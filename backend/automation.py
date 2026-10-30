@@ -289,13 +289,7 @@ def windows(connect, db_path, payload, checkpoint):
                 )
                 artifacts.append(artifact)
                 value = artifact
-            if step.expected_text:
-                until = time.monotonic() + 5
-                while step.expected_text not in target.window_text():
-                    checkpoint()
-                    if time.monotonic() > until:
-                        raise ValueError("Windows result verification failed")
-                    time.sleep(0.1)
+            verify_windows_result(target, step, checkpoint)
             results.append(
                 {
                     "action": step.action,
@@ -309,3 +303,17 @@ def windows(connect, db_path, payload, checkpoint):
         for artifact in artifacts:
             files.delete(connect, db_path, artifact["id"])
         raise
+
+
+def verify_windows_result(target, step, checkpoint):
+    if not step.expected_text:
+        return
+    until = time.monotonic() + 5
+    # UIA control Name/Text and Value are different properties. Edits verify the Value pattern.
+    while step.expected_text not in (
+        target.get_value() if step.action == "fill" else target.window_text()
+    ):
+        checkpoint()
+        if time.monotonic() > until:
+            raise ValueError("Windows result verification failed")
+        time.sleep(0.1)

@@ -56,6 +56,9 @@ jobs:
           $env:NIGHTBREW_TEST_BROWSER = "${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe"
           .venv\Scripts\python -m pytest backend/tests -q
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Report Windows test failures
+        if: always()
+        run: .venv\Scripts\python scripts/report-tests.py pytest-windows.xml
       - name: Test managed desktop backend
         run: npm run test:desktop
       - name: Validate Electron IPC and automatic startup

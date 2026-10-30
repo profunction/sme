@@ -141,3 +141,18 @@ def test_windows_adapter_reports_platform_limit(tmp_path):
                 {},
                 lambda: None,
             )
+
+
+def test_windows_edit_verifies_value_not_accessible_name():
+    class Edit:
+        def window_text(self):
+            return "Name of input control"
+
+        def get_value(self):
+            return "Entered customer text"
+
+    automation.verify_windows_result(
+        Edit(),
+        automation.WindowsStep(action="fill", expected_text="Entered customer text"),
+        lambda: None,
+    )
