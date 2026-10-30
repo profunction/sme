@@ -150,6 +150,14 @@ def chat(request: ai.Chat):
         selected = ai.select(request, policy, measured, local_model)
     except ValueError as exc:
         raise HTTPException(403, str(exc)) from None
+    employee_instructions = ""
+    if request.employee_id:
+        from backend import workforce
+        try:
+            with connect() as db:
+                employee = workforce.check(db, request.employee_id, 'ai.chat', {})
+                employee_instructions = f'Role: {employee.role}\n{employee.instructions}'
+        except ValueError as exc: raise HTTPException(403, str(exc)) from None
     cloud = selected == "CLOUD_ONLY"
     model = os.getenv("NIGHTBREW_CLOUD_MODEL", "") if cloud else local_model
     try:
@@ -167,7 +175,7 @@ def chat(request: ai.Chat):
     reservation = None
     if cloud:
         try:
-            reservation, _ = ai.reserve(connect, model, request, policy)
+            reservation, _ = ai.reserve(connect, model, request, policy, employee_instructions)
         except ValueError as exc:
             raise HTTPException(402, str(exc)) from None
     payload = {
@@ -175,6 +183,8 @@ def chat(request: ai.Chat):
         "messages": [{"role": "user", "content": request.message}],
         "stream": False,
     }
+    if employee_instructions:
+        payload["messages"].insert(0, {"role":"system", "content":employee_instructions})
     if cloud:
         payload["max_tokens"] = policy.max_output_tokens
     else:
@@ -235,9 +245,16 @@ def estimate_chat(request: ai.Chat):
         )
     except ValueError as exc:
         raise HTTPException(403, str(exc)) from None
+    system_text = ''
+    if request.employee_id:
+        try:
+            with connect() as db:
+                employee = workforce.check(db, request.employee_id, 'ai.chat', {})
+                system_text = f'Role: {employee.role}\n{employee.instructions}'
+        except ValueError as exc: raise HTTPException(403, str(exc)) from None
     return {
         "provider": selected,
-        "estimated_max_cost_usd": ai.estimate(request, policy)
+        "estimated_max_cost_usd": ai.estimate(request, policy, system_text)
         if selected == "CLOUD_ONLY"
         else 0,
         "pricing_confirmed": policy.pricing_confirmed,
@@ -251,6 +268,7 @@ def estimate_chat(request: ai.Chat):
 class TaskRequest(BaseModel):
     tool: str = Field(max_length=60)
     payload: dict
+    employee_id: str | None = Field(default=None, max_length=80)
 
 
 @app.post("/tasks", dependencies=[Depends(authorize)], status_code=201)
@@ -260,7 +278,7 @@ def create_task(request: TaskRequest):
             403, "Create writes through the connector permissions endpoint"
         )
     try:
-        identifier, status = tasks.create(connect, request.tool, request.payload)
+        identifier, status = tasks.create(connect, request.tool, request.payload, request.employee_id)
     except ValueError:
         raise HTTPException(422, "Invalid task, input or queue state") from None
     if status == "queued":
@@ -270,10 +288,10 @@ def create_task(request: TaskRequest):
 
 
 @app.get("/tasks", dependencies=[Depends(authorize)])
-def task_history():
+def task_history(employee_id: str | None = None):
     with connect() as db:
         rows = db.execute(
-            "SELECT * FROM tasks ORDER BY rowid DESC LIMIT 100"
+            "SELECT t.*, a.employee_id FROM tasks t LEFT JOIN assignments a ON a.task_id=t.id WHERE (? IS NULL OR a.employee_id=?) ORDER BY t.rowid DESC LIMIT 100", (employee_id, employee_id)
         ).fetchall()
     return [
         {
@@ -482,3 +500,31 @@ def save_automation_policy(policy: automation.AutomationPolicy):
         store.put(db, 'automation_policy', policy.model_dump())
         store.audit(db, 'automation_policy_updated', 'automation')
     return policy
+
+
+from backend import workforce
+
+@app.get('/employees', dependencies=[Depends(authorize)])
+def employees():
+    with connect() as db:
+        return [{'id':row['id'],**json.loads(row['config'])} for row in db.execute('SELECT * FROM employees ORDER BY created_at,id')]
+
+@app.post('/employees', dependencies=[Depends(authorize)], status_code=201)
+def new_employee(employee: workforce.Employee):
+    try: return workforce.save(connect, employee)
+    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+
+@app.put('/employees/{identifier}', dependencies=[Depends(authorize)])
+def edit_employee(identifier: str, employee: workforce.Employee):
+    try:
+        with connect() as db: workforce.get(db,identifier)
+        return workforce.save(connect,employee,identifier)
+    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+
+@app.post('/employees/{identifier}/connector-writes/{connector_id}', dependencies=[Depends(authorize)], status_code=201)
+def employee_write(identifier: str, connector_id: str, request: connectors.Write):
+    try:
+        payload=connectors.prepare_write(connect,connector_id,request)
+        task_id,status=tasks.create(connect,'connector.write',payload,identifier)
+        return {'id':task_id,'status':status}
+    except ValueError as exc: raise HTTPException(422,str(exc)) from None

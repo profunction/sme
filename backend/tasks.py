@@ -5,10 +5,10 @@ import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 
-from backend import automation, documents, files, store
+from backend import automation, documents, files, store, workforce
 
 EXECUTOR = ThreadPoolExecutor(max_workers=2, thread_name_prefix="nightbrew-task")
-TOOLS = {"document.generate", "excel.analyze", "document.extract", "file.delete", "browser.run", "windows.run"}
+TOOLS = {"document.generate", "excel.analyze", "document.extract", "file.delete", "browser.run", "windows.run", "connector.read"}
 APPROVAL = {"file.delete", "connector.write", "browser.run", "windows.run"}
 TIMEOUT_SECONDS = 60
 # A single process owns the SQLite job queue. No external action is replayed after restart.
@@ -18,7 +18,7 @@ class Cancelled(Exception):
     pass
 
 
-def create(connect, tool, payload):
+def create(connect, tool, payload, employee_id=None):
     if tool not in TOOLS and tool != "connector.write":
         raise ValueError("Tool is not permitted")
     if tool == "document.generate":
@@ -27,6 +27,10 @@ def create(connect, tool, payload):
         )
     elif tool in ("browser.run", "windows.run"):
         payload = automation.prepare(connect, tool, payload)
+    elif tool == "connector.read":
+        from backend import connectors
+        connectors.get(connect, payload.get("connector_id"))
+        payload = {"connector_id": payload["connector_id"]}
     elif tool in TOOLS:
         payload = documents.FileOperation.model_validate(payload).model_dump()
     identifier = uuid.uuid4().hex
@@ -35,6 +39,8 @@ def create(connect, tool, payload):
         db.execute("BEGIN IMMEDIATE")
         if store.get(db, "emergency_stop", False):
             raise ValueError("Emergency stop is active")
+        employee = workforce.check(db, employee_id, tool, payload) if employee_id else None
+        if employee and employee.require_approval: status = 'pending_approval'
         pending = db.execute(
             "SELECT COUNT(*) FROM tasks WHERE status IN ('queued','running','pending_approval','cancel_requested')"
         ).fetchone()[0]
@@ -44,6 +50,8 @@ def create(connect, tool, payload):
             "INSERT INTO tasks(id,tool,payload,status) VALUES(?,?,?,?)",
             (identifier, tool, json.dumps(payload), status),
         )
+        if employee:
+            db.execute('INSERT INTO assignments VALUES(?,?,?)', (identifier, employee_id, employee.model_dump_json()))
         store.audit(db, "task_created", identifier, tool)
     return identifier, status
 
@@ -77,11 +85,15 @@ def execute(connect, db_path, identifier):
     result = None
     try:
         check()
+        workforce.execution_check(connect, identifier)
         payload = json.loads(row["payload"])
         if row["tool"] == "connector.write":
             from backend import connectors
 
             result = connectors.write(connect, payload, check)
+        elif row["tool"] == "connector.read":
+            from backend import connectors
+            result = connectors.read(connect, payload['connector_id'])
         elif row["tool"] == "browser.run":
             result = automation.browser(connect, db_path, payload, check)
         elif row["tool"] == "windows.run":

@@ -4,6 +4,7 @@ import { apiFor } from "./api";
 import { Assistant } from "./Assistant";
 import { Connectors } from "./Connectors";
 import { Business } from "./Business";
+import {Workforce} from "./Workforce";
 import {Automation} from "./Automation";
 import { Settings } from "./Settings";
 import "./style.css";
@@ -17,7 +18,7 @@ function App() {
         <h2>☕ NightBrew</h2>
         <p>AI EMPLOYEE</p>
         <h3>Workspace</h3>
-        {["Assistant", "Business tools", "Connectors", "Computer tools", "AI & privacy"].map(
+        {["Assistant", "Business tools", "Connectors", "Computer tools", "Employees", "AI & privacy"].map(
           (name) => (
             <button
               key={name}
@@ -58,7 +59,7 @@ function App() {
           <Business key={token} api={api} token={token} />
         ) : tab === "Connectors" ? (
           <Connectors key={token} api={api} />
-        ) : tab === "Computer tools" ? (<Automation key={token} api={api}/>) : (
+        ) : tab === "Computer tools" ? (<Automation key={token} api={api}/>) : tab === "Employees" ? (<Workforce key={token} api={api}/>) : (
           <Settings key={token} api={api} />
         )}
       </section>
