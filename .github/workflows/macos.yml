@@ -38,7 +38,10 @@ jobs:
         run: |
           python -m venv .venv
           .venv/bin/python -m pip install -r backend/requirements-build.txt
-      - run: .venv/bin/python -m pytest backend/tests -q
+      - run: .venv/bin/python -m pytest backend/tests -q --junitxml=pytest-macos.xml
+      - name: Report backend test failures
+        if: always()
+        run: .venv/bin/python scripts/report-tests.py pytest-macos.xml
       - run: npm run test:desktop
       - run: npm run build
       - run: npm run test:electron
