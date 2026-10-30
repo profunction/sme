@@ -24,6 +24,8 @@ def main():
         logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s")
     )
     logging.basicConfig(level=logging.INFO, handlers=[handler])
+    for name in ("httpx", "httpcore", "pywinauto", "comtypes"):
+        logging.getLogger(name).setLevel(logging.WARNING)
     # No request-body, authorization-header, process-environment or credential logging.
     from backend.app import app
 

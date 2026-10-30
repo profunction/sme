@@ -73,18 +73,7 @@ jobs:
           npm run package:win:unsigned
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Validate packaged backend and silent installation
-        run: |
-          $unpacked = Start-Process "release\win-unpacked\NightBrew AI Employee.exe" -ArgumentList '--smoke-test' -PassThru
-          if (-not $unpacked.WaitForExit(60000)) { Stop-Process -Id $unpacked.Id; throw 'Packaged startup timeout' }
-          if ($unpacked.ExitCode -ne 0) { throw 'Packaged startup failed' }
-          $installer = Get-ChildItem release\NightBrew-DEV-UNSIGNED-*.exe | Select-Object -First 1
-          if (-not $installer) { throw 'No installer produced' }
-          $destination = "$env:RUNNER_TEMP\NightBrewInstalled"
-          $installation = Start-Process $installer.FullName -ArgumentList "/S /D=$destination" -Wait -PassThru
-          if ($installation.ExitCode -ne 0) { throw 'Silent installation failed' }
-          $installed = Start-Process "$destination\NightBrew AI Employee.exe" -ArgumentList '--smoke-test' -PassThru
-          if (-not $installed.WaitForExit(60000)) { Stop-Process -Id $installed.Id; throw 'Installed startup timeout' }
-          if ($installed.ExitCode -ne 0) { throw 'Installed startup failed' }
+        run: scripts/verify-windows-package.ps1
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: NightBrew-Windows-DEV-UNSIGNED
