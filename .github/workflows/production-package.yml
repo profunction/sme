@@ -43,6 +43,7 @@ jobs:
           if ($signature.Status -ne 'Valid') { throw 'Installer signature or certificate chain is invalid' }
           if ($signature.SignerCertificate.GetNameInfo('SimpleName', $false) -ne $env:NIGHTBREW_SIGNING_PUBLISHER) { throw 'Unexpected signing publisher' }
           $process = Start-Process "release\win-unpacked\NightBrew AI Employee.exe" -ArgumentList '--smoke-test' -PassThru
+          $handle = $process.Handle
           if (-not $process.WaitForExit(60000)) { Stop-Process -Id $process.Id; throw 'Production startup timeout' }
           if ($process.ExitCode -ne 0) { throw 'Production startup failed' }
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6

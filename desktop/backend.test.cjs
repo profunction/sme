@@ -126,3 +126,34 @@ test("production release preparation fails closed without signing and authority 
   );
   fs.rmSync(directory, { recursive: true, force: true });
 });
+
+test("release config preserves backend resources and installation policy", () => {
+  const { spawnSync } = require("node:child_process");
+  const directory = fs.mkdtempSync(
+    path.join(os.tmpdir(), "nightbrew-resource-config-"),
+  );
+  try {
+    const result = spawnSync(
+      process.execPath,
+      [path.resolve("scripts/prepare-release.cjs"), "--development"],
+      { cwd: directory, encoding: "utf8" },
+    );
+    assert.equal(result.status, 0);
+    const config = JSON.parse(
+      fs.readFileSync(
+        path.join(directory, "build/electron-release.json"),
+        "utf8",
+      ),
+    );
+    assert.equal(config.productName, "NightBrew AI Employee");
+    assert.ok(config.extraResources.some((entry) => entry.to === "backend"));
+    assert.ok(
+      config.extraResources.some((entry) => entry.to === "release-policy.json"),
+    );
+    assert.ok(config.files.includes("desktop/preload.cjs"));
+    assert.equal(config.nsis.runAfterFinish, false);
+    assert.equal(config.forceCodeSigning, false);
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});

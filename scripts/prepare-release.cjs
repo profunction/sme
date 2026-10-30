@@ -1,5 +1,5 @@
 const fs = require("node:fs");
-const path = require("node:path");
+const base = require("../package.json").build;
 const development = process.argv.includes("--development");
 const policy = {
   license_public_key: process.env.NIGHTBREW_RELEASE_PUBLIC_KEY || "",
@@ -39,8 +39,10 @@ if (!development && (!process.env.CSC_LINK || !process.env.CSC_KEY_PASSWORD))
 fs.mkdirSync("build", { recursive: true });
 fs.writeFileSync("build/release-policy.json", JSON.stringify(policy, null, 2));
 const config = {
+  ...base,
   forceCodeSigning: !development,
   win: {
+    ...base.win,
     target: "nsis",
     verifyUpdateCodeSignature: true,
     ...(development ? {} : { publisherName: [policy.publisher_name] }),
