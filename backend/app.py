@@ -140,3 +140,108 @@ def estimate_chat(request: ai.Chat):
     try: selected = ai.select(request, policy, measured, os.getenv('NIGHTBREW_LOCAL_MODEL', 'llama3.2:3b'))
     except ValueError as exc: raise HTTPException(403, str(exc)) from None
     return {'provider': selected, 'estimated_max_cost_usd': ai.estimate(request, policy) if selected == 'CLOUD_ONLY' else 0, 'pricing_confirmed': policy.pricing_confirmed, 'note': 'Conservative reservation, not a provider invoice. Failed cloud calls retain the reservation when billing is unknown.'}
+
+# Business tasks and restricted files are explicitly invoked, never parsed from model output.
+import json
+from contextlib import asynccontextmanager
+from fastapi import Request
+from fastapi.responses import FileResponse
+from pydantic import Field, ValidationError
+from backend import documents, files, tasks
+
+
+@asynccontextmanager
+async def lifespan(_app):
+    tasks.recover(connect)
+    yield
+
+
+app.router.lifespan_context = lifespan
+app.version = '0.3.0'
+
+
+class TaskRequest(BaseModel):
+    tool: str = Field(max_length=60)
+    payload: dict
+
+
+@app.post('/tasks', dependencies=[Depends(authorize)], status_code=201)
+def create_task(request: TaskRequest):
+    if request.tool == 'connector.write': raise HTTPException(403, 'Create writes through the connector permissions endpoint')
+    try: identifier, status = tasks.create(connect, request.tool, request.payload)
+    except (ValueError, ValidationError) as exc: raise HTTPException(422, 'Invalid task, input or queue state') from None
+    if status == 'queued':
+        path = DB
+        tasks.schedule(lambda: store.open_db(path), path, identifier)
+    return {'id': identifier, 'status': status}
+
+
+@app.get('/tasks', dependencies=[Depends(authorize)])
+def task_history():
+    with connect() as db:
+        rows = db.execute('SELECT * FROM tasks ORDER BY rowid DESC LIMIT 100').fetchall()
+    return [{**dict(row), 'payload': json.loads(row['payload']), 'result': json.loads(row['result']) if row['result'] else None} for row in rows]
+
+
+@app.post('/tasks/{identifier}/approve', dependencies=[Depends(authorize)])
+def approve_task(identifier: str):
+    try: tasks.approve(connect, identifier)
+    except ValueError as exc: raise HTTPException(409, str(exc)) from None
+    path = DB
+    tasks.schedule(lambda: store.open_db(path), path, identifier)
+    return {'id': identifier, 'status': 'queued'}
+
+
+@app.post('/tasks/{identifier}/cancel', dependencies=[Depends(authorize)])
+def cancel_task(identifier: str):
+    try: tasks.cancel(connect, identifier)
+    except ValueError as exc: raise HTTPException(409, str(exc)) from None
+    return {'id': identifier, 'cancel_requested': True}
+
+
+@app.post('/control/stop', dependencies=[Depends(authorize)])
+def emergency_stop():
+    tasks.stop(connect)
+    return {'stopped': True, 'note': 'New work blocked; cancellation is cooperative. Already dispatched provider calls or external writes cannot be recalled.'}
+
+
+@app.post('/control/resume', dependencies=[Depends(authorize)])
+def resume():
+    with connect() as db:
+        store.put(db, 'emergency_stop', False)
+        store.audit(db, 'emergency_resume', 'all_tasks')
+    return {'stopped': False}
+
+
+@app.get('/control', dependencies=[Depends(authorize)])
+def control():
+    with connect() as db: return {'stopped': store.get(db, 'emergency_stop', False)}
+
+
+@app.get('/audit', dependencies=[Depends(authorize)])
+def audit_log():
+    with connect() as db: return [dict(row) for row in db.execute('SELECT * FROM audit ORDER BY id DESC LIMIT 200')]
+
+
+@app.get('/files', dependencies=[Depends(authorize)])
+def list_files():
+    with connect() as db: return [dict(row) for row in db.execute('SELECT * FROM files ORDER BY rowid DESC LIMIT 100')]
+
+
+@app.post('/files', dependencies=[Depends(authorize)], status_code=201)
+async def upload_file(request: Request, filename: str):
+    with connect() as db:
+        if store.get(db, 'emergency_stop', False): raise HTTPException(409, 'Emergency stop is active')
+    data = bytearray()
+    async for chunk in request.stream():
+        data.extend(chunk)
+        if len(data) > files.MAX_BYTES: raise HTTPException(413, 'Maximum upload size is 10 MiB')
+    try: return files.save(connect, DB, filename, bytes(data))
+    except ValueError as exc: raise HTTPException(422, str(exc)) from None
+
+
+@app.get('/files/{identifier}', dependencies=[Depends(authorize)])
+def download_file(identifier: str):
+    try: path, metadata = files.locate(connect, DB, identifier)
+    except ValueError as exc: raise HTTPException(404, str(exc)) from None
+    return FileResponse(path, filename=metadata['name'], media_type='application/octet-stream', headers={'X-Content-Type-Options':'nosniff'})
