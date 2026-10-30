@@ -34,7 +34,7 @@ export function Billing({ api }: { api: API }) {
       <h2>License & computer activation</h2>
       <pre>{JSON.stringify(status, null, 2)}</pre>
       <label>
-        Account key (Windows Credential Manager)
+        Account key (system credential vault)
         <input
           type="password"
           autoComplete="off"
@@ -107,7 +107,7 @@ export function Billing({ api }: { api: API }) {
       </button>
       <h2>Application updates</h2>
       <p>
-        Production updates require HTTPS metadata and a matching signed Windows
+        Windows production updates require HTTPS metadata and a matching signed Windows
         publisher. Save work before installing.
       </p>
       <button

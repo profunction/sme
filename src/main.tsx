@@ -42,7 +42,7 @@ function App() {
             {name}
           </button>
         ))}
-        <small>Windows application · Cloud development</small>
+        <small>Windows & macOS · Cloud development</small>
       </aside>
       <section>
         <header>
