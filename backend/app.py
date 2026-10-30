@@ -468,3 +468,17 @@ def update_plans(config: Plans):
         store.put(db, "plans", config.model_dump())
         store.audit(db, "mock_plans_updated", "all_plans")
     return plans()
+
+
+from backend import automation
+
+@app.get('/automation/policy', dependencies=[Depends(authorize)])
+def automation_policy():
+    return automation.policy(connect)
+
+@app.put('/automation/policy', dependencies=[Depends(authorize)])
+def save_automation_policy(policy: automation.AutomationPolicy):
+    with connect() as db:
+        store.put(db, 'automation_policy', policy.model_dump())
+        store.audit(db, 'automation_policy_updated', 'automation')
+    return policy

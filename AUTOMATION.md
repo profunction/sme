@@ -1,0 +1,9 @@
+# Controlled computer tools — Phase 5
+
+Configure exact browser hosts / absolute approved Windows .exe paths in Computer tools. Build an explicit plan (maximum 20 steps), request approval, then review/approve the exact saved plan in Business tools. Policy changes invalidate pending approvals. All automation tasks require approval; model text never executes as code.
+
+Browser uses an isolated, nonpersistent Playwright context: reads, clicks, text fill, bounded key presses, screenshots and explicit text/value verification. HTTP destinations are intercepted against the allowlist, network writes are off by default, popups/downloads/service workers/websockets are blocked. No arbitrary JavaScript, file upload, shell commands or coordinates. Operator egress controls must also prevent private network/DNS rebinding access. Cloud tests use a local test fixture; production requires HTTPS destinations. The browser session is fresh, so existing customer logins are not reused. Windows defaults to installed Edge; Linux uses NIGHTBREW_BROWSER_EXECUTABLE=/usr/bin/chromium.
+
+Windows uses pywinauto UIA, exact process paths, optional exact window titles, Automation IDs/control types, invoke/set_edit_text/menu_select, screenshots and expected-text verification. It can open/connect only to approved applications and never accepts shell commands or command-line arguments. It does not claim all applications support UIA. It requires Windows and an interactive desktop. The adapter is implemented but not verified on this Linux host.
+
+Results and screenshots are restricted local artifacts. Cancellation is cooperative at step/network boundaries; actions already performed cannot be undone. An approved click may be consequential, so inspect the entire plan and enable browser network writes only for an authorized workflow. No autonomous AI action planner is enabled: users construct deterministic plans.

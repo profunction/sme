@@ -5,11 +5,11 @@ import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 
-from backend import documents, files, store
+from backend import automation, documents, files, store
 
 EXECUTOR = ThreadPoolExecutor(max_workers=2, thread_name_prefix="nightbrew-task")
-TOOLS = {"document.generate", "excel.analyze", "document.extract", "file.delete"}
-APPROVAL = {"file.delete", "connector.write"}
+TOOLS = {"document.generate", "excel.analyze", "document.extract", "file.delete", "browser.run", "windows.run"}
+APPROVAL = {"file.delete", "connector.write", "browser.run", "windows.run"}
 TIMEOUT_SECONDS = 60
 # A single process owns the SQLite job queue. No external action is replayed after restart.
 
@@ -25,6 +25,8 @@ def create(connect, tool, payload):
         payload = documents.BusinessDocument.model_validate(payload).model_dump(
             mode="json"
         )
+    elif tool in ("browser.run", "windows.run"):
+        payload = automation.prepare(connect, tool, payload)
     elif tool in TOOLS:
         payload = documents.FileOperation.model_validate(payload).model_dump()
     identifier = uuid.uuid4().hex
@@ -80,6 +82,10 @@ def execute(connect, db_path, identifier):
             from backend import connectors
 
             result = connectors.write(connect, payload, check)
+        elif row["tool"] == "browser.run":
+            result = automation.browser(connect, db_path, payload, check)
+        elif row["tool"] == "windows.run":
+            result = automation.windows(connect, db_path, payload, check)
         else:
             result = documents.run(row["tool"], payload, connect, db_path, check)
         check()
@@ -102,6 +108,10 @@ def execute(connect, db_path, identifier):
                 files.delete(connect, db_path, result["file"]["id"])
             except (ValueError, OSError):
                 pass
+        if result and isinstance(result, dict):
+            for artifact in result.get("artifacts", []):
+                try: files.delete(connect, db_path, artifact["id"])
+                except (ValueError, OSError): pass
         status = "cancelled" if isinstance(exc, Cancelled) else "failed"
         error = (
             "Cancelled. In-flight external writes may already have occurred; verify the remote system before retrying."
