@@ -10,6 +10,7 @@ from backend import hardware, store, workforce
 
 
 class Policy(BaseModel):
+    billing_source: Literal['BYOK','INCLUDED'] = 'BYOK'
     cloud_allowed: bool = False
     monthly_limit_usd: float = Field(default=5, ge=0, le=10000, allow_inf_nan=False)
     credit_balance_usd: float = Field(default=0, ge=0, le=10000, allow_inf_nan=False)
@@ -87,10 +88,10 @@ def estimate(request, policy, system_text=""):
     ) / 1_000_000
 
 
-def reserve(connect, model, request, policy, system_text=""):
-    if not policy.pricing_confirmed:
+def reserve(connect, model, request, policy, system_text="", override_amount=None):
+    if override_amount is None and not policy.pricing_confirmed:
         raise ValueError("Confirm provider pricing before cloud inference")
-    amount = estimate(request, policy, system_text)
+    amount = estimate(request, policy, system_text) if override_amount is None else override_amount
     month = datetime.now(UTC).strftime("%Y-%m")
     identifier = uuid.uuid4().hex
     with connect() as db:
@@ -117,7 +118,7 @@ def reserve(connect, model, request, policy, system_text=""):
     return identifier, amount
 
 
-def settle(connect, identifier, usage, policy, success):
+def settle(connect, identifier, usage, policy, success, actual_cost=None):
     with connect() as db:
         db.execute("BEGIN IMMEDIATE")
         row = db.execute("SELECT * FROM usage WHERE id=?", (identifier,)).fetchone()
@@ -141,6 +142,9 @@ def settle(connect, identifier, usage, policy, success):
                 status = "reported"
             else:
                 tokens_in, tokens_out = 0, 0
+        if actual_cost is not None:
+            actual = actual_cost
+            status = "authority_reported"
         current = Policy(**store.get(db, "ai_policy", {}))
         current.credit_balance_usd = max(
             0, current.credit_balance_usd + row["reserved"] - actual

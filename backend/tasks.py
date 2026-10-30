@@ -5,7 +5,7 @@ import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 
-from backend import automation, documents, files, store, workforce
+from backend import automation, documents, files, store, workforce, licensing
 
 EXECUTOR = ThreadPoolExecutor(max_workers=2, thread_name_prefix="nightbrew-task")
 TOOLS = {"document.generate", "excel.analyze", "document.extract", "file.delete", "browser.run", "windows.run", "connector.read"}
@@ -41,6 +41,7 @@ def create(connect, tool, payload, employee_id=None):
             raise ValueError("Emergency stop is active")
         employee = workforce.check(db, employee_id, tool, payload) if employee_id else None
         if employee and employee.require_approval: status = 'pending_approval'
+        licensing.reserve_task(connect, identifier, employee_id)
         pending = db.execute(
             "SELECT COUNT(*) FROM tasks WHERE status IN ('queued','running','pending_approval','cancel_requested')"
         ).fetchone()[0]
@@ -85,6 +86,7 @@ def execute(connect, db_path, identifier):
     result = None
     try:
         check()
+        licensing.enforce(connect)
         workforce.execution_check(connect, identifier)
         payload = json.loads(row["payload"])
         if row["tool"] == "connector.write":

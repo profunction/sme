@@ -140,6 +140,10 @@ def usage():
 
 @app.post("/chat", dependencies=[Depends(authorize)])
 def chat(request: ai.Chat):
+    from backend import licensing
+    import uuid
+    try: licensing.enforce(connect)
+    except ValueError as exc: raise HTTPException(403, str(exc)) from None
     local_model = os.getenv("NIGHTBREW_LOCAL_MODEL", "llama3.2:3b")
     with connect() as db:
         if store.get(db, "emergency_stop", False):
@@ -158,7 +162,23 @@ def chat(request: ai.Chat):
                 employee = workforce.check(db, request.employee_id, 'ai.chat', {})
                 employee_instructions = f'Role: {employee.role}\n{employee.instructions}'
         except ValueError as exc: raise HTTPException(403, str(exc)) from None
+    try: licensing.reserve_task(connect, uuid.uuid4().hex, request.employee_id)
+    except ValueError as exc: raise HTTPException(403, str(exc)) from None
     cloud = selected == "CLOUD_ONLY"
+    if cloud and policy.billing_source == 'INCLUDED':
+        reservation = None
+        try:
+            quote = licensing.remote('/inference/estimate', {'device_id':licensing.device_id(),'request_id':uuid.uuid4().hex,'message':request.message,'system_text':employee_instructions,'cloud_consent':request.cloud_consent})
+            reservation,_ = ai.reserve(connect,quote['model'],request,policy,employee_instructions,override_amount=quote['estimated_cost_usd'])
+            result = licensing.included_inference(connect, request, employee_instructions)
+            ai.settle(connect,reservation,result.get('usage'),policy,True,actual_cost=result['cost_usd'])
+        except ValueError as exc:
+            if reservation: ai.settle(connect,reservation,None,policy,False)
+            raise HTTPException(402, str(exc)) from None
+        with connect() as db:
+            db.executemany('INSERT INTO messages(role,content,provider) VALUES(?,?,?)', [('user',request.message,'INCLUDED'),('assistant',result['answer'],'INCLUDED')])
+            store.audit(db, 'included_chat_completed', result['model'])
+        return {'answer':result['answer'],'provider':'CLOUD_ONLY · included credits','cost_usd':result['cost_usd']}
     model = os.getenv("NIGHTBREW_CLOUD_MODEL", "") if cloud else local_model
     try:
         key = credentials.cloud_key() if cloud else None
@@ -527,4 +547,52 @@ def employee_write(identifier: str, connector_id: str, request: connectors.Write
         payload=connectors.prepare_write(connect,connector_id,request)
         task_id,status=tasks.create(connect,'connector.write',payload,identifier)
         return {'id':task_id,'status':status}
+    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+
+
+from backend import licensing
+
+@app.get('/license', dependencies=[Depends(authorize)])
+def license_status():
+    try: return {'required':licensing.required(),'device_id':licensing.device_id(),'claims':licensing.enforce(connect),'valid':licensing.required()}
+    except ValueError as exc: return {'required':True,'device_id':licensing.device_id(),'valid':False,'error':str(exc)}
+
+@app.post('/license/activate', dependencies=[Depends(authorize)])
+def activate_license():
+    try: return licensing.activate(connect)
+    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+
+@app.put('/license/account-key', dependencies=[Depends(authorize)])
+def license_account_key(request: KeyRequest):
+    try:
+        credentials.windows_vault().set_password('NightBrew','license-account-key',request.key.get_secret_value())
+        return {'stored':True,'storage':'Windows Credential Manager'}
+    except Exception: raise HTTPException(503,'Use the backend account-key environment binding on Linux') from None
+
+@app.get('/billing/account', dependencies=[Depends(authorize)])
+def billing_account():
+    try: return licensing.remote('/account')
+    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+
+@app.get('/billing/catalog', dependencies=[Depends(authorize)])
+def billing_catalog():
+    try: return licensing.remote('/catalog')
+    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+
+class Purchase(BaseModel):
+    sku: str = Field(pattern='^(Starter|Business|Enterprise|credits|computer|setup|custom_connector)$')
+
+@app.post('/billing/checkout', dependencies=[Depends(authorize)])
+def billing_checkout(request: Purchase):
+    try: return licensing.remote('/checkout',request.model_dump())
+    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+
+@app.get('/marketplace', dependencies=[Depends(authorize)])
+def marketplace():
+    return {'all_plans':True,'installation':'No arbitrary plugin code is downloaded or executed','entries':[{'id':'generic-rest','name':'Generic REST','categories':list(connectors.CATEGORIES),'vendor_verified':False,'custom_development':'Separate quotation'}]+[{'id':'mock-'+category.lower(),'name':'Mock '+category,'development_only':True,'vendor_verified':False} for category in connectors.CATEGORIES if category!='API']}
+
+
+@app.post('/billing/portal', dependencies=[Depends(authorize)])
+def customer_portal():
+    try: return licensing.remote('/portal',{})
     except ValueError as exc: raise HTTPException(422,str(exc)) from None

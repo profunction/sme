@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { errorText, type API } from "./api";
 type Policy = {
+  billing_source: "BYOK" | "INCLUDED";
   cloud_allowed: boolean;
   monthly_limit_usd: number;
   credit_balance_usd: number;
@@ -11,6 +12,7 @@ type Policy = {
   max_output_tokens: number;
 };
 const initial: Policy = {
+  billing_source: "BYOK",
   cloud_allowed: false,
   monthly_limit_usd: 5,
   credit_balance_usd: 0,
@@ -41,7 +43,7 @@ export function Settings({ api }: { api: API }) {
   }
   return (
     <>
-      <h2>Privacy & AI budget</h2>
+      <h2>Privacy & AI budget</h2><label>Cloud funding<select value={policy.billing_source} onChange={e=>setPolicy({...policy,billing_source:e.target.value as 'BYOK'|'INCLUDED'})}><option value="BYOK">My own API key (BYOK)</option><option value="INCLUDED">Trusted gateway / included credits</option></select></label>
       <p>
         Local development allowances in USD; these balances are not proof of
         payment. Configure the provider model and endpoint on the backend.

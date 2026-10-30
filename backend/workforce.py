@@ -5,7 +5,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator
 
-from backend import store
+from backend import store, licensing
 
 ALLOWED_TOOLS = {'document.generate','excel.analyze','document.extract','file.delete','connector.read','connector.write','browser.run','windows.run','ai.chat'}
 
@@ -39,6 +39,7 @@ def save(connect, employee, identifier=None):
     with connect() as db:
         db.execute('BEGIN IMMEDIATE')
         if db.execute('SELECT COUNT(*) FROM employees').fetchone()[0]>=100 and not db.execute('SELECT 1 FROM employees WHERE id=?',(identifier,)).fetchone(): raise ValueError('Maximum 100 employees')
+        licensing.reserve_seat(connect, identifier, employee.active)
         db.execute('INSERT INTO employees(id,config) VALUES(?,?) ON CONFLICT(id) DO UPDATE SET config=excluded.config',(identifier,employee.model_dump_json()))
         store.audit(db,'employee_saved',identifier)
     return {'id':identifier,**employee.model_dump()}
