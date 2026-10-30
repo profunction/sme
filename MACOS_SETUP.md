@@ -1,6 +1,6 @@
 # Run NightBrew on macOS
 
-macOS 12 or later. Apple Silicon (M1/M2/M3/M4 and later) uses **arm64**; Intel uses **x64**. In Apple menu → About This Mac, check Chip/Processor. Builds include Electron and Python; end users do not need Node or Python.
+The initial supported baseline is macOS 15 or later (the CI validation platform). Apple Silicon (M1/M2/M3/M4 and later) uses **arm64**; Intel uses **x64**. In Apple menu → About This Mac, check Chip/Processor. Builds include Electron and Python; end users do not need Node or Python.
 
 ## Download the development app
 
