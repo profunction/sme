@@ -20,6 +20,7 @@ def test_consent(client):
 
 def test_missing_key(client,monkeypatch):
     monkeypatch.delenv('NIGHTBREW_CLOUD_KEY',raising=False)
+    client.put('/settings/ai',headers=AUTH,json={'cloud_allowed':True})
     assert client.post('/chat',headers=AUTH,json={'message':'hi','mode':'CLOUD_ONLY','cloud_consent':True}).status_code==503
 
 def test_persistence(client,monkeypatch):
@@ -41,9 +42,10 @@ def test_failure(client,monkeypatch):
     assert client.get('/messages',headers=AUTH).json()==[]
 
 def test_mode(client):
-    assert client.post('/chat',headers=AUTH,json={'message':'hi','mode':'HYBRID'}).status_code==422
+    assert client.post('/chat',headers=AUTH,json={'message':'hi','mode':'INVALID'}).status_code==422
 
 def test_cloud_adapter(client,monkeypatch):
+    client.put('/settings/ai',headers=AUTH,json={'cloud_allowed':True,'pricing_confirmed':True,'credit_balance_usd':1})
     monkeypatch.setenv('NIGHTBREW_CLOUD_KEY','test-key')
     monkeypatch.setenv('NIGHTBREW_CLOUD_MODEL','test-model')
     monkeypatch.setenv('NIGHTBREW_CLOUD_URL','https://provider.example/v1')

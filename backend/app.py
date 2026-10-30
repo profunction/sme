@@ -1,77 +1,142 @@
-"""Loopback-only chat service. No tool execution or automatic cloud fallback."""
+"""Authenticated loopback API; all AI output is untrusted text, never executable instructions."""
 import os
 import secrets
-import sqlite3
 from pathlib import Path
-from typing import Literal
 
 import httpx
-from fastapi import FastAPI, HTTPException, Header
-from pydantic import BaseModel, Field
+from fastapi import Depends, FastAPI, Header, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, SecretStr
 
-app = FastAPI(title="NightBrew AI Employee", version="0.1.0")
-DB = Path(os.getenv("NIGHTBREW_DB", str(Path.home() / ".nightbrew" / "chat.sqlite3")))
-TOKEN = os.getenv("NIGHTBREW_SESSION_TOKEN") or secrets.token_urlsafe(32)
+from backend import ai, credentials, hardware, store
+
+app = FastAPI(title='NightBrew AI Employee', version='0.2.0')
+DB = Path(os.getenv('NIGHTBREW_DB', str(Path.home() / '.nightbrew' / 'chat.sqlite3')))
+TOKEN = os.getenv('NIGHTBREW_SESSION_TOKEN') or secrets.token_urlsafe(32)
 
 
 def connect():
-    DB.parent.mkdir(parents=True, exist_ok=True)
-    connection = sqlite3.connect(DB)
-    connection.execute("CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY, role TEXT NOT NULL, content TEXT NOT NULL, provider TEXT NOT NULL, created_at TEXT DEFAULT CURRENT_TIMESTAMP)")
-    return connection
+    return store.open_db(DB)
 
 
-def authorize(authorization):
-    if not authorization or not secrets.compare_digest(authorization, f"Bearer {TOKEN}"):
-        raise HTTPException(401, "Session authentication required")
+def authorize(authorization: str | None = Header(default=None)):
+    if not authorization or not secrets.compare_digest(authorization, f'Bearer {TOKEN}'):
+        raise HTTPException(401, 'Session authentication required')
 
 
-class Chat(BaseModel):
-    message: str = Field(min_length=1, max_length=32000)
-    mode: Literal["LOCAL_ONLY", "CLOUD_ONLY"] = "LOCAL_ONLY"
-    cloud_consent: bool = False
-
-
-@app.get("/health")
+@app.get('/health')
 def health():
-    return {"status": "ok", "version": "0.1.0"}
+    return {'status': 'ok', 'version': app.version}
 
 
-@app.get("/messages")
-def messages(authorization: str | None = Header(default=None)):
-    authorize(authorization)
+@app.get('/messages', dependencies=[Depends(authorize)])
+def messages():
     with connect() as db:
-        rows = db.execute("SELECT id, role, content, provider FROM messages ORDER BY id DESC LIMIT 100").fetchall()
-    return [dict(zip(("id", "role", "content", "provider"), row)) for row in reversed(rows)]
+        rows = db.execute('SELECT id,role,content,provider FROM messages ORDER BY id DESC LIMIT 100').fetchall()
+    return [dict(row) for row in reversed(rows)]
 
 
-@app.post("/chat")
-def chat(request: Chat, authorization: str | None = Header(default=None)):
-    authorize(authorization)
-    cloud = request.mode == "CLOUD_ONLY"
-    if cloud and not request.cloud_consent:
-        raise HTTPException(403, "Explicit cloud data consent is required")
-    model = os.getenv("NIGHTBREW_CLOUD_MODEL", "") if cloud else os.getenv("NIGHTBREW_LOCAL_MODEL", "llama3.2:3b")
-    if cloud and (not os.getenv("NIGHTBREW_CLOUD_KEY") or not model):
-        raise HTTPException(503, "Configure cloud API key and model in the backend environment")
-    base = os.getenv("NIGHTBREW_CLOUD_URL", "https://api.openai.com/v1") if cloud else os.getenv("NIGHTBREW_OLLAMA_URL", "http://127.0.0.1:11434")
-    if cloud and not base.startswith("https://"):
-        raise HTTPException(503, "Cloud endpoint requires HTTPS")
-    payload = {"model": model, "messages": [{"role": "user", "content": request.message}], "stream": False}
-    headers = {"Authorization": f"Bearer {os.environ['NIGHTBREW_CLOUD_KEY']}"} if cloud else {}
+@app.get('/hardware', dependencies=[Depends(authorize)])
+def hardware_info():
+    info = hardware.inspect()
+    with connect() as db:
+        measured = store.get(db, 'benchmark')
+    info['benchmark'] = measured
+    info['local_plan_recommended'] = bool(measured and measured.get('local_plan_recommended') and measured.get('model') in info['models'])
+    return info
+
+
+@app.post('/hardware/benchmark', dependencies=[Depends(authorize)])
+def benchmark():
+    try:
+        result = hardware.benchmark(os.getenv('NIGHTBREW_LOCAL_MODEL', 'llama3.2:3b'))
+    except (httpx.HTTPError, ValueError, KeyError, TypeError):
+        raise HTTPException(502, 'Local model benchmark unavailable; install/start Ollama and the selected model') from None
+    from datetime import datetime, timezone
+    result['measured_at'] = datetime.now(timezone.utc).isoformat()
+    with connect() as db: store.put(db, 'benchmark', result)
+    return result
+
+
+@app.get('/settings/ai', dependencies=[Depends(authorize)])
+def ai_settings():
+    with connect() as db: return ai.Policy(**store.get(db, 'ai_policy', {}))
+
+
+@app.put('/settings/ai', dependencies=[Depends(authorize)])
+def update_ai_settings(policy: ai.Policy):
+    with connect() as db:
+        store.put(db, 'ai_policy', policy.model_dump())
+        store.audit(db, 'ai_policy_updated', 'settings')
+    return policy
+
+
+class KeyRequest(BaseModel):
+    key: SecretStr
+
+
+@app.put('/settings/cloud-key', dependencies=[Depends(authorize)])
+def cloud_key(request: KeyRequest):
+    try: credentials.save_key(request.key.get_secret_value())
+    except Exception: raise HTTPException(503, 'Windows Credential Manager unavailable; use the backend environment binding on Linux') from None
+    return {'stored': bool(request.key.get_secret_value()), 'storage': 'Windows Credential Manager'}
+
+
+@app.get('/usage', dependencies=[Depends(authorize)])
+def usage():
+    with connect() as db:
+        rows = db.execute('SELECT * FROM usage ORDER BY created_at DESC LIMIT 100').fetchall()
+        return {'currency': 'USD', 'entries': [dict(row) for row in rows], 'policy': ai.Policy(**store.get(db, 'ai_policy', {}))}
+
+
+@app.post('/chat', dependencies=[Depends(authorize)])
+def chat(request: ai.Chat):
+    local_model = os.getenv('NIGHTBREW_LOCAL_MODEL', 'llama3.2:3b')
+    with connect() as db:
+        if store.get(db, 'emergency_stop', False): raise HTTPException(409, 'Emergency stop is active')
+        policy = ai.Policy(**store.get(db, 'ai_policy', {}))
+        measured = store.get(db, 'benchmark')
+    try: selected = ai.select(request, policy, measured, local_model)
+    except ValueError as exc: raise HTTPException(403, str(exc)) from None
+    cloud = selected == 'CLOUD_ONLY'
+    model = os.getenv('NIGHTBREW_CLOUD_MODEL', '') if cloud else local_model
+    try: key = credentials.cloud_key() if cloud else None
+    except Exception: raise HTTPException(503, 'Credential store unavailable') from None
+    if cloud and (not key or not model): raise HTTPException(503, 'Configure cloud API key and model in the backend environment')
+    try: base = ai.cloud_base() if cloud else hardware.ollama_base()
+    except ValueError as exc: raise HTTPException(503, str(exc)) from None
+    reservation = None
+    if cloud:
+        try: reservation, _ = ai.reserve(connect, model, request, policy)
+        except ValueError as exc: raise HTTPException(402, str(exc)) from None
+    payload = {'model': model, 'messages': [{'role': 'user', 'content': request.message}], 'stream': False}
+    if cloud: payload['max_tokens'] = policy.max_output_tokens
+    else: payload['options'] = {'num_predict': policy.max_output_tokens}
+    headers = {'Authorization': f'Bearer {key}'} if cloud else {}
     try:
         with httpx.Client(timeout=90, follow_redirects=False, trust_env=cloud) as client:
-            response = client.post(base.rstrip("/") + ("/chat/completions" if cloud else "/api/chat"), json=payload, headers=headers)
+            response = client.post(base + ('/chat/completions' if cloud else '/api/chat'), json=payload, headers=headers)
             response.raise_for_status()
             data = response.json()
-            answer = data["choices"][0]["message"]["content"] if cloud else data["message"]["content"]
-            if not isinstance(answer, str) or not answer.strip():
-                raise ValueError("Empty answer")
+            answer = data['choices'][0]['message']['content'] if cloud else data['message']['content']
+            if not isinstance(answer, str) or not answer.strip(): raise ValueError('Empty answer')
     except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError):
-        raise HTTPException(502, "AI provider unavailable or returned an invalid response") from None
+        if reservation: ai.settle(connect, reservation, None, policy, False)
+        raise HTTPException(502, 'AI provider unavailable or returned an invalid response; no automatic fallback was attempted') from None
+    if reservation: ai.settle(connect, reservation, data.get('usage'), policy, True)
     with connect() as db:
-        db.executemany("INSERT INTO messages(role,content,provider) VALUES(?,?,?)", [("user", request.message, request.mode), ("assistant", answer, request.mode)])
-    return {"answer": answer, "provider": request.mode}
+        db.executemany('INSERT INTO messages(role,content,provider) VALUES(?,?,?)', [('user', request.message, selected), ('assistant', answer, selected)])
+        store.audit(db, 'chat_completed', selected)
+    return {'answer': answer, 'provider': selected, 'usage_id': reservation}
 
-from fastapi.middleware.cors import CORSMiddleware
-app.add_middleware(CORSMiddleware, allow_origins=["null", "http://127.0.0.1:5173"], allow_methods=["GET", "POST"], allow_headers=["Authorization", "Content-Type"])
+
+app.add_middleware(CORSMiddleware, allow_origins=['null', 'http://127.0.0.1:5173'], allow_methods=['GET', 'POST', 'PUT', 'DELETE'], allow_headers=['Authorization', 'Content-Type'])
+
+@app.post('/ai/estimate', dependencies=[Depends(authorize)])
+def estimate_chat(request: ai.Chat):
+    with connect() as db:
+        policy = ai.Policy(**store.get(db, 'ai_policy', {}))
+        measured = store.get(db, 'benchmark')
+    try: selected = ai.select(request, policy, measured, os.getenv('NIGHTBREW_LOCAL_MODEL', 'llama3.2:3b'))
+    except ValueError as exc: raise HTTPException(403, str(exc)) from None
+    return {'provider': selected, 'estimated_max_cost_usd': ai.estimate(request, policy) if selected == 'CLOUD_ONLY' else 0, 'pricing_confirmed': policy.pricing_confirmed, 'note': 'Conservative reservation, not a provider invoice. Failed cloud calls retain the reservation when billing is unknown.'}
