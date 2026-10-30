@@ -43,7 +43,22 @@ export function Settings({ api }: { api: API }) {
   }
   return (
     <>
-      <h2>Privacy & AI budget</h2><label>Cloud funding<select value={policy.billing_source} onChange={e=>setPolicy({...policy,billing_source:e.target.value as 'BYOK'|'INCLUDED'})}><option value="BYOK">My own API key (BYOK)</option><option value="INCLUDED">Trusted gateway / included credits</option></select></label>
+      <h2>Privacy & AI budget</h2>
+      <label>
+        Cloud funding
+        <select
+          value={policy.billing_source}
+          onChange={(e) =>
+            setPolicy({
+              ...policy,
+              billing_source: e.target.value as "BYOK" | "INCLUDED",
+            })
+          }
+        >
+          <option value="BYOK">My own API key (BYOK)</option>
+          <option value="INCLUDED">Trusted gateway / included credits</option>
+        </select>
+      </label>
       <p>
         Local development allowances in USD; these balances are not proof of
         payment. Configure the provider model and endpoint on the backend.

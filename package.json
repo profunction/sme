@@ -1,6 +1,6 @@
 {
   "name": "nightbrew-ai-employee",
-  "version": "0.4.0",
+  "version": "0.8.0",
   "private": true,
   "description": "NightBrew Windows AI desktop foundation",
   "author": "NightBrew",
@@ -9,10 +9,16 @@
     "dev": "vite --host 127.0.0.1",
     "desktop": "electron .",
     "build": "tsc --noEmit && vite build",
-    "package:win": "npm run build && electron-builder --win nsis",
-    "test:e2e": "playwright test"
+    "package:win": "node scripts/prepare-release.cjs && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --win nsis --config build/electron-release.json --publish never",
+    "test:e2e": "playwright test",
+    "test:desktop": "node --test desktop/*.test.cjs",
+    "backend:build": "python scripts/build-backend.py",
+    "package:win:unsigned": "node scripts/prepare-release.cjs --development && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --win nsis --config build/electron-release.json --publish never",
+    "test:electron": "node scripts/smoke-desktop.cjs",
+    "desktop:install": "node node_modules/electron/install.js"
   },
   "dependencies": {
+    "electron-updater": "6.8.11",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
@@ -35,10 +41,46 @@
     },
     "files": [
       "dist/**/*",
-      "desktop/**/*"
+      "desktop/main.cjs",
+      "desktop/preload.cjs",
+      "desktop/backend.cjs"
     ],
     "win": {
       "target": "nsis"
+    },
+    "extraResources": [
+      {
+        "from": "build/backend/nightbrew-backend",
+        "to": "backend"
+      },
+      {
+        "from": "build/release-policy.json",
+        "to": "release-policy.json"
+      },
+      {
+        "from": "LICENSE_AUDIT.md",
+        "to": "LICENSE_AUDIT.md"
+      },
+      {
+        "from": "docs",
+        "to": "dependency-notices"
+      },
+      {
+        "from": "build/THIRD-PARTY-NOTICES.txt",
+        "to": "licenses/THIRD-PARTY-NOTICES.txt"
+      },
+      {
+        "from": "node_modules/electron/dist/LICENSES.chromium.html",
+        "to": "licenses/LICENSES.chromium.html"
+      }
+    ],
+    "asar": true,
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "runAfterFinish": false,
+      "perMachine": false,
+      "createDesktopShortcut": false
     }
   }
 }

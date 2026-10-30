@@ -19,6 +19,7 @@ type Task = {
     text?: string;
     note?: string;
     data?: unknown;
+    steps?: { action: string; verified: boolean; result: unknown }[];
   } | null;
 };
 type Line = { description: string; quantity: string; unit_price: string };
@@ -344,7 +345,7 @@ export function Business({ api, token }: { api: API; token: string }) {
                 >
                   Analyze Excel
                 </button>
-              ) : (
+              ) : !file.name.toLowerCase().endsWith(".png") ? (
                 <button
                   disabled={busy || stopped}
                   onClick={() =>
@@ -358,7 +359,7 @@ export function Business({ api, token }: { api: API; token: string }) {
                 >
                   Extract text
                 </button>
-              )}
+              ) : null}
               <button
                 className="secondary"
                 disabled={busy || stopped}

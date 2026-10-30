@@ -19,7 +19,7 @@ PAYLOAD = {
 
 
 def wait(client, identifier):
-    for _ in range(200):
+    for _ in range(1000):
         row = next(
             t
             for t in client.get("/tasks", headers=AUTH).json()

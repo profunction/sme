@@ -1,25 +1,22 @@
-# Windows development
+# Windows development and installation
 
-Requires Windows 10/11, Node 24, Python 3.12 and a working desktop session. These steps are instructions only; cloud setup does not install anything on your computer.
+All current development happened in cloud; these instructions do not install anything on your computer automatically. Requires Windows 10/11, Node 24, Python 3.12 and an interactive desktop.
 
 ```powershell
 npm ci
+npm run desktop:install
 py -3.12 -m venv .venv
 .venv\Scripts\python -m pip install -r backend/requirements.lock.txt
 npm run build
-.venv\Scripts\python -m pytest backend/tests
-$env:NIGHTBREW_SESSION_TOKEN = [guid]::NewGuid().ToString('N')
-.venv\Scripts\python -m uvicorn backend.app:app --host 127.0.0.1 --port 8765
+.venv\Scripts\python -m pytest backend/tests -q
+npm run test:desktop
+npm run desktop
 ```
 
-In another terminal run `npm run desktop`; enter the session token in the app. Start Ollama and pull a suitable model separately, or configure the backend's cloud environment variables described in README. `npm run package:win` builds the Electron shell, but does not bundle Python yet. Do not distribute it as a standalone product. Windows desktop, packaging and UI Automation tests have not been run in Linux cloud.
+Electron now starts/stops its own backend and supplies a private session automatically. Do not start another backend on port 8765 first. For browser development only, run the backend manually and enter its token as described in README.
 
-## Phase 2–4 workflow
+Development mode is labeled unpaid; it does not establish subscription entitlements. Packaged builds require a valid signed license from the configured trusted authority. Customer account keys and AI BYOK can be stored in Windows Credential Manager. Use the Subscription panel for activation and payments; see COMMERCIAL_BACKEND.md. Ollama/model installation and provider credentials are separate; no model is automatically downloaded. Benchmark your actual hardware before recommending local AI.
 
-Use AI & privacy to detect hardware and benchmark your installed Ollama model before recommending local AI. Cloud chat requires a configured model, global permission, confirmed provider pricing/budget and per-message consent. Windows BYOK uses native Credential Manager; no plaintext fallback is implemented. Hardware-bound benchmarks from Linux cloud cannot qualify a Windows machine automatically.
+Computer tools accepts exact approved executable paths and deterministic plans, with human approval in Business tools. Windows UIA needs an interactive session and compatible controls; it is not universal support for every Windows program. Browser tasks use a fresh isolated Edge session by default. No unrestricted shell/AI-generated code execution exists. Employees assigns scoped roles/tools/connectors and persists task history.
 
-Business tools creates PDF/Word drafts, analyzes uploaded Excel, extracts local document text and manages restricted files/tasks. Review exact-task approvals there before deleting files or writing connector records. Emergency stop blocks new work and requests cancellation; it cannot reverse already dispatched requests.
-
-The four ERP/POS/WMS/TMS connectors are development mocks. See CONNECTOR_GUIDE.md before configuring a real HTTPS API; scoped credentials and network access are required. All categories remain available in every plan.
-
-Cloud validation includes backend tests and a Linux Chromium UI flow. This does not verify Windows Electron startup, Windows Credential Manager, Windows GPU detection or a Windows installer. Python is still started separately; these remain release prerequisites. No Windows automation is enabled through Phase 4.
+To build an installer, install backend/requirements-build.txt into the venv and follow WINDOWS_RELEASE.md. Unsigned development artifacts are explicitly labeled; production requires a trusted public key, HTTPS license/update services and publisher signing certificate. The cloud Linux native build and browser tests are not Windows verification; inspect the Windows GitHub Actions results before using an installer. Signing/live payments/real vendor validation remain deployment prerequisites.

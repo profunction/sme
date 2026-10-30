@@ -5,10 +5,18 @@ import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 
-from backend import automation, documents, files, store, workforce, licensing
+from backend import automation, documents, files, licensing, store, workforce
 
 EXECUTOR = ThreadPoolExecutor(max_workers=2, thread_name_prefix="nightbrew-task")
-TOOLS = {"document.generate", "excel.analyze", "document.extract", "file.delete", "browser.run", "windows.run", "connector.read"}
+TOOLS = {
+    "document.generate",
+    "excel.analyze",
+    "document.extract",
+    "file.delete",
+    "browser.run",
+    "windows.run",
+    "connector.read",
+}
 APPROVAL = {"file.delete", "connector.write", "browser.run", "windows.run"}
 TIMEOUT_SECONDS = 60
 # A single process owns the SQLite job queue. No external action is replayed after restart.
@@ -29,6 +37,7 @@ def create(connect, tool, payload, employee_id=None):
         payload = automation.prepare(connect, tool, payload)
     elif tool == "connector.read":
         from backend import connectors
+
         connectors.get(connect, payload.get("connector_id"))
         payload = {"connector_id": payload["connector_id"]}
     elif tool in TOOLS:
@@ -39,8 +48,11 @@ def create(connect, tool, payload, employee_id=None):
         db.execute("BEGIN IMMEDIATE")
         if store.get(db, "emergency_stop", False):
             raise ValueError("Emergency stop is active")
-        employee = workforce.check(db, employee_id, tool, payload) if employee_id else None
-        if employee and employee.require_approval: status = 'pending_approval'
+        employee = (
+            workforce.check(db, employee_id, tool, payload) if employee_id else None
+        )
+        if employee and employee.require_approval:
+            status = "pending_approval"
         licensing.reserve_task(connect, identifier, employee_id)
         pending = db.execute(
             "SELECT COUNT(*) FROM tasks WHERE status IN ('queued','running','pending_approval','cancel_requested')"
@@ -52,7 +64,10 @@ def create(connect, tool, payload, employee_id=None):
             (identifier, tool, json.dumps(payload), status),
         )
         if employee:
-            db.execute('INSERT INTO assignments VALUES(?,?,?)', (identifier, employee_id, employee.model_dump_json()))
+            db.execute(
+                "INSERT INTO assignments VALUES(?,?,?)",
+                (identifier, employee_id, employee.model_dump_json()),
+            )
         store.audit(db, "task_created", identifier, tool)
     return identifier, status
 
@@ -87,7 +102,8 @@ def execute(connect, db_path, identifier):
     try:
         check()
         licensing.enforce(connect)
-        workforce.execution_check(connect, identifier)
+        employee_id = workforce.execution_check(connect, identifier)
+        licensing.reserve_task(connect, identifier, employee_id)
         payload = json.loads(row["payload"])
         if row["tool"] == "connector.write":
             from backend import connectors
@@ -95,7 +111,10 @@ def execute(connect, db_path, identifier):
             result = connectors.write(connect, payload, check)
         elif row["tool"] == "connector.read":
             from backend import connectors
-            result = connectors.read(connect, payload['connector_id'])
+
+            result = connectors.read(
+                connect, payload["connector_id"], reserve_license=False
+            )
         elif row["tool"] == "browser.run":
             result = automation.browser(connect, db_path, payload, check)
         elif row["tool"] == "windows.run":
@@ -124,8 +143,10 @@ def execute(connect, db_path, identifier):
                 pass
         if result and isinstance(result, dict):
             for artifact in result.get("artifacts", []):
-                try: files.delete(connect, db_path, artifact["id"])
-                except (ValueError, OSError): pass
+                try:
+                    files.delete(connect, db_path, artifact["id"])
+                except (ValueError, OSError):
+                    pass
         status = "cancelled" if isinstance(exc, Cancelled) else "failed"
         error = (
             "Cancelled. In-flight external writes may already have occurred; verify the remote system before retrying."

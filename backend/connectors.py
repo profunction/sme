@@ -278,7 +278,13 @@ def remote(connect, config, write=False, payload=None, checkpoint=lambda: None):
     raise ValueError("Connector request failed")
 
 
-def read(connect, identifier):
+def read(connect, identifier, reserve_license=True):
+    import uuid
+
+    from backend import licensing
+
+    if reserve_license:
+        licensing.reserve_task(connect, uuid.uuid4().hex)
     config = get(connect, identifier)
     if not config.read_enabled:
         raise ValueError("Connector read permission denied")

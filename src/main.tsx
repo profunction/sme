@@ -1,17 +1,23 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { apiFor } from "./api";
 import { Assistant } from "./Assistant";
 import { Connectors } from "./Connectors";
 import { Business } from "./Business";
-import {Billing} from "./Billing";
-import {Workforce} from "./Workforce";
-import {Automation} from "./Automation";
+import { Billing } from "./Billing";
+import { Workforce } from "./Workforce";
+import { Automation } from "./Automation";
 import { Settings } from "./Settings";
 import "./style.css";
 function App() {
   const [token, setToken] = useState(""),
     [tab, setTab] = useState("Assistant");
+  useEffect(() => {
+    window.nightbrew
+      ?.session()
+      .then((session) => setToken(session.token))
+      .catch(() => {});
+  }, []);
   const api = useMemo(() => apiFor(token), [token]);
   return (
     <main>
@@ -19,17 +25,23 @@ function App() {
         <h2>☕ NightBrew</h2>
         <p>AI EMPLOYEE</p>
         <h3>Workspace</h3>
-        {["Assistant", "Business tools", "Connectors", "Computer tools", "Employees", "Subscription", "AI & privacy"].map(
-          (name) => (
-            <button
-              key={name}
-              className={tab === name ? "" : "secondary"}
-              onClick={() => setTab(name)}
-            >
-              {name}
-            </button>
-          ),
-        )}
+        {[
+          "Assistant",
+          "Business tools",
+          "Connectors",
+          "Computer tools",
+          "Employees",
+          "Subscription",
+          "AI & privacy",
+        ].map((name) => (
+          <button
+            key={name}
+            className={tab === name ? "" : "secondary"}
+            onClick={() => setTab(name)}
+          >
+            {name}
+          </button>
+        ))}
         <small>Windows application · Cloud development</small>
       </aside>
       <section>
@@ -60,7 +72,13 @@ function App() {
           <Business key={token} api={api} token={token} />
         ) : tab === "Connectors" ? (
           <Connectors key={token} api={api} />
-        ) : tab === "Computer tools" ? (<Automation key={token} api={api}/>) : tab === "Employees" ? (<Workforce key={token} api={api}/>) : tab === "Subscription" ? (<Billing key={token} api={api}/>) : (
+        ) : tab === "Computer tools" ? (
+          <Automation key={token} api={api} />
+        ) : tab === "Employees" ? (
+          <Workforce key={token} api={api} />
+        ) : tab === "Subscription" ? (
+          <Billing key={token} api={api} />
+        ) : (
           <Settings key={token} api={api} />
         )}
       </section>

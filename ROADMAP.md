@@ -1,14 +1,14 @@
-# Roadmap
+# Implementation and verification status
 
-| Phase | Current state |
-|---|---|
-| 1 — Desktop foundation | Implemented: Electron/React, FastAPI/SQLite, local/cloud chat and authentication. Linux build/API checks pass; Windows runtime remains unverified. |
-| 2 — Hybrid AI | Implemented: hardware/model inspection, measured local benchmark, hardware-bound hybrid routing, privacy controls, Windows BYOK path, estimates and usage budgets. Live inference/Windows vault need runtime validation. |
-| 3 — Business automation | Implemented: deterministic PDF/Word business drafts, bounded Excel analysis, document extraction, restricted files, task history, approval, cooperative cancellation and emergency stop. Native parsers still need production process isolation. |
-| 4 — Integration framework | Implemented: registry, Generic REST adapter, mock ERP/POS/WMS/TMS, permissions, connection tests, audit, retry/rate controls and all-plan availability. Real vendor integration remains unverified. |
-| 5 — Computer automation | Not implemented: controlled Playwright tools, Windows UI Automation, screenshot capture, planning and result verification. Playwright currently tests the application only. |
-| 6 — Digital workforce | Not implemented: employee roles, assignments, scoped tools and employee task history. |
-| 7 — Commercial features | Not implemented: trusted subscription validation, paid credits, device licensing and marketplace. Only configurable mock plan metadata/local budgets exist. |
-| 8 — Windows release | Not implemented: bundled backend, signed installer, managed process lifecycle, secure updates and Windows integration tests. |
+| Phase | Implemented code | Verification still required |
+|---|---|---|
+| 1 — Desktop foundation | Electron/React, FastAPI/SQLite, authenticated local/cloud chat | Real Windows/customer runtime and live AI providers |
+| 2 — Hybrid AI | Hardware detection, local benchmark, hardware-bound routing, privacy, vault path, usage/budgets | Windows GPU/vault test results, actual model performance |
+| 3 — Business automation | PDF/Word drafts, Excel, extraction, restricted files, approval/history/cancellation | Production parser isolation/malware scan; customer document compatibility |
+| 4 — Connectors | Generic REST, mock ERP/POS/WMS/TMS, permissions/audit/retry/rates, all-plan access | Authorized real vendor API/integration tests |
+| 5 — Computer automation | Deterministic approved browser/Windows UIA plans, screenshots and result verification | Browser workflow passed locally; Windows UIA/target applications must pass Windows CI/customer tests |
+| 6 — Digital workforce | Employee roles/instructions, scoped tools/connectors, assignments/history, spending/task limits | Customer end-to-end acceptance; no autonomous unrestricted AI scheduler is promised |
+| 7 — Commercial foundation | Separate trusted authority, signed grants, device/employee/task quotas, mock/Stripe billing, credits/gateway, add-ons/catalog | Deploy secure service; configure merchant/webhooks/provider; validate real test-mode payments and reconciliations |
+| 8 — Windows release engineering | Managed backend/IPC, PyInstaller, signing/update configurations, Windows build/install tests and artifact workflows | Windows CI results, actual signed installer/update chain, publisher certificate, hosted feed and release approval |
 
-Advance through small tested changes. Never claim vendor support based on mocks, Windows verification based on Linux, or payment validity based on local SQLite.
+Cloud remains Linux and no customer machine has been modified. Code implementation, cloud validation, Windows CI execution, production deployment and commercial release are separate outcomes. Never claim Windows/vendor/payment/signing verification based only on mocks or configured workflows.

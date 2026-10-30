@@ -1,0 +1,56 @@
+name: Build signed production candidate
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    environment: release
+    runs-on: windows-latest
+    timeout-minutes: 30
+    env:
+      NIGHTBREW_RELEASE_PUBLIC_KEY: ${{ vars.NIGHTBREW_RELEASE_PUBLIC_KEY }}
+      NIGHTBREW_RELEASE_LICENSE_URL: ${{ vars.NIGHTBREW_RELEASE_LICENSE_URL }}
+      NIGHTBREW_RELEASE_UPDATE_URL: ${{ vars.NIGHTBREW_RELEASE_UPDATE_URL }}
+      NIGHTBREW_SIGNING_PUBLISHER: ${{ vars.NIGHTBREW_SIGNING_PUBLISHER }}
+      CSC_LINK: ${{ secrets.CSC_LINK }}
+      CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24"
+          cache: npm
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - run: npm ci
+      - run: npm run desktop:install
+      - run: |
+          python -m venv .venv
+          .venv\Scripts\Activate.ps1
+          python -m pip install -r backend/requirements-build.txt
+          python -m pytest backend/tests -q
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run test:desktop
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run package:win
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Verify production signature and packaged startup
+        run: |
+          $installer = Get-ChildItem release\NightBrew-*.exe | Select-Object -First 1
+          $signature = Get-AuthenticodeSignature $installer.FullName
+          if ($signature.Status -ne 'Valid') { throw 'Installer signature or certificate chain is invalid' }
+          if ($signature.SignerCertificate.GetNameInfo('SimpleName', $false) -ne $env:NIGHTBREW_SIGNING_PUBLISHER) { throw 'Unexpected signing publisher' }
+          $process = Start-Process "release\win-unpacked\NightBrew AI Employee.exe" -ArgumentList '--smoke-test' -PassThru
+          if (-not $process.WaitForExit(60000)) { Stop-Process -Id $process.Id; throw 'Production startup timeout' }
+          if ($process.ExitCode -ne 0) { throw 'Production startup failed' }
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: NightBrew-signed-production-candidate
+          path: |
+            release/NightBrew-*.exe
+            release/*.blockmap
+            release/latest.yml
+          if-no-files-found: error
+          retention-days: 14

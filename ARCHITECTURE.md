@@ -1,22 +1,24 @@
 # Architecture
 
 ```text
-Sandboxed Electron / React renderer
+Electron main -> owned Python backend, random session + authenticated instance handshake
+  -> sandboxed React renderer via minimal validated preload IPC
   -> bearer-authenticated loopback FastAPI
-     -> hardware inspection + local model benchmark
-     -> privacy/capability router -> Ollama OR HTTPS cloud provider
-     -> transactional SQLite usage reservations / chat history
-     -> bounded task workers -> deterministic document / file tools
-     -> connector registry -> local mocks OR allowlisted HTTPS JSON APIs
-     -> immutable approval records + metadata-only audit
+     -> hardware / privacy router -> local Ollama OR customer BYOK provider
+     -> deterministic documents + opaque files
+     -> bounded tasks / immutable approvals -> browser / Windows UIA / connectors
+     -> employee instructions, scoped tools/connectors, assignment and usage history
+     -> verified public-key device grant + online quotas
+        -> separate HTTPS commercial authority
+           -> Stripe Checkout/Portal + verified webhook reconciliation
+           -> authoritative plans/seats/devices/credits
+           -> included-AI gateway -> company provider (private key stays server-side)
 ```
 
-`backend/app.py` defines the API boundary; `ai.py` handles routing/costs; `hardware.py` measures capabilities; `credentials.py` uses backend environment or Windows Credential Manager. `store.py` creates backward-compatible tables. `documents.py` owns deterministic operations; `files.py` restricts access to opaque IDs; `tasks.py` owns lifecycle/approval/recovery. `connectors.py` owns adapters, authentication references, rate/retry policies and all-plan integration access.
+`backend/app.py` is the desktop API; `ai.py`, `hardware.py` and `credentials.py` implement inference policy, measurements and vault bindings. `store.py` adds compatible SQLite tables; `documents.py`/`files.py` implement restricted deterministic operations. `tasks.py` handles queue/approval/recovery; `automation.py` implements explicit plans; `workforce.py` checks employee context/permissions/caps; `connectors.py` owns adapters and all-plan category access. `licensing.py` verifies grants and calls online quota/credit services. `billing_service/app.py` is deployed separately and must never be bundled with desktop secrets.
 
-The single-user session token authorizes local administrative access. There are no per-employee identities or tenant boundaries yet. UI navigation/permissions do not substitute for backend checks. Provider output and extracted/remote content never enter the tool dispatcher as instructions. No shell execution exists.
+`desktop/backend.cjs` chooses the development Python or frozen executable, generates the session and checks instance identity. `main.cjs` manages lifecycle/IPC/window/updates; `preload.cjs` exposes only named operations. `backend/entrypoint.py` runs the frozen service and rotating logs. PyInstaller/installer scripts and pinned-action Windows workflows build and test native candidates. Production signing/update/public license configuration is generated into ignored build resources; only public policy ships.
 
-Cloud requests reserve budget under a SQLite write lock; completion reconciles reported usage, while unknown billing retains the estimate. Prices/credits are development policy, not payment entitlements. Chat and business content are local plaintext protected by OS account permissions, not encrypted at rest.
+Employee instructions guide chat but do not grant tools. Model output cannot dispatch tools. Task/employee/connector/automation snapshots bind approval to exact intent, and permissions are rechecked. Consequential actions always require human approval. Quotas count attempts, and interrupted/unknown external outcomes are not replayed. This is a single-company desktop application with two task workers, not a multi-tenant cloud worker cluster or unrestricted autonomous agent.
 
-Task payloads are frozen on creation. Writes bind approval to a complete connector configuration snapshot; execution rechecks permissions/current configuration. Interrupted tasks are not replayed, and writes have no automatic retries. Cancellation is cooperative; unknown external outcomes must be reconciled manually. Two workers and SQLite are deliberate initial constraints; this is not a multi-tenant cloud service.
-
-Phase 8 must supervise/package the Python process, sign releases, add secure updates and verify all Windows paths. Current `package:win` packages the shell only, not a standalone product.
+Desktop and authority have separate SQLite stores/trust boundaries. Desktop plaintext records are OS-account protected; paid entitlements are signature-verified and quotas/credits controlled on the authority. BYOK costs go to the customer's provider; included credits use the authority gateway. Customer business content only enters the gateway/provider with explicit consent. At-rest encryption/parser sandboxing, real vendor acceptance, Windows verification and deployed commercial operations remain release work.

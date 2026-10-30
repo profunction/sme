@@ -55,7 +55,7 @@ def save(connect, db_path, name, data, trusted=False):
     extension = Path(name).suffix.lower()
     if not trusted:
         validate(data, extension)
-    if not name or extension not in (ALLOWED | ({'.png'} if trusted else set())):
+    if not name or extension not in (ALLOWED | ({".png"} if trusted else set())):
         raise ValueError("Unsupported file name")
     identifier = uuid.uuid4().hex
     path = file_root(db_path) / (identifier + extension)

@@ -111,6 +111,18 @@
     ]
   },
   {
+    "name": "greenlet",
+    "version": "3.5.6",
+    "declared_license": "MIT AND PSF-2.0",
+    "project_urls": [
+      "Homepage, https://greenlet.readthedocs.io",
+      "Documentation, https://greenlet.readthedocs.io",
+      "Repository, https://github.com/python-greenlet/greenlet",
+      "Issues, https://github.com/python-greenlet/greenlet/issues",
+      "Changelog, https://greenlet.readthedocs.io/en/latest/changes.html"
+    ]
+  },
+  {
     "name": "h11",
     "version": "0.16.0",
     "declared_license": "MIT",
@@ -279,6 +291,15 @@
     ]
   },
   {
+    "name": "playwright",
+    "version": "1.64.1",
+    "declared_license": "Apache-2.0",
+    "project_urls": [
+      "homepage, https://github.com/Microsoft/playwright-python",
+      "Release notes, https://github.com/microsoft/playwright-python/releases"
+    ]
+  },
+  {
     "name": "pluggy",
     "version": "1.7.0",
     "declared_license": "MIT",
@@ -325,6 +346,15 @@
       "Funding, https://github.com/sponsors/samuelcolvin",
       "Homepage, https://github.com/pydantic",
       "Source, https://github.com/pydantic/pydantic/tree/main/pydantic-core"
+    ]
+  },
+  {
+    "name": "pyee",
+    "version": "14.0.0",
+    "declared_license": "MIT",
+    "project_urls": [
+      "Repository, https://github.com/jfhbrook/pyee",
+      "Documentation, https://pyee.readthedocs.io"
     ]
   },
   {
@@ -474,7 +504,25 @@
   {
     "name": "pywin32-ctypes",
     "version": "0.2.3",
-    "declared_license": "MIT (Windows-only pywin32-ctypes; not installed in Linux)",
-    "platform": "win32"
+    "declared_license": "MIT",
+    "platform": "win32; not runtime-tested in Linux"
+  },
+  {
+    "name": "pywinauto",
+    "version": "0.6.9",
+    "declared_license": "BSD-3-Clause",
+    "platform": "win32; not runtime-tested in Linux"
+  },
+  {
+    "name": "pywin32",
+    "version": "312",
+    "declared_license": "PSF",
+    "platform": "win32; not runtime-tested in Linux"
+  },
+  {
+    "name": "comtypes",
+    "version": "1.4.17",
+    "declared_license": "MIT",
+    "platform": "win32; not runtime-tested in Linux"
   }
 ]

@@ -10,7 +10,7 @@ from backend import hardware, store, workforce
 
 
 class Policy(BaseModel):
-    billing_source: Literal['BYOK','INCLUDED'] = 'BYOK'
+    billing_source: Literal["BYOK", "INCLUDED"] = "BYOK"
     cloud_allowed: bool = False
     monthly_limit_usd: float = Field(default=5, ge=0, le=10000, allow_inf_nan=False)
     credit_balance_usd: float = Field(default=0, ge=0, le=10000, allow_inf_nan=False)
@@ -81,7 +81,9 @@ def cloud_base():
 
 def estimate(request, policy, system_text=""):
     # UTF-8 bytes are a conservative token bound for normal text tokenizers, plus request framing.
-    input_bound = len(request.message.encode("utf-8")) + len(system_text.encode("utf-8")) + 256
+    input_bound = (
+        len(request.message.encode("utf-8")) + len(system_text.encode("utf-8")) + 256
+    )
     return (
         input_bound * policy.input_usd_per_million
         + policy.max_output_tokens * policy.output_usd_per_million
@@ -91,14 +93,23 @@ def estimate(request, policy, system_text=""):
 def reserve(connect, model, request, policy, system_text="", override_amount=None):
     if override_amount is None and not policy.pricing_confirmed:
         raise ValueError("Confirm provider pricing before cloud inference")
-    amount = estimate(request, policy, system_text) if override_amount is None else override_amount
+    amount = (
+        estimate(request, policy, system_text)
+        if override_amount is None
+        else override_amount
+    )
+    import math
+
+    if not isinstance(amount, (int, float)) or not math.isfinite(amount) or amount < 0:
+        raise ValueError("Invalid cost reservation")
     month = datetime.now(UTC).strftime("%Y-%m")
     identifier = uuid.uuid4().hex
     with connect() as db:
         db.execute("BEGIN IMMEDIATE")
         # Re-read inside the transaction: concurrent settings changes cannot create extra credits.
         current = Policy(**store.get(db, "ai_policy", {}))
-        if request.employee_id: workforce.spending_check(db, request.employee_id, amount)
+        if request.employee_id:
+            workforce.spending_check(db, request.employee_id, amount)
         used = db.execute(
             "SELECT COALESCE(SUM(cost),0) FROM usage WHERE month=?", (month,)
         ).fetchone()[0]
@@ -114,7 +125,10 @@ def reserve(connect, model, request, policy, system_text="", override_amount=Non
             (identifier, month, model, amount, amount, "reserved"),
         )
         if request.employee_id:
-            db.execute('INSERT INTO usage_owners VALUES(?,?)', (identifier, request.employee_id))
+            db.execute(
+                "INSERT INTO usage_owners VALUES(?,?)",
+                (identifier, request.employee_id),
+            )
     return identifier, amount
 
 

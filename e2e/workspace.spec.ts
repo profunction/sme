@@ -32,14 +32,12 @@ test("business drafts and approved mock connector writes through the actual UI",
     page.getByRole("button", { name: "Download", exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Connectors", exact: true }).click();
-  const warehouse = page
-    .locator("li")
-    .filter({
-      has: page.getByRole("heading", {
-        name: "Mock WMS (development only)",
-        exact: true,
-      }),
-    });
+  const warehouse = page.locator("li").filter({
+    has: page.getByRole("heading", {
+      name: "Mock WMS (development only)",
+      exact: true,
+    }),
+  });
   await warehouse.getByRole("button", { name: "Configure" }).click();
   await page.getByLabel("Allow writes after exact-task approval").check();
   await page.getByRole("button", { name: "Save connector" }).click();
@@ -72,4 +70,49 @@ test("business drafts and approved mock connector writes through the actual UI",
   await expect(
     page.getByRole("button", { name: "Create local draft" }),
   ).toBeEnabled();
+});
+
+test("employee assignment and development license status are visible", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .getByLabel("Backend session token")
+    .fill("nightbrew-e2e-not-production");
+  await page.getByRole("button", { name: "Employees", exact: true }).click();
+  await page.getByLabel("Name", { exact: true }).fill("Finance UI Employee");
+  await page.getByLabel("Role", { exact: true }).fill("Finance");
+  await page
+    .getByLabel("Instructions", { exact: true })
+    .fill("Verify document totals.");
+  await page
+    .getByRole("button", { name: "Save employee", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Assign a job to Finance UI Employee" }),
+  ).toBeVisible();
+  await page.getByLabel("Task data (JSON)").fill(
+    JSON.stringify({
+      company: "NightBrew",
+      customer: "UI Customer",
+      reference: "EMP-001",
+      lines: [{ description: "Tea", quantity: "2", unit_price: "5.00" }],
+    }),
+  );
+  await page.getByRole("button", { name: "Assign task", exact: true }).click();
+  await expect(page.locator("pre")).toContainText("pending_approval");
+  await page
+    .getByRole("button", { name: "Business tools", exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: "Approve exact task", exact: true })
+    .click();
+  await expect(
+    page.getByText("Total: 10.00 MYR · Tax: 0.00", { exact: true }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Subscription", exact: true }).click();
+  await expect(page.locator("pre")).toContainText("development");
+  await expect(
+    page.getByRole("button", { name: "Check & download signed update" }),
+  ).toBeDisabled();
 });

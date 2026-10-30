@@ -12,8 +12,21 @@ export function Assistant({ api }: { api: API }) {
     [error, setError] = useState(""),
     [history, setHistory] = useState<Message[]>([]),
     [estimate, setEstimate] = useState("");
-  const [employees,setEmployees]=useState<{id:string,name:string}[]>([]),[employeeId,setEmployeeId]=useState('');
-  useEffect(()=>{api<{id:string,name:string,tools:string[],active:boolean}[]>('/employees').then(list=>setEmployees(list.filter(e=>e.active&&e.tools.includes('ai.chat')))).catch(()=>{})},[api]);
+  const [employees, setEmployees] = useState<{ id: string; name: string }[]>(
+      [],
+    ),
+    [employeeId, setEmployeeId] = useState("");
+  useEffect(() => {
+    api<{ id: string; name: string; tools: string[]; active: boolean }[]>(
+      "/employees",
+    )
+      .then((list) =>
+        setEmployees(
+          list.filter((e) => e.active && e.tools.includes("ai.chat")),
+        ),
+      )
+      .catch(() => {});
+  }, [api]);
   async function send(e: FormEvent) {
     e.preventDefault();
     setBusy(true);
@@ -22,7 +35,14 @@ export function Assistant({ api }: { api: API }) {
       const data = await api<{ answer: string; provider: string }>(
         "/chat",
         "POST",
-        { message, mode, privacy, complexity, cloud_consent: consent, employee_id:employeeId||null },
+        {
+          message,
+          mode,
+          privacy,
+          complexity,
+          cloud_consent: consent,
+          employee_id: employeeId || null,
+        },
       );
       setHistory([
         ...history,
@@ -47,7 +67,20 @@ export function Assistant({ api }: { api: API }) {
   }
   return (
     <>
-      <label>Chat as employee<select value={employeeId} onChange={e=>setEmployeeId(e.target.value)}><option value="">Business assistant</option>{employees.map(e=><option key={e.id} value={e.id}>{e.name}</option>)}</select></label>
+      <label>
+        Chat as employee
+        <select
+          value={employeeId}
+          onChange={(e) => setEmployeeId(e.target.value)}
+        >
+          <option value="">Business assistant</option>
+          {employees.map((e) => (
+            <option key={e.id} value={e.id}>
+              {e.name}
+            </option>
+          ))}
+        </select>
+      </label>
       <div className="row">
         <label>
           AI mode
@@ -104,8 +137,8 @@ export function Assistant({ api }: { api: API }) {
               provider: string;
               estimated_max_cost_usd: number;
             }>("/ai/estimate", "POST", {
-              employee_id:employeeId||null,
-          message,
+              employee_id: employeeId || null,
+              message,
               mode,
               privacy,
               complexity,

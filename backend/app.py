@@ -30,7 +30,7 @@ async def lifespan(_app):
     yield
 
 
-app = FastAPI(title="NightBrew AI Employee", version="0.4.0", lifespan=lifespan)
+app = FastAPI(title="NightBrew AI Employee", version="0.8.0", lifespan=lifespan)
 DB = Path(os.getenv("NIGHTBREW_DB", str(Path.home() / ".nightbrew" / "chat.sqlite3")))
 TOKEN = os.getenv("NIGHTBREW_SESSION_TOKEN") or secrets.token_urlsafe(32)
 
@@ -140,10 +140,14 @@ def usage():
 
 @app.post("/chat", dependencies=[Depends(authorize)])
 def chat(request: ai.Chat):
-    from backend import licensing
     import uuid
-    try: licensing.enforce(connect)
-    except ValueError as exc: raise HTTPException(403, str(exc)) from None
+
+    from backend import licensing
+
+    try:
+        licensing.enforce(connect)
+    except ValueError as exc:
+        raise HTTPException(403, str(exc)) from None
     local_model = os.getenv("NIGHTBREW_LOCAL_MODEL", "llama3.2:3b")
     with connect() as db:
         if store.get(db, "emergency_stop", False):
@@ -157,28 +161,70 @@ def chat(request: ai.Chat):
     employee_instructions = ""
     if request.employee_id:
         from backend import workforce
+
         try:
             with connect() as db:
-                employee = workforce.check(db, request.employee_id, 'ai.chat', {})
-                employee_instructions = f'Role: {employee.role}\n{employee.instructions}'
-        except ValueError as exc: raise HTTPException(403, str(exc)) from None
-    try: licensing.reserve_task(connect, uuid.uuid4().hex, request.employee_id)
-    except ValueError as exc: raise HTTPException(403, str(exc)) from None
+                employee = workforce.check(db, request.employee_id, "ai.chat", {})
+                employee_instructions = (
+                    f"Role: {employee.role}\n{employee.instructions}"
+                )
+        except ValueError as exc:
+            raise HTTPException(403, str(exc)) from None
+    try:
+        licensing.reserve_task(connect, uuid.uuid4().hex, request.employee_id)
+    except ValueError as exc:
+        raise HTTPException(403, str(exc)) from None
     cloud = selected == "CLOUD_ONLY"
-    if cloud and policy.billing_source == 'INCLUDED':
+    if cloud and policy.billing_source == "INCLUDED":
         reservation = None
         try:
-            quote = licensing.remote('/inference/estimate', {'device_id':licensing.device_id(),'request_id':uuid.uuid4().hex,'message':request.message,'system_text':employee_instructions,'cloud_consent':request.cloud_consent})
-            reservation,_ = ai.reserve(connect,quote['model'],request,policy,employee_instructions,override_amount=quote['estimated_cost_usd'])
-            result = licensing.included_inference(connect, request, employee_instructions)
-            ai.settle(connect,reservation,result.get('usage'),policy,True,actual_cost=result['cost_usd'])
+            quote = licensing.remote(
+                "/inference/estimate",
+                {
+                    "device_id": licensing.device_id(),
+                    "request_id": uuid.uuid4().hex,
+                    "message": request.message,
+                    "system_text": employee_instructions,
+                    "cloud_consent": request.cloud_consent,
+                },
+            )
+            reservation, _ = ai.reserve(
+                connect,
+                quote["model"],
+                request,
+                policy,
+                employee_instructions,
+                override_amount=quote["estimated_cost_usd"],
+            )
+            result = licensing.included_inference(
+                connect, request, employee_instructions
+            )
+            ai.settle(
+                connect,
+                reservation,
+                result.get("usage"),
+                policy,
+                True,
+                actual_cost=result["cost_usd"],
+            )
         except ValueError as exc:
-            if reservation: ai.settle(connect,reservation,None,policy,False)
+            if reservation:
+                ai.settle(connect, reservation, None, policy, False)
             raise HTTPException(402, str(exc)) from None
         with connect() as db:
-            db.executemany('INSERT INTO messages(role,content,provider) VALUES(?,?,?)', [('user',request.message,'INCLUDED'),('assistant',result['answer'],'INCLUDED')])
-            store.audit(db, 'included_chat_completed', result['model'])
-        return {'answer':result['answer'],'provider':'CLOUD_ONLY · included credits','cost_usd':result['cost_usd']}
+            db.executemany(
+                "INSERT INTO messages(role,content,provider) VALUES(?,?,?)",
+                [
+                    ("user", request.message, "INCLUDED"),
+                    ("assistant", result["answer"], "INCLUDED"),
+                ],
+            )
+            store.audit(db, "included_chat_completed", result["model"])
+        return {
+            "answer": result["answer"],
+            "provider": "CLOUD_ONLY · included credits",
+            "cost_usd": result["cost_usd"],
+        }
     model = os.getenv("NIGHTBREW_CLOUD_MODEL", "") if cloud else local_model
     try:
         key = credentials.cloud_key() if cloud else None
@@ -195,7 +241,9 @@ def chat(request: ai.Chat):
     reservation = None
     if cloud:
         try:
-            reservation, _ = ai.reserve(connect, model, request, policy, employee_instructions)
+            reservation, _ = ai.reserve(
+                connect, model, request, policy, employee_instructions
+            )
         except ValueError as exc:
             raise HTTPException(402, str(exc)) from None
     payload = {
@@ -204,7 +252,9 @@ def chat(request: ai.Chat):
         "stream": False,
     }
     if employee_instructions:
-        payload["messages"].insert(0, {"role":"system", "content":employee_instructions})
+        payload["messages"].insert(
+            0, {"role": "system", "content": employee_instructions}
+        )
     if cloud:
         payload["max_tokens"] = policy.max_output_tokens
     else:
@@ -265,13 +315,36 @@ def estimate_chat(request: ai.Chat):
         )
     except ValueError as exc:
         raise HTTPException(403, str(exc)) from None
-    system_text = ''
+    system_text = ""
     if request.employee_id:
         try:
             with connect() as db:
-                employee = workforce.check(db, request.employee_id, 'ai.chat', {})
-                system_text = f'Role: {employee.role}\n{employee.instructions}'
-        except ValueError as exc: raise HTTPException(403, str(exc)) from None
+                employee = workforce.check(db, request.employee_id, "ai.chat", {})
+                system_text = f"Role: {employee.role}\n{employee.instructions}"
+        except ValueError as exc:
+            raise HTTPException(403, str(exc)) from None
+    if selected == "CLOUD_ONLY" and policy.billing_source == "INCLUDED":
+        import uuid
+
+        try:
+            quote = licensing.remote(
+                "/inference/estimate",
+                {
+                    "device_id": licensing.device_id(),
+                    "request_id": uuid.uuid4().hex,
+                    "message": request.message,
+                    "system_text": system_text,
+                    "cloud_consent": request.cloud_consent,
+                },
+            )
+            return {
+                "provider": selected,
+                "estimated_max_cost_usd": quote["estimated_cost_usd"],
+                "pricing_confirmed": True,
+                "note": "Trusted gateway quote, not a provider invoice",
+            }
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from None
     return {
         "provider": selected,
         "estimated_max_cost_usd": ai.estimate(request, policy, system_text)
@@ -298,7 +371,9 @@ def create_task(request: TaskRequest):
             403, "Create writes through the connector permissions endpoint"
         )
     try:
-        identifier, status = tasks.create(connect, request.tool, request.payload, request.employee_id)
+        identifier, status = tasks.create(
+            connect, request.tool, request.payload, request.employee_id
+        )
     except ValueError:
         raise HTTPException(422, "Invalid task, input or queue state") from None
     if status == "queued":
@@ -311,7 +386,8 @@ def create_task(request: TaskRequest):
 def task_history(employee_id: str | None = None):
     with connect() as db:
         rows = db.execute(
-            "SELECT t.*, a.employee_id FROM tasks t LEFT JOIN assignments a ON a.task_id=t.id WHERE (? IS NULL OR a.employee_id=?) ORDER BY t.rowid DESC LIMIT 100", (employee_id, employee_id)
+            "SELECT t.*, a.employee_id FROM tasks t LEFT JOIN assignments a ON a.task_id=t.id WHERE (? IS NULL OR a.employee_id=?) ORDER BY t.rowid DESC LIMIT 100",
+            (employee_id, employee_id),
         ).fetchall()
     return [
         {
@@ -510,89 +586,174 @@ def update_plans(config: Plans):
 
 from backend import automation
 
-@app.get('/automation/policy', dependencies=[Depends(authorize)])
+
+@app.get("/automation/policy", dependencies=[Depends(authorize)])
 def automation_policy():
     return automation.policy(connect)
 
-@app.put('/automation/policy', dependencies=[Depends(authorize)])
+
+@app.put("/automation/policy", dependencies=[Depends(authorize)])
 def save_automation_policy(policy: automation.AutomationPolicy):
     with connect() as db:
-        store.put(db, 'automation_policy', policy.model_dump())
-        store.audit(db, 'automation_policy_updated', 'automation')
+        store.put(db, "automation_policy", policy.model_dump())
+        store.audit(db, "automation_policy_updated", "automation")
     return policy
 
 
 from backend import workforce
 
-@app.get('/employees', dependencies=[Depends(authorize)])
+
+@app.get("/employees", dependencies=[Depends(authorize)])
 def employees():
     with connect() as db:
-        return [{'id':row['id'],**json.loads(row['config'])} for row in db.execute('SELECT * FROM employees ORDER BY created_at,id')]
+        return [
+            {"id": row["id"], **json.loads(row["config"])}
+            for row in db.execute("SELECT * FROM employees ORDER BY created_at,id")
+        ]
 
-@app.post('/employees', dependencies=[Depends(authorize)], status_code=201)
+
+@app.post("/employees", dependencies=[Depends(authorize)], status_code=201)
 def new_employee(employee: workforce.Employee):
-    try: return workforce.save(connect, employee)
-    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+    try:
+        return workforce.save(connect, employee)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
 
-@app.put('/employees/{identifier}', dependencies=[Depends(authorize)])
+
+@app.put("/employees/{identifier}", dependencies=[Depends(authorize)])
 def edit_employee(identifier: str, employee: workforce.Employee):
     try:
-        with connect() as db: workforce.get(db,identifier)
-        return workforce.save(connect,employee,identifier)
-    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+        with connect() as db:
+            workforce.get(db, identifier)
+        return workforce.save(connect, employee, identifier)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
 
-@app.post('/employees/{identifier}/connector-writes/{connector_id}', dependencies=[Depends(authorize)], status_code=201)
+
+@app.post(
+    "/employees/{identifier}/connector-writes/{connector_id}",
+    dependencies=[Depends(authorize)],
+    status_code=201,
+)
 def employee_write(identifier: str, connector_id: str, request: connectors.Write):
     try:
-        payload=connectors.prepare_write(connect,connector_id,request)
-        task_id,status=tasks.create(connect,'connector.write',payload,identifier)
-        return {'id':task_id,'status':status}
-    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+        payload = connectors.prepare_write(connect, connector_id, request)
+        task_id, status = tasks.create(connect, "connector.write", payload, identifier)
+        return {"id": task_id, "status": status}
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
 
 
 from backend import licensing
 
-@app.get('/license', dependencies=[Depends(authorize)])
+
+@app.get("/license", dependencies=[Depends(authorize)])
 def license_status():
-    try: return {'required':licensing.required(),'device_id':licensing.device_id(),'claims':licensing.enforce(connect),'valid':licensing.required()}
-    except ValueError as exc: return {'required':True,'device_id':licensing.device_id(),'valid':False,'error':str(exc)}
+    try:
+        return {
+            "required": licensing.required(),
+            "device_id": licensing.device_id(),
+            "claims": licensing.enforce(connect),
+            "valid": licensing.required(),
+        }
+    except ValueError as exc:
+        return {
+            "required": True,
+            "device_id": licensing.device_id(),
+            "valid": False,
+            "error": str(exc),
+        }
 
-@app.post('/license/activate', dependencies=[Depends(authorize)])
+
+@app.post("/license/activate", dependencies=[Depends(authorize)])
 def activate_license():
-    try: return licensing.activate(connect)
-    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+    try:
+        return licensing.activate(connect)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
 
-@app.put('/license/account-key', dependencies=[Depends(authorize)])
+
+@app.put("/license/account-key", dependencies=[Depends(authorize)])
 def license_account_key(request: KeyRequest):
     try:
-        credentials.windows_vault().set_password('NightBrew','license-account-key',request.key.get_secret_value())
-        return {'stored':True,'storage':'Windows Credential Manager'}
-    except Exception: raise HTTPException(503,'Use the backend account-key environment binding on Linux') from None
+        credentials.windows_vault().set_password(
+            "NightBrew", "license-account-key", request.key.get_secret_value()
+        )
+        return {"stored": True, "storage": "Windows Credential Manager"}
+    except Exception:  # noqa: BLE001 -- Sanitize native credential backend failures.
+        raise HTTPException(
+            503, "Use the backend account-key environment binding on Linux"
+        ) from None
 
-@app.get('/billing/account', dependencies=[Depends(authorize)])
+
+@app.get("/billing/account", dependencies=[Depends(authorize)])
 def billing_account():
-    try: return licensing.remote('/account')
-    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+    try:
+        return licensing.remote("/account")
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
 
-@app.get('/billing/catalog', dependencies=[Depends(authorize)])
+
+@app.get("/billing/catalog", dependencies=[Depends(authorize)])
 def billing_catalog():
-    try: return licensing.remote('/catalog')
-    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+    try:
+        return licensing.remote("/catalog")
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
+
 
 class Purchase(BaseModel):
-    sku: str = Field(pattern='^(Starter|Business|Enterprise|credits|computer|setup|custom_connector)$')
+    sku: str = Field(
+        pattern="^(Starter|Business|Enterprise|credits|computer|setup|custom_connector)$"
+    )
 
-@app.post('/billing/checkout', dependencies=[Depends(authorize)])
+
+@app.post("/billing/checkout", dependencies=[Depends(authorize)])
 def billing_checkout(request: Purchase):
-    try: return licensing.remote('/checkout',request.model_dump())
-    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+    try:
+        return licensing.remote("/checkout", request.model_dump())
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
 
-@app.get('/marketplace', dependencies=[Depends(authorize)])
+
+@app.get("/marketplace", dependencies=[Depends(authorize)])
 def marketplace():
-    return {'all_plans':True,'installation':'No arbitrary plugin code is downloaded or executed','entries':[{'id':'generic-rest','name':'Generic REST','categories':list(connectors.CATEGORIES),'vendor_verified':False,'custom_development':'Separate quotation'}]+[{'id':'mock-'+category.lower(),'name':'Mock '+category,'development_only':True,'vendor_verified':False} for category in connectors.CATEGORIES if category!='API']}
+    return {
+        "all_plans": True,
+        "installation": "No arbitrary plugin code is downloaded or executed",
+        "entries": [
+            {
+                "id": "generic-rest",
+                "name": "Generic REST",
+                "categories": list(connectors.CATEGORIES),
+                "vendor_verified": False,
+                "custom_development": "Separate quotation",
+            }
+        ]
+        + [
+            {
+                "id": "mock-" + category.lower(),
+                "name": "Mock " + category,
+                "development_only": True,
+                "vendor_verified": False,
+            }
+            for category in connectors.CATEGORIES
+            if category != "API"
+        ],
+    }
 
 
-@app.post('/billing/portal', dependencies=[Depends(authorize)])
+@app.post("/billing/portal", dependencies=[Depends(authorize)])
 def customer_portal():
-    try: return licensing.remote('/portal',{})
-    except ValueError as exc: raise HTTPException(422,str(exc)) from None
+    try:
+        return licensing.remote("/portal", {})
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
+
+
+@app.get("/session", dependencies=[Depends(authorize)])
+def managed_session():
+    return {
+        "instance_id": os.getenv("NIGHTBREW_INSTANCE_ID", "manual-session"),
+        "version": "0.8.0",
+    }

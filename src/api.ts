@@ -30,3 +30,13 @@ export function apiFor(token: string): API {
 export function errorText(e: unknown) {
   return e instanceof Error ? e.message : "Request failed";
 }
+
+declare global {
+  interface Window {
+    nightbrew?: {
+      session: () => Promise<{ token: string; version: string }>;
+      checkForUpdates: () => Promise<{ status: string }>;
+      installUpdate: () => Promise<{ status: string }>;
+    };
+  }
+}
