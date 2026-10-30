@@ -1,4 +1,5 @@
 $ErrorActionPreference = 'Stop'
+$PSNativeCommandUseErrorActionPreference = $false
 trap {
     $message = $_.Exception.Message.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A')
     Write-Host "::error title=Windows package verification::$message"
@@ -17,8 +18,11 @@ function Test-OwnedApplication([string]$executable) {
     if ($null -eq $code -or $code -ne 0) { throw "Authenticated startup failed (exit $code): $executable" }
     Write-Host 'Authenticated packaged application startup passed'
 }
-.venv\Scripts\python scripts/probe-frozen.py 'release\win-unpacked\resources\backend\nightbrew-backend.exe'
-if ($LASTEXITCODE -ne 0) { throw 'Frozen backend startup failed; see sanitized diagnostic annotation' }
+$probeOutput = & .venv\Scripts\python scripts/probe-frozen.py 'release\win-unpacked\resources\backend\nightbrew-backend.exe' 2>&1
+$probeExitCode = $LASTEXITCODE
+$probeOutput | ForEach-Object { Write-Host $_ }
+if ($probeExitCode -ne 0) { throw 'Frozen backend startup failed; see sanitized diagnostic annotation' }
+
 Test-OwnedApplication 'release\win-unpacked\NightBrew AI Employee.exe'
 $installer = Get-ChildItem release\NightBrew-DEV-UNSIGNED-*.exe | Select-Object -First 1
 if (-not $installer) { throw 'No development installer produced' }
