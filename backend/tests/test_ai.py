@@ -155,16 +155,16 @@ def test_benchmark_requires_real_measurement(monkeypatch):
     assert hardware.benchmark("small")["tokens_per_second"] == 10
 
 
-def test_windows_vault_is_not_plaintext_fallback(client):
+def test_linux_vault_is_not_plaintext_fallback(client, monkeypatch):
     import sys
 
-    if sys.platform != "win32":
-        assert (
-            client.put(
-                "/settings/cloud-key", headers=AUTH, json={"key": "test-not-real"}
-            ).status_code
-            == 503
-        )
+    monkeypatch.setattr(sys, "platform", "linux")
+    assert (
+        client.put(
+            "/settings/cloud-key", headers=AUTH, json={"key": "test-not-real"}
+        ).status_code
+        == 503
+    )
 
 
 def test_benchmark_cannot_be_reused_on_a_different_machine():
