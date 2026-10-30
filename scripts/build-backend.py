@@ -4,9 +4,9 @@ import subprocess
 import sys
 from pathlib import Path
 
-if sys.platform != "win32" and "--allow-native" not in sys.argv:
+if sys.platform not in ("win32", "darwin") and "--allow-native" not in sys.argv:
     raise SystemExit(
-        "Windows backend must be built on Windows; use the Windows CI workflow. --allow-native builds Linux for local packaging validation only."
+        "Build Windows/macOS backends on their target OS; --allow-native allows Linux validation."
     )
 command = [
     sys.executable,
@@ -49,5 +49,7 @@ if sys.platform == "win32":
         "--collect-all",
         "comtypes",
     ]
+if sys.platform == "darwin":
+    command += ["--hidden-import", "keyring.backends.macOS"]
 command += ["backend/entrypoint.py"]
 subprocess.run(command, check=True)

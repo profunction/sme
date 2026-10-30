@@ -1,6 +1,8 @@
 const fs = require("node:fs");
 const base = require("../package.json").build;
 const development = process.argv.includes("--development");
+if (process.argv.includes("--mac") && !development)
+  throw Error("macOS production distribution requires a separate signing and notarization workflow");
 const policy = {
   license_public_key: process.env.NIGHTBREW_RELEASE_PUBLIC_KEY || "",
   license_url: process.env.NIGHTBREW_RELEASE_LICENSE_URL || "",
@@ -41,6 +43,7 @@ fs.writeFileSync("build/release-policy.json", JSON.stringify(policy, null, 2));
 const config = {
   ...base,
   forceCodeSigning: !development,
+  mac: { ...base.mac, identity: null },
   win: {
     ...base.win,
     target: "nsis",

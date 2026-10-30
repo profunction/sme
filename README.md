@@ -70,3 +70,7 @@ See [COMMERCIAL_BACKEND.md](COMMERCIAL_BACKEND.md) for server deployment/configu
 See [WINDOWS_RELEASE.md](WINDOWS_RELEASE.md), [WINDOWS_SETUP.md](WINDOWS_SETUP.md), [AUTOMATION.md](AUTOMATION.md), [WORKFORCE.md](WORKFORCE.md), [CONNECTOR_GUIDE.md](CONNECTOR_GUIDE.md), [SECURITY.md](SECURITY.md) and [LICENSE_AUDIT.md](LICENSE_AUDIT.md). Do not equate Linux/mock tests or CI configuration with a verified Windows commercial release.
 
 Current cloud limitation: external Chromium HTTPS cannot be called verified under the ordinary filesystem sandbox while its NSS database is outside writable roots. A proposed trust-store relocation was rejected by automatic approval review and was not executed; see AUTOMATION.md. Local browser automation and the Electron IPC smoke pass without disabling TLS verification. Windows/browser/vendor acceptance remains separate.
+
+## macOS
+
+See [MACOS_SETUP.md](MACOS_SETUP.md) for Apple Silicon and Intel builds, local development and platform limitations.

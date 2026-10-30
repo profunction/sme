@@ -137,7 +137,7 @@ export function Settings({ api }: { api: API }) {
       </fieldset>
       <h2>Bring your own key</h2>
       <p>
-        On Windows, keys are stored in Credential Manager. On Linux cloud, use
+        Keys use Windows Credential Manager or macOS Keychain. On Linux cloud, use
         the backend environment binding.
       </p>
       <input
@@ -159,7 +159,7 @@ export function Settings({ api }: { api: API }) {
           })
         }
       >
-        Store in Windows Credential Manager
+        Store in system credential vault
       </button>
       <button
         disabled={busy}

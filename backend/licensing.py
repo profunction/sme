@@ -88,8 +88,8 @@ def account_key():
     key = os.getenv("NIGHTBREW_LICENSE_ACCOUNT_KEY")
     if key:
         return key
-    if platform.system() == "Windows":
-        return credentials.windows_vault().get_password(
+    if platform.system() in ("Windows", "Darwin"):
+        return credentials.native_vault().get_password(
             "NightBrew", "license-account-key"
         )
     return None

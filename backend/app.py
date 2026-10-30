@@ -117,11 +117,11 @@ def cloud_key(request: KeyRequest):
     except Exception:  # noqa: BLE001 -- Native credential backends must not leak secret-bearing errors.
         raise HTTPException(
             503,
-            "Windows Credential Manager unavailable; use the backend environment binding on Linux",
+            "Native credential vault unavailable; use the backend environment binding",
         ) from None
     return {
         "stored": bool(request.key.get_secret_value()),
-        "storage": "Windows Credential Manager",
+        "storage": "OS native credential vault",
     }
 
 
@@ -676,10 +676,10 @@ def activate_license():
 @app.put("/license/account-key", dependencies=[Depends(authorize)])
 def license_account_key(request: KeyRequest):
     try:
-        credentials.windows_vault().set_password(
+        credentials.native_vault().set_password(
             "NightBrew", "license-account-key", request.key.get_secret_value()
         )
-        return {"stored": True, "storage": "Windows Credential Manager"}
+        return {"stored": True, "storage": "OS native credential vault"}
     except Exception:  # noqa: BLE001 -- Sanitize native credential backend failures.
         raise HTTPException(
             503, "Use the backend account-key environment binding on Linux"

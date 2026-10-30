@@ -2,7 +2,7 @@
   "name": "nightbrew-ai-employee",
   "version": "0.8.0",
   "private": true,
-  "description": "NightBrew Windows AI desktop foundation",
+  "description": "NightBrew AI desktop for Windows and macOS",
   "author": "NightBrew",
   "main": "desktop/main.cjs",
   "scripts": {
@@ -15,7 +15,8 @@
     "backend:build": "python scripts/build-backend.py",
     "package:win:unsigned": "node scripts/prepare-release.cjs --development && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --win nsis --config build/electron-release.json --publish never",
     "test:electron": "node scripts/smoke-desktop.cjs",
-    "desktop:install": "node node_modules/electron/install.js"
+    "desktop:install": "node node_modules/electron/install.js",
+    "package:mac:unsigned": "node scripts/prepare-release.cjs --development --mac && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --mac dmg zip --config build/electron-release.json --publish never"
   },
   "dependencies": {
     "electron-updater": "6.8.11",
@@ -81,6 +82,15 @@
       "runAfterFinish": false,
       "perMachine": false,
       "createDesktopShortcut": false
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.business",
+      "minimumSystemVersion": "12.0",
+      "identity": null
     }
   }
 }

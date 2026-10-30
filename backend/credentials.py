@@ -1,4 +1,4 @@
-"""BYOK: environment injection or explicit Windows Credential Manager only."""
+"""Explicit OS-native vaults; never fall back to plaintext keyring backends."""
 
 import os
 import sys
@@ -14,17 +14,25 @@ def windows_vault():
     return WinVaultKeyring()
 
 
+def native_vault():
+    if sys.platform == "darwin":
+        from keyring.backends.macOS import Keyring
+
+        return Keyring()
+    return windows_vault()
+
+
 def cloud_key():
     key = os.getenv("NIGHTBREW_CLOUD_KEY")
     if key:
         return key
-    if sys.platform == "win32":
-        return windows_vault().get_password("NightBrew", "cloud-api-key")
+    if sys.platform in ("win32", "darwin"):
+        return native_vault().get_password("NightBrew", "cloud-api-key")
     return None
 
 
 def save_key(key):
-    vault = windows_vault()
+    vault = native_vault()
     if key:
         vault.set_password("NightBrew", "cloud-api-key", key)
     else:

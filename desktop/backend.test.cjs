@@ -157,3 +157,13 @@ test("release config preserves backend resources and installation policy", () =>
     fs.rmSync(directory, { recursive: true, force: true });
   }
 });
+
+ test("macOS packaged backend resolves a native executable inside app resources", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "nightbrew-mac-policy-"));
+  try {
+    fs.writeFileSync(path.join(directory, "release-policy.json"), "{}");
+    const value = configuration({ packaged: true, resources: directory, root: directory, dataDir: directory, platform: "darwin", environment: {} });
+    assert.equal(value.executable, path.join(directory, "backend", "nightbrew-backend"));
+    assert.equal(value.env.NIGHTBREW_ENFORCE_LICENSE, "1");
+  } finally { fs.rmSync(directory, { recursive: true, force: true }); }
+});
