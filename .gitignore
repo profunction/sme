@@ -8,3 +8,6 @@ __pycache__/
 .env
 
 .local/
+
+playwright-report/
+test-results/

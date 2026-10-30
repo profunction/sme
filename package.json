@@ -1,1 +1,44 @@
-{"name":"nightbrew-ai-employee","version":"0.1.0","private":true,"description":"NightBrew Windows AI desktop foundation","author":"NightBrew","main":"desktop/main.cjs","scripts":{"dev":"vite --host 127.0.0.1","desktop":"electron .","build":"tsc --noEmit && vite build","package:win":"npm run build && electron-builder --win nsis"},"dependencies":{"react":"19.2.0","react-dom":"19.2.0"},"devDependencies":{"@types/react":"19.2.2","@types/react-dom":"19.2.2","typescript":"5.9.3","vite":"7.2.2","electron":"39.2.0","electron-builder":"26.0.12","tailwindcss":"4.1.17","@tailwindcss/vite":"4.1.17"},"build":{"appId":"com.nightbrew.employee","productName":"NightBrew AI Employee","directories":{"output":"release"},"files":["dist/**/*","desktop/**/*"],"win":{"target":"nsis"}}}
+{
+  "name": "nightbrew-ai-employee",
+  "version": "0.4.0",
+  "private": true,
+  "description": "NightBrew Windows AI desktop foundation",
+  "author": "NightBrew",
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "desktop": "electron .",
+    "build": "tsc --noEmit && vite build",
+    "package:win": "npm run build && electron-builder --win nsis",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@tailwindcss/vite": "4.1.17",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "electron": "45.1.0",
+    "electron-builder": "26.18.0",
+    "tailwindcss": "4.1.17",
+    "typescript": "5.9.3",
+    "vite": "7.3.7"
+  },
+  "build": {
+    "appId": "com.nightbrew.employee",
+    "productName": "NightBrew AI Employee",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "desktop/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
