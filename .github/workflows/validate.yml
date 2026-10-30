@@ -54,7 +54,7 @@ jobs:
       - name: Test backend and Windows UI Automation
         run: |
           $env:NIGHTBREW_TEST_BROWSER = "${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe"
-          .venv\Scripts\python -m pytest backend/tests -q
+          .venv\Scripts\python -m pytest backend/tests -q --junitxml=pytest-windows.xml
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Report Windows test failures
         if: always()
