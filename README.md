@@ -2,7 +2,7 @@
 
 A Windows desktop AI workforce application developed entirely in cloud. Application code for Phases 1–8 is present: chat/hybrid AI, business documents, connectors, approved computer tools, scoped employees, trusted licensing/billing, managed backend startup and release pipelines. Nothing has been installed on the customer's computer.
 
-**This is not yet a verified commercial Windows release.** Windows-specific tests and installer builds run in the new GitHub Actions workflow; their results must be checked after pushing. Real model inference, merchant payments, deployed licensing/gateway services, code signing and signed update-chain validation require their actual runtime/owner configuration. See [ROADMAP.md](ROADMAP.md) for implementation versus verification status.
+**This is not yet a verified commercial Windows release.** Windows CI has passed native UIA/vault, managed Electron, frozen backend and NSIS installation/startup checks; the [verified run](https://github.com/profunction/sme/actions/runs/41037603208) contains the unsigned development installer. Real model inference, merchant payments, deployed licensing/gateway services, code signing and signed update-chain validation require their actual runtime/owner configuration. See [ROADMAP.md](ROADMAP.md) for implementation versus verification status.
 
 ## Start in cloud
 

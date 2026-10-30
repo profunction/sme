@@ -37,3 +37,9 @@ The signing public key/URLs/publisher are embedded in the generated release poli
 This development session runs Linux. The native Linux PyInstaller build and managed backend can be validated here; they do not establish Windows installer or Windows UIA success. Windows CI results must be inspected after pushing. Real signing/update-chain verification needs the owner's certificate and hosted feed. Do not advertise production readiness before those checks pass.
 
 The Linux Electron window/IPC smoke also passed using the test-only headless Ozone flag. That path dispatches the navigation event programmatically because the headless window has no normal animation/input surface; Chromium UI E2E tests exercise real clicks separately. This is not a Windows desktop-input or OS-sandbox verification result.
+
+## Verified development candidate
+
+[Windows workflow run 41037603208](https://github.com/profunction/sme/actions/runs/41037603208) passed for source commit a5f9c1a. It executed native UIA/vault and Electron checks, built the full Python/Electron package, authenticated the copied backend, smoke-started the unpacked application, silently installed NSIS and smoke-started the installed application. The development artifact is approximately 187 MB and retained for 7 days. It is unsigned and is not a formal commercial release.
+
+The release configuration now preserves the complete package.json build settings; a regression test prevents dropping backend resources, preload files, product naming or installer policy when applying signing overrides.

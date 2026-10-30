@@ -9,6 +9,6 @@
 | 5 — Computer automation | Deterministic approved browser/Windows UIA plans, screenshots and result verification | Browser workflow passed locally; Windows UIA/target applications must pass Windows CI/customer tests |
 | 6 — Digital workforce | Employee roles/instructions, scoped tools/connectors, assignments/history, spending/task limits | Customer end-to-end acceptance; no autonomous unrestricted AI scheduler is promised |
 | 7 — Commercial foundation | Separate trusted authority, signed grants, device/employee/task quotas, mock/Stripe billing, credits/gateway, add-ons/catalog | Deploy secure service; configure merchant/webhooks/provider; validate real test-mode payments and reconciliations |
-| 8 — Windows release engineering | Managed backend/IPC, PyInstaller, signing/update configurations, Windows build/install tests and artifact workflows | Windows CI results, actual signed installer/update chain, publisher certificate, hosted feed and release approval |
+| 8 — Windows release engineering | Managed backend/IPC, PyInstaller, signing/update configurations, Windows build/install tests and artifact workflows | Windows development CI passed; actual signed installer/update chain, publisher certificate, hosted feed, customer acceptance and release approval remain |
 
 Cloud remains Linux and no customer machine has been modified. Code implementation, cloud validation, Windows CI execution, production deployment and commercial release are separate outcomes. Never claim Windows/vendor/payment/signing verification based only on mocks or configured workflows.
