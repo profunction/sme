@@ -42,3 +42,14 @@ npm run package:mac:unsigned
 ```
 
 Build separately on Apple Silicon and Intel so the bundled Python backend matches Electron. CI validates both architectures, backend authentication and packaged application startup. These checks do not replace real-machine Gatekeeper, Keychain, local-model and customer integration acceptance testing. The Windows production signing workflow remains Windows-only; macOS signed updates and notarization are not configured.
+
+### Intel source builds
+
+The pinned cryptography release builds from source on Intel macOS. Before installing Python requirements, install Homebrew `openssl@3`, ensure Rust/Cargo and Xcode command-line tools are available, and export:
+
+```bash
+export OPENSSL_DIR="$(brew --prefix openssl@3)"
+export OPENSSL_STATIC=1
+```
+
+Use a fresh virtual environment when changing these flags. Static linking prevents the frozen cryptography extension from loading the older same-named OpenSSL library shipped with Python. CI sets these flags for Intel; Apple Silicon uses the official prebuilt wheel.

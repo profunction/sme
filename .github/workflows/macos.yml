@@ -37,6 +37,14 @@ jobs:
       - name: Install backend dependencies
         run: |
           python -m venv .venv
+          if [ "${{ matrix.arch }}" = "x64" ]; then
+            # cryptography has no Intel macOS wheel. Its source build must not
+            # dynamically load Python's older, same-named OpenSSL in PyInstaller.
+            export OPENSSL_DIR="$(brew --prefix openssl@3)"
+            export OPENSSL_STATIC=1
+            test -f "$OPENSSL_DIR/lib/libssl.a"
+            test -f "$OPENSSL_DIR/lib/libcrypto.a"
+          fi
           .venv/bin/python -m pip install -r backend/requirements-build.txt
       - run: .venv/bin/python -m pytest backend/tests -q --junitxml=pytest-macos.xml
       - name: Report backend test failures
