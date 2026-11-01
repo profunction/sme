@@ -131,6 +131,5 @@ def test_snapshot_and_input_boundaries(env):
     assert 'password_hash' not in str(snapshot)
     assert c.get('/snapshot',headers=bh).json()['work_orders']==[]
     assert c.post('/customers',headers=ah,json={'name':'x','company_id':'forged'}).status_code==422
-    assert c.post('/customers',headers=ah,content=b'x'*(100*1024),headers_update={}).status_code if False else True
     r=c.post('/customers',headers={**ah,'Content-Type':'application/json'},content=b' '*(100*1024))
     assert r.status_code==413

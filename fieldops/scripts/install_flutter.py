@@ -14,7 +14,7 @@ def main():
     version='3.44.0'
     host='macos' if platform.system()=='Darwin' else 'linux'
     arch='arm64' if platform.machine().lower() in ('arm64','aarch64') else 'x64'
-    base='https://storage.googleapis.com/flutter_infra_release/'
+    base='https://storage.googleapis.com/flutter_infra_release/flutter/'
     with urllib.request.urlopen(base+f'releases/releases_{host}.json',timeout=60) as response:
         releases=json.load(response)['releases']
     matches=[r for r in releases if r['version']==version and r['channel']=='stable' and r.get('dart_sdk_arch','x64')==arch]

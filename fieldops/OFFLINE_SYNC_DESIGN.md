@@ -1,0 +1,11 @@
+# Offline synchronization
+
+1. Online login establishes company/user identity; secure storage retains the bearer session and its expiry. First download stores only accessible records in an account/origin-scoped SQLite snapshot.
+2. Saving a service note writes to SQLite before network transmission. Every note has a stable random mutation ID, a captured work-order base revision and user-recorded timestamp. The app never labels it synchronized before acknowledgment.
+3. Foreground periodic/manual retries POST notes with the same mutation ID/body. Server deduplication is scoped to company AND actor, checks the request fingerprint and returns the original acknowledgment for an exact retry. Reusing a key with different content yields 409.
+4. The server takes a write transaction, checks the current assignment/role and expected revision, inserts the immutable note, increments work revision and saves the mutation result atomically.
+5. HTTP 409 retains the local note as a conflict. 4xx validation/permission failures retain it as rejected. Network errors, rate limits and 5xx retain pending data. The engine does not continuously retry a conflict or silently overwrite the server.
+6. Conflict review shows current server notes/status and the preserved local facts. Explicit rebase changes the base revision and generates a new mutation ID; closed work cannot be rebased. Dependent notes may need further manual review. A sync loop runs serially and stops later dependent writes after a conflict.
+7. A refreshed snapshot replaces cached server state, including records no longer assigned. Unsent local facts are kept for resolution. Logout confirms deletion of that scope's cache/drafts and clears the secure session.
+
+Limits: only service notes are offline mutations initially. Customer/site/equipment creation, assignment/status changes and PDF export are online-only. No background OS scheduler or guaranteed terminated-app sync is implemented; retries occur in foreground/resume/manual actions. Session expiry requires reconnect/login. Device cache uses OS app-private storage, not SQLCipher. Large-company pagination/complete backups are not implemented: the snapshot explicitly reports collection limits.
