@@ -41,21 +41,21 @@ jobs:
       - run: python fieldops/scripts/install_flutter.py
       - run: flutter --version
       - run: python fieldops/scripts/bootstrap_mobile.py
-      - run: flutter pub get
+      - run: python ../scripts/run_check.py flutter pub get
         working-directory: fieldops/mobile
-      - run: dart format lib test
+      - run: python ../scripts/run_check.py dart format lib test
         working-directory: fieldops/mobile
-      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
+      - run: python ../scripts/run_check.py flutter analyze --no-fatal-infos --no-fatal-warnings
         working-directory: fieldops/mobile
-      - run: flutter test
+      - run: python ../scripts/run_check.py flutter test
         working-directory: fieldops/mobile
       - name: Android development APK
         if: matrix.target == 'android'
-        run: flutter build apk --debug --dart-define=FIELDOPS_ALLOW_HTTP=true
+        run: python ../scripts/run_check.py flutter build apk --debug --dart-define=FIELDOPS_ALLOW_HTTP=true
         working-directory: fieldops/mobile
       - name: iOS unsigned build
         if: matrix.target == 'ios'
-        run: flutter build ios --release --no-codesign
+        run: python ../scripts/run_check.py flutter build ios --release --no-codesign
         working-directory: fieldops/mobile
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
         if: always()
