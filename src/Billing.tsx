@@ -26,7 +26,12 @@ export function Billing({ api }: { api: API }) {
     }
   }
   const license = status as
-    | { required: boolean; valid: boolean; device_id: string }
+    | {
+        required: boolean;
+        valid: boolean;
+        device_id: string;
+        claims?: { environment?: string };
+      }
     | undefined;
   return (
     <>
@@ -43,11 +48,13 @@ export function Billing({ api }: { api: API }) {
           <strong>
             {!license
               ? "正在检查授权…"
-              : !license.required
-                ? "开发模式（未验证付费）"
-                : license.valid
-                  ? "设备授权有效"
-                  : "这台设备需要激活"}
+              : license.claims?.environment === "local_preview"
+                ? "本地试用 · 无需商业激活，不含云端服务"
+                : !license.required
+                  ? "开发模式（未验证付费）"
+                  : license.valid
+                    ? "设备授权有效"
+                    : "这台设备需要激活"}
           </strong>
           <p>
             正式安装包需要企业管理员提供的账号密钥和已配置的授权服务。演示数据与开发模式不代表已购买订阅。

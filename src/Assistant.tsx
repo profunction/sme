@@ -23,6 +23,14 @@ export function Assistant({
     [error, setError] = useState(""),
     [history, setHistory] = useState<Message[]>([]),
     [estimate, setEstimate] = useState("");
+  const [localPreview, setLocalPreview] = useState(false);
+  useEffect(() => {
+    api<{ claims?: { environment?: string } }>("/license")
+      .then((value) =>
+        setLocalPreview(value.claims?.environment === "local_preview"),
+      )
+      .catch(() => {});
+  }, [api]);
   const [employees, setEmployees] = useState<{ id: string; name: string }[]>(
       [],
     ),
@@ -96,6 +104,15 @@ export function Assistant({
           选择提示词模板
         </button>
       </div>
+      {localPreview && (
+        <div className="notice">
+          <Icon name="shield" />
+          <p>
+            本地试用版：连接你电脑上的 Ollama，不需要云端 API key。请先在“AI
+            与隐私设置”检测并保存已安装模型。此版本不含云端 AI、支付或商业授权。
+          </p>
+        </div>
+      )}
       <div className="chat-controls">
         <label>
           选择助理
@@ -122,8 +139,12 @@ export function Assistant({
               }}
             >
               <option value="LOCAL_ONLY">本地 AI · 留在电脑</option>
-              <option value="CLOUD_ONLY">云端 AI · 需要同意</option>
-              <option value="HYBRID">混合 AI · 按策略选择</option>
+              <option disabled={localPreview} value="CLOUD_ONLY">
+                云端 AI · 需要同意
+              </option>
+              <option disabled={localPreview} value="HYBRID">
+                混合 AI · 按策略选择
+              </option>
             </select>
           </label>
           <label>

@@ -80,3 +80,20 @@ jobs:
           path: release/NightBrew-DEV-UNSIGNED-*.exe
           if-no-files-found: error
           retention-days: 7
+
+      - name: Build local Ollama preview using the validated native backend
+        run: |
+          node scripts/prepare-release.cjs --development --local-preview
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npx electron-builder --win nsis --config build/electron-release.json --publish never
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Verify local Ollama HTTP boundary and document execution in the frozen package
+        run: node scripts/probe-local-preview.cjs release/win-unpacked/resources
+      - name: Validate local preview installation
+        run: scripts/verify-windows-package.ps1 -LocalPreview
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: NightBrew-Windows-LOCAL-PREVIEW
+          path: release/NightBrew-LOCAL-PREVIEW-*.exe
+          if-no-files-found: error
+          retention-days: 14

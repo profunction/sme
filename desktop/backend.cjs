@@ -29,11 +29,19 @@ function configuration({
         ".venv",
         platform === "win32" ? "Scripts/python.exe" : "bin/python",
       );
+  const localPreview =
+    packaged &&
+    policy.development_unsigned === true &&
+    policy.local_preview === true;
   const env = {
     ...environment,
     NIGHTBREW_SESSION_TOKEN: token,
     NIGHTBREW_INSTANCE_ID: instance,
-    NIGHTBREW_DB: path.join(dataDir, "chat.sqlite3"),
+    NIGHTBREW_DB: path.join(
+      dataDir,
+      ...(localPreview ? ["local-preview"] : []),
+      "chat.sqlite3",
+    ),
     PYTHONUNBUFFERED: "1",
   };
   if (packaged) {
@@ -44,8 +52,9 @@ function configuration({
         )
       )
         delete env[name];
-    env.NIGHTBREW_ENV = "production";
-    env.NIGHTBREW_ENFORCE_LICENSE = "1";
+    env.NIGHTBREW_ENV = localPreview ? "local-preview" : "production";
+    env.NIGHTBREW_LOCAL_PREVIEW = localPreview ? "1" : "0";
+    env.NIGHTBREW_ENFORCE_LICENSE = localPreview ? "0" : "1";
     env.NIGHTBREW_ALLOW_MOCK_LICENSE = "0";
     env.NIGHTBREW_LICENSE_PUBLIC_KEY = policy.license_public_key;
     env.NIGHTBREW_LICENSE_URL = policy.license_url;

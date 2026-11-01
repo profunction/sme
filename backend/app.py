@@ -20,6 +20,7 @@ from backend import (
     files,
     hardware,
     model_settings,
+    licensing,
     store,
     tasks,
 )
@@ -31,7 +32,7 @@ async def lifespan(_app):
     yield
 
 
-app = FastAPI(title="NightBrew AI Employee", version="0.9.0", lifespan=lifespan)
+app = FastAPI(title="NightBrew AI Employee", version="0.9.1", lifespan=lifespan)
 DB = Path(os.getenv("NIGHTBREW_DB", str(Path.home() / ".nightbrew" / "chat.sqlite3")))
 TOKEN = os.getenv("NIGHTBREW_SESSION_TOKEN") or secrets.token_urlsafe(32)
 
@@ -101,6 +102,8 @@ def ai_settings():
 
 @app.put("/settings/ai", dependencies=[Depends(authorize)])
 def update_ai_settings(policy: ai.Policy):
+    if licensing.local_preview() and (policy.cloud_allowed or policy.billing_source != "BYOK"):
+        raise HTTPException(403, "Local preview only supports local Ollama; cloud inference is disabled")
     with connect() as db:
         store.put(db, "ai_policy", policy.model_dump())
         store.audit(db, "ai_policy_updated", "settings")
@@ -163,9 +166,10 @@ def usage():
 
 @app.post("/chat", dependencies=[Depends(authorize)])
 def chat(request: ai.Chat):
+    if licensing.local_preview() and request.mode != "LOCAL_ONLY":
+        raise HTTPException(403, "Local preview only supports LOCAL_ONLY with your local Ollama")
     import uuid
 
-    from backend import licensing
 
     try:
         licensing.enforce(connect)
@@ -330,6 +334,8 @@ app.add_middleware(
 
 @app.post("/ai/estimate", dependencies=[Depends(authorize)])
 def estimate_chat(request: ai.Chat):
+    if licensing.local_preview() and request.mode != "LOCAL_ONLY":
+        raise HTTPException(403, "Local preview only supports LOCAL_ONLY with your local Ollama")
     with connect() as db:
         policy = ai.Policy(**store.get(db, "ai_policy", {}))
         measured = store.get(db, "benchmark")
@@ -668,7 +674,6 @@ def employee_write(identifier: str, connector_id: str, request: connectors.Write
         raise HTTPException(422, str(exc)) from None
 
 
-from backend import licensing
 
 
 @app.get("/license", dependencies=[Depends(authorize)])

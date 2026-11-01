@@ -23,6 +23,10 @@ def device_id():
     return hashlib.sha256(material.encode()).hexdigest()
 
 
+def local_preview():
+    return os.getenv("NIGHTBREW_LOCAL_PREVIEW") == "1" and os.getenv("NIGHTBREW_ENV") == "local-preview"
+
+
 def required():
     return os.getenv("NIGHTBREW_ENFORCE_LICENSE") == "1"
 
@@ -71,7 +75,7 @@ def verify(token, public_key, device=None, now=None):
 def enforce(connect):
     if not required():
         return {
-            "environment": "development",
+            "environment": "local_preview" if local_preview() else "development",
             "plan": "Development",
             "employee_limit": 100,
             "verified": False,
@@ -96,6 +100,8 @@ def account_key():
 
 
 def remote(path, body=None):
+    if local_preview():
+        raise ValueError("Local preview has no cloud gateway, subscription or payment services")
     base = os.getenv("NIGHTBREW_LICENSE_URL", "").rstrip("/")
     parsed = urlsplit(base)
     test = os.getenv("NIGHTBREW_ENV") == "test" and parsed.hostname in (

@@ -14,6 +14,12 @@ export function ModelSetup({
     cloud_model: "",
     cloud_url: "https://api.openai.com/v1",
   });
+  const [localPreview, setLocalPreview] = useState(false);
+  useEffect(() => {
+    api<{ claims?: { environment?: string } }>("/license")
+      .then((v) => setLocalPreview(v.claims?.environment === "local_preview"))
+      .catch(() => {});
+  }, [api]);
   const [installed, setInstalled] = useState<string[]>([]);
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
@@ -48,6 +54,60 @@ export function ModelSetup({
         </div>
       </div>
       <h2>模型配置</h2>
+      {localPreview && (
+        <p className="notice">
+          本地试用版：不用填写 API key 或激活账号。先启动 Windows 上已有的
+          Ollama，点击检测，在下方选择已安装模型，再保存。
+        </p>
+      )}
+      <button
+        className="secondary"
+        disabled={busy}
+        onClick={async () => {
+          setBusy(true);
+          try {
+            const h = await api<{
+              models: string[];
+              ollama_available: boolean;
+            }>("/hardware");
+            setInstalled(h.models);
+            setStatus(
+              h.ollama_available
+                ? `Ollama 已连接，检测到 ${h.models.length} 个模型。请选择后保存。`
+                : "尚未连接 Ollama。请在这台电脑启动 Ollama 后重新检测。",
+            );
+          } catch (e) {
+            setStatus(errorText(e));
+          } finally {
+            setBusy(false);
+          }
+        }}
+      >
+        检测已有 Ollama 模型
+      </button>
+      {installed.length > 0 && (
+        <label>
+          选择已安装模型
+          <select
+            aria-label="选择已安装模型"
+            value={
+              installed.includes(models.local_model) ? models.local_model : ""
+            }
+            onChange={(e) =>
+              setModels({ ...models, local_model: e.target.value })
+            }
+          >
+            <option value="" disabled>
+              请选择，之后点击保存模型配置
+            </option>
+            {installed.map((m) => (
+              <option key={m} value={m}>
+                {m}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -95,6 +155,7 @@ export function ModelSetup({
             <label>
               云端模型名称
               <input
+                disabled={localPreview}
                 aria-label="云端模型名称"
                 value={models.cloud_model}
                 onChange={(e) =>
@@ -109,6 +170,7 @@ export function ModelSetup({
           <label>
             OpenAI 兼容服务地址（HTTPS）
             <input
+              disabled={localPreview}
               type="url"
               required
               value={models.cloud_url}

@@ -80,3 +80,7 @@ See [MACOS_SETUP.md](MACOS_SETUP.md) for Apple Silicon and Intel builds, local d
 The redesigned customer GUI adds a real-status dashboard, a Chinese first-use guide, six editable prompt templates, four employee role presets, plain-language approval review, three persistent appearance themes, and model/provider configuration in the GUI. Template use never automatically calls AI or grants tools; cloud consent remains per message. Changing cloud provider/model clears cloud permission and pricing confirmation. Browser development credentials stay in memory; the desktop uses its existing automatic IPC session.
 
 Start with [CUSTOMER_GUIDE.md](CUSTOMER_GUIDE.md). [OPEN_SOURCE_RESEARCH.md](OPEN_SOURCE_RESEARCH.md) records the refreshed upstream comparison and licensing exceptions. This GUI work does not establish production signing/notarization, deployed paid services, knowledge-base retrieval, or real-vendor acceptance.
+
+## Windows local Ollama preview (0.9.1)
+
+Use the explicitly labeled `NightBrew-Windows-LOCAL-PREVIEW` artifact for owner testing without a deployed commercial licensing service. It connects only to local Ollama for chat, blocks cloud inference and paid authority calls, retains approvals and file boundaries, and isolates its local database. See [WINDOWS_LOCAL_TRIAL.md](WINDOWS_LOCAL_TRIAL.md). Standard/production packages continue to require verified commercial activation.

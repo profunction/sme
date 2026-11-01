@@ -128,7 +128,7 @@ function App() {
         <div className="sidebar-foot">
           <span className={`connection-dot ${token ? "online" : ""}`} />
           {token ? "工作区已连接" : "尚未连接工作区"}
-          <small>Windows & macOS · v0.9</small>
+          <small>Windows & macOS · v0.9.1</small>
         </div>
       </aside>
       <div className="main-area">

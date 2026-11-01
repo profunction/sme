@@ -1,3 +1,4 @@
+param([switch]$LocalPreview)
 $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $false
 trap {
@@ -23,13 +24,22 @@ $probeExitCode = $LASTEXITCODE
 $probeOutput | ForEach-Object { Write-Host $_ }
 if ($probeExitCode -ne 0) { throw 'Frozen backend startup failed; see sanitized diagnostic annotation' }
 
+if ($LocalPreview) {
+    $policy = Get-Content 'release\win-unpacked\resources\release-policy.json' -Raw | ConvertFrom-Json
+    if (-not $policy.local_preview -or -not $policy.development_unsigned) { throw 'Expected explicit local development preview policy' }
+}
 Test-OwnedApplication 'release\win-unpacked\NightBrew AI Employee.exe'
-$installer = Get-ChildItem release\NightBrew-DEV-UNSIGNED-*.exe | Select-Object -First 1
+$pattern = if ($LocalPreview) { 'release\NightBrew-LOCAL-PREVIEW-*.exe' } else { 'release\NightBrew-DEV-UNSIGNED-*.exe' }
+$installer = Get-ChildItem $pattern | Select-Object -First 1
 if (-not $installer) { throw 'No development installer produced' }
 $destination = "$env:RUNNER_TEMP\NightBrewInstalled"
 $installation = Start-Process $installer.FullName -ArgumentList "/S /D=$destination" -PassThru
 $installationHandle = $installation.Handle
 if (-not $installation.WaitForExit(300000)) { Stop-Process -Id $installation.Id; throw "Silent installation timed out" }
 if ($installation.ExitCode -ne 0) { throw "Silent installation failed (exit $($installation.ExitCode))" }
+if ($LocalPreview) {
+    $installedPolicy = Get-Content "$destination\resources\release-policy.json" -Raw | ConvertFrom-Json
+    if (-not $installedPolicy.local_preview) { throw 'Installed application is not the local preview' }
+}
 Write-Host 'Silent installation passed'
 Test-OwnedApplication "$destination\NightBrew AI Employee.exe"

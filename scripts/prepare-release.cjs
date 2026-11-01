@@ -1,14 +1,22 @@
 const fs = require("node:fs");
 const base = require("../package.json").build;
 const development = process.argv.includes("--development");
+const localPreview = process.argv.includes("--local-preview");
+if (localPreview && !development)
+  throw Error(
+    "Local preview is only available in an explicitly unsigned development build",
+  );
 if (process.argv.includes("--mac") && !development)
-  throw Error("macOS production distribution requires a separate signing and notarization workflow");
+  throw Error(
+    "macOS production distribution requires a separate signing and notarization workflow",
+  );
 const policy = {
   license_public_key: process.env.NIGHTBREW_RELEASE_PUBLIC_KEY || "",
   license_url: process.env.NIGHTBREW_RELEASE_LICENSE_URL || "",
   publisher_name: process.env.NIGHTBREW_SIGNING_PUBLISHER || "",
   update_url: process.env.NIGHTBREW_RELEASE_UPDATE_URL || "",
   development_unsigned: development,
+  local_preview: localPreview,
 };
 function https(value) {
   try {
@@ -50,9 +58,11 @@ const config = {
     verifyUpdateCodeSignature: true,
     ...(development ? {} : { publisherName: [policy.publisher_name] }),
   },
-  artifactName: development
-    ? "NightBrew-DEV-UNSIGNED-${version}-${arch}.${ext}"
-    : "NightBrew-${version}-${arch}.${ext}",
+  artifactName: localPreview
+    ? "NightBrew-LOCAL-PREVIEW-${version}-${arch}.${ext}"
+    : development
+      ? "NightBrew-DEV-UNSIGNED-${version}-${arch}.${ext}"
+      : "NightBrew-${version}-${arch}.${ext}",
   publish: development
     ? null
     : [{ provider: "generic", url: policy.update_url }],

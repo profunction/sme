@@ -158,12 +158,68 @@ test("release config preserves backend resources and installation policy", () =>
   }
 });
 
- test("macOS packaged backend resolves a native executable inside app resources", () => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "nightbrew-mac-policy-"));
+test("macOS packaged backend resolves a native executable inside app resources", () => {
+  const directory = fs.mkdtempSync(
+    path.join(os.tmpdir(), "nightbrew-mac-policy-"),
+  );
   try {
     fs.writeFileSync(path.join(directory, "release-policy.json"), "{}");
-    const value = configuration({ packaged: true, resources: directory, root: directory, dataDir: directory, platform: "darwin", environment: {} });
-    assert.equal(value.executable, path.join(directory, "backend", "nightbrew-backend"));
+    const value = configuration({
+      packaged: true,
+      resources: directory,
+      root: directory,
+      dataDir: directory,
+      platform: "darwin",
+      environment: {},
+    });
+    assert.equal(
+      value.executable,
+      path.join(directory, "backend", "nightbrew-backend"),
+    );
     assert.equal(value.env.NIGHTBREW_ENFORCE_LICENSE, "1");
-  } finally { fs.rmSync(directory, { recursive: true, force: true }); }
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});
+
+test("local preview is explicit, development-only and uses isolated data", () => {
+  const directory = fs.mkdtempSync(
+    path.join(os.tmpdir(), "nightbrew-local-config-"),
+  );
+  try {
+    for (const [development, expected] of [
+      [false, "1"],
+      [true, "0"],
+    ]) {
+      fs.writeFileSync(
+        path.join(directory, "release-policy.json"),
+        JSON.stringify({
+          development_unsigned: development,
+          local_preview: true,
+        }),
+      );
+      const value = configuration({
+        packaged: true,
+        resources: directory,
+        root: directory,
+        dataDir: directory,
+        environment: {
+          NIGHTBREW_ENFORCE_LICENSE: "0",
+          NIGHTBREW_LOCAL_PREVIEW: "1",
+          NIGHTBREW_ENV: "local-preview",
+        },
+      });
+      assert.equal(value.env.NIGHTBREW_ENFORCE_LICENSE, expected);
+      assert.equal(value.env.NIGHTBREW_ALLOW_MOCK_LICENSE, "0");
+      if (development)
+        assert.ok(
+          value.env.NIGHTBREW_DB.includes(
+            path.join("local-preview", "chat.sqlite3"),
+          ),
+        );
+      else assert.equal(value.env.NIGHTBREW_LOCAL_PREVIEW, "0");
+    }
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
 });

@@ -29,6 +29,8 @@ export function apiFor(token: string): API {
 }
 export function errorText(e: unknown) {
   const message = e instanceof Error ? e.message : "请求未完成，请稍后再试。";
+  if (/local preview/i.test(message))
+    return "本地试用版仅支持你电脑上的 Ollama，不含云端 AI、支付或商业授权服务。";
   if (/failed to fetch|networkerror|load failed/i.test(message))
     return "无法连接本机应用服务。请重新打开应用，或检查工作区是否已连接。";
   if (/license|entitlement|subscription|activate/i.test(message))
