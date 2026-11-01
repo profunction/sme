@@ -6,6 +6,7 @@ root=Path(__file__).resolve().parents[1]/'mobile'
 subprocess.run(['flutter','create','--no-pub','--project-name','nightbrew_fieldops','--org','com.nightbrew','--platforms=android,ios',str(root)],check=True)
 # flutter create adds its counter-example test; our real tests have different filenames.
 (root/'test/widget_test.dart').unlink(missing_ok=True)
+(root/'analysis_options.yaml').write_text('analyzer:\n  exclude: [build/**]\n')
 manifest=root/'android/app/src/main/AndroidManifest.xml'
 text=manifest.read_text()
 if 'android.permission.INTERNET' not in text:

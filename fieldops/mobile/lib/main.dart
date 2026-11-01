@@ -142,17 +142,77 @@ class _WorkspaceState extends State<Workspace> with WidgetsBindingObserver {
   try{await api.json('/auth/logout',method:'POST');}catch(_){}
   await store?.clear();await widget.onLogout();
  }
- @override Widget build(BuildContext context)=>Scaffold(appBar:AppBar(title:const Text('NightBrew FieldOps'),actions:[IconButton(tooltip:'Synchronize',onPressed:busy?null:sync,icon:busy?const SizedBox(width:20,height:20,child:CircularProgressIndicator(color:Colors.white,strokeWidth:2)):const Icon(Icons.sync)),IconButton(tooltip:'Sign out',onPressed:signOut,icon:const Icon(Icons.logout))]),bottomNavigationBar:NavigationBar(selectedIndex:tab,onDestinationSelected:(v)=>setState(()=>tab=v),destinations:const [NavigationDestination(icon:Icon(Icons.assignment_outlined),label:'Work orders'),NavigationDestination(icon:Icon(Icons.devices_other_outlined),label:'Equipment'),NavigationDestination(icon:Icon(Icons.business_outlined),label:'Company')]),body:SafeArea(child:Column(children:[Container(width:double.infinity,color:online?const Color(0xFFE6F2ED):const Color(0xFFFFF1D8),padding:const EdgeInsets.all(12),child:Text('${online?'ONLINE':'OFFLINE / UNVERIFIED'} · ${drafts.length} unsent · $message',maxLines:4,overflow:TextOverflow.ellipsis,style:const TextStyle(fontSize:12))),Expanded(child:RefreshIndicator(onRefresh:sync,child:ListView(padding:const EdgeInsets.all(18),children:[
- if(tab==0)...[
-  Text('Ready for the next call.',style:Theme.of(context).textTheme.headlineSmall),const SizedBox(height:8),Text('Only authorized, previously synchronized records are available offline. Industry: ${data?['company']?['industry']??'not loaded'}.'),const SizedBox(height:12),
-  if(manager)FilledButton.icon(onPressed:online?()=>create('work'):null,icon:const Icon(Icons.add),label:const Text('Create work order')),
-  if(rows('work_orders').isEmpty)const Card(child:Padding(padding:EdgeInsets.all(24),child:Text('No cached work orders. Connect and synchronize, or ask your supervisor to assign work.'))),
-  for(final w in rows('work_orders'))Card(child:ListTile(onTap:()=>openWork(w),leading:const CircleAvatar(backgroundColor:navy,child:Icon(Icons.build_outlined,color:gold)),title:Text('${w['title']}'),subtitle:Text('${w['customer_name']} · ${w['site_name']}\n${w['manufacturer']} ${w['model']} · ${w['number']}'),isThreeLine:true,trailing:Chip(label:Text('${w['status']}',style:const TextStyle(fontSize:10))))),
- ],
- if(tab==1)...[Text('Equipment inventory',style:Theme.of(context).textTheme.headlineSmall),if(manager)FilledButton.icon(onPressed:online?()=>create('equipment'):null,icon:const Icon(Icons.add),label:const Text('Add equipment')),for(final e in rows('equipment'))Card(child:ListTile(title:Text('${e['manufacturer']} ${e['model']}'),subtitle:Text('Serial: ${e['serial_number']} · ${e['room']}\n${e['category']} · firmware ${e['firmware']}'),onTap:()async{final related=rows('work_orders').where((w)=>w['equipment_id']==e['id']).toList();await showDialog<void>(context:context,builder:(ctx)=>AlertDialog(title:const Text('Cached maintenance history'),content:SizedBox(width:400,child:ListView(shrinkWrap:true,children:[if(related.isEmpty)const Text('No related cached work orders.'),for(final w in related)ListTile(title:Text('${w['title']}'),subtitle:Text('${w['status']} · ${w['updated_at']}'))])),actions:[TextButton(onPressed:()=>Navigator.pop(ctx),child:const Text('Close'))]));})))] ,
- if(tab==2)...[Text('${data?['company']?['name']??'Company workspace'}',style:Theme.of(context).textTheme.headlineSmall),Text('${user['name']} · ${user['role']}'),SwitchListTile(title:const Text('Synchronize when online'),subtitle:const Text('Saved service notes are queued for your company server. No cloud AI or photos are uploaded.'),value:autoSync,onChanged:(v)=>setState(()=>autoSync=v)),const Card(child:Padding(padding:EdgeInsets.all(16),child:Text('Phase 1: factual records and PDF reports. AI diagnosis, manuals, voice, photos, signatures, payment and full web administration are not enabled.'))),if(manager)Wrap(spacing:8,children:[OutlinedButton(onPressed:online?()=>create('customer'):null,child:const Text('Add customer')),OutlinedButton(onPressed:online?()=>create('site'):null,child:const Text('Add site')),if(['owner','administrator'].contains(user['role']))OutlinedButton(onPressed:online?()=>create('engineer'):null,child:const Text('Add engineer'))]),TextButton(onPressed:()=>Navigator.push(context,MaterialPageRoute<void>(builder:(_)=>const LicensePage(applicationName:'NightBrew FieldOps AI'))),child:const Text('Open-source licenses')),const SizedBox(height:14),const Text('Customers'),for(final c in rows('customers'))Card(child:ListTile(title:Text('${c['name']}'),subtitle:Text('${c['contact']}'))),const SizedBox(height:14),const Text('Sites'),for(final s in rows('sites'))Card(child:ListTile(title:Text('${s['name']}'),subtitle:Text('${s['address']}')))],
- const SizedBox(height:24),const Text('Safety: follow verified manufacturer procedures. Qualified personnel only for hazardous work; never bypass protective systems.',style:TextStyle(fontSize:11,color:Colors.blueGrey)),
- ])))])));
+ List<Widget> workList(BuildContext context) => [
+  Text('Ready for the next call.',style:Theme.of(context).textTheme.headlineSmall),
+  const SizedBox(height:8),
+  Text('Only synchronized records are available offline. Industry: ${data?['company']?['industry']??'not loaded'}.'),
+  if(manager) FilledButton.icon(onPressed:online?()=>create('work'):null,icon:const Icon(Icons.add),label:const Text('Create work order')),
+  if(rows('work_orders').isEmpty) const Card(child:Padding(padding:EdgeInsets.all(24),child:Text('No cached work orders. Synchronize, or ask your supervisor to assign work.'))),
+  for(final w in rows('work_orders')) Card(child:ListTile(
+   onTap:()=>openWork(w),
+   leading:const CircleAvatar(backgroundColor:navy,child:Icon(Icons.build_outlined,color:gold)),
+   title:Text('${w['title']}'),
+   subtitle:Text('${w['customer_name']} · ${w['site_name']}\n${w['manufacturer']} ${w['model']} · ${w['number']}'),
+   isThreeLine:true,
+   trailing:Chip(label:Text('${w['status']}',style:const TextStyle(fontSize:10))),
+  )),
+ ];
+ List<Widget> equipmentList(BuildContext context) => [
+  Text('Equipment inventory',style:Theme.of(context).textTheme.headlineSmall),
+  if(manager) FilledButton.icon(onPressed:online?()=>create('equipment'):null,icon:const Icon(Icons.add),label:const Text('Add equipment')),
+  for(final e in rows('equipment')) Card(child:ListTile(
+   title:Text('${e['manufacturer']} ${e['model']}'),
+   subtitle:Text('Serial: ${e['serial_number']} · ${e['room']}\n${e['category']} · firmware ${e['firmware']}'),
+   onTap:() async {
+    final related=rows('work_orders').where((w)=>w['equipment_id']==e['id']).toList();
+    await showDialog<void>(context:context,builder:(ctx)=>AlertDialog(
+     title:const Text('Cached maintenance history'),
+     content:SizedBox(width:400,child:ListView(shrinkWrap:true,children:[
+      if(related.isEmpty) const Text('No related cached work orders.'),
+      for(final w in related) ListTile(title:Text('${w['title']}'),subtitle:Text('${w['status']} · ${w['updated_at']}')),
+     ])),
+     actions:[TextButton(onPressed:()=>Navigator.pop(ctx),child:const Text('Close'))],
+    ));
+   },
+  )),
+ ];
+ List<Widget> companyList(BuildContext context) => [
+  Text('${data?['company']?['name']??'Company workspace'}',style:Theme.of(context).textTheme.headlineSmall),
+  Text('${user['name']} · ${user['role']}'),
+  SwitchListTile(title:const Text('Synchronize when online'),subtitle:const Text('Saved notes synchronize to your company. No cloud AI or photos are uploaded.'),value:autoSync,onChanged:(v)=>setState(()=>autoSync=v)),
+  const Card(child:Padding(padding:EdgeInsets.all(16),child:Text('Phase 1: factual records and PDF. AI, manuals, voice, photos, signatures, payment and full web administration are not enabled.'))),
+  if(manager) Wrap(spacing:8,children:[
+   OutlinedButton(onPressed:online?()=>create('customer'):null,child:const Text('Add customer')),
+   OutlinedButton(onPressed:online?()=>create('site'):null,child:const Text('Add site')),
+   if(['owner','administrator'].contains(user['role'])) OutlinedButton(onPressed:online?()=>create('engineer'):null,child:const Text('Add engineer')),
+  ]),
+  TextButton(onPressed:()=>Navigator.push(context,MaterialPageRoute<void>(builder:(_)=>const LicensePage(applicationName:'NightBrew FieldOps AI'))),child:const Text('Open-source licenses')),
+  const SizedBox(height:14),const Text('Customers'),
+  for(final c in rows('customers')) Card(child:ListTile(title:Text('${c['name']}'),subtitle:Text('${c['contact']}'))),
+  const SizedBox(height:14),const Text('Sites'),
+  for(final s in rows('sites')) Card(child:ListTile(title:Text('${s['name']}'),subtitle:Text('${s['address']}'))),
+ ];
+ @override Widget build(BuildContext context) => Scaffold(
+  appBar:AppBar(title:const Text('NightBrew FieldOps'),actions:[
+   IconButton(tooltip:'Synchronize',onPressed:busy?null:sync,icon:busy?const SizedBox(width:20,height:20,child:CircularProgressIndicator(color:Colors.white,strokeWidth:2)):const Icon(Icons.sync)),
+   IconButton(tooltip:'Sign out',onPressed:signOut,icon:const Icon(Icons.logout)),
+  ]),
+  bottomNavigationBar:NavigationBar(selectedIndex:tab,onDestinationSelected:(v)=>setState(()=>tab=v),destinations:const [
+   NavigationDestination(icon:Icon(Icons.assignment_outlined),label:'Work orders'),
+   NavigationDestination(icon:Icon(Icons.devices_other_outlined),label:'Equipment'),
+   NavigationDestination(icon:Icon(Icons.business_outlined),label:'Company'),
+  ]),
+  body:SafeArea(child:Column(children:[
+   Container(width:double.infinity,color:online?const Color(0xFFE6F2ED):const Color(0xFFFFF1D8),padding:const EdgeInsets.all(12),child:Text('${online?'ONLINE':'OFFLINE / UNVERIFIED'} · ${drafts.length} unsent · $message',maxLines:4,overflow:TextOverflow.ellipsis,style:const TextStyle(fontSize:12))),
+   Expanded(child:RefreshIndicator(onRefresh:sync,child:ListView(padding:const EdgeInsets.all(18),children:[
+    if(tab==0)...workList(context),
+    if(tab==1)...equipmentList(context),
+    if(tab==2)...companyList(context),
+    const SizedBox(height:24),
+    const Text('Safety: follow verified manufacturer procedures. Qualified personnel only for hazardous work; never bypass protective systems.',style:TextStyle(fontSize:11,color:Colors.blueGrey)),
+   ]))),
+  ])),
+ );
 }
 
 class WorkDetail extends StatefulWidget {
