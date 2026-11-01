@@ -62,3 +62,9 @@ python -m pytest fieldops/tests -q
 Backend tests cover tenant and role boundaries, foreign references, note idempotency/conflicts, work status and history, actual PDF parsing, missing facts and request limits. Flutter tests cover actual SQLite persistence/account scopes, retry/conflict behavior and the first-use login form. `.github/workflows/fieldops.yml` analyzes/tests Flutter and attempts Android APK and unsigned iOS builds; consult the actual run result rather than equating configuration with verification.
 
 This Phase 1 does **not** implement cloud AI, RAG/manual uploads, voice, photos, annotations, signatures, DOCX, full web administration, PostgreSQL, S3, production billing or production mobile distribution. The pricing endpoint is a mock configuration foundation; no payment or paid entitlement is accepted. See [ROADMAP.md](ROADMAP.md), [DEPLOYMENT.md](DEPLOYMENT.md) and [SECURITY.md](SECURITY.md).
+
+## Verified build — 2026-11-01
+
+[CI run 41315897633](https://github.com/profunction/sme/actions/runs/41315897633) succeeded for source commit `26191b6`: backend 15 tests; Flutter analysis and six mobile tests on both runners; Android development APK and unsigned iOS build. Download **FieldOps-android-development** for the debug APK. **FieldOps-ios-development** contains an unsigned `.app` and is not directly installable on an iPhone. The artifacts do not include a hosted backend, company account or password.
+
+This proves build/test execution on those runners, not physical device/network acceptance, live AI or production distribution. Combined existing AI Employee + FieldOps Python regression: 86 passed, two Windows-only checks skipped on Linux.
