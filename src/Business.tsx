@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { errorText, type API } from "./api";
+import { TaskReview } from "./TaskReview";
 type FileEntry = { id: string; name: string; size: number };
 type Task = {
   id: string;
@@ -152,7 +153,7 @@ export function Business({ api, token }: { api: API; token: string }) {
         it, post an invoice or update an external system.
       </p>
       {error && <p role="alert">{error}</p>}
-      <h2>Create a business document</h2>
+      <h2>制作业务文档 / Create a business document</h2>
       <form onSubmit={generate}>
         <fieldset disabled={busy || stopped}>
           <div className="row">
@@ -161,7 +162,16 @@ export function Business({ api, token }: { api: API; token: string }) {
               <select value={kind} onChange={(e) => setKind(e.target.value)}>
                 {["quotation", "invoice", "purchase_order", "report"].map(
                   (k) => (
-                    <option key={k}>{k}</option>
+                    <option key={k} value={k}>
+                      {
+                        {
+                          quotation: "报价单",
+                          invoice: "发票草稿",
+                          purchase_order: "采购单草稿",
+                          report: "报表",
+                        }[k]
+                      }
+                    </option>
                   ),
                 )}
               </select>
@@ -179,7 +189,7 @@ export function Business({ api, token }: { api: API; token: string }) {
           </div>
           <div className="row">
             <label>
-              Your company
+              公司名称 / Your company
               <input
                 required
                 value={company}
@@ -188,7 +198,7 @@ export function Business({ api, token }: { api: API; token: string }) {
               />
             </label>
             <label>
-              Customer / supplier
+              客户或供应商 / Customer / supplier
               <input
                 required
                 value={customer}
@@ -197,7 +207,7 @@ export function Business({ api, token }: { api: API; token: string }) {
               />
             </label>
             <label>
-              Reference
+              单据编号 / Reference
               <input
                 required
                 value={reference}
@@ -209,7 +219,7 @@ export function Business({ api, token }: { api: API; token: string }) {
           {lines.map((line, i) => (
             <div className="row line" key={i}>
               <label>
-                Description
+                产品说明 / Description
                 <input
                   required
                   maxLength={200}
@@ -224,7 +234,7 @@ export function Business({ api, token }: { api: API; token: string }) {
                 />
               </label>
               <label>
-                Quantity
+                数量 / Quantity
                 <input
                   required
                   type="number"
@@ -242,7 +252,7 @@ export function Business({ api, token }: { api: API; token: string }) {
                 />
               </label>
               <label>
-                Price (MYR)
+                单价 / Price (MYR)
                 <input
                   required
                   type="number"
@@ -283,7 +293,7 @@ export function Business({ api, token }: { api: API; token: string }) {
             Add line
           </button>
           <label>
-            Tax %
+            税率 / Tax %
             <input
               required
               type="number"
@@ -302,10 +312,10 @@ export function Business({ api, token }: { api: API; token: string }) {
               maxLength={4000}
             />
           </label>
-          <button>Create local draft</button>
+          <button>生成本地草稿 / Create local draft</button>
         </fieldset>
       </form>
-      <h2>Files & analysis</h2>
+      <h2>上传文件与分析 / Files & analysis</h2>
       <label>
         Upload XLSX, PDF, Word or CSV (maximum 10 MiB)
         <input
@@ -343,7 +353,7 @@ export function Business({ api, token }: { api: API; token: string }) {
                     )
                   }
                 >
-                  Analyze Excel
+                  分析表格 / Analyze Excel
                 </button>
               ) : !file.name.toLowerCase().endsWith(".png") ? (
                 <button
@@ -357,7 +367,7 @@ export function Business({ api, token }: { api: API; token: string }) {
                     )
                   }
                 >
-                  Extract text
+                  提取文字 / Extract text
                 </button>
               ) : null}
               <button
@@ -372,13 +382,13 @@ export function Business({ api, token }: { api: API; token: string }) {
                   )
                 }
               >
-                Request deletion
+                申请删除 / Request deletion
               </button>
             </div>
           </li>
         ))}
       </ul>
-      <h2>Task history & approvals</h2>
+      <h2>任务记录与审批 / Task history & approvals</h2>
       <p>
         Review the exact saved task before approving. Cancellation is
         cooperative; an external write already sent cannot be recalled.
@@ -390,14 +400,14 @@ export function Business({ api, token }: { api: API; token: string }) {
             <span className="badge">{task.status}</span>
             {task.status === "pending_approval" && (
               <>
-                <pre>{JSON.stringify(task.payload, null, 2)}</pre>
+                <TaskReview value={task.payload} />
                 <button
                   disabled={busy || stopped}
                   onClick={() =>
                     action(() => api(`/tasks/${task.id}/approve`, "POST"))
                   }
                 >
-                  Approve exact task
+                  批准此任务 / Approve exact task
                 </button>
               </>
             )}
@@ -410,7 +420,7 @@ export function Business({ api, token }: { api: API; token: string }) {
                   action(() => api(`/tasks/${task.id}/cancel`, "POST"))
                 }
               >
-                Cancel task
+                取消任务 / Cancel task
               </button>
             )}
             {task.error && <p role="alert">{task.error}</p>}

@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { errorText, type API } from "./api";
+import { ModelSetup } from "./ModelSetup";
+import { TaskReview } from "./TaskReview";
 type Policy = {
   billing_source: "BYOK" | "INCLUDED";
   cloud_allowed: boolean;
@@ -29,6 +31,13 @@ export function Settings({ api }: { api: API }) {
     [status, setStatus] = useState(""),
     [key, setKey] = useState(""),
     [busy, setBusy] = useState(false);
+  async function reloadPolicy() {
+    setPolicy(await api<Policy>("/settings/ai"));
+    setLoaded(true);
+  }
+  useEffect(() => {
+    void reloadPolicy().catch((e) => setStatus(errorText(e)));
+  }, [api]);
   async function action(fn: () => Promise<unknown>) {
     setBusy(true);
     try {
@@ -43,7 +52,8 @@ export function Settings({ api }: { api: API }) {
   }
   return (
     <>
-      <h2>Privacy & AI budget</h2>
+      <ModelSetup api={api} onSaved={reloadPolicy} />
+      <h2>隐私与 AI 预算 / Privacy & AI budget</h2>
       <label>
         Cloud funding
         <select
@@ -61,7 +71,7 @@ export function Settings({ api }: { api: API }) {
       </label>
       <p>
         Local development allowances in USD; these balances are not proof of
-        payment. Configure the provider model and endpoint on the backend.
+        payment. Configure the provider model and endpoint in the form above.
       </p>
       <button
         disabled={busy}
@@ -137,8 +147,8 @@ export function Settings({ api }: { api: API }) {
       </fieldset>
       <h2>Bring your own key</h2>
       <p>
-        Keys use Windows Credential Manager or macOS Keychain. On Linux cloud, use
-        the backend environment binding.
+        Keys use Windows Credential Manager or macOS Keychain. On Linux cloud,
+        use the backend environment binding.
       </p>
       <input
         aria-label="Cloud API key"
@@ -183,7 +193,16 @@ export function Settings({ api }: { api: API }) {
         Usage ledger
       </button>
       <p role="status">{status}</p>
-      {info !== undefined && <pre>{JSON.stringify(info, null, 2)}</pre>}
+      {info !== undefined && (
+        <div className="panel">
+          <h3>检查结果</h3>
+          <TaskReview value={info} />
+          <details>
+            <summary>进阶诊断数据</summary>
+            <pre>{JSON.stringify(info, null, 2)}</pre>
+          </details>
+        </div>
+      )}
     </>
   );
 }

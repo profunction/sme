@@ -19,6 +19,7 @@ from backend import (
     credentials,
     files,
     hardware,
+    model_settings,
     store,
     tasks,
 )
@@ -30,7 +31,7 @@ async def lifespan(_app):
     yield
 
 
-app = FastAPI(title="NightBrew AI Employee", version="0.8.0", lifespan=lifespan)
+app = FastAPI(title="NightBrew AI Employee", version="0.9.0", lifespan=lifespan)
 DB = Path(os.getenv("NIGHTBREW_DB", str(Path.home() / ".nightbrew" / "chat.sqlite3")))
 TOKEN = os.getenv("NIGHTBREW_SESSION_TOKEN") or secrets.token_urlsafe(32)
 
@@ -78,7 +79,7 @@ def hardware_info():
 @app.post("/hardware/benchmark", dependencies=[Depends(authorize)])
 def benchmark():
     try:
-        result = hardware.benchmark(os.getenv("NIGHTBREW_LOCAL_MODEL", "llama3.2:3b"))
+        result = hardware.benchmark(model_settings.load(connect).local_model)
     except (httpx.HTTPError, ValueError, KeyError, TypeError):
         raise HTTPException(
             502,
@@ -104,6 +105,28 @@ def update_ai_settings(policy: ai.Policy):
         store.put(db, "ai_policy", policy.model_dump())
         store.audit(db, "ai_policy_updated", "settings")
     return policy
+
+
+@app.get("/settings/models", dependencies=[Depends(authorize)])
+def get_models():
+    return model_settings.load(connect)
+
+
+@app.put("/settings/models", dependencies=[Depends(authorize)])
+def set_models(config: model_settings.Models):
+    with connect() as db:
+        db.execute("BEGIN IMMEDIATE")
+        previous = model_settings.read(db)
+        store.put(db, "model_settings", config.model_dump())
+        if config.local_model != previous.local_model:
+            store.put(db, "benchmark", None)
+        if (config.cloud_model, config.cloud_url) != (previous.cloud_model, previous.cloud_url):
+            policy = ai.Policy(**store.get(db, "ai_policy", {}))
+            policy.pricing_confirmed = False
+            policy.cloud_allowed = False
+            store.put(db, "ai_policy", policy.model_dump())
+        store.audit(db, "model_settings_updated", "settings")
+    return config
 
 
 class KeyRequest(BaseModel):
@@ -148,7 +171,8 @@ def chat(request: ai.Chat):
         licensing.enforce(connect)
     except ValueError as exc:
         raise HTTPException(403, str(exc)) from None
-    local_model = os.getenv("NIGHTBREW_LOCAL_MODEL", "llama3.2:3b")
+    models = model_settings.load(connect)
+    local_model = models.local_model
     with connect() as db:
         if store.get(db, "emergency_stop", False):
             raise HTTPException(409, "Emergency stop is active")
@@ -225,17 +249,17 @@ def chat(request: ai.Chat):
             "provider": "CLOUD_ONLY · included credits",
             "cost_usd": result["cost_usd"],
         }
-    model = os.getenv("NIGHTBREW_CLOUD_MODEL", "") if cloud else local_model
+    model = models.cloud_model if cloud else local_model
     try:
         key = credentials.cloud_key() if cloud else None
     except Exception:  # noqa: BLE001 -- Native credential backends must not leak secret-bearing errors.
         raise HTTPException(503, "Credential store unavailable") from None
     if cloud and (not key or not model):
         raise HTTPException(
-            503, "Configure cloud API key and model in the backend environment"
+            503, "Configure cloud API key and model in AI settings"
         )
     try:
-        base = ai.cloud_base() if cloud else hardware.ollama_base()
+        base = ai.cloud_base(models.cloud_url) if cloud else hardware.ollama_base()
     except ValueError as exc:
         raise HTTPException(503, str(exc)) from None
     reservation = None
@@ -311,7 +335,7 @@ def estimate_chat(request: ai.Chat):
         measured = store.get(db, "benchmark")
     try:
         selected = ai.select(
-            request, policy, measured, os.getenv("NIGHTBREW_LOCAL_MODEL", "llama3.2:3b")
+            request, policy, measured, model_settings.load(connect).local_model
         )
     except ValueError as exc:
         raise HTTPException(403, str(exc)) from None

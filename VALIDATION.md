@@ -19,3 +19,12 @@ No live paid AI call, real Stripe payment, vendor ERP/POS acceptance, Windows si
 Do not count skipped tests as passed, simulated payments as real, mock connectors as vendors, or a configured workflow as executed Windows verification. Production still requires TLS hosting/backup/abuse controls, owner merchant/signing configuration, parser isolation/malware scan, final license review and customer acceptance.
 
 A proposed persistent cloud NSS relocation was rejected by automatic approval review as a broader security/configuration change without explicit authorization. It was not executed. The approved one-off read-only browser check used the existing database without relocating it or bypassing TLS.
+
+## 0.9 customer GUI — 2026-11-01
+
+- TypeScript/Vite build passed.
+- Python suite: 67 passed, two Windows-only tests skipped on Linux. New coverage checks authenticated model configuration, persistent adapter routing, unsafe provider URL rejection, and invalidation of benchmark/cloud pricing permission.
+- Six actual Chromium UI workflows passed: guided prompt construction, unsent drafts and default cloud consent, theme persistence, model configuration, real business draft/approval/emergency-stop flow, and employee assignment/license status. Narrow viewport checked for horizontal overflow.
+- Six Node desktop checks and Linux Ozone Electron IPC/startup smoke passed. The pre-existing frozen-backend fixture test is not proof of a newly built native 0.9 package.
+- Native Windows/macOS packaging is delegated to the existing CI pipelines after push; no new native-build result or production signature is claimed by these local checks.
+- Live model quality, real payments/vendor connections, full accessibility audit, real-customer usability acceptance and Mac download/Gatekeeper acceptance remain outstanding. UI tests do not guarantee that every customer will understand the product.

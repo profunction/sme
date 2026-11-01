@@ -4,9 +4,12 @@ test("business drafts and approved mock connector writes through the actual UI",
   page,
 }) => {
   await page.goto("/");
+  await page.getByText("开发者连接（浏览器预览）", { exact: true }).click();
   await page
     .getByLabel("Backend session token")
     .fill("nightbrew-e2e-not-production");
+  await page.getByRole("button", { name: "连接工作区", exact: true }).click();
+  await expect(page.locator(".connection-pill.connected")).toBeVisible();
   await page.getByRole("button", { name: "AI & privacy", exact: true }).click();
   await page
     .getByRole("button", { name: "Load settings", exact: true })
@@ -15,15 +18,17 @@ test("business drafts and approved mock connector writes through the actual UI",
     page.getByRole("button", { name: "Save privacy & budget" }),
   ).toBeEnabled();
   await page.getByRole("button", { name: "Inspect hardware" }).click();
-  await expect(page.locator("pre")).toContainText("ram_bytes");
+  await expect(
+    page.getByText("统一内存 / RAM（字节）", { exact: true }),
+  ).toBeVisible();
   await page
     .getByRole("button", { name: "Business tools", exact: true })
     .click();
   await page.getByLabel("Your company").fill("NightBrew UI Test");
   await page.getByLabel("Customer / supplier").fill("Test customer");
   await page.getByLabel("Reference").fill("UI-Q-001");
-  await page.getByLabel("Description", { exact: true }).fill("Tea");
-  await page.getByLabel("Quantity", { exact: true }).fill("3");
+  await page.getByLabel(/Description/).fill("Tea");
+  await page.getByLabel(/Quantity/).fill("3");
   await page.getByLabel("Price (MYR)").fill("10.05");
   await page.getByLabel("Tax %").fill("6");
   await page.getByRole("button", { name: "Create local draft" }).click();
@@ -76,9 +81,12 @@ test("employee assignment and development license status are visible", async ({
   page,
 }) => {
   await page.goto("/");
+  await page.getByText("开发者连接（浏览器预览）", { exact: true }).click();
   await page
     .getByLabel("Backend session token")
     .fill("nightbrew-e2e-not-production");
+  await page.getByRole("button", { name: "连接工作区", exact: true }).click();
+  await expect(page.locator(".connection-pill.connected")).toBeVisible();
   await page.getByRole("button", { name: "Employees", exact: true }).click();
   await page.getByLabel("Name", { exact: true }).fill("Finance UI Employee");
   await page.getByLabel("Role", { exact: true }).fill("Finance");
@@ -91,6 +99,7 @@ test("employee assignment and development license status are visible", async ({
   await expect(
     page.getByRole("heading", { name: "Assign a job to Finance UI Employee" }),
   ).toBeVisible();
+  await page.getByLabel("进阶任务配置（JSON）").check();
   await page.getByLabel("Task data (JSON)").fill(
     JSON.stringify({
       company: "NightBrew",
@@ -100,12 +109,14 @@ test("employee assignment and development license status are visible", async ({
     }),
   );
   await page.getByRole("button", { name: "Assign task", exact: true }).click();
-  await expect(page.locator("pre")).toContainText("pending_approval");
+  await expect(
+    page.getByText("pending_approval", { exact: true }),
+  ).toBeVisible();
   await page
     .getByRole("button", { name: "Business tools", exact: true })
     .click();
   await page
-    .getByRole("button", { name: "Approve exact task", exact: true })
+    .getByRole("button", { name: /Approve exact task/, exact: false })
     .click();
   await expect(
     page.getByText("Total: 10.00 MYR · Tax: 0.00", { exact: true }),

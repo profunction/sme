@@ -28,7 +28,22 @@ export function apiFor(token: string): API {
   };
 }
 export function errorText(e: unknown) {
-  return e instanceof Error ? e.message : "Request failed";
+  const message = e instanceof Error ? e.message : "请求未完成，请稍后再试。";
+  if (/failed to fetch|networkerror|load failed/i.test(message))
+    return "无法连接本机应用服务。请重新打开应用，或检查工作区是否已连接。";
+  if (/license|entitlement|subscription|activate/i.test(message))
+    return "此功能需要有效设备授权。请到“订阅与用量”检查激活状态，或联系企业管理员。";
+  if (/consent/i.test(message))
+    return "需要你同意本次消息使用云端 AI。勾选同意后再试；私密资料请选择本地模式。";
+  if (/benchmark|ollama|local model/i.test(message))
+    return "本地 AI 尚未就绪。请先启动 Ollama、准备配置的模型，再到“AI 与隐私设置”检查或测速。";
+  if (/unauthorized|invalid.*token/i.test(message))
+    return "工作区连接已失效，请重新打开应用后再试。";
+  if (/budget|credit|spending|quota/i.test(message))
+    return "当前可用额度或任务预算不足。请在“订阅与用量”及“AI 与隐私设置”中查看限制。";
+  if (/Request validation failed/i.test(message))
+    return "填写的资料未通过检查。请确认必填项、数值范围，以及服务地址是否为不含密钥的公开 HTTPS 网址。";
+  return message;
 }
 
 declare global {

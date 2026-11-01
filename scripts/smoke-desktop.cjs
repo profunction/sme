@@ -26,14 +26,12 @@ const path = require("node:path");
       },
     });
     const window = await application.firstWindow();
-    await window.waitForFunction(
-      () => {
-        const input = document.querySelector("input[type=password]");
-        return Boolean(input && input.value.length >= 32);
-      },
-      undefined,
-      { timeout: 15000 },
-    );
+    await window
+      .locator(".connection-pill.connected")
+      .waitFor({ timeout: 15000 });
+    await window
+      .getByRole("heading", { name: "工作台", exact: false })
+      .waitFor();
     const subscription = window.getByRole("button", {
       name: "Subscription",
       exact: true,

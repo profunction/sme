@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { errorText, type API } from "./api";
+import { TaskReview } from "./TaskReview";
+import { Icon } from "./Icon";
 export function Billing({ api }: { api: API }) {
   const [status, setStatus] = useState<unknown>(),
     [result, setResult] = useState<unknown>(),
@@ -23,6 +25,9 @@ export function Billing({ api }: { api: API }) {
       setBusy(false);
     }
   }
+  const license = status as
+    | { required: boolean; valid: boolean; device_id: string }
+    | undefined;
   return (
     <>
       <p>
@@ -31,8 +36,28 @@ export function Billing({ api }: { api: API }) {
         payment. Every plan can use ERP, POS, WMS, TMS and API connectors.
       </p>
       {error && <p role="alert">{error}</p>}
-      <h2>License & computer activation</h2>
-      <pre>{JSON.stringify(status, null, 2)}</pre>
+      <h2>授权与设备激活 / License & computer activation</h2>
+      <div className="feature-guide">
+        <Icon name="shield" />
+        <div>
+          <strong>
+            {!license
+              ? "正在检查授权…"
+              : !license.required
+                ? "开发模式（未验证付费）"
+                : license.valid
+                  ? "设备授权有效"
+                  : "这台设备需要激活"}
+          </strong>
+          <p>
+            正式安装包需要企业管理员提供的账号密钥和已配置的授权服务。演示数据与开发模式不代表已购买订阅。
+          </p>
+        </div>
+      </div>
+      <details>
+        <summary>查看授权诊断信息</summary>
+        <pre>{JSON.stringify(status, null, 2)}</pre>
+      </details>
       <label>
         Account key (system credential vault)
         <input
@@ -107,8 +132,8 @@ export function Billing({ api }: { api: API }) {
       </button>
       <h2>Application updates</h2>
       <p>
-        Windows production updates require HTTPS metadata and a matching signed Windows
-        publisher. Save work before installing.
+        Windows production updates require HTTPS metadata and a matching signed
+        Windows publisher. Save work before installing.
       </p>
       <button
         disabled={!window.nightbrew || busy}

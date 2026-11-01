@@ -4,7 +4,8 @@ The installed dependency inventory is recorded in [docs/python-dependencies.json
 
 | Direct dependency group | Declared licenses |
 |---|---|
-| React, React DOM, TypeScript, Vite, Tailwind, Electron, electron-builder | MIT |
+| React, React DOM, Vite, Tailwind, Electron, electron-builder | MIT |
+| TypeScript | Apache-2.0 |
 | FastAPI, httpx, pytest, keyring, openpyxl, python-docx | MIT |
 | uvicorn, Starlette, psutil, pandas, pypdf | BSD family (typically BSD-3-Clause) |
 | reportlab | BSD; preserve bundled font/third-party notices |
@@ -20,3 +21,5 @@ Recheck with `npm audit`. Python advisory scanning can use `pip-audit -r backend
 Phase 5–8 additions: Python Playwright (Apache-2.0), pywinauto (BSD-3-Clause), comtypes (MIT), pywin32 (PSF family), electron-updater (MIT), and PyInstaller build tooling (GPL with its documented bootloader exception allowing proprietary/commercial bundled applications). Preserve their notices and exception terms. Windows-only metadata/runtime and signing/distribution notices still require Windows release review. Build tooling is separate from the runtime lock.
 
 Final Phase 8 scans also covered the installed Linux build environment. The venv's old pip was upgraded to 26.2 to resolve build-tool advisories; the subsequent complete installed Python and full npm scans reported no known vulnerabilities. Windows-only runtime and certificate-chain verification remain separate. Packaging collects installed public license texts into THIRD-PARTY-NOTICES.txt and includes Electron's Chromium notice file; final legal review is still required.
+
+2026-11-01: refreshed upstream comparison in [OPEN_SOURCE_RESEARCH.md](OPEN_SOURCE_RESEARCH.md). Corrected TypeScript to Apache-2.0; no new runtime packages were added for the customer GUI.
