@@ -1,0 +1,9 @@
+.git
+.env
+.env.*
+.venv
+node_modules
+build
+release
+fieldops
+*.sqlite3

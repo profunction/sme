@@ -1,0 +1,11 @@
+{
+ email {$ACME_EMAIL}
+}
+{$API_DOMAIN} {
+ encode gzip
+ header {
+  Strict-Transport-Security "max-age=31536000"
+  X-Content-Type-Options nosniff
+ }
+ reverse_proxy api:8000
+}

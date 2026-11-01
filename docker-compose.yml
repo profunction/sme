@@ -1,0 +1,40 @@
+name: nightbrew
+services:
+  database:
+    image: postgres:16.10-bookworm
+    environment:
+      POSTGRES_DB: nightbrew
+      POSTGRES_USER: nightbrew
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes: [database:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U nightbrew -d nightbrew']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+  migrate:
+    build: .
+    command: [python, deploy/migrate.py]
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL}
+    depends_on:
+      database: {condition: service_healthy}
+  api:
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL}
+    ports: ['127.0.0.1:8000:8000']
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready',timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    init: true
+    stop_grace_period: 40s
+    restart: unless-stopped
+volumes:
+  database:

@@ -13,3 +13,8 @@ Production license/public update policy is embedded by the build. Packaged mode 
 Stripe webhooks check signatures/timestamps, known checkout sessions, event/invoice idempotency and canonical subscription state. Mock confirmation is administrator-only and disabled in Stripe mode. Unknown inference billing retains its reservation. Included company-provider credits are consumed on the trusted gateway, not asserted by a desktop receipt. BYOK/local budgets are additional controls, not authoritative paid credits.
 
 Production packaging fails without public authority configuration, HTTPS update feed and code signing credentials. Updates are user-requested, publisher-verified and not auto-installed on quit. Unsigned CI artifacts are explicitly development-only. Code signing, live merchant/gateway validation, Windows integration results, secure hosting, abuse controls and customer acceptance remain prerequisites for production distribution. Linux headless Electron tests disable the OS sandbox only for that test process; they do not validate Windows OS sandbox enforcement or signing.
+
+
+## VPS deployment foundation
+
+See DEPLOYMENT.md, BACKUP_RESTORE.md and CAPACITY_PLANNING.md. Server/provider/signing secrets stay outside the desktop package. Do not commit production .env files. No server or paid service was provisioned. Production deployment, PostgreSQL migration, backup restore, monitoring/dashboard and live gateway acceptance remain verification gates.

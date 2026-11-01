@@ -45,6 +45,9 @@ PLAN_DEFAULTS = {
 
 
 def db():
+    if os.getenv("DATABASE_URL"):
+        from billing_service.postgres import connection
+        return connection()
     DB.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
     connection = sqlite3.connect(DB, timeout=15)
     connection.row_factory = sqlite3.Row
