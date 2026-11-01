@@ -136,6 +136,12 @@ class _WorkspaceState extends State<Workspace> with WidgetsBindingObserver {
   detailOpen=false;
   if(mounted){data=await store!.snapshot();drafts=await store!.drafts();setState((){});if(autoSync)sync(silent:true);}
  }
+ Future<void> reauthenticate()async{
+  if(busy)return;
+  setState(()=>busy=true);
+  try{await api.json('/auth/logout',method:'POST');}catch(_){}
+  await widget.onLogout();
+ }
  Future<void> signOut()async{
   final confirmed=await showDialog<bool>(context:context,builder:(ctx)=>AlertDialog(title:const Text('Sign out and clear this account’s cache?'),content:Text('${drafts.length} unsent drafts are stored locally. Signing out deletes this account’s cached records and drafts. Sync first to keep them.'),actions:[TextButton(onPressed:()=>Navigator.pop(ctx,false),child:const Text('Keep working')),FilledButton(onPressed:()=>Navigator.pop(ctx,true),child:const Text('Delete local cache & sign out'))]));
   if(confirmed!=true)return;
@@ -179,6 +185,7 @@ class _WorkspaceState extends State<Workspace> with WidgetsBindingObserver {
  List<Widget> companyList(BuildContext context) => [
   Text('${data?['company']?['name']??'Company workspace'}',style:Theme.of(context).textTheme.headlineSmall),
   Text('${user['name']} · ${user['role']}'),
+  TextButton(onPressed:busy?null:reauthenticate,child:const Text('Sign in again — keep local drafts')),
   SwitchListTile(title:const Text('Synchronize when online'),subtitle:const Text('Saved notes synchronize to your company. No cloud AI or photos are uploaded.'),value:autoSync,onChanged:(v)=>setState(()=>autoSync=v)),
   const Card(child:Padding(padding:EdgeInsets.all(16),child:Text('Phase 1: factual records and PDF. AI, manuals, voice, photos, signatures, payment and full web administration are not enabled.'))),
   if(manager) Wrap(spacing:8,children:[

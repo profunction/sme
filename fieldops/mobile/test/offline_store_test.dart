@@ -58,4 +58,18 @@ void main(){
   expect(()=>validateServer('http://10.0.2.2:8787'),throwsFormatException);
   expect(validateServer('http://10.0.2.2:8787',allowDevelopmentHttp:true).port,8787);
  });
+ test('a lost snapshot response keeps acknowledged facts visible for idempotent retry',()async{
+  final db=await FieldStore.open(path:inMemoryDatabasePath,factory:databaseFactoryFfi);
+  final store=FieldStore(db,'scope');
+  await store.queueNote('w1',{'mutation_id':'mutation-1234567890','expected_version':1,'outcome':'Actual observation'});
+  final api=FieldApi(Uri.parse('https://company.example'),client:MockClient((r)async{
+   if(r.method=='POST')return http.Response('{"id":"note1","work_order_version":2}',200);
+   throw const SocketException('snapshot download interrupted');
+  }));
+  await expectLater(SyncEngine(store,api).sync(),throwsA(isA<SocketException>()));
+  expect((await store.drafts()).length,1);
+  expect(jsonDecode((await store.drafts()).single['body'] as String)['outcome'],'Actual observation');
+  api.close();await db.close();
+ });
+
 }

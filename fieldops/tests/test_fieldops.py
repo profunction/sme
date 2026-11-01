@@ -133,3 +133,34 @@ def test_snapshot_and_input_boundaries(env):
     assert c.post('/customers',headers=ah,json={'name':'x','company_id':'forged'}).status_code==422
     r=c.post('/customers',headers={**ah,'Content-Type':'application/json'},content=b' '*(100*1024))
     assert r.status_code==413
+
+
+def test_engineer_cannot_read_other_assigned_work_in_same_company(env):
+    c,ah,*_=env
+    customer,site,equip,work,eh=setup_records(c,ah)
+    other=c.post('/users',headers=ah,json={'email':'other@test.example','name':'Other engineer','password':'test-password-123'}).json()
+    hidden=c.post('/work-orders',headers=ah,json={'equipment_id':equip['id'],'title':'Another engineer job','engineer_id':other['id']}).json()
+    assert c.get('/work-orders/'+hidden['id'],headers=eh).status_code==404
+    assert c.get('/work-orders/'+hidden['id']+'/notes',headers=eh).status_code==404
+    assert c.get('/work-orders/'+hidden['id']+'/report.pdf',headers=eh).status_code==404
+
+
+def test_mock_plan_catalog_is_admin_only_and_cannot_accept_payments(env):
+    c,ah,*_=env
+    catalog=c.get('/plans',headers=ah).json()
+    assert catalog['billing_enabled'] is False
+    assert catalog['mode']=='mock-foundation'
+    assert c.post('/checkout',headers=ah,json={'plan':'Pro'}).status_code==404
+
+
+def test_pdf_preserves_engineer_observations_without_inventing_missing_fields(env):
+    c,ah,*_=env
+    *_,work,eh=setup_records(c,ah)
+    body=note(investigation='Checked HDMI cable; no repair performed',outcome='',follow_up='Customer confirmation pending')
+    assert c.post('/work-orders/'+work['id']+'/notes',headers=eh,json=body).status_code==201
+    response=c.get('/work-orders/'+work['id']+'/report.pdf',headers=eh)
+    text='\n'.join(p.extract_text() for p in PdfReader(io.BytesIO(response.content)).pages)
+    assert 'no repair performed' in text
+    assert 'Customer confirmation pending' in text
+    assert 'Requires engineer confirmation' in text
+    assert 'System working normally' not in text
