@@ -30,7 +30,7 @@ class BusinessDocument(BaseModel):
     reference: str = Field(min_length=1, max_length=80)
     currency: str = Field(default="MYR", pattern=r"^[A-Z]{3}$")
     tax_percent: Decimal = Field(
-        default=0, ge=0, le=100, max_digits=5, decimal_places=2
+        default=Decimal("0"), ge=0, le=100, max_digits=5, decimal_places=2
     )
     lines: list[Line] = Field(min_length=1, max_length=100)
     notes: str = Field(default="", max_length=4000)

@@ -32,9 +32,10 @@ test("business drafts and approved mock connector writes through the actual UI",
   await page.getByLabel("Price (MYR)").fill("10.05");
   await page.getByLabel("Tax %").fill("6");
   await page.getByRole("button", { name: "Create local draft" }).click();
-  await expect(page.getByText("Total: 31.96 MYR · Tax: 1.81")).toBeVisible();
+  const draft = page.locator("li").filter({ has: page.getByText("document.generate", { exact: true }) });
+  await expect(draft.getByText("Total: 31.96 MYR · Tax: 1.81")).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Download", exact: true }),
+    page.locator("li").filter({ has: page.getByText("quotation.pdf", { exact: true }) }).getByRole("button", { name: "Download", exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Connectors", exact: true }).click();
   const warehouse = page.locator("li").filter({

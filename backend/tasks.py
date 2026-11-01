@@ -5,7 +5,7 @@ import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 
-from backend import automation, documents, files, licensing, store, workforce
+from backend import automation, documents, files, licensing, purchaseorders, store, workforce
 
 EXECUTOR = ThreadPoolExecutor(max_workers=2, thread_name_prefix="nightbrew-task")
 TOOLS = {
@@ -16,8 +16,11 @@ TOOLS = {
     "browser.run",
     "windows.run",
     "connector.read",
+    "purchase_order.import",
+    "purchase_order.review",
+    "purchase_order.export",
 }
-APPROVAL = {"file.delete", "connector.write", "browser.run", "windows.run"}
+APPROVAL = {"file.delete", "connector.write", "browser.run", "windows.run", "purchase_order.export"}
 TIMEOUT_SECONDS = 60
 # A single process owns the SQLite job queue. No external action is replayed after restart.
 
@@ -29,7 +32,9 @@ class Cancelled(Exception):
 def create(connect, tool, payload, employee_id=None):
     if tool not in TOOLS and tool != "connector.write":
         raise ValueError("Tool is not permitted")
-    if tool == "document.generate":
+    if tool.startswith("purchase_order."):
+        payload = purchaseorders.prepare(tool, payload)
+    elif tool == "document.generate":
         payload = documents.BusinessDocument.model_validate(payload).model_dump(
             mode="json"
         )
@@ -105,7 +110,9 @@ def execute(connect, db_path, identifier):
         employee_id = workforce.execution_check(connect, identifier)
         licensing.reserve_task(connect, identifier, employee_id)
         payload = json.loads(row["payload"])
-        if row["tool"] == "connector.write":
+        if row["tool"].startswith("purchase_order."):
+            result = purchaseorders.run(row["tool"], payload, connect, db_path, check)
+        elif row["tool"] == "connector.write":
             from backend import connectors
 
             result = connectors.write(connect, payload, check)
