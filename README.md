@@ -1,6 +1,8 @@
-# NightBrew AI Employee — 0.8.0 development release
+# NightBrew AI Employee — 0.9.1 development release
 
-A Windows and macOS desktop AI workforce application developed entirely in cloud. Application code for Phases 1–8 is present: chat/hybrid AI, business documents, connectors, approved computer tools, scoped employees, trusted licensing/billing, managed backend startup and release pipelines. Nothing has been installed on the customer's computer.
+A Windows desktop AI workforce application with an additional macOS development build. Existing foundations include chat, business document drafts, explicit approved tools, scoped employees, licensing/billing protocols and packaging recipes. These building blocks do not establish complete commercial workflows.
+
+**2026-11-01 audit: not ready for a paid pilot.** See the [repository audit](docs/REPOSITORY_AUDIT.md), [feature evidence](docs/FEATURE_STATUS.md), [security gaps](docs/SECURITY_GAPS.md) and [release gates](docs/COMMERCIAL_READINESS.md). Exact AI credit accounting, authoritative user/policy controls, the complete purchase-order workflow and real payment/provider/operations acceptance remain blockers. Historical phase labels below describe code scope, not verified completion.
 
 **This is not yet a verified commercial Windows release.** Windows CI has passed native UIA/vault, managed Electron, frozen backend and NSIS installation/startup checks; the [verified run](https://github.com/profunction/sme/actions/runs/41037603208) contains the unsigned development installer. Real model inference, merchant payments, deployed licensing/gateway services, code signing and signed update-chain validation require their actual runtime/owner configuration. See [ROADMAP.md](ROADMAP.md) for implementation versus verification status.
 
@@ -43,7 +45,7 @@ Computer plans and employee jobs are explicitly assigned by the user. Model outp
 
 Ollama defaults to `http://127.0.0.1:11434`, model `llama3.2:3b` (`NIGHTBREW_OLLAMA_URL` is loopback HTTP only; `NIGHTBREW_LOCAL_MODEL` overrides model). No model was downloaded. Check hardware/model licensing and benchmark before recommending Local AI; unknown GPU VRAM stays unknown. Benchmarks are specific to machine/model, not broad capability certification.
 
-BYOK cloud requires `NIGHTBREW_CLOUD_KEY`, `NIGHTBREW_CLOUD_MODEL`, optionally HTTPS `NIGHTBREW_CLOUD_URL` (default OpenAI `/v1`). Windows stores keys in Credential Manager and macOS uses Keychain; Linux uses secure backend environment bindings. Global cloud permission plus per-message consent are required; private tasks never use cloud and provider failure never silently falls back. Employee role/instructions become system context while permissions remain backend-enforced.
+BYOK cloud requires `NIGHTBREW_CLOUD_KEY`, optionally `NIGHTBREW_CLOUD_MODEL` and HTTPS `NIGHTBREW_CLOUD_URL` (defaults `deepseek-chat` and `https://api.deepseek.com/v1`). Windows stores keys in Credential Manager and macOS uses Keychain; Linux uses secure backend environment bindings. Global cloud permission plus per-message consent are required; private tasks never use cloud and provider failure never silently falls back. Employee role/instructions become system context while permissions remain backend-enforced. Live provider pricing and availability remain unverified.
 
 INCLUDED cloud uses the separately deployed trusted gateway. Company provider keys/purchased credits stay on the authority, never on the desktop. The gateway quotes/reserves using server prices and reconciles provider usage; local company/employee limits add a second control. Unknown billing retains estimates. These controls are not a guarantee of the provider invoice. Each chat sends only its current message plus selected employee instructions, not all saved history.
 

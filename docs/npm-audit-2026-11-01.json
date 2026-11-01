@@ -1,0 +1,285 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@electron/asar": {
+      "name": "@electron/asar",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "glob",
+        "minimatch"
+      ],
+      "effects": [
+        "electron-winstaller"
+      ],
+      "range": "",
+      "nodes": [
+        "node_modules/@electron/asar"
+      ],
+      "fixAvailable": true
+    },
+    "@electron/universal": {
+      "name": "@electron/universal",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@electron/asar",
+        "dir-compare",
+        "minimatch"
+      ],
+      "effects": [],
+      "range": "",
+      "nodes": [
+        "node_modules/@electron/universal"
+      ],
+      "fixAvailable": true
+    },
+    "app-builder-lib": {
+      "name": "app-builder-lib",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@electron/asar",
+        "@electron/universal",
+        "dmg-builder",
+        "ejs",
+        "electron-builder-squirrel-windows",
+        "minimatch"
+      ],
+      "effects": [
+        "dmg-builder",
+        "electron-builder",
+        "electron-builder-squirrel-windows"
+      ],
+      "range": "",
+      "nodes": [
+        "node_modules/app-builder-lib"
+      ],
+      "fixAvailable": false
+    },
+    "dir-compare": {
+      "name": "dir-compare",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "minimatch"
+      ],
+      "effects": [],
+      "range": "",
+      "nodes": [
+        "node_modules/dir-compare"
+      ],
+      "fixAvailable": true
+    },
+    "dmg-builder": {
+      "name": "dmg-builder",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "app-builder-lib"
+      ],
+      "effects": [],
+      "range": "",
+      "nodes": [
+        "node_modules/dmg-builder"
+      ],
+      "fixAvailable": true
+    },
+    "ejs": {
+      "name": "ejs",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "jake"
+      ],
+      "effects": [],
+      "range": "",
+      "nodes": [
+        "node_modules/ejs"
+      ],
+      "fixAvailable": true
+    },
+    "electron-builder": {
+      "name": "electron-builder",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "app-builder-lib",
+        "dmg-builder"
+      ],
+      "effects": [],
+      "range": "",
+      "nodes": [
+        "node_modules/electron-builder"
+      ],
+      "fixAvailable": false
+    },
+    "electron-builder-squirrel-windows": {
+      "name": "electron-builder-squirrel-windows",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "app-builder-lib",
+        "electron-winstaller"
+      ],
+      "effects": [],
+      "range": "",
+      "nodes": [
+        "node_modules/electron-builder-squirrel-windows"
+      ],
+      "fixAvailable": true
+    },
+    "electron-winstaller": {
+      "name": "electron-winstaller",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@electron/asar",
+        "temp"
+      ],
+      "effects": [],
+      "range": "",
+      "nodes": [
+        "node_modules/electron-winstaller"
+      ],
+      "fixAvailable": true
+    },
+    "filelist": {
+      "name": "filelist",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "minimatch"
+      ],
+      "effects": [
+        "jake"
+      ],
+      "range": "",
+      "nodes": [
+        "node_modules/filelist"
+      ],
+      "fixAvailable": true
+    },
+    "glob": {
+      "name": "glob",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "minimatch"
+      ],
+      "effects": [
+        "rimraf"
+      ],
+      "range": "",
+      "nodes": [
+        "node_modules/glob"
+      ],
+      "fixAvailable": true
+    },
+    "jake": {
+      "name": "jake",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "filelist"
+      ],
+      "effects": [
+        "ejs"
+      ],
+      "range": "",
+      "nodes": [
+        "node_modules/jake"
+      ],
+      "fixAvailable": true
+    },
+    "minimatch": {
+      "name": "minimatch",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1244012,
+          "name": "minimatch",
+          "dependency": "minimatch",
+          "title": "minimatch has potential denial of service via globparts amplification",
+          "url": "https://github.com/advisories/GHSA-g3hv-75wg-m249",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-405"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<11.0.1"
+        }
+      ],
+      "effects": [
+        "@electron/asar",
+        "@electron/universal",
+        "app-builder-lib",
+        "dir-compare",
+        "filelist",
+        "glob"
+      ],
+      "range": "",
+      "nodes": [
+        "node_modules/@electron/asar/node_modules/minimatch",
+        "node_modules/@electron/universal/node_modules/minimatch",
+        "node_modules/dir-compare/node_modules/minimatch",
+        "node_modules/filelist/node_modules/minimatch",
+        "node_modules/glob/node_modules/minimatch",
+        "node_modules/minimatch"
+      ],
+      "fixAvailable": false
+    },
+    "rimraf": {
+      "name": "rimraf",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "glob"
+      ],
+      "effects": [
+        "temp"
+      ],
+      "range": "",
+      "nodes": [
+        "node_modules/rimraf"
+      ],
+      "fixAvailable": true
+    },
+    "temp": {
+      "name": "temp",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "rimraf"
+      ],
+      "effects": [],
+      "range": "",
+      "nodes": [
+        "node_modules/temp"
+      ],
+      "fixAvailable": true
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 15,
+      "high": 0,
+      "critical": 0,
+      "total": 15
+    },
+    "dependencies": {
+      "prod": 20,
+      "dev": 391,
+      "optional": 107,
+      "peer": 13,
+      "peerOptional": 0,
+      "total": 410
+    }
+  }
+}
