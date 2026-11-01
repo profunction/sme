@@ -1,0 +1,71 @@
+name: FieldOps Phase 1
+on:
+  push:
+    branches: [main]
+    paths: ['fieldops/**', '.github/workflows/fieldops.yml']
+  pull_request:
+    paths: ['fieldops/**', '.github/workflows/fieldops.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: fieldops-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r fieldops/requirements-test.txt
+      - run: python -m pytest fieldops/tests -q
+  mobile:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            target: android
+          - runner: macos-15
+            target: ios
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+      - run: python fieldops/scripts/install_flutter.py
+      - run: flutter --version
+      - run: python fieldops/scripts/bootstrap_mobile.py
+      - run: flutter pub get
+        working-directory: fieldops/mobile
+      - run: dart format lib test
+        working-directory: fieldops/mobile
+      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
+        working-directory: fieldops/mobile
+      - run: flutter test
+        working-directory: fieldops/mobile
+      - name: Android development APK
+        if: matrix.target == 'android'
+        run: flutter build apk --debug --dart-define=FIELDOPS_ALLOW_HTTP=true
+        working-directory: fieldops/mobile
+      - name: iOS unsigned build
+        if: matrix.target == 'ios'
+        run: flutter build ios --release --no-codesign
+        working-directory: fieldops/mobile
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        if: always()
+        with:
+          name: FieldOps-${{ matrix.target }}-development
+          path: |
+            fieldops/mobile/build/app/outputs/flutter-apk/*.apk
+            fieldops/mobile/build/ios/iphoneos/*.app
+            fieldops/mobile/pubspec.lock
+            fieldops/mobile/android
+            fieldops/mobile/ios
+          retention-days: 14
+          if-no-files-found: warn

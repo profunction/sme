@@ -16,3 +16,16 @@ build/
 *.spec
 
 pytest-*.xml
+
+# FieldOps generated Flutter/native files (bootstrap_mobile.py regenerates runners)
+fieldops/mobile/.dart_tool/
+fieldops/mobile/.flutter-plugins*
+fieldops/mobile/android/
+fieldops/mobile/ios/
+fieldops/mobile/macos/
+fieldops/mobile/linux/
+fieldops/mobile/windows/
+fieldops/mobile/web/
+fieldops/mobile/analysis_options.yaml
+fieldops/mobile/*.iml
+fieldops/mobile/.metadata
