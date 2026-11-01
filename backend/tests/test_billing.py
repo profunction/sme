@@ -349,3 +349,47 @@ def test_licensed_queue_reserves_and_executes_idempotently(
         assert db.execute("SELECT status FROM tasks").fetchone()[0] == "completed"
     with authority.db() as db:
         assert db.execute("SELECT COUNT(*) FROM operations").fetchone()[0] == 1
+
+
+def test_deepseek_gateway_defaults_and_secret_boundary(billing, monkeypatch):
+    client, _ = billing
+    _, auth = paid_account(client, 'Business')
+    client.post('/activate', headers=auth, json={'device_id':DEVICE})
+    monkeypatch.delenv('NIGHTBREW_GATEWAY_URL', raising=False)
+    monkeypatch.delenv('NIGHTBREW_GATEWAY_MODEL', raising=False)
+    monkeypatch.setenv('NIGHTBREW_GATEWAY_API_KEY','deepseek-test-placeholder')
+    monkeypatch.setenv('NIGHTBREW_GATEWAY_INPUT_USD_PER_MILLION','1')
+    monkeypatch.setenv('NIGHTBREW_GATEWAY_OUTPUT_USD_PER_MILLION','2')
+    real_client=httpx.Client
+    calls=[]
+    def handler(request):
+        calls.append(request)
+        assert str(request.url)=='https://api.deepseek.com/v1/chat/completions'
+        assert request.headers['Authorization']=='Bearer deepseek-test-placeholder'
+        payload=json.loads(request.content)
+        assert payload['model']=='deepseek-chat'
+        assert payload['stream'] is False
+        assert payload['max_tokens']==512
+        return httpx.Response(200,json={'choices':[{'message':{'content':'Test provider reply'}}],'usage':{'prompt_tokens':10,'completion_tokens':20}})
+    monkeypatch.setattr(authority.httpx,'Client',lambda **kw:real_client(transport=httpx.MockTransport(handler),**kw))
+    body={'device_id':DEVICE,'request_id':uuid.uuid4().hex,'message':'Approved test text','cloud_consent':False}
+    assert client.post('/inference',headers=auth,json=body).status_code==403
+    assert calls==[]
+    body['cloud_consent']=True
+    estimate=client.post('/inference/estimate',headers=auth,json=body)
+    assert estimate.json()['model']=='deepseek-chat'
+    result=client.post('/inference',headers=auth,json=body)
+    assert result.status_code==200,result.text
+    assert result.json()['cost_usd']==pytest.approx(0.00005)
+    assert 'deepseek-test-placeholder' not in result.text
+    assert client.post('/inference',headers=auth,json=body).status_code==409
+    assert len(calls)==1
+
+
+@pytest.mark.parametrize('endpoint',['http://api.deepseek.com/v1','https://secret:key@api.deepseek.com/v1','https://api.deepseek.com/v1?api_key=secret','https://api.deepseek.com:8443/v1'])
+def test_gateway_provider_url_validation(monkeypatch,endpoint):
+    from billing_service.provider import configuration
+    monkeypatch.setenv('NIGHTBREW_GATEWAY_URL',endpoint)
+    monkeypatch.setenv('NIGHTBREW_GATEWAY_API_KEY','not-a-real-key')
+    from fastapi import HTTPException
+    with pytest.raises(HTTPException):configuration()

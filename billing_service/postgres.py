@@ -29,6 +29,8 @@ class Adapter:
             return self.conn.execute('SELECT pg_advisory_xact_lock(73482011)')
         if 'INSERT OR IGNORE' in sql.upper():
             sql = sql.replace('INSERT OR IGNORE', 'INSERT') + ' ON CONFLICT DO NOTHING'
+        # SQLite's two-argument scalar MAX is PostgreSQL GREATEST, not aggregate MAX.
+        sql = sql.replace('MAX(0,credits+?)', 'GREATEST(0,credits+?)')
         return self.conn.execute(sql.replace('?', '%s'), params)
 
 

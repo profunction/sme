@@ -63,7 +63,7 @@ def eligible(measured, model, request, policy):
 
 
 def cloud_base(value=None):
-    base = (value if value is not None else os.getenv("NIGHTBREW_CLOUD_URL", "https://api.openai.com/v1")).rstrip("/")
+    base = (value if value is not None else os.getenv("NIGHTBREW_CLOUD_URL", "https://api.deepseek.com/v1")).rstrip("/")
     p = urlsplit(base)
     if (
         p.scheme != "https"

@@ -10,8 +10,8 @@ from backend import store
 
 class Models(BaseModel):
     local_model: str = Field(default="llama3.2:3b", min_length=1, max_length=200, pattern=r"^[A-Za-z0-9][A-Za-z0-9._:/-]*$")
-    cloud_model: str = Field(default="", max_length=200)
-    cloud_url: str = Field(default="https://api.openai.com/v1", max_length=2000)
+    cloud_model: str = Field(default="deepseek-chat", max_length=200)
+    cloud_url: str = Field(default="https://api.deepseek.com/v1", max_length=2000)
 
     @field_validator("cloud_model")
     @classmethod
@@ -44,8 +44,8 @@ def read(db):
     saved = store.get(db, "model_settings")
     return Models(**(saved if saved is not None else {
         "local_model": os.getenv("NIGHTBREW_LOCAL_MODEL", "llama3.2:3b"),
-        "cloud_model": os.getenv("NIGHTBREW_CLOUD_MODEL", ""),
-        "cloud_url": os.getenv("NIGHTBREW_CLOUD_URL", "https://api.openai.com/v1"),
+        "cloud_model": os.getenv("NIGHTBREW_CLOUD_MODEL", "deepseek-chat"),
+        "cloud_url": os.getenv("NIGHTBREW_CLOUD_URL", "https://api.deepseek.com/v1"),
     }))
 
 

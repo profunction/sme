@@ -88,3 +88,7 @@ Use the explicitly labeled `NightBrew-Windows-LOCAL-PREVIEW` artifact for owner 
 ## NightBrew FieldOps AI (separate product)
 
 See [fieldops/README.md](fieldops/README.md) for the new Flutter Android/iOS field-service application, tenant-scoped API, service records and PDF reports. It has a separate database/authentication boundary and does not use AI Employee commercial device licensing. Phase 1 and unfinished work are documented separately.
+
+## Default cloud provider: DeepSeek
+
+The trusted gateway and new BYOK model settings default to DeepSeek (`deepseek-chat`, OpenAI-compatible HTTPS API). Existing saved providers remain unchanged until explicitly selected. See [DEEPSEEK_SETUP.md](DEEPSEEK_SETUP.md) for server-only key bindings, required verified pricing, customer consent and live-verification prerequisites. The local Ollama preview remains local-only.

@@ -11,8 +11,8 @@ export function ModelSetup({
 }) {
   const [models, setModels] = useState<Models>({
     local_model: "llama3.2:3b",
-    cloud_model: "",
-    cloud_url: "https://api.openai.com/v1",
+    cloud_model: "deepseek-chat",
+    cloud_url: "https://api.deepseek.com/v1",
   });
   const [localPreview, setLocalPreview] = useState(false);
   useEffect(() => {
@@ -54,6 +54,30 @@ export function ModelSetup({
         </div>
       </div>
       <h2>模型配置</h2>
+      {!localPreview && (
+        <>
+          <p>
+            默认云端服务为 DeepSeek。需要使用你自己的密钥时，请保存对应的
+            DeepSeek API key 并确认当前价格；企业共享密钥只放在受信服务器。
+          </p>
+          <button
+            className="secondary"
+            disabled={busy}
+            onClick={() => {
+              setModels({
+                ...models,
+                cloud_model: "deepseek-chat",
+                cloud_url: "https://api.deepseek.com/v1",
+              });
+              setStatus(
+                "已填写 DeepSeek 预设，尚未保存或调用 AI。请确认你已使用 DeepSeek 对应的密钥，保存后重新确认云端许可与价格。",
+              );
+            }}
+          >
+            使用 DeepSeek 预设
+          </button>
+        </>
+      )}
       {localPreview && (
         <p className="notice">
           本地试用版：不用填写 API key 或激活账号。先启动 Windows 上已有的

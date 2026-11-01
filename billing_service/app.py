@@ -16,6 +16,7 @@ import httpx
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from pydantic import BaseModel, Field
+from billing_service.provider import configuration as provider_configuration
 
 app = FastAPI(title="NightBrew trusted billing authority", version="0.8.0")
 DB = Path(os.getenv("NIGHTBREW_BILLING_DB", "/tmp/nightbrew-billing.sqlite3"))
@@ -550,11 +551,7 @@ class Inference(Activation):
 def inference(request: Inference, row: Account):
     if not request.cloud_consent:
         raise HTTPException(403, "Cloud consent required")
-    key = os.getenv("NIGHTBREW_GATEWAY_API_KEY")
-    model = os.getenv("NIGHTBREW_GATEWAY_MODEL")
-    base = os.getenv("NIGHTBREW_GATEWAY_URL", "https://api.openai.com/v1").rstrip("/")
-    if not key or not model or not base.startswith("https://"):
-        raise HTTPException(503, "Inference provider not configured")
+    key, model, base = provider_configuration()
     # Prices are authority-controlled, never accepted from the desktop.
     input_price, output_price = gateway_prices()
     maximum = 512
@@ -691,7 +688,7 @@ def inference_estimate(request: Inference, row: Account):
     ) / 1e6
     return {
         "estimated_cost_usd": amount,
-        "model": os.getenv("NIGHTBREW_GATEWAY_MODEL", ""),
+        "model": provider_configuration(require_key=False)[1],
     }
 
 
