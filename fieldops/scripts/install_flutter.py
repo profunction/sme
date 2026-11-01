@@ -40,6 +40,6 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as exc:
-        message=(type(exc).__name__+": "+str(exc)).replace("%","%25").replace("\r","%0D").replace("\n","%0A")
+        message=(type(exc).__name__+": "+str(exc)+" URL="+str(getattr(exc,"url",""))).replace("%","%25").replace("\r","%0D").replace("\n","%0A")
         print("::error title=Flutter SDK setup::"+message,flush=True)
         raise SystemExit(1)
