@@ -84,3 +84,7 @@ Start with [CUSTOMER_GUIDE.md](CUSTOMER_GUIDE.md). [OPEN_SOURCE_RESEARCH.md](OPE
 ## Windows local Ollama preview (0.9.1)
 
 Use the explicitly labeled `NightBrew-Windows-LOCAL-PREVIEW` artifact for owner testing without a deployed commercial licensing service. It connects only to local Ollama for chat, blocks cloud inference and paid authority calls, retains approvals and file boundaries, and isolates its local database. See [WINDOWS_LOCAL_TRIAL.md](WINDOWS_LOCAL_TRIAL.md). Standard/production packages continue to require verified commercial activation.
+
+## NightBrew FieldOps AI (separate product)
+
+See [fieldops/README.md](fieldops/README.md) for the new Flutter Android/iOS field-service application, tenant-scoped API, service records and PDF reports. It has a separate database/authentication boundary and does not use AI Employee commercial device licensing. Phase 1 and unfinished work are documented separately.

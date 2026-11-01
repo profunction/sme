@@ -1,0 +1,8 @@
+{
+  "currency": "MYR",
+  "plans": [
+    {"id": "Starter", "price_per_engineer_month": 49},
+    {"id": "Pro", "price_per_engineer_month": 99},
+    {"id": "Enterprise", "price_per_engineer_month": null}
+  ]
+}

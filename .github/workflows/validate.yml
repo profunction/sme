@@ -2,7 +2,9 @@ name: Validate and build Windows
 on:
   push:
     branches: [main]
+    paths-ignore: ["fieldops/**", ".github/workflows/fieldops.yml"]
   pull_request:
+    paths-ignore: ["fieldops/**", ".github/workflows/fieldops.yml"]
   workflow_dispatch:
 permissions:
   contents: read

@@ -9,6 +9,7 @@ import uuid
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from html import escape
+from pathlib import Path
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
@@ -294,6 +295,8 @@ def create_note(wid:str,body:NoteInput,user=Depends(current_user)):
             if previous['fingerprint']!=fingerprint:raise HTTPException(409,'Mutation ID reused with different content')
             return json.loads(previous['result'])
         if work['status']=='Closed':raise HTTPException(409,'Closed work orders are immutable')
+        count=conn.execute('SELECT COUNT(*) FROM service_notes WHERE company_id=? AND work_order_id=?',(user['company_id'],wid)).fetchone()[0]
+        if count>=200:raise HTTPException(409,'Work order reached the bounded 200-note limit; create a follow-up work order')
         if work['version']!=body.expected_version:raise HTTPException(409,{'message':'Conflict: local note retained; refresh the work order and explicitly rebase the draft','current_version':work['version']})
         nid=identifier();stamp=now()
         conn.execute('INSERT INTO service_notes VALUES(?,?,?,?,?,?,?,?,?,?)',(nid,user['company_id'],wid,user['id'],body.initial_condition,body.investigation,body.outcome,body.follow_up,body.recorded_at.isoformat(),stamp))
@@ -363,4 +366,5 @@ def audit_log(user=Depends(current_user)):
 @app.get('/plans')
 def plans(user=Depends(current_user)):
     admin(user)
-    return {'mode':'mock-foundation','currency':'MYR','prices_not_payment_authorization':True,'plans':[{'id':'Starter','price_per_engineer_month':49},{'id':'Pro','price_per_engineer_month':99},{'id':'Enterprise','price_per_engineer_month':None}],'billing_enabled':False}
+    config=json.loads(Path(__file__).with_name('plans.json').read_text())
+    return {**config,'mode':'mock-foundation','prices_not_payment_authorization':True,'billing_enabled':False}
