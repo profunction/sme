@@ -31,7 +31,7 @@ jobs:
       - run: npm run desktop:install
       - run: python -m venv .venv
       - run: .venv/bin/python -m pip install -r backend/requirements.lock.txt
-      - run: .venv/bin/python -m pytest backend/tests -q
+      - run: .venv/bin/python -m pytest backend/tests deploy -q
       - run: npm run build
       - run: npm run test:desktop
       - run: npm run test:e2e
@@ -56,7 +56,7 @@ jobs:
       - name: Test backend and Windows UI Automation
         run: |
           $env:NIGHTBREW_TEST_BROWSER = "${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe"
-          .venv\Scripts\python -m pytest backend/tests -q --junitxml=pytest-windows.xml
+          .venv\Scripts\python -m pytest backend/tests deploy -q --junitxml=pytest-windows.xml
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Report Windows test failures
         if: always()

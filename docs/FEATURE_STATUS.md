@@ -72,3 +72,5 @@ Baseline `ca68b44`; Phase 1 follow-up is listed separately. Status applies only 
 ## Phase 1 follow-up
 
 The baseline above remains an audit snapshot. Subsequent verified changes and test counts are recorded in [COMMERCIAL_READINESS.md](COMMERCIAL_READINESS.md). A fix to one row does not upgrade adjacent features or commercial readiness.
+
+Follow-up status: global/per-account gateway admission is now **IMPLEMENTED AND TESTED** for actual SQLite transactions with concurrent mocked provider calls. Thirteen new tests exercise admission/idempotency/error/configuration/crash behavior; the complete backend/deploy run reports 92 passed and 2 skipped. `usage` with an invalid container type now retains an unknown-billed reservation instead of raising an unhandled attribute error. PostgreSQL multi-process admission and reconciliation operations remain unverified. Money still uses REAL/float; the ledger, capability registry and server policy gaps remain open.

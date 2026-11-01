@@ -16,6 +16,7 @@ import httpx
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from pydantic import BaseModel, Field
+from billing_service import admission
 from billing_service.provider import configuration as provider_configuration
 
 app = FastAPI(title="NightBrew trusted billing authority", version="0.8.0")
@@ -554,6 +555,7 @@ def inference(request: Inference, row: Account):
     key, model, base = provider_configuration()
     # Prices are authority-controlled, never accepted from the desktop.
     input_price, output_price = gateway_prices()
+    concurrency_limits = admission.limits()
     maximum = 512
     estimated = (
         (len(request.message.encode()) + len(request.system_text.encode()) + 256)
@@ -588,6 +590,9 @@ def inference(request: Inference, row: Account):
             raise HTTPException(429, "Inference rate limit exceeded")
         if estimated > current:
             raise HTTPException(402, "Included credit balance exceeded")
+        # This check and insertion share the quota write lock. Do not use an
+        # in-memory semaphore: future API processes must share the same limit.
+        admission.check(connection, row["id"], concurrency_limits)
         connection.execute(
             "UPDATE accounts SET credits=credits-? WHERE id=?", (estimated, row["id"])
         )
@@ -624,6 +629,8 @@ def inference(request: Inference, row: Account):
             if not isinstance(answer, str) or not answer:
                 raise ValueError()
         usage = data.get("usage", {})
+        if not isinstance(usage, dict):
+            raise ValueError("Invalid provider usage payload")
         ins = usage.get("prompt_tokens")
         outs = usage.get("completion_tokens")
         cost = (

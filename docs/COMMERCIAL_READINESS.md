@@ -22,7 +22,13 @@ Completed: baseline repository/feature audit, risk register, architecture/provid
 
 Baseline executed: Python backend/deploy **79 passed, 2 Windows-only skipped**; TypeScript/Vite build passed; desktop tests **7 passed**; Chromium e2e **6 passed**. Mock provider/payment responses do not prove live integrations. PostgreSQL unit tests use fake connections, not a real server. TestClient deprecation and Pydantic Decimal serialization warnings remain.
 
-Safe follow-up: gateway concurrency and malformed-outcome hardening is planned after the baseline audit. Its final executed results will be appended here before commit. It does not replace the missing accounting/policy work.
+Safe follow-up completed: database-transactional global/account gateway admission, configurable defaults of 2/1, invalid-limit rejection before reservation, and malformed provider-usage outcomes handled without an unhandled exception. No schema, customer balance, paid entitlement or automatic retry policy was changed. Rejected capacity requests neither debit credits nor dispatch inference. Handled unknown outcomes keep their monetary reservation; crashed reservations fail closed pending operator reconciliation. See [deployment caveats](DEPLOYMENT.md).
+
+Code/config changed: `billing_service/admission.py`, `billing_service/app.py`, `.env.example`, `backend/tests/test_gateway_admission.py` and `.github/workflows/validate.yml`. CI now includes deployment unit tests on Linux and Windows; those PostgreSQL tests are still fake-connection tests. Audit files/README/license review were updated in a separate reviewable commit.
+
+Executed after the code changes: `.venv/bin/python -m pytest backend/tests deploy -q`: **92 passed, 2 Windows-only skipped**, including 13 new cases for concurrent global/account admission, unchanged credits/no dispatch on rejection, in-flight idempotency, invalid configuration, timeout/malformed outcomes and crash-slot retention. TypeScript build, 7 desktop tests and 6 Chromium e2e tests passed at baseline; renderer/desktop code was unchanged. `git diff --check` passed. Full npm advisory scan exits 1 with 15 moderate affected entries; production-only scan exits 0, with the exclusion caveat recorded in SECURITY_GAPS.md. No Python/Windows advisory scan or live service acceptance was performed.
+
+This closes the bounded SQLite admission gap, not exact accounting, provider invoice limits or PostgreSQL deployment verification. Remaining risks and gates above are unchanged. No production release is approved by these test results.
 
 ## What can be demonstrated now
 
