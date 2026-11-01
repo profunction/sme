@@ -16,10 +16,10 @@ import httpx
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from pydantic import BaseModel, Field
-from billing_service import admission
+from billing_service import accounting, admission, model_registry, payment_validation
 from billing_service.provider import configuration as provider_configuration
 
-app = FastAPI(title="NightBrew trusted billing authority", version="0.8.0")
+app = FastAPI(title="NightBrew trusted billing authority", version="0.9.2")
 DB = Path(os.getenv("NIGHTBREW_BILLING_DB", "/tmp/nightbrew-billing.sqlite3"))
 PLAN_DEFAULTS = {
     "Starter": {
@@ -39,7 +39,7 @@ PLAN_DEFAULTS = {
     "Enterprise": {
         "monthly_myr": 1499,
         "employees": 10,
-        "devices": 10,
+        "devices": 5,
         "monthly_tasks": 20000,
         "included_credits_usd": 50,
     },
@@ -62,27 +62,31 @@ def db():
     CREATE TABLE IF NOT EXISTS events(id TEXT PRIMARY KEY, created INTEGER);
     CREATE TABLE IF NOT EXISTS inference(account TEXT,id TEXT,charged REAL,status TEXT,month TEXT,created INTEGER,PRIMARY KEY(account,id));
     """)
+    connection.executescript(accounting.SCHEMA)
     return connection
 
 
 def catalog():
     # Server deployment configuration, never desktop-controlled pricing/entitlements.
-    configured = json.loads(
-        os.getenv("NIGHTBREW_BILLING_PLANS_JSON", json.dumps(PLAN_DEFAULTS))
-    )
-    if set(configured) != set(PLAN_DEFAULTS):
-        raise ValueError("Configure exactly three plans")
     try:
+        configured = json.loads(
+            os.getenv("NIGHTBREW_BILLING_PLANS_JSON", json.dumps(PLAN_DEFAULTS))
+        )
+        if not isinstance(configured, dict) or set(configured) != set(PLAN_DEFAULTS):
+            raise ValueError("Configure exactly three plans")
         return {
             name: AuthorityPlan(**values).model_dump()
             for name, values in configured.items()
         }
-    except ValueError:
+    except (ValueError, TypeError):
         raise HTTPException(503, "Invalid authority plan configuration") from None
 
 
 def mode():
-    return os.getenv("NIGHTBREW_BILLING_MODE", "mock")
+    configured = os.getenv("NIGHTBREW_BILLING_MODE", "mock")
+    if configured not in ("mock", "stripe"):
+        raise HTTPException(503, "Unknown billing environment")
+    return configured
 
 
 def account(authorization: str | None = Header(default=None)):
@@ -157,10 +161,12 @@ def create_account(request: NewAccount):
     identifier = uuid.uuid4().hex
     key = secrets.token_urlsafe(32)
     with db() as connection:
+        connection.execute("BEGIN IMMEDIATE")
         connection.execute(
             "INSERT INTO accounts(id,key_hash,plan,active,expires) VALUES(?,?,?,?,?)",
             (identifier, hashlib.sha256(key.encode()).hexdigest(), request.plan, 0, 0),
         )
+        accounting.open_account(connection, identifier)
     return {
         "account_id": identifier,
         "account_key": key,
@@ -180,7 +186,81 @@ def products():
 
 @app.get("/account")
 def account_status(row: Account):
-    return {key: value for key, value in row.items() if key != "key_hash"}
+    result = {key: value for key, value in row.items() if key != "key_hash"}
+    with db() as connection:
+        exact = connection.execute("SELECT * FROM money_accounts WHERE account=?", (row["id"],)).fetchone()
+    result["accounting_state"] = exact["state"] if exact else "opening_review_required"
+    result["available_usd_exact"] = exact["available_usd"] if exact else None
+    return result
+
+
+class OpeningBalance(BaseModel):
+    expected_legacy_usd: str = Field(max_length=60)
+    reviewed_opening_usd: str = Field(max_length=60)
+    review_reference: str = Field(min_length=1, max_length=200)
+
+
+@app.post("/admin/accounts/{account_id}/opening-balance", dependencies=[Depends(admin)])
+def review_opening_balance(account_id: str, request: OpeningBalance):
+    try:
+        expected = accounting.decimal(request.expected_legacy_usd)
+        reviewed = accounting.decimal(request.reviewed_opening_usd)
+        if reviewed < 0:
+            raise ValueError()
+    except ValueError:
+        raise HTTPException(422, "Valid nonnegative reviewed amounts required") from None
+    with db() as connection:
+        connection.execute("BEGIN IMMEDIATE")
+        row = connection.execute("SELECT credits FROM accounts WHERE id=?", (account_id,)).fetchone()
+        if row is None:
+            raise HTTPException(404, "Unknown account")
+        if connection.execute("SELECT 1 FROM money_accounts WHERE account=?", (account_id,)).fetchone():
+            raise HTTPException(409, "Opening entry already exists")
+        if accounting.decimal(row["credits"]) != expected:
+            raise HTTPException(409, "Legacy balance changed; review again")
+        accounting.open_account(connection, account_id, reviewed, metadata={
+            "review_reference": request.review_reference, "legacy_usd": accounting.text(expected)})
+    return {"reviewed": True, "available_usd_exact": accounting.text(reviewed)}
+
+
+class Reconciliation(BaseModel):
+    final_customer_cost_usd: str = Field(max_length=60)
+    review_reference: str = Field(min_length=1, max_length=200)
+
+
+@app.post("/admin/accounts/{account_id}/inference/{request_id}/reconcile", dependencies=[Depends(admin)])
+def reconcile_inference(account_id: str, request_id: str, request: Reconciliation):
+    try:
+        final_cost = accounting.decimal(request.final_customer_cost_usd)
+        if final_cost < 0:
+            raise ValueError()
+    except ValueError:
+        raise HTTPException(422, "A valid nonnegative final cost is required") from None
+    with db() as connection:
+        connection.execute("BEGIN IMMEDIATE")
+        details = connection.execute("SELECT * FROM inference_costs WHERE account=? AND id=?",
+                                     (account_id, request_id)).fetchone()
+        if not details:
+            raise HTTPException(404, "Unknown inference accounting record")
+        if details["outcome"] not in ("unknown_billed", "usage_discrepancy"):
+            raise HTTPException(409, "Outcome is not awaiting reconciliation; no live request may be reconciled")
+        reserved = accounting.decimal(json.loads(details["snapshot"])["reserved_usd"])
+        if final_cost > reserved:
+            raise HTTPException(409, "Cannot charge beyond the original customer reservation")
+        accounting.change(connection, account_id, "settle:" + request_id,
+                          reserved - final_cost, "inference_reconciliation", allow_held=True,
+                          metadata={"request_id": request_id, "review_reference": request.review_reference,
+                                    "provider_reported_cost_usd": details["reported_cost_usd"],
+                                    "final_customer_cost_usd": accounting.text(final_cost)})
+        connection.execute("UPDATE inference SET charged=?,status='reconciled' WHERE account=? AND id=?",
+                           (float(final_cost), account_id, request_id))
+        connection.execute("UPDATE inference_costs SET outcome='reconciled' WHERE account=? AND id=?",
+                           (account_id, request_id))
+        remaining = connection.execute("SELECT 1 FROM inference_costs WHERE account=? AND outcome='usage_discrepancy'",
+                                       (account_id,)).fetchone()
+        if not remaining:
+            connection.execute("UPDATE money_accounts SET state='active' WHERE account=?", (account_id,))
+    return {"reconciled": True, "final_customer_cost_usd": accounting.text(final_cost)}
 
 
 class Activation(BaseModel):
@@ -193,6 +273,12 @@ def activate(request: Activation, row: Account):
     plan = catalog()[row["plan"]]
     with db() as connection:
         connection.execute("BEGIN IMMEDIATE")
+        current = connection.execute("SELECT * FROM accounts WHERE id=?", (row["id"],)).fetchone()
+        if not current:
+            raise HTTPException(401, "Account unavailable")
+        row.update(dict(current))
+        active(row)
+        plan = catalog()[row["plan"]]
         existing = connection.execute(
             "SELECT 1 FROM devices WHERE account=? AND device=?",
             (row["id"], request.device_id),
@@ -299,16 +385,7 @@ def stripe_request(method, path, data=None):
     key = os.getenv("NIGHTBREW_STRIPE_SECRET_KEY")
     if not key:
         raise HTTPException(503, "Stripe merchant configuration missing")
-    with httpx.Client(timeout=20, follow_redirects=False) as client:
-        response = client.request(
-            method,
-            "https://api.stripe.com/v1" + path,
-            data=data,
-            headers={"Authorization": "Bearer " + key},
-        )
-    if response.status_code >= 300:
-        raise HTTPException(502, "Payment provider rejected request")
-    return response.json()
+    return payment_validation.provider_request(method, path, key, data)
 
 
 @app.post("/checkout")
@@ -344,8 +421,7 @@ def checkout(request: Checkout, row: Account):
                 "client_reference_id": row["id"],
             },
         )
-        identifier = session["id"]
-        url = session["url"]
+        identifier, url = payment_validation.checkout_values(session)
     with db() as connection:
         connection.execute(
             "INSERT INTO checkout(id,account,sku) VALUES(?,?,?)",
@@ -373,24 +449,23 @@ def fulfill(connection, session_id, subscription=None, payment_intent=None):
             if not subscription:
                 raise HTTPException(400, "Subscription missing")
             current = stripe_request("GET", "/subscriptions/" + subscription)
-            expiry = current.get("current_period_end") or max(
-                (
-                    item.get("current_period_end", 0)
-                    for item in current.get("items", {}).get("data", [])
-                ),
-                default=0,
-            )
-            is_active = current.get("status") in ("active", "trialing")
+            is_active, expiry = payment_validation.subscription_state(current, expected_id=subscription)
             credits = 0
         connection.execute(
-            "UPDATE accounts SET plan=?,active=?,expires=?,credits=credits+? WHERE id=?",
-            (sku, is_active, expiry, credits, account_id),
+            "UPDATE accounts SET plan=?,active=?,expires=? WHERE id=?",
+            (sku, int(is_active), expiry, account_id),
         )
+        accounting.change(connection, account_id, "checkout:" + session_id,
+                          credits, "subscription_allowance", metadata={"sku": sku})
     elif sku == "credits":
-        connection.execute(
-            "UPDATE accounts SET credits=credits+? WHERE id=?",
-            (float(os.getenv("NIGHTBREW_CREDIT_PACK_USD", "10")), account_id),
-        )
+        try:
+            amount = accounting.decimal(os.getenv("NIGHTBREW_CREDIT_PACK_USD", "10"))
+            if amount <= 0:
+                raise ValueError()
+        except ValueError:
+            raise HTTPException(503, "Configure a valid credit pack amount") from None
+        accounting.change(connection, account_id, "checkout:" + session_id,
+                          amount, "credit_purchase", metadata={"sku": sku})
     elif sku == "computer":
         connection.execute(
             "UPDATE accounts SET extra_devices=extra_devices+1 WHERE id=?",
@@ -429,24 +504,7 @@ async def webhook(request: Request):
     payload = bytes(raw)
     secret = os.getenv("NIGHTBREW_STRIPE_WEBHOOK_SECRET", "")
     header = request.headers.get("stripe-signature", "")
-    try:
-        pieces = {}
-        for piece in header.split(","):
-            key, value = piece.split("=", 1)
-            pieces.setdefault(key, []).append(value)
-        timestamp = int(pieces["t"][0])
-        expected = hmac.new(
-            secret.encode(), str(timestamp).encode() + b"." + payload, hashlib.sha256
-        ).hexdigest()
-        if (
-            not secret
-            or abs(time.time() - timestamp) > 300
-            or not any(hmac.compare_digest(expected, item) for item in pieces["v1"])
-        ):
-            raise ValueError()
-        event = json.loads(payload)
-    except (ValueError, KeyError):
-        raise HTTPException(400, "Invalid webhook signature") from None
+    event = payment_validation.signed_event(payload, header, secret)
     with db() as connection:
         connection.execute("BEGIN IMMEDIATE")
         if connection.execute(
@@ -477,15 +535,11 @@ async def webhook(request: Request):
             if purchase:
                 # Query canonical provider state; out-of-order events cannot resurrect a cancelled subscription.
                 current = stripe_request("GET", "/subscriptions/" + obj["id"])
-                periods = [
-                    item.get("current_period_end", 0)
-                    for item in current.get("items", {}).get("data", [])
-                ]
-                expiry = current.get("current_period_end") or max(periods, default=0)
+                is_active, expiry = payment_validation.subscription_state(current)
                 connection.execute(
                     "UPDATE accounts SET active=?,expires=? WHERE id=?",
                     (
-                        current.get("status") in ("active", "trialing"),
+                        int(is_active),
                         expiry,
                         purchase["account"],
                     ),
@@ -500,9 +554,10 @@ async def webhook(request: Request):
                     "UPDATE accounts SET active=0 WHERE id=?", (purchase["account"],)
                 )
         elif kind == "invoice.paid":
-            subscription = obj.get("subscription") or obj.get("parent", {}).get(
-                "subscription_details", {}
-            ).get("subscription")
+            subscription = payment_validation.invoice_subscription(obj)
+            if not subscription:
+                connection.execute("INSERT INTO events VALUES(?,?)", (event["id"], int(time.time())))
+                return {"received": True, "ignored": "non_subscription_invoice"}
             purchase = connection.execute(
                 "SELECT * FROM checkout WHERE subscription=?", (subscription,)
             ).fetchone()
@@ -512,25 +567,23 @@ async def webhook(request: Request):
                 )
             if purchase:
                 current = stripe_request("GET", "/subscriptions/" + subscription)
-                periods = [
-                    item.get("current_period_end", 0)
-                    for item in current.get("items", {}).get("data", [])
-                ]
-                expiry = current.get("current_period_end") or max(periods, default=0)
+                is_active, expiry = payment_validation.subscription_state(current)
                 # Each provider event is idempotent. Invoice ID additionally protects multiple event IDs for one invoice.
                 invoice_key = "invoice:" + obj["id"]
                 if not connection.execute(
                     "SELECT 1 FROM events WHERE id=?", (invoice_key,)
                 ).fetchone():
                     connection.execute(
-                        "UPDATE accounts SET active=?,expires=?,credits=credits+? WHERE id=?",
+                        "UPDATE accounts SET active=?,expires=? WHERE id=?",
                         (
-                            current.get("status") in ("active", "trialing"),
+                            int(is_active),
                             expiry,
-                            catalog()[purchase["sku"]]["included_credits_usd"],
                             purchase["account"],
                         ),
                     )
+                    accounting.change(connection, purchase["account"], invoice_key,
+                                      catalog()[purchase["sku"]]["included_credits_usd"],
+                                      "subscription_allowance", metadata={"invoice_id": obj["id"]})
                     connection.execute(
                         "INSERT INTO events VALUES(?,?)",
                         (invoice_key, int(time.time())),
@@ -557,17 +610,14 @@ def inference(request: Inference, row: Account):
     input_price, output_price = gateway_prices()
     concurrency_limits = admission.limits()
     maximum = 512
-    estimated = (
-        (len(request.message.encode()) + len(request.system_text.encode()) + 256)
-        * input_price
-        + maximum * output_price
-    ) / 1e6
+    model_registry.validate_text_request(model, request.message, request.system_text, maximum)
+    input_bound = len(request.message.encode()) + len(request.system_text.encode()) + 256
+    pricing = accounting.snapshot(model, base, input_bound, maximum, (input_price, output_price))
+    estimated = accounting.decimal(pricing["reserved_usd"])
     with db() as connection:
         connection.execute("BEGIN IMMEDIATE")
         active_device(connection, row, request.device_id)
-        current = connection.execute(
-            "SELECT credits FROM accounts WHERE id=?", (row["id"],)
-        ).fetchone()[0]
+        current = accounting.balance(connection, row["id"])
         if connection.execute(
             "SELECT 1 FROM inference WHERE account=? AND id=?",
             (row["id"], request.request_id),
@@ -593,20 +643,21 @@ def inference(request: Inference, row: Account):
         # This check and insertion share the quota write lock. Do not use an
         # in-memory semaphore: future API processes must share the same limit.
         admission.check(connection, row["id"], concurrency_limits)
-        connection.execute(
-            "UPDATE accounts SET credits=credits-? WHERE id=?", (estimated, row["id"])
-        )
+        accounting.change(connection, row["id"], "reserve:" + request.request_id,
+                          -estimated, "inference_reservation", metadata={"request_id": request.request_id})
         connection.execute(
             "INSERT INTO inference VALUES(?,?,?,?,?,?)",
             (
                 row["id"],
                 request.request_id,
-                estimated,
+                float(estimated),
                 "reserved",
                 month,
                 int(time.time()),
             ),
         )
+        connection.execute("INSERT INTO inference_costs VALUES(?,?,?,?,?,?)",
+                           (row["id"], request.request_id, json.dumps(pricing, sort_keys=True), None, None, "reserved"))
     messages = [
         {"role": "system", "content": request.system_text},
         {"role": "user", "content": request.message},
@@ -628,33 +679,39 @@ def inference(request: Inference, row: Account):
             answer = data["choices"][0]["message"]["content"]
             if not isinstance(answer, str) or not answer:
                 raise ValueError()
-        usage = data.get("usage", {})
-        if not isinstance(usage, dict):
-            raise ValueError("Invalid provider usage payload")
-        ins = usage.get("prompt_tokens")
-        outs = usage.get("completion_tokens")
-        cost = (
-            (ins * input_price + outs * output_price) / 1e6
-            if type(ins) is int and type(outs) is int and ins >= 0 and outs >= 0
-            else estimated
-        )
+        usage, cost, bounded = accounting.reported(data.get("usage"), pricing)
         with db() as connection:
             connection.execute("BEGIN IMMEDIATE")
+            outcome = "completed" if bounded else "usage_discrepancy"
             connection.execute(
-                "UPDATE accounts SET credits=MAX(0,credits+?) WHERE id=?",
-                (estimated - cost, row["id"]),
+                "UPDATE inference_costs SET reported_usage=?,reported_cost_usd=?,outcome=? WHERE account=? AND id=?",
+                (json.dumps(usage, sort_keys=True), accounting.text(cost), outcome, row["id"], request.request_id),
             )
+            if bounded:
+                accounting.change(connection, row["id"], "settle:" + request.request_id,
+                                  estimated - cost, "inference_settlement", allow_held=True,
+                                  metadata={"request_id": request.request_id})
+            else:
+                # Retain reservation, record the full reported liability, and block
+                # new cloud spend. Never silently floor a negative balance.
+                connection.execute("UPDATE money_accounts SET state='hold' WHERE account=?", (row["id"],))
             connection.execute(
                 "UPDATE inference SET charged=?,status=? WHERE account=? AND id=?",
-                (cost, "completed", row["id"], request.request_id),
+                (float(cost if bounded else estimated), outcome, row["id"], request.request_id),
             )
-        return {"answer": answer, "usage": usage, "cost_usd": cost, "model": model}
+        if not bounded:
+            raise HTTPException(502, "Provider usage exceeded its reserved bounds; account held for reconciliation, no automatic retry")
+        return {"answer": answer, "usage": usage, "cost_usd": float(cost),
+                "cost_usd_exact": accounting.text(cost), "currency": "USD", "model": model}
     except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError):
         with db() as connection:
+            connection.execute("BEGIN IMMEDIATE")
             connection.execute(
                 "UPDATE inference SET status='unknown_billed' WHERE account=? AND id=?",
                 (row["id"], request.request_id),
             )
+            connection.execute("UPDATE inference_costs SET outcome='unknown_billed' WHERE account=? AND id=?",
+                               (row["id"], request.request_id))
         raise HTTPException(
             502,
             "Provider outcome unknown; reservation retained, do not automatically retry",
@@ -662,23 +719,7 @@ def inference(request: Inference, row: Account):
 
 
 def gateway_prices():
-    import math
-
-    try:
-        prices = [
-            float(os.environ[name])
-            for name in (
-                "NIGHTBREW_GATEWAY_INPUT_USD_PER_MILLION",
-                "NIGHTBREW_GATEWAY_OUTPUT_USD_PER_MILLION",
-            )
-        ]
-        if any(
-            not math.isfinite(price) or price < 0 or price > 10000 for price in prices
-        ):
-            raise ValueError()
-        return prices
-    except (KeyError, ValueError):
-        raise HTTPException(503, "Configure valid gateway model prices") from None
+    return accounting.prices()
 
 
 @app.post("/inference/estimate")
@@ -688,14 +729,14 @@ def inference_estimate(request: Inference, row: Account):
     with db() as connection:
         active_device(connection, row, request.device_id)
     input_price, output_price = gateway_prices()
-    amount = (
-        (len(request.message.encode()) + len(request.system_text.encode()) + 256)
-        * input_price
-        + 512 * output_price
-    ) / 1e6
+    model = provider_configuration(require_key=False)[1]
+    model_registry.validate_text_request(model, request.message, request.system_text, 512)
+    amount = accounting.cost(len(request.message.encode()) + len(request.system_text.encode()) + 256,
+                             512, (input_price, output_price))
     return {
-        "estimated_cost_usd": amount,
-        "model": provider_configuration(require_key=False)[1],
+        "estimated_cost_usd": float(amount),
+        "estimated_cost_usd_exact": accounting.text(amount),
+        "model": model,
     }
 
 

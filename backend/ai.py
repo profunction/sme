@@ -1,12 +1,13 @@
 import os
 import uuid
 from datetime import UTC, datetime
+from decimal import Decimal, InvalidOperation
 from typing import Literal
-from urllib.parse import urlsplit
 
 from pydantic import BaseModel, Field
 
 from backend import hardware, store, workforce
+from backend.model_settings import validate_cloud_url
 
 
 class Policy(BaseModel):
@@ -63,20 +64,20 @@ def eligible(measured, model, request, policy):
 
 
 def cloud_base(value=None):
-    base = (value if value is not None else os.getenv("NIGHTBREW_CLOUD_URL", "https://api.deepseek.com/v1")).rstrip("/")
-    p = urlsplit(base)
-    if (
-        p.scheme != "https"
-        or not p.hostname
-        or p.username
-        or p.password
-        or p.query
-        or p.fragment
-    ):
-        raise ValueError(
-            "Cloud endpoint requires HTTPS without embedded credentials, query or fragment"
-        )
-    return base
+    return validate_cloud_url(value if value is not None else os.getenv("NIGHTBREW_CLOUD_URL", "https://api.deepseek.com/v1"))
+
+
+def money(value):
+    """Validated calculation value; local REAL storage is not a paid ledger."""
+    if type(value) not in (str, int, float, Decimal):
+        raise ValueError("Invalid cloud cost")
+    try:
+        result = Decimal(str(value))
+        if not result.is_finite() or result < 0 or result > 10000:
+            raise ValueError("Invalid cloud cost")
+        return result
+    except InvalidOperation:
+        raise ValueError("Invalid cloud cost") from None
 
 
 def estimate(request, policy, system_text=""):
@@ -84,10 +85,8 @@ def estimate(request, policy, system_text=""):
     input_bound = (
         len(request.message.encode("utf-8")) + len(system_text.encode("utf-8")) + 256
     )
-    return (
-        input_bound * policy.input_usd_per_million
-        + policy.max_output_tokens * policy.output_usd_per_million
-    ) / 1_000_000
+    return float((input_bound * money(policy.input_usd_per_million)
+                  + policy.max_output_tokens * money(policy.output_usd_per_million)) / 1_000_000)
 
 
 def reserve(connect, model, request, policy, system_text="", override_amount=None):
@@ -98,10 +97,7 @@ def reserve(connect, model, request, policy, system_text="", override_amount=Non
         if override_amount is None
         else override_amount
     )
-    import math
-
-    if not isinstance(amount, (int, float)) or not math.isfinite(amount) or amount < 0:
-        raise ValueError("Invalid cost reservation")
+    amount = float(money(amount))
     month = datetime.now(UTC).strftime("%Y-%m")
     identifier = uuid.uuid4().hex
     with connect() as db:
@@ -133,9 +129,15 @@ def reserve(connect, model, request, policy, system_text="", override_amount=Non
 
 
 def settle(connect, identifier, usage, policy, success, actual_cost=None):
+    problem = None
     with connect() as db:
         db.execute("BEGIN IMMEDIATE")
         row = db.execute("SELECT * FROM usage WHERE id=?", (identifier,)).fetchone()
+        if not row:
+            raise ValueError("Unknown cost reservation")
+        # A response/failure handler may run twice. Refund or settle at most once.
+        if row["status"] != "reserved":
+            return
         actual, tokens_in, tokens_out = row["reserved"], 0, 0
         status = "estimated" if success else "failed_estimated"
         if success and isinstance(usage, dict):
@@ -148,23 +150,43 @@ def settle(connect, identifier, usage, policy, success, actual_cost=None):
                 and type(tokens_out) is int
                 and tokens_in >= 0
                 and tokens_out >= 0
+                and tokens_in <= 1000000
+                and tokens_out <= policy.max_output_tokens
             ):
-                actual = (
-                    tokens_in * policy.input_usd_per_million
-                    + tokens_out * policy.output_usd_per_million
-                ) / 1_000_000
+                actual = (tokens_in * money(policy.input_usd_per_million)
+                          + tokens_out * money(policy.output_usd_per_million)) / 1_000_000
                 status = "reported"
             else:
                 tokens_in, tokens_out = 0, 0
+                if "prompt_tokens" in usage or "completion_tokens" in usage:
+                    problem = "Cloud token usage was invalid; billing needs reconciliation"
+        elif success and usage is not None:
+            problem = "Cloud token usage was invalid; billing needs reconciliation"
         if actual_cost is not None:
             actual = actual_cost
             status = "authority_reported"
         current = Policy(**store.get(db, "ai_policy", {}))
-        current.credit_balance_usd = max(
-            0, current.credit_balance_usd + row["reserved"] - actual
-        )
+        try:
+            actual = money(actual)
+            if actual > money(row["reserved"]):
+                problem = "Cloud cost exceeded its reservation; billing needs reconciliation"
+        except ValueError:
+            actual = money(row["reserved"])
+            problem = "Cloud cost response was invalid; billing needs reconciliation"
+        if problem:
+            # Retain the reservation, expose the known cost, and stop further
+            # cloud dispatch rather than manufacturing money or hiding debt.
+            current.cloud_allowed = False
+            status = "reconciliation_required"
+            store.audit(db, "cloud_billing_reconciliation", identifier)
+        else:
+            current.credit_balance_usd = float(
+                money(current.credit_balance_usd) + money(row["reserved"]) - actual
+            )
         store.put(db, "ai_policy", current.model_dump())
         db.execute(
             "UPDATE usage SET cost=?,input_tokens=?,output_tokens=?,status=? WHERE id=?",
-            (actual, tokens_in, tokens_out, status, identifier),
+            (float(actual), tokens_in, tokens_out, status, identifier),
         )
+    if problem:
+        raise ValueError(problem)

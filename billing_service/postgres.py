@@ -10,7 +10,9 @@ class Row(dict):
 
 
 def rows(cursor):
-    columns = [column.name for column in cursor.description]
+    # psycopg invokes the factory for INSERT/UPDATE/DDL as well as SELECT.
+    # Those commands have no result description; they must not crash writes.
+    columns = [column.name for column in (cursor.description or ())]
     return lambda values: Row(zip(columns, values))
 
 
@@ -19,7 +21,7 @@ def pool():
     from psycopg_pool import ConnectionPool
     return ConnectionPool(os.environ['DATABASE_URL'], min_size=1,
                           max_size=int(os.getenv('DB_POOL_MAX', '5')),
-                          kwargs={'row_factory': rows}, timeout=10)
+                          kwargs={'row_factory': rows}, timeout=10, open=True)
 
 
 class Adapter:
@@ -31,6 +33,10 @@ class Adapter:
             sql = sql.replace('INSERT OR IGNORE', 'INSERT') + ' ON CONFLICT DO NOTHING'
         # SQLite's two-argument scalar MAX is PostgreSQL GREATEST, not aggregate MAX.
         sql = sql.replace('MAX(0,credits+?)', 'GREATEST(0,credits+?)')
+        # The preserved SQLite-compatible schema stores flags as INTEGER.
+        # psycopg otherwise binds Python bool as PostgreSQL boolean, which is
+        # incompatible with INSERT/UPDATE of those legacy integer columns.
+        params = tuple(int(value) if type(value) is bool else value for value in params)
         return self.conn.execute(sql.replace('?', '%s'), params)
 
 

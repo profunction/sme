@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 import platform
+import re
 import time
 import uuid
 from urllib.parse import urlsplit
@@ -32,25 +33,36 @@ def required():
 
 
 def decode(value):
-    return base64.urlsafe_b64decode(value + "=" * (-len(value) % 4))
+    if not isinstance(value, str) or not 1 <= len(value) <= 32768 or not re.fullmatch(r"[A-Za-z0-9_-]+={0,2}", value):
+        raise ValueError("Invalid license encoding")
+    decoded = base64.urlsafe_b64decode(value + "=" * (-len(value) % 4))
+    if base64.urlsafe_b64encode(decoded).decode().rstrip("=") != value.rstrip("="):
+        raise ValueError("Noncanonical license encoding")
+    return decoded
 
 
 def verify(token, public_key, device=None, now=None):
     try:
+        if not isinstance(token, str) or len(token) > 32768:
+            raise ValueError("Invalid license token")
         encoded, signature = token.split(".")
         Ed25519PublicKey.from_public_bytes(decode(public_key)).verify(
             decode(signature), encoded.encode()
         )
         data = json.loads(decode(encoded))
+        if not isinstance(data, dict):
+            raise ValueError("Invalid license claims")
         timestamp = time.time() if now is None else now
         if (
             data["iss"] != "nightbrew-license-authority"
             or data["aud"] != "nightbrew-desktop"
-            or data["version"] != 1
+            or type(data["version"]) is not int or data["version"] != 1
         ):
             raise ValueError("Invalid grant issuer")
         if (
             data["device_id"] != (device or device_id())
+            or type(data["nbf"]) is not int or type(data["exp"]) is not int
+            or not 0 < data["exp"] - data["nbf"] <= 86405
             or not data["nbf"] <= timestamp < data["exp"]
         ):
             raise ValueError("License expired or belongs to another computer")
@@ -61,8 +73,13 @@ def verify(token, public_key, device=None, now=None):
             raise ValueError("Mock grants are disabled")
         if (
             data["plan"] not in ("Starter", "Business", "Enterprise")
-            or not isinstance(data["employee_limit"], int)
-            or data["employee_limit"] < 1
+            or type(data["employee_limit"]) is not int
+            or not 1 <= data["employee_limit"] <= 10000
+            or data["environment"] not in ("mock", "stripe", "production")
+            or not isinstance(data["account_id"], str)
+            or not re.fullmatch(r"[a-f0-9]{32}", data["account_id"])
+            or type(data["monthly_tasks"]) is not int
+            or not 0 <= data["monthly_tasks"] <= 1000000
         ):
             raise ValueError("Invalid license claims")
         return data
@@ -117,7 +134,10 @@ def remote(path, body=None):
         or parsed.fragment
     ):
         raise ValueError("Configure a trusted HTTPS licensing backend URL")
-    key = account_key()
+    try:
+        key = account_key()
+    except Exception:
+        raise ValueError("License credential store is unavailable") from None
     if not key:
         raise ValueError("Configure the license account credential securely")
     try:
@@ -138,6 +158,8 @@ def remote(path, body=None):
 
 def activate(connect):
     result = remote("/activate", {"device_id": device_id()})
+    if not isinstance(result, dict) or not isinstance(result.get("grant"), str):
+        raise ValueError("Licensing backend returned an invalid activation response")
     claims = verify(result["grant"], os.getenv("NIGHTBREW_LICENSE_PUBLIC_KEY", ""))
     with connect() as db:
         store.put(db, "license_grant", result["grant"])

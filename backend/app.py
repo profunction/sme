@@ -32,7 +32,7 @@ async def lifespan(_app):
     yield
 
 
-app = FastAPI(title="NightBrew AI Employee", version="0.9.1", lifespan=lifespan)
+app = FastAPI(title="NightBrew AI Employee", version="0.9.2", lifespan=lifespan)
 DB = Path(os.getenv("NIGHTBREW_DB", str(Path.home() / ".nightbrew" / "chat.sqlite3")))
 TOKEN = os.getenv("NIGHTBREW_SESSION_TOKEN") or secrets.token_urlsafe(32)
 
@@ -187,19 +187,17 @@ def chat(request: ai.Chat):
     except ValueError as exc:
         raise HTTPException(403, str(exc)) from None
     employee_instructions = ""
+    operation_id = uuid.uuid4().hex
     if request.employee_id:
         from backend import workforce
 
         try:
-            with connect() as db:
-                employee = workforce.check(db, request.employee_id, "ai.chat", {})
-                employee_instructions = (
-                    f"Role: {employee.role}\n{employee.instructions}"
-                )
+            employee = workforce.reserve_chat(connect, request.employee_id, operation_id)
+            employee_instructions = f"Role: {employee.role}\n{employee.instructions}"
         except ValueError as exc:
             raise HTTPException(403, str(exc)) from None
     try:
-        licensing.reserve_task(connect, uuid.uuid4().hex, request.employee_id)
+        licensing.reserve_task(connect, operation_id, request.employee_id)
     except ValueError as exc:
         raise HTTPException(403, str(exc)) from None
     cloud = selected == "CLOUD_ONLY"
@@ -216,6 +214,8 @@ def chat(request: ai.Chat):
                     "cloud_consent": request.cloud_consent,
                 },
             )
+            if not isinstance(quote, dict) or not isinstance(quote.get("model"), str) or "estimated_cost_usd" not in quote:
+                raise ValueError("Licensing backend returned an invalid cost estimate")
             reservation, _ = ai.reserve(
                 connect,
                 quote["model"],
@@ -227,13 +227,17 @@ def chat(request: ai.Chat):
             result = licensing.included_inference(
                 connect, request, employee_instructions
             )
+            if (not isinstance(result, dict) or not isinstance(result.get("answer"), str)
+                    or not result["answer"].strip() or not isinstance(result.get("model"), str)
+                    or "cost_usd" not in result):
+                raise ValueError("Licensing backend returned an invalid inference response")
             ai.settle(
                 connect,
                 reservation,
                 result.get("usage"),
                 policy,
                 True,
-                actual_cost=result["cost_usd"],
+                actual_cost=result.get("cost_usd_exact", result["cost_usd"]),
             )
         except ValueError as exc:
             if reservation:
@@ -314,7 +318,10 @@ def chat(request: ai.Chat):
             "AI provider unavailable or returned an invalid response; no automatic fallback was attempted",
         ) from None
     if reservation:
-        ai.settle(connect, reservation, data.get("usage"), policy, True)
+        try:
+            ai.settle(connect, reservation, data.get("usage"), policy, True)
+        except ValueError as exc:
+            raise HTTPException(402, str(exc)) from None
     with connect() as db:
         db.executemany(
             "INSERT INTO messages(role,content,provider) VALUES(?,?,?)",
@@ -784,5 +791,5 @@ def customer_portal():
 def managed_session():
     return {
         "instance_id": os.getenv("NIGHTBREW_INSTANCE_ID", "manual-session"),
-        "version": "0.8.0",
+        "version": app.version,
     }

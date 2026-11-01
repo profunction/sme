@@ -17,6 +17,7 @@ def open_db(path):
     CREATE TABLE IF NOT EXISTS employees (id TEXT PRIMARY KEY, config TEXT NOT NULL, created_at TEXT DEFAULT CURRENT_TIMESTAMP);
     CREATE TABLE IF NOT EXISTS assignments (task_id TEXT PRIMARY KEY, employee_id TEXT NOT NULL, snapshot TEXT NOT NULL);
     CREATE TABLE IF NOT EXISTS usage_owners (usage_id TEXT PRIMARY KEY, employee_id TEXT NOT NULL);
+    CREATE TABLE IF NOT EXISTS employee_chat_operations (id TEXT PRIMARY KEY, employee_id TEXT NOT NULL, created_at TEXT DEFAULT CURRENT_TIMESTAMP);
     CREATE TABLE IF NOT EXISTS tasks (id TEXT PRIMARY KEY, tool TEXT NOT NULL, payload TEXT NOT NULL, status TEXT NOT NULL, result TEXT, error TEXT, created_at TEXT DEFAULT CURRENT_TIMESTAMP, updated_at TEXT DEFAULT CURRENT_TIMESTAMP);
     """)
     return db

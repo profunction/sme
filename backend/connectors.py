@@ -30,7 +30,7 @@ PLANS = {
     "Enterprise": {
         "monthly_myr": 1499,
         "employees": 10,
-        "computers": 10,
+        "computers": 5,
         "ai_mode": "HYBRID",
     },
 }
