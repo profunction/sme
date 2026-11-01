@@ -26,6 +26,14 @@ class FieldStore {
   Future<void> saveSnapshot(Map<String, dynamic> data) async {
     await db.insert('snapshots', {'scope': scope, 'json': jsonEncode(data)}, conflictAlgorithm: ConflictAlgorithm.replace);
   }
+  Future<void> commitSynchronized(Map<String, dynamic> data, List<String> acknowledged) async {
+    await db.transaction((t) async {
+      await t.insert('snapshots', {'scope': scope, 'json': jsonEncode(data)}, conflictAlgorithm: ConflictAlgorithm.replace);
+      for (final id in acknowledged) {
+        await t.delete('outbox', where: 'scope=? AND id=?', whereArgs: [scope, id]);
+      }
+    });
+  }
   Future<void> queueNote(String workOrderId, Map<String, dynamic> body) async {
     final id = body['mutation_id'] as String;
     if (jsonEncode(body).length > 40000) throw FormatException('Note is too large. Split it into separate observations.');
@@ -61,6 +69,7 @@ class SyncEngine {
     if (_running) return 0;
     _running = true;
     var sent = 0;
+    final acknowledged = <String>[];
     final blocked = <String>{};
     try {
       for (final row in await store.drafts()) {
@@ -68,7 +77,7 @@ class SyncEngine {
         if (row['state'] != 'pending' || blocked.contains(wid)) { blocked.add(wid); continue; }
         try {
           await api.json('/work-orders/$wid/notes', method: 'POST', body: jsonDecode(row['body'] as String));
-          await store.db.delete('outbox', where: 'scope=? AND id=?', whereArgs: [store.scope, row['id']]);
+          acknowledged.add(row['id'] as String);
           sent++;
         } on ApiException catch (error) {
           if (error.status == 401 || error.status == 429 || error.status >= 500) rethrow;
@@ -77,7 +86,7 @@ class SyncEngine {
         }
       }
       final snapshot = Map<String, dynamic>.from(await api.json('/snapshot'));
-      await store.saveSnapshot(snapshot);
+      await store.commitSynchronized(snapshot, acknowledged);
       return sent;
     } finally { _running = false; }
   }

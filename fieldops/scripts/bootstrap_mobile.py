@@ -9,6 +9,8 @@ subprocess.run(['flutter','create','--no-pub','--project-name','nightbrew_fieldo
 (root/'analysis_options.yaml').write_text('analyzer:\n  exclude: [build/**]\n')
 manifest=root/'android/app/src/main/AndroidManifest.xml'
 text=manifest.read_text()
+if 'android:allowBackup=' not in text:
+    text=text.replace('<application','<application android:allowBackup="false" android:fullBackupContent="false"',1)
 if 'android.permission.INTERNET' not in text:
     text=text.replace('<application','<uses-permission android:name="android.permission.INTERNET"/>\n    <application',1)
 manifest.write_text(text)
