@@ -1,0 +1,28 @@
+{
+  "advisory": "GHSA-g3hv-75wg-m249",
+  "upstream_commit": "77a0f5c4b80bdc641c3c930a1d9edf5ad2db57f8",
+  "upstream_patch_sha256": "49d4fb172aafb601ca96e0377c89a78674f7424cd9ded6775783257058629295",
+  "note": "Backport the official preprocessing bounds without changing package APIs or versions. npm audit continues to flag affected version numbers; this is a mitigation, not a scanner-clean claim. Package licenses are retained. Legacy 3.1.5/5.1.9 have no affected preprocessing methods.",
+  "versions": {
+    "9.0.9": {
+      "commonjs": {
+        "before_sha256": "a958a41536f57484cc427a03a10a6a094eb062a004c58261add4dbb6dd77bbda",
+        "after_sha256": "c53702b9885d3c61d20236ab92351ac6fe76b808b8837c65118346f46fd5dd04"
+      },
+      "esm": {
+        "before_sha256": "8772b7fc5d3c741723b3839a43f929d9d9262121c5a74535638fa40c92cc1e6d",
+        "after_sha256": "f3e5a9ea5d84248b4c46c769fb477902d6910bbbefa169cb97de2417e7b95fee"
+      }
+    },
+    "10.2.6": {
+      "commonjs": {
+        "before_sha256": "d224f71f20d7c206fcc5b7e9f747324c7698345a0b2c28d717dd9cf698306783",
+        "after_sha256": "7e835c0a30f7b4f29f4ad8cf8c3e92b97ab23ed854a7a777f240d6bdf3d19231"
+      },
+      "esm": {
+        "before_sha256": "59821ec2ce0d3df968292036e5c831ad322b33e9c33a949ecbc9dfe125d165be",
+        "after_sha256": "37ba4ff4010cda499e890975983b78ebd5f2be2dd8506d938472de4af8e9ed25"
+      }
+    }
+  }
+}

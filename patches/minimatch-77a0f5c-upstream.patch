@@ -1,0 +1,134 @@
+From 77a0f5c4b80bdc641c3c930a1d9edf5ad2db57f8 Mon Sep 17 00:00:00 2001
+From: isaacs <i@izs.me>
+Date: Tue, 27 Oct 2026 15:22:03 -0700
+Subject: [PATCH] limit **/.. optimization pass to avoid quadratic explosion
+
+---
+ README.md                 |  5 ++++-
+ changelog.md              |  4 ++++
+ src/index.ts              | 11 ++++++++++-
+ test/preprocess-limits.ts | 34 ++++++++++++++++++++++++++++++++++
+ 4 files changed, 52 insertions(+), 2 deletions(-)
+ create mode 100644 test/preprocess-limits.ts
+
+diff --git a/README.md b/README.md
+index 6e235f26..75538279 100644
+--- a/README.md
++++ b/README.md
+@@ -423,7 +423,8 @@ is equivalent in all cases).
+   - Convert patterns containing `<pre>/**/../<p>/<rest>` into the
+     equivalent `<pre>/{..,**}/<p>/<rest>`, where `<p>` is a
+     a pattern portion other than `.`, `..`, `**`, or empty
+-    `''`.
++    `''`. This stops when there are `braceExpandMax`
++    patterns.
+   - Dedupe patterns where a `**` portion is present in one and
+     omitted in another, and it is not the final path portion, and
+     they are otherwise equivalent. So `{a/**/b,a/b}` becomes
+@@ -432,6 +433,8 @@ is equivalent in all cases).
+     non-dot pattern other than `**`, `.`, `..`, or `''` is in the
+     same position in the other. So `a/{*,x}/b` becomes `a/*/b`,
+     because `*` can match against `x`.
++  - Dedupe only sets of 1000 patterns or fewer, because each
++    pattern is compared to each other one.
+ 
+   While these optimizations improve the performance of
+   file-walking use cases such as [glob](http://npm.im/glob) (ie,
+diff --git a/changelog.md b/changelog.md
+index 5e7a222c..b2ef5c60 100644
+--- a/changelog.md
++++ b/changelog.md
+@@ -36,6 +36,10 @@
+ - On Windows, long UNC paths like `//?/UNC/host/share/...` match
+   `//host/share/...` and vice versa, the same as `//?/c:/...` and
+   `c:/...`.
++- At optimization level 2, stop splitting `**/..` portions once
++  there are `braceExpandMax` patterns, and do not dedupe sets of
++  more than 1000 patterns. Before, a short pattern could take
++  minutes to compile.
+ 
+ ## 10.2
+ 
+diff --git a/src/index.ts b/src/index.ts
+index 402bba8f..7e7c2964 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -89,6 +89,9 @@ export interface MinimatchOptions {
+   windowsNoMagicRoot?: boolean
+   /**
+    * max number of `{...}` patterns to expand. Default 100_000.
++   *
++   * At `optimizationLevel` 2 or higher, this also limits the
++   * patterns made when `**` is followed by `..`.
+    */
+   braceExpandMax?: number
+   /**
+@@ -1150,6 +1153,8 @@ export class Minimatch {
+   // **/*/<rest> -> */**/<rest> <== not valid because ** doesn't follow
+   // this WOULD be allowed if ** did follow symlinks, or * didn't
+   firstPhasePreProcess(globParts: string[][]) {
++    // each **/.. split doubles the patterns, so stop at the brace max
++    const { braceExpandMax = 100_000 } = this.options
+     let didSomething = false
+     do {
+       didSomething = false
+@@ -1178,7 +1183,8 @@ export class Minimatch {
+             p === '..' ||
+             !p2 ||
+             p2 === '.' ||
+-            p2 === '..'
++            p2 === '..' ||
++            globParts.length >= braceExpandMax
+           ) {
+             continue
+           }
+@@ -1242,6 +1248,9 @@ export class Minimatch {
+   // {<pre>/**/<rest>,<pre>/**/<p>/<rest>} -> <pre>/**/<rest>
+   // ^-- not valid because ** doens't follow symlinks
+   secondPhasePreProcess(globParts: string[][]): string[][] {
++    // each pattern is compared to each other one, so skip this for
++    // large sets. The patterns match the same paths either way.
++    if (globParts.length > 1000) return globParts
+     for (let i = 0; i < globParts.length - 1; i++) {
+       for (let j = i + 1; j < globParts.length; j++) {
+         const matched = this.partsMatch(
+diff --git a/test/preprocess-limits.ts b/test/preprocess-limits.ts
+new file mode 100644
+index 00000000..4f03d974
+--- /dev/null
++++ b/test/preprocess-limits.ts
+@@ -0,0 +1,34 @@
++// optimizationLevel 2 can not make too many patterns, or spend
++// too long comparing them to each other
++
++import t from 'tap'
++import { Minimatch } from '../dist/esm/index.js'
++
++const optimizationLevel = 2
++
++t.test('**/.. splits stop at braceExpandMax', t => {
++  const p = Array(30).fill('**/../a/b').join('/')
++  const mm = new Minimatch(p, { optimizationLevel, braceExpandMax: 64 })
++  t.equal(mm.set.length, 64)
++  t.equal(new Minimatch(p, { optimizationLevel }).set.length, 100_000)
++  t.end()
++})
++
++t.test('**/.. splits below the max', t => {
++  const mm = new Minimatch('**/../a/b/**/../c/d', { optimizationLevel })
++  t.equal(mm.set.length, 4)
++  t.equal(mm.match('../a/b/../c/d'), true)
++  t.equal(mm.match('x/a/b/y/c/d'), true)
++  t.end()
++})
++
++t.test('large sets are not deduped', t => {
++  const small = new Minimatch('{x,*}/{0..9}', { optimizationLevel })
++  t.equal(small.set.length, 10)
++  const large = new Minimatch('{x,*}/{0..999}', { optimizationLevel })
++  t.equal(large.set.length, 2000)
++  t.equal(large.match('x/5'), true)
++  t.equal(large.match('y/999'), true)
++  t.equal(large.match('.y/5'), false)
++  t.end()
++})

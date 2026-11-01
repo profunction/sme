@@ -1,0 +1,2 @@
+# The reviewed upstream patch is verified by SHA-256 on every build platform.
+patches/*.patch text eol=lf whitespace=-blank-at-eol

@@ -1,8 +1,10 @@
-# NightBrew AI Employee — 0.9.1 development release
+# NightBrew AI Employee — 0.9.2 development release
 
 A Windows desktop AI workforce application with an additional macOS development build. Existing foundations include chat, business document drafts, explicit approved tools, scoped employees, licensing/billing protocols and packaging recipes. These building blocks do not establish complete commercial workflows.
 
 **2026-11-01 audit: not ready for a paid pilot.** See the [repository audit](docs/REPOSITORY_AUDIT.md), [feature evidence](docs/FEATURE_STATUS.md), [security gaps](docs/SECURITY_GAPS.md) and [release gates](docs/COMMERCIAL_READINESS.md). Exact AI credit accounting, authoritative user/policy controls, the complete purchase-order workflow and real payment/provider/operations acceptance remain blockers. Historical phase labels below describe code scope, not verified completion.
+
+**0.9.2 fixes:** exact trusted USD cost ledger and immutable pricing snapshots, discrepancy reconciliation, malformed license/payment handling, employee chat quota accounting, real PostgreSQL adapter/migration fixes and local reviewed CSV/XLSX purchase-order export. See [executed results and remaining gaps](docs/BUGFIX_REPORT_0.9.2.md). Separate customer Credit units, full tenant/user policies, live payments/providers and signed Windows acceptance remain unfinished. The audit paragraphs describe the older baseline; the fix report records current evidence.
 
 **This is not yet a verified commercial Windows release.** Windows CI has passed native UIA/vault, managed Electron, frozen backend and NSIS installation/startup checks; the [verified run](https://github.com/profunction/sme/actions/runs/41037603208) contains the unsigned development installer. Real model inference, merchant payments, deployed licensing/gateway services, code signing and signed update-chain validation require their actual runtime/owner configuration. See [ROADMAP.md](ROADMAP.md) for implementation versus verification status.
 

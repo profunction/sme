@@ -1,5 +1,7 @@
 # Commercial readiness — NOT READY for a paid pilot
 
+**Current 0.9.2 follow-up:** see [the fix report](BUGFIX_REPORT_0.9.2.md). Exact trusted USD ledger/snapshots, discrepancy holds, malformed license/payment errors, local employee chat quotas, real PostgreSQL operation and approval-gated structured PO export are now implemented and exercised. The gate table below preserves the earlier audit; those fixes do not complete separate customer Credits, central user/policy administration, live payment/provider acceptance or signed Windows delivery. Production remains blocked.
+
 Phase 1 audit, 2026-11-01. Existing foundations can support developer demonstrations with synthetic data. They do not establish safe customer-funded operation or validated purchase-order processing. No production deployment or paid infrastructure was authorized or performed.
 
 ## Release gates

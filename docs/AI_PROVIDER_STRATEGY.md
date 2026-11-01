@@ -1,5 +1,7 @@
 # AI provider strategy
 
+0.9.2 adds an administrator-controlled model capability/context/output registry used by both quote and dispatch, with production review gates. It enforces TEXT for the existing text gateway and rejects unsupported configured tasks/limits before spending. This does not implement native Gemini/Claude, vision, structured-output or tool-calling adapters; the implementation matrix below remains applicable. Details: [fix report](BUGFIX_REPORT_0.9.2.md).
+
 2026-11-01. Current application supports Ollama text and one configured OpenAI-compatible text endpoint. DeepSeek is the default cloud candidate. Gateway defaults are configurable, not proof a model remains available. No live paid inference, model capability certification or current price verification was performed.
 
 | Provider | Existing integration | Next acceptance work |

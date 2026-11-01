@@ -1,6 +1,6 @@
 {
   "name": "nightbrew-ai-employee",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "private": true,
   "description": "NightBrew AI desktop for Windows and macOS",
   "author": "NightBrew",
@@ -11,7 +11,9 @@
     "build": "tsc --noEmit && vite build",
     "package:win": "node scripts/prepare-release.cjs && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --win nsis --config build/electron-release.json --publish never",
     "test:e2e": "playwright test",
-    "test:desktop": "node --test desktop/*.test.cjs",
+    "test:desktop": "node --test desktop/*.test.cjs scripts/build-dependency-safety.test.cjs",
+    "postinstall": "node scripts/patch-build-dependencies.cjs",
+    "prebuild": "node scripts/patch-build-dependencies.cjs",
     "backend:build": "python scripts/build-backend.py",
     "package:win:unsigned": "node scripts/prepare-release.cjs --development && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --win nsis --config build/electron-release.json --publish never",
     "test:electron": "node scripts/smoke-desktop.cjs",

@@ -1,5 +1,7 @@
 # Deployment status and gates
 
+0.9.2 has now passed nine real disposable PostgreSQL tests, including exact settlement/discrepancy reconciliation and admission. A manual same-cloud pg_dump/pg_restore drill preserved exact money/hold/migration records. Migration paths/checksums, write row factories, integer flags, startup guards and API log rotation were fixed. This is not production TLS deployment, an encrypted off-server restore or load acceptance; see [the fix report](BUGFIX_REPORT_0.9.2.md). Earlier paragraphs below preserve the initial audit evidence.
+
 The existing [root deployment guide](../DEPLOYMENT.md), [VPS setup](../VPS_SETUP.md), [backup/restore](../BACKUP_RESTORE.md), [migration](../MIGRATION_PLAN.md) and [rollback](../ROLLBACK_PLAN.md) are procedures awaiting execution evidence. No VPS was purchased or provisioned. No production deployment was performed.
 
 Target one 2-vCPU/4-GB Ubuntu LTS server, no GPU, Compose API/PostgreSQL/Caddy. One modular authority serves every plan. PostgreSQL is private, persistent volume required; production override removes API host port, uses read-only API filesystem/non-root process, HTTPS reverse proxy. Stable API domain and environment configuration permit later migration. No customer capacity guarantee exists.

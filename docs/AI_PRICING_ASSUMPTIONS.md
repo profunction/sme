@@ -1,5 +1,7 @@
 # AI pricing and credits assumptions
 
+0.9.2 now uses an exact trusted USD ledger and per-request immutable pricing snapshot; see [the fix report](BUGFIX_REPORT_0.9.2.md). REAL authority columns are compatibility projections, never spend authorization. Production requires administrator-reviewed model and price configuration; this is not live independent verification. Legacy accounts require reviewed opening balances. Separate customer Credits/conversion/expiry, complete pricing dimensions and provider invoice reconciliation remain unfinished. The limitations below describe the original audit baseline.
+
 No current API price is asserted in this audit. DeepSeek, Gemini, Claude and OpenAI rates/capabilities are **UNVERIFIED**. The existing `.env.example` leaves rates empty; gateway requests fail closed until an administrator supplies valid rates. Synthetic rates in tests are test fixtures, not market prices.
 
 Current limitations: mutable environment input/output USD rates; REAL/float usage and balances; no immutable price snapshots, separate Credit units or cache/reasoning/image/audio tariffs. Historical authority rows contain charged amount/status, not the complete token/pricing attribution required for customer billing. Do not use these records as a complete customer invoice ledger.

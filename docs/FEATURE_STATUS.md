@@ -1,5 +1,7 @@
 # Feature status — 2026-11-01
 
+**0.9.2 update:** [BUGFIX_REPORT_0.9.2.md](BUGFIX_REPORT_0.9.2.md) supersedes affected baseline rows below. It records implemented exact USD accounting, registry limits, local chat quotas, payment validation, real PostgreSQL testing and the structured CSV/XLSX PO review/export GUI. Native Gemini/Claude, distinct customer Credit units, full corporate RBAC/budgets, OCR/vendor submission and commercial live acceptance remain incomplete.
+
 Baseline `ca68b44`; Phase 1 follow-up is listed separately. Status applies only to the precisely described scope. **IMPLEMENTED AND TESTED** includes repeatable mocked protocols, not live vendor certification. **IMPLEMENTED BUT UNVERIFIED** means code exists without relevant acceptance evidence. **PARTIALLY IMPLEMENTED** means essential behavior is missing. **NOT IMPLEMENTED** means no implementation was found. **BLOCKED BY EXTERNAL DEPENDENCY** identifies release acceptance requiring an external service, account or platform. Root documents describing historical phases do not override this matrix.
 
 | Feature / precise scope | Status | Evidence and practical limit |

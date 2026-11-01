@@ -1,5 +1,7 @@
 # Security gap register
 
+**0.9.2 follow-up:** [executed fix report](BUGFIX_REPORT_0.9.2.md). S01/S02 exact trusted cost accounting and bounds now have a decimal-string ledger, immutable snapshots and controlled discrepancy reconciliation; separate customer Credit units remain absent. S07 PostgreSQL write/flag/migration failures are fixed and exercised on a real server. S08 has a same-cloud logical restore drill only. S09 has startup guards; real merchant acceptance is still absent. S12 literal/alias URL validation improved; a DNS egress firewall remains necessary. S17 has a checksum-verified official mitigation; npm version findings remain. Other identity/policy/privacy/delivery gates remain open. The table below is the original audit snapshot, not a claim that these bugs still exist unchanged.
+
 Reviewed 2026-11-01 at `ca68b44`. P0 blocks customer-funded cloud operation; P1 blocks the proposed paid pilot; P2 must be bounded/documented before wider release. These are observed gaps, not evidence of exploitation.
 
 | ID / priority | Finding and evidence | Required closure evidence |
