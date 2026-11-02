@@ -36,3 +36,14 @@ No real ERP vendor, customer credentials or paid AI inference were used during d
 ## Verification
 
 Local verification: 329 backend/deployment tests passed with 14 platform/database-dependent skips; 16 desktop/build tests passed; 12 Chromium UI tests passed; TypeScript/Vite production build passed. Native CI results are recorded separately per commit. Automated coverage includes approval-to-PDF-download, all four dashboard links, employee chat selection, clearing stale save results on assignment errors, bilingual AI key setup, consent, no automatic chat, no localStorage key retention, sanitized connection errors, signed-production mode boundaries, local-only preview restrictions, API-preview budget/consent enforcement and disabled shared funding.
+
+
+## Verified native artifacts (2026-11-02)
+
+Code commit: `a2dc8c8`. Documentation-only commits do not change the binaries.
+
+- [Windows run](https://github.com/profunction/sme/actions/runs/41463665490): native backend/UIA tests, Electron startup, frozen local/API preview boundaries, NSIS installation and installed application startup passed. Uploaded **NightBrew-Windows-API-PREVIEW** (187 MB), plus LOCAL-PREVIEW and DEV-UNSIGNED variants. The API preview is the variant for customer-owned AI keys without commercial activation.
+- [macOS run](https://github.com/profunction/sme/actions/runs/41463664972): ARM64 LOCAL-PREVIEW and **NightBrew-macOS-arm64-API-PREVIEW** (391 MB) completed native tests, build, bundle integrity, packaged startup and owned-fixture probes. This evidence is specific to the ARM64 jobs; it is not a claim that the separate Intel job has completed. The ARM64 API artifact includes DMG/ZIP/checksums. Ad-hoc signing is not Apple notarization.
+- A Linux native PyInstaller freeze and the API preview fixture probe also passed locally.
+
+Live customer API credentials were not supplied or used. Model-list verification and inference remain customer acceptance steps. GitHub artifacts require sign-in to download and expire according to the workflow retention settings (14 days for these previews).

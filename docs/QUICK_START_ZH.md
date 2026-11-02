@@ -1,5 +1,14 @@
 # NightBrew 0.9.4：API Key、聊天与任务结果
 
+## 下载 0.9.4 API 试用版
+
+打开下面对应页面，在下方 **Artifacts** 下载指定名称（需登录 GitHub，试用包保留 14 天）：
+
+- [Windows 下载页](https://github.com/profunction/sme/actions/runs/41463665490)：选 **NightBrew-Windows-API-PREVIEW**，解压后运行 `.exe`。
+- [Apple Silicon Mac 下载页](https://github.com/profunction/sme/actions/runs/41463664972)：选 **NightBrew-macOS-arm64-API-PREVIEW**，解压后使用 `.dmg` 或应用 ZIP。适用于 M 系列芯片，需 macOS 15 或以上。
+
+这些包已通过对应平台的安装或启动检查。真实 AI Key 尚待用户自行验证，开发包的系统签名限制见文末。
+
 ## 我只是要让 AI 回答
 
 请打开 **AI 与隐私设置**，不用配置业务系统连接中的 POS / WMS / TMS。
