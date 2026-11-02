@@ -2,6 +2,8 @@ const fs = require("node:fs");
 const base = require("../package.json").build;
 const development = process.argv.includes("--development");
 const localPreview = process.argv.includes("--local-preview");
+const byokPreview = process.argv.includes("--byok-preview");
+if (byokPreview && (!development || localPreview)) throw Error("API preview requires a separate unsigned development build");
 const mac = process.argv.includes("--mac");
 if (localPreview && !development)
   throw Error(
@@ -18,6 +20,7 @@ const policy = {
   update_url: process.env.NIGHTBREW_RELEASE_UPDATE_URL || "",
   development_unsigned: development,
   local_preview: localPreview,
+  byok_preview: byokPreview,
 };
 function https(value) {
   try {
@@ -54,10 +57,10 @@ const config = {
   forceCodeSigning: !development,
   mac: {
     ...base.mac,
-    identity: mac && localPreview ? "-" : null,
+    identity: mac && (localPreview || byokPreview) ? "-" : null,
     // Ad-hoc signing verifies development bundle integrity without claiming
     // an Apple Developer identity or notarization. Production is gated above.
-    ...(mac && localPreview ? { hardenedRuntime: false, notarize: false } : {}),
+    ...(mac && (localPreview || byokPreview) ? { hardenedRuntime: false, notarize: false } : {}),
   },
   win: {
     ...base.win,
@@ -65,7 +68,7 @@ const config = {
     verifyUpdateCodeSignature: true,
     ...(development ? {} : { publisherName: [policy.publisher_name] }),
   },
-  artifactName: localPreview
+  artifactName: byokPreview ? "NightBrew-API-PREVIEW-${version}-${arch}.${ext}" : localPreview
     ? "NightBrew-LOCAL-PREVIEW-${version}-${arch}.${ext}"
     : development
       ? "NightBrew-DEV-UNSIGNED-${version}-${arch}.${ext}"

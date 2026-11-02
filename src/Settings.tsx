@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { errorText, type API } from "./api";
+import { AIConnection } from "./AIConnection";
 import { ModelSetup } from "./ModelSetup";
 import { TaskReview } from "./TaskReview";
 type Policy = {
@@ -24,12 +25,11 @@ const initial: Policy = {
   local_complex_capable: false,
   max_output_tokens: 512,
 };
-export function Settings({ api }: { api: API }) {
+export function Settings({ api, onCloudChat }: { api: API; onCloudChat?: () => void }) {
   const [policy, setPolicy] = useState<Policy>(initial),
     [loaded, setLoaded] = useState(false),
     [info, setInfo] = useState<unknown>(),
     [status, setStatus] = useState(""),
-    [key, setKey] = useState(""),
     [busy, setBusy] = useState(false);
   async function reloadPolicy() {
     setPolicy(await api<Policy>("/settings/ai"));
@@ -52,7 +52,8 @@ export function Settings({ api }: { api: API }) {
   }
   return (
     <>
-      <ModelSetup api={api} onSaved={reloadPolicy} />
+      <AIConnection api={api} onChat={onCloudChat} onSaved={reloadPolicy} />
+      <details><summary>Ollama 与模型进阶设置 / Ollama & advanced model settings</summary><ModelSetup api={api} onSaved={reloadPolicy} /></details>
       <h2>隐私与 AI 预算 / Privacy & AI budget</h2>
       <label>
         Cloud funding
@@ -145,40 +146,6 @@ export function Settings({ api }: { api: API }) {
           Save privacy & budget
         </button>
       </fieldset>
-      <h2>Bring your own key</h2>
-      <p>
-        Keys use Windows Credential Manager or macOS Keychain. On Linux cloud,
-        use the backend environment binding.
-      </p>
-      <input
-        aria-label="Cloud API key"
-        type="password"
-        autoComplete="off"
-        value={key}
-        onChange={(e) => setKey(e.target.value)}
-      />
-      <button
-        disabled={busy || !key}
-        onClick={() =>
-          action(async () => {
-            try {
-              return await api("/settings/cloud-key", "PUT", { key });
-            } finally {
-              setKey("");
-            }
-          })
-        }
-      >
-        Store in system credential vault
-      </button>
-      <button
-        disabled={busy}
-        onClick={() =>
-          action(() => api("/settings/cloud-key", "PUT", { key: "" }))
-        }
-      >
-        Remove stored key
-      </button>
       <h2>Hardware & measured readiness</h2>
       <button disabled={busy} onClick={() => action(() => api("/hardware"))}>
         Inspect hardware

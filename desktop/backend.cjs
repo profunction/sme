@@ -33,13 +33,15 @@ function configuration({
     packaged &&
     policy.development_unsigned === true &&
     policy.local_preview === true;
+  const byokPreview = packaged && policy.development_unsigned === true && policy.byok_preview === true && !localPreview;
+  const preview = localPreview || byokPreview;
   const env = {
     ...environment,
     NIGHTBREW_SESSION_TOKEN: token,
     NIGHTBREW_INSTANCE_ID: instance,
     NIGHTBREW_DB: path.join(
       dataDir,
-      ...(localPreview ? ["local-preview"] : []),
+      ...(localPreview ? ["local-preview"] : byokPreview ? ["byok-preview"] : []),
       "chat.sqlite3",
     ),
     PYTHONUNBUFFERED: "1",
@@ -52,9 +54,10 @@ function configuration({
         )
       )
         delete env[name];
-    env.NIGHTBREW_ENV = localPreview ? "local-preview" : "production";
+    env.NIGHTBREW_ENV = localPreview ? "local-preview" : byokPreview ? "byok-preview" : "production";
     env.NIGHTBREW_LOCAL_PREVIEW = localPreview ? "1" : "0";
-    env.NIGHTBREW_ENFORCE_LICENSE = localPreview ? "0" : "1";
+    env.NIGHTBREW_BYOK_PREVIEW = byokPreview ? "1" : "0";
+    env.NIGHTBREW_ENFORCE_LICENSE = preview ? "0" : "1";
     env.NIGHTBREW_ALLOW_MOCK_LICENSE = "0";
     env.NIGHTBREW_LICENSE_PUBLIC_KEY = policy.license_public_key;
     env.NIGHTBREW_LICENSE_URL = policy.license_url;

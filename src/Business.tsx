@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { errorText, type API } from "./api";
 import { TaskReview } from "./TaskReview";
+import { useLanguage } from "./i18n";
 import { PurchaseOrder, type POImport, type POReport } from "./PurchaseOrder";
 import { ExcelFill, type SpreadsheetInspection, type SpreadsheetPreview } from "./ExcelFill";
 type FileEntry = { id: string; name: string; size: number };
@@ -30,7 +31,10 @@ type Task = {
   } | null;
 };
 type Line = { description: string; quantity: string; unit_price: string };
-export function Business({ api, token }: { api: API; token: string }) {
+export function Business({ api, token, initialTaskFilter = "all", focusedTaskId = "" }: { api: API; token: string; initialTaskFilter?: string; focusedTaskId?: string }) {
+  const { t } = useLanguage();
+  const [taskFilter, setTaskFilter] = useState(initialTaskFilter);
+  useEffect(() => { setTaskFilter(initialTaskFilter); }, [initialTaskFilter]);
   const [company, setCompany] = useState(""),
     [customer, setCustomer] = useState(""),
     [reference, setReference] = useState(""),
@@ -46,6 +50,13 @@ export function Business({ api, token }: { api: API; token: string }) {
     [error, setError] = useState(""),
     [busy, setBusy] = useState(false),
     [stopped, setStopped] = useState(false);
+  const [tasksLoaded, setTasksLoaded] = useState(false);
+  useEffect(() => {
+    if (tasksLoaded && (initialTaskFilter !== "all" || focusedTaskId)) {
+      (document.getElementById(focusedTaskId ? "task-" + focusedTaskId : "task-history") || document.getElementById("task-history"))?.scrollIntoView({ block: "start" });
+    }
+  }, [tasksLoaded, initialTaskFilter, focusedTaskId]);
+  const visibleTasks = tasks.filter((task) => taskFilter === "all" || (taskFilter === "running" ? ["queued", "running", "cancel_requested"].includes(task.status) : taskFilter === "failed" ? ["failed", "interrupted"].includes(task.status) : task.status === taskFilter));
   async function refresh() {
     const [f, t, c] = await Promise.all([
       api<FileEntry[]>("/files"),
@@ -68,6 +79,7 @@ export function Business({ api, token }: { api: API; token: string }) {
         if (active) {
           setFiles(f);
           setTasks(t);
+          setTasksLoaded(true);
           setStopped(c.stopped);
         }
       } catch (e) {
@@ -396,14 +408,18 @@ export function Business({ api, token }: { api: API; token: string }) {
           </li>
         ))}
       </ul>
-      <h2>任务记录与审批 / Task history & approvals</h2>
+      <h2 id="task-history">任务记录与审批 / Task history & approvals</h2>
+      <div className="row" aria-label={t("筛选任务", "Filter tasks")}>
+        {[["all", "全部", "All"], ["running", "进行中", "In progress"], ["pending_approval", "待审批", "Awaiting approval"], ["completed", "已完成", "Completed"], ["failed", "失败/中断", "Failed/interrupted"]].map(([value, zh, en]) => <button key={value} className={taskFilter === value ? "" : "secondary"} onClick={() => setTaskFilter(value)}>{t(zh, en)}</button>)}
+      </div>
       <p>
         Review the exact saved task before approving. Cancellation is
         cooperative; an external write already sent cannot be recalled.
       </p>
-      <ul className="cards">
-        {tasks.map((task) => (
-          <li key={task.id}>
+      {tasksLoaded && !visibleTasks.length && <p role="status">{t("这个分类目前没有任务。", "No tasks in this category yet.")}</p>}
+      <ul className="cards" aria-label={t("任务明细", "Task details")}>
+        {visibleTasks.map((task) => (
+          <li key={task.id} id={"task-" + task.id}>
             <strong>{task.tool}</strong>
             <span className="badge">{task.status}</span>
             {task.status === "pending_approval" && (
@@ -438,6 +454,7 @@ export function Business({ api, token }: { api: API; token: string }) {
                 · Tax: {task.result.totals.tax}
               </p>
             )}
+            {task.status === "completed" && task.result?.file && <button onClick={() => action(() => download(task.result!.file!))}>{t("下载任务结果", "Download task result")}: {task.result.file.name}</button>}
             {task.result?.text && <pre>{task.result.text}</pre>}
             {task.result?.sheets?.map((sheet) => (
               <div key={sheet.sheet}>

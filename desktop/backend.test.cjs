@@ -1,4 +1,5 @@
 const { test } = require("node:test");
+const { spawnSync } = require("node:child_process");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const os = require("node:os");
@@ -246,4 +247,24 @@ test("Mac local preview uses an explicit development policy and no Apple identit
   } finally {
     fs.rmSync(directory, { recursive: true, force: true });
   }
+});
+
+test("API preview requires its own unsigned policy, isolates data, and cannot be enabled by inherited environment flags", () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "nightbrew-api-preview-"));
+  try {
+    const result = spawnSync(process.execPath, [path.resolve("scripts/prepare-release.cjs"), "--development", "--byok-preview", "--mac"], { cwd: directory, encoding: "utf8" });
+    assert.equal(result.status, 0, result.stderr);
+    const policy = JSON.parse(fs.readFileSync(path.join(directory, "build/release-policy.json"), "utf8"));
+    assert.equal(policy.byok_preview, true);
+    assert.equal(policy.local_preview, false);
+    for (const development of [true, false]) {
+      fs.writeFileSync(path.join(directory, "release-policy.json"), JSON.stringify({ ...policy, development_unsigned: development }));
+      const config = configuration({ packaged: true, resources: directory, root: directory, dataDir: directory, environment: { NIGHTBREW_BYOK_PREVIEW: "1", NIGHTBREW_ENV: "byok-preview", NIGHTBREW_ENFORCE_LICENSE: "0" } });
+      assert.equal(config.env.NIGHTBREW_BYOK_PREVIEW, development ? "1" : "0");
+      assert.equal(config.env.NIGHTBREW_ENFORCE_LICENSE, development ? "0" : "1");
+      assert.equal(config.env.NIGHTBREW_ENV, development ? "byok-preview" : "production");
+      if (development) assert.ok(config.env.NIGHTBREW_DB.endsWith(path.join("byok-preview", "chat.sqlite3")));
+    }
+    assert.notEqual(spawnSync(process.execPath, [path.resolve("scripts/prepare-release.cjs"), "--byok-preview"], { cwd: directory }).status, 0);
+  } finally { fs.rmSync(directory, { recursive: true, force: true }); }
 });

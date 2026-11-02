@@ -98,6 +98,7 @@ test("a customer can save a model in the GUI and changing provider requires fres
     .fill("nightbrew-e2e-not-production");
   await page.getByRole("button", { name: "连接工作区", exact: true }).click();
   await page.getByRole("button", { name: "AI & privacy", exact: true }).click();
+  await page.getByText("Ollama 与模型进阶设置 / Ollama & advanced model settings", { exact: true }).click();
   await expect(page.getByLabel("本地 Ollama 模型名称")).toHaveValue(
     "llama3.2:3b",
   );
@@ -108,6 +109,7 @@ test("a customer can save a model in the GUI and changing provider requires fres
   await expect(page.getByLabel(/Permit cloud inference/)).not.toBeChecked();
   await page.getByRole("button", { name: "Dashboard", exact: true }).click();
   await page.getByRole("button", { name: "AI & privacy", exact: true }).click();
+  await page.getByText("Ollama 与模型进阶设置 / Ollama & advanced model settings", { exact: true }).click();
   await expect(page.getByLabel("本地 Ollama 模型名称")).toHaveValue(
     "customer-model:3b",
   );

@@ -223,7 +223,7 @@ def test_approved_mock_payload_is_immutable(client):
         client.put(
             "/tasks/" + task["id"], headers=AUTH, json={"record": {"quantity": 999}}
         ).status_code
-        == 404
+        == 405  # Read-only detail endpoint exists; mutation remains forbidden.
     )
     client.post("/tasks/" + task["id"] + "/approve", headers=AUTH)
     result = wait(client, task["id"])

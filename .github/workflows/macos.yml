@@ -20,9 +20,15 @@ jobs:
           - runner: macos-15
             arch: arm64
             local_preview: true
+            byok_preview: false
           - runner: macos-15-intel
             arch: x64
             local_preview: false
+            byok_preview: false
+          - runner: macos-15
+            arch: arm64
+            local_preview: false
+            byok_preview: true
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 35
     env:
@@ -60,7 +66,9 @@ jobs:
       - name: Build native macOS app and disk image
         run: |
           source .venv/bin/activate
-          if [ '${{ matrix.local_preview }}' = 'true' ]; then
+          if [ '${{ matrix.byok_preview }}' = 'true' ]; then
+            npm run package:mac:api
+          elif [ '${{ matrix.local_preview }}' = 'true' ]; then
             npm run package:mac:local
           else
             npm run package:mac:unsigned
@@ -68,10 +76,10 @@ jobs:
       - name: Verify bundled backend and application startup
         run: |
           source .venv/bin/activate
-          python scripts/verify-macos-package.py '${{ matrix.arch }}' ${{ matrix.local_preview && '--local-preview' || '' }}
+          python scripts/verify-macos-package.py '${{ matrix.arch }}' ${{ matrix.local_preview && '--local-preview' || '' }} ${{ matrix.byok_preview && '--byok-preview' || '' }}
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
-          name: NightBrew-macOS-${{ matrix.arch }}-${{ matrix.local_preview && 'LOCAL-PREVIEW' || 'DEV-UNSIGNED' }}
+          name: NightBrew-macOS-${{ matrix.arch }}-${{ matrix.byok_preview && 'API-PREVIEW' || matrix.local_preview && 'LOCAL-PREVIEW' || 'DEV-UNSIGNED' }}
           path: |
             release/*.dmg
             release/*.zip

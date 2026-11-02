@@ -29,6 +29,10 @@ function App() {
   };
   const label = (p: typeof pages[number]) => t(p.label, englishPages[p.id][0]);
   const [token, setToken] = useState("");
+  const [taskFilter, setTaskFilter] = useState("all");
+  const [taskFocus, setTaskFocus] = useState("");
+  const [chatEmployeeId, setChatEmployeeId] = useState("");
+  const [chatMode, setChatMode] = useState("LOCAL_ONLY");
   const [appVersion, setAppVersion] = useState("");
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem("nightbrew.theme");
@@ -209,7 +213,7 @@ function App() {
               api={api}
               connected={!!token}
               go={go}
-              usePrompt={usePrompt}
+              usePrompt={usePrompt} openTasks={(filter, id) => { setTaskFilter(filter); setTaskFocus(id || ""); go("Business tools"); }}
             />
           ) : tab === "Guide" ? (
             <Guide initialPrompt={selectedPrompt} go={go} compose={compose} />
@@ -236,6 +240,8 @@ function App() {
                   }
                   onGuide={() => go("Guide")}
                   onSettings={() => go("AI & privacy")}
+                  initialEmployeeId={chatEmployeeId}
+                  initialMode={chatMode}
                 />
               ) : tab === "Business tools" ? (
                 <>
@@ -249,7 +255,7 @@ function App() {
                       </p>
                     </div>
                   </div>
-                  <Business key={token} api={api} token={token} />
+                  <Business key={token} api={api} token={token} initialTaskFilter={taskFilter} focusedTaskId={taskFocus} />
                 </>
               ) : tab === "Connectors" ? (
                 <>
@@ -263,7 +269,7 @@ function App() {
                       </p>
                     </div>
                   </div>
-                  <Connectors key={token} api={api} />
+                  <Connectors key={token} api={api} token={token} go={go} />
                 </>
               ) : tab === "Computer tools" ? (
                 <>
@@ -279,11 +285,11 @@ function App() {
                   <Automation key={token} api={api} />
                 </>
               ) : tab === "Employees" ? (
-                <Workforce key={token} api={api} />
+                <Workforce key={token} api={api} token={token} onChat={(id) => { setChatEmployeeId(id); go("Assistant"); }} />
               ) : tab === "Subscription" ? (
                 <Billing key={token} api={api} />
               ) : (
-                <Settings key={token} api={api} />
+                <Settings key={token} api={api} onCloudChat={() => { setChatMode("CLOUD_ONLY"); setChatEmployeeId(""); go("Assistant"); }} />
               )}
             </div>
           )}

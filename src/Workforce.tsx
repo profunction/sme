@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { errorText, type API } from "./api";
 import { Icon } from "./Icon";
 import { TaskReview } from "./TaskReview";
+import { AssignedTask } from "./AssignedTask";
+import { useLanguage } from "./i18n";
 type Employee = {
   id?: string;
   name: string;
@@ -39,7 +41,11 @@ const tools = [
   "excel.inspect", "excel.preview", "excel.fill", "browser.inspect", "browser.fill",
   "windows.inspect", "windows.fill", "macos.inspect", "macos.fill",
 ];
-export function Workforce({ api }: { api: API }) {
+export function Workforce({ api, token, onChat }: { api: API; token?: string; onChat?: (id: string) => void }) {
+  const { t } = useLanguage();
+  const [busy, setBusy] = useState(false);
+  const [assignedId, setAssignedId] = useState("");
+  const [resultKind, setResultKind] = useState("employee");
   const [employees, setEmployees] = useState<Employee[]>([]),
     [selected, setSelected] = useState<Employee>(fresh()),
     [connectors, setConnectors] = useState<{ id: string; name: string }[]>([]),
@@ -89,14 +95,20 @@ export function Workforce({ api }: { api: API }) {
   useEffect(() => {
     void refresh().catch((e) => setError(errorText(e)));
   }, [api]);
-  async function action(fn: () => Promise<unknown>) {
-    setError("");
+  async function action(fn: () => Promise<unknown>, kind = "employee") {
+    if (busy) return;
+    setBusy(true); setError(""); setResult(undefined); setAssignedId("");
     try {
-      setResult(await fn());
+      const value = await fn();
+      if (kind === "assignment") {
+        const receipt = value as { id?: unknown; status?: unknown } | null;
+        if (!receipt || typeof receipt.id !== "string" || typeof receipt.status !== "string")
+          throw new Error(t("未收到有效任务编号，请查看任务记录。", "No valid task ID was returned. Check task history."));
+        setAssignedId(receipt.id);
+      } else { setResultKind(kind); setResult(value); }
       await refresh();
-    } catch (e) {
-      setError(errorText(e));
-    }
+    } catch (e) { setError(errorText(e)); }
+    finally { setBusy(false); }
   }
   function toggleTool(name: string) {
     setSelected({
@@ -135,7 +147,7 @@ export function Workforce({ api }: { api: API }) {
                   "document.extract",
                 ],
               });
-              setResult(undefined);
+              setResult(undefined); setAssignedId("");
             }}
           >
             <Icon name="people" size={17} />
@@ -143,11 +155,11 @@ export function Workforce({ api }: { api: API }) {
           </button>
         ))}
       </div>
-      {error && <p role="alert">{error}</p>}
+
       <button
         onClick={() => {
           setSelected(fresh());
-          setResult(undefined);
+          setResult(undefined); setAssignedId("");
         }}
       >
         New employee
@@ -159,11 +171,19 @@ export function Workforce({ api }: { api: API }) {
               {e.name} · {e.role}
             </strong>
             <span className="badge">{e.active ? "active" : "paused"}</span>
-            <button className="secondary" onClick={() => setSelected(e)}>
+            <button disabled={busy || !e.active} onClick={async () => {
+              setBusy(true); setError("");
+              try {
+                if (!e.tools.includes("ai.chat")) await api(`/employees/${e.id}`, "PUT", { ...e, tools: [...e.tools, "ai.chat"] });
+                onChat?.(e.id!);
+              } catch (failure) { setError(errorText(failure)); }
+              finally { setBusy(false); }
+            }}>{e.tools.includes("ai.chat") ? t(`和 ${e.name} 聊天`, `Chat with ${e.name}`) : t("启用聊天并打开", "Enable chat and open")}</button>
+            <button className="secondary" disabled={busy} onClick={() => { setSelected(e); setResult(undefined); setAssignedId(""); setError(""); }}>
               Edit employee
             </button>
             <button
-              onClick={() => action(() => api("/tasks?employee_id=" + e.id))}
+              disabled={busy} onClick={() => action(() => api("/tasks?employee_id=" + e.id), "history")}
             >
               Task history
             </button>
@@ -198,6 +218,9 @@ export function Workforce({ api }: { api: API }) {
           }
         />
       </label>
+      <label><input type="checkbox" checked={selected.tools.includes("ai.chat")} onChange={() => toggleTool("ai.chat")} />{t("允许这个员工参与 AI 聊天", "Allow AI chat with this employee")}</label>
+      <p>{t("员工的云端预算默认是 0。如需让这个员工使用付费 API，请在高级设置中明确填写预算。", "Employee cloud budgets default to 0. To allow this employee to use a paid API, set a budget in advanced settings.")}</p>
+      <details><summary>{t("高级权限与员工预算", "Advanced permissions and employee budgets")}</summary>
       <h3>Assigned tools</h3>
       {tools.map((t) => (
         <label key={t}>
@@ -286,7 +309,9 @@ export function Workforce({ api }: { api: API }) {
         />{" "}
         Active employee
       </label>
+      </details>
       <button
+        disabled={busy}
         onClick={() =>
           action(async () => {
             const saved = await api<Employee>(
@@ -372,7 +397,7 @@ export function Workforce({ api }: { api: API }) {
           )}
           <button
             disabled={
-              !advanced &&
+              busy || (!advanced &&
               (!selected.tools.includes("document.generate") ||
                 !assignment.company.trim() ||
                 !assignment.customer.trim() ||
@@ -381,7 +406,7 @@ export function Workforce({ api }: { api: API }) {
                 !Number.isFinite(Number(assignment.quantity)) ||
                 Number(assignment.quantity) <= 0 ||
                 !Number.isFinite(Number(assignment.unit_price)) ||
-                Number(assignment.unit_price) < 0)
+                Number(assignment.unit_price) < 0))
             }
             onClick={() =>
               action(() => {
@@ -411,17 +436,22 @@ export function Workforce({ api }: { api: API }) {
                       payload: data,
                       employee_id: selected.id,
                     });
-              })
+              }, "assignment")
             }
           >
-            Assign task
+            {busy ? t("正在提交…", "Submitting…") : "Assign task"}
           </button>
         </>
       )}
+      {error && <p role="alert">{error}</p>}
+      {assignedId && <AssignedTask api={api} id={assignedId} token={token} />}
       {result !== undefined && (
         <div className="panel">
-          <h3>保存 / 任务结果</h3>
-          <TaskReview value={result} />
+          <h3>{resultKind === "employee" ? t("员工资料已保存（不是任务执行结果）", "Employee saved — not a task result") : t("任务记录", "Task history")}</h3>
+          {resultKind === "history" && Array.isArray(result) ? <>
+            {!result.length && <p>{t("这位员工还没有任务记录。", "No tasks assigned to this employee yet.")}</p>}
+            {result.map((item: { id: string; tool: string; status: string }) => <div key={item.id}><span>{item.tool} · {item.status}</span><button onClick={() => setAssignedId(item.id)}>{t("查看任务结果", "View task result")}</button></div>)}
+          </> : <TaskReview value={result} />}
           <details>
             <summary>进阶诊断数据</summary>
             <pre>{JSON.stringify(result, null, 2)}</pre>

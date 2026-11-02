@@ -649,6 +649,8 @@ pre {
   margin: 22px 0 32px;
 }
 .metric-card {
+  display: block;
+  margin: 0;
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 12px;

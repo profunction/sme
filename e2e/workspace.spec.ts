@@ -35,21 +35,24 @@ test("business drafts and approved mock connector writes through the actual UI",
   const draft = page.locator("li").filter({ has: page.getByText("document.generate", { exact: true }) });
   await expect(draft.getByText("Total: 31.96 MYR · Tax: 1.81")).toBeVisible();
   await expect(
-    page.locator("li").filter({ has: page.getByText("quotation.pdf", { exact: true }) }).getByRole("button", { name: "Download", exact: true }),
+    page.locator("li").filter({ has: page.getByText("quotation.pdf", { exact: true }) }).getByRole("button", { name: "Download", exact: true }).first(),
   ).toBeVisible();
   await page.getByRole("button", { name: "Connectors", exact: true }).click();
+  await page.getByLabel("显示测试演示系统（不是真实业务资料）").check();
   const warehouse = page.locator("li").filter({
     has: page.getByRole("heading", {
       name: "Mock WMS (development only)",
       exact: true,
     }),
   });
-  await warehouse.getByRole("button", { name: "Configure" }).click();
+  await warehouse.getByRole("button", { name: "配置", exact: true }).click();
+  await page.getByText("高级设置与写入权限", { exact: true }).click();
   await page.getByLabel("Allow writes after exact-task approval").check();
-  await page.getByRole("button", { name: "Save connector" }).click();
+  await page.getByRole("button", { name: "保存连接设置" }).click();
   await expect(page.locator("pre")).toContainText('"write_enabled": true');
+  await page.getByText("申请写入资料", { exact: true }).click();
   await page.getByLabel("Record JSON").fill('{"id":"ui-stock","quantity":42}');
-  await page.getByRole("button", { name: "Request write approval" }).click();
+  await page.getByRole("button", { name: "申请写入审批" }).click();
   await expect(page.locator("pre")).toContainText("pending_approval");
   await page
     .getByRole("button", { name: "Business tools", exact: true })

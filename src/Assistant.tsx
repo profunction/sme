@@ -6,19 +6,21 @@ import { Automation } from "./Automation";
 import { useLanguage } from "./i18n";
 type Message = { role: string; content: string };
 type Intent = "ask" | "reply" | "fill";
-export function Assistant({ api, initialDraft, onGuide, onDraftLoaded, onSettings }: {
+export function Assistant({ api, initialDraft, onGuide, onDraftLoaded, onSettings, initialEmployeeId, initialMode = "LOCAL_ONLY" }: {
   api: API;
   initialDraft?: { text: string; revision: number };
   onGuide?: () => void;
   onDraftLoaded?: () => void;
   onSettings?: () => void;
+  initialEmployeeId?: string;
+  initialMode?: string;
 }) {
   const { language, t } = useLanguage();
   const [intent, setIntent] = useState<Intent>("ask");
   const [message, setMessage] = useState("");
   const [replyDraft, setReplyDraft] = useState("");
   const [fillSource, setFillSource] = useState("");
-  const [mode, setMode] = useState("LOCAL_ONLY");
+  const [mode, setMode] = useState(initialMode);
   const [consent, setConsent] = useState(false);
   const [privacy, setPrivacy] = useState("standard");
   const [complexity, setComplexity] = useState("simple");
@@ -30,6 +32,7 @@ export function Assistant({ api, initialDraft, onGuide, onDraftLoaded, onSetting
   const [copied, setCopied] = useState(false);
   const [employees, setEmployees] = useState<{ id: string; name: string }[]>([]);
   const [employeeId, setEmployeeId] = useState("");
+  useEffect(() => { if (initialEmployeeId) setEmployeeId(initialEmployeeId); }, [initialEmployeeId]);
   useEffect(() => {
     api<{ claims?: { environment?: string } }>("/license")
       .then((value) => setLocalPreview(value.claims?.environment === "local_preview"))
@@ -66,6 +69,7 @@ export function Assistant({ api, initialDraft, onGuide, onDraftLoaded, onSetting
         <p>{t("先说目标；涉及填写时，先看内容，再由你确认。", "Tell me the goal. Review any field changes before you approve them.")}</p></div>
       <button className="secondary" onClick={onGuide}>{t("看例子", "Examples")}</button>
     </div>
+    {employeeId && <p role="status">{t("正在与这位员工聊天", "Chatting with this employee")}: <strong>{employees.find((employee) => employee.id === employeeId)?.name || t("正在读取…", "Loading…")}</strong></p>}
     <div className="filter-tabs" role="tablist" aria-label={t("你想做什么", "Choose a task")}>
       {([['ask', '问问题', 'Ask a question'], ['reply', '帮我写回复', 'Draft a reply'], ['fill', '帮我填写', 'Fill for me']] as const).map(([value, zh, en]) =>
         <button type="button" role="tab" key={value} aria-selected={intent === value}

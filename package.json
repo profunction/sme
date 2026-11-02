@@ -1,6 +1,6 @@
 {
   "name": "nightbrew-ai-employee",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "private": true,
   "description": "NightBrew AI desktop for Windows and macOS",
   "author": "NightBrew",
@@ -20,7 +20,9 @@
     "desktop:install": "node node_modules/electron/install.js",
     "package:mac:unsigned": "node scripts/prepare-release.cjs --development --mac && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --mac dmg zip --config build/electron-release.json --publish never",
     "package:mac:local": "node scripts/prepare-release.cjs --development --local-preview --mac && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --mac dmg zip --config build/electron-release.json --publish never",
-    "package:win:local": "node scripts/prepare-release.cjs --development --local-preview && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --win nsis --config build/electron-release.json --publish never"
+    "package:win:local": "node scripts/prepare-release.cjs --development --local-preview && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --win nsis --config build/electron-release.json --publish never",
+    "package:win:api": "node scripts/prepare-release.cjs --development --byok-preview && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --win nsis --config build/electron-release.json --publish never",
+    "package:mac:api": "node scripts/prepare-release.cjs --development --byok-preview --mac && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --mac dmg zip --config build/electron-release.json --publish never"
   },
   "dependencies": {
     "electron-updater": "6.8.11",

@@ -35,10 +35,12 @@ export function Dashboard({
   connected,
   go,
   usePrompt,
+  openTasks,
 }: {
   api: API;
   connected: boolean;
   go: (p: Page) => void;
+  openTasks?: (filter: string, id?: string) => void;
   usePrompt: (p: Prompt) => void;
 }) {
   const { t, language } = useLanguage();
@@ -186,15 +188,15 @@ export function Dashboard({
         </div>
       )}
       <div className="metric-grid">
-        {metrics.map((m) => (
-          <div className="metric-card" key={m.name}>
+        {metrics.map((m, index) => (
+          <button type="button" className="metric-card" key={m.name} style={{ textAlign: "left", color: "inherit", width: "100%" }} onClick={() => index === 0 ? go("Employees") : openTasks ? openTasks(["all", "running", "pending_approval", "completed"][index]) : go("Business tools")}>
             <div className={`metric-icon ${m.color}`}>
               <Icon name={m.icon} />
             </div>
             <span>{m.name}</span>
             <strong>{m.value}</strong>
-            <small>{m.detail}</small>
-          </div>
+            <small>{m.detail} · {t("点击查看", "View details")} →</small>
+          </button>
         ))}
       </div>
       <div className="section-heading">
@@ -247,6 +249,7 @@ export function Dashboard({
                   <div>
                     <strong>{t(toolNames[task.tool] || task.tool, task.tool)}</strong>
                     <small>{task.id.slice(0, 8)}</small>
+                    <button className="text-button" onClick={() => openTasks ? openTasks("all", task.id) : go("Business tools")}>{t("查看结果", "View result")}</button>
                   </div>
                   <span className={`status-badge ${task.status}`}>
                     {t(statusNames[task.status] || task.status, task.status.replaceAll("_", " "))}

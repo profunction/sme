@@ -4,6 +4,7 @@ const http = require("node:http");
 const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
+const apiPreview = process.argv.includes("--byok-preview");
 const { startBackend, stopBackend } = require("../desktop/backend.cjs");
 (async () => {
   const data = fs.mkdtempSync(
@@ -56,7 +57,7 @@ const { startBackend, stopBackend } = require("../desktop/backend.cjs");
     };
     const license = await api("/license");
     assert.equal(license.body.required, false);
-    assert.equal(license.body.claims.environment, "local_preview");
+    assert.equal(license.body.claims.environment, apiPreview ? "byok_preview" : "local_preview");
     const capabilities = await api("/automation/capabilities");
     assert.equal(capabilities.status, 200);
     assert.equal(capabilities.body.excel.available, true);
@@ -81,14 +82,14 @@ const { startBackend, stopBackend } = require("../desktop/backend.cjs");
         await api("/chat", "POST", {
           message: "Must not leave device",
           mode: "CLOUD_ONLY",
-          cloud_consent: true,
+          cloud_consent: !apiPreview,
         })
       ).status,
       403,
     );
     assert.equal(
       (await api("/settings/ai", "PUT", { cloud_allowed: true })).status,
-      403,
+      apiPreview ? 200 : 403,
     );
     const created = await api("/tasks", "POST", {
       tool: "document.generate",

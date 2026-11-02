@@ -1,6 +1,7 @@
 """Authenticated loopback API; all AI output is untrusted text, never executable instructions."""
 
 import json
+import time
 import os
 import secrets
 from contextlib import asynccontextmanager
@@ -32,7 +33,7 @@ async def lifespan(_app):
     yield
 
 
-app = FastAPI(title="NightBrew AI Employee", version="0.9.3", lifespan=lifespan)
+app = FastAPI(title="NightBrew AI Employee", version="0.9.4", lifespan=lifespan)
 DB = Path(os.getenv("NIGHTBREW_DB", str(Path.home() / ".nightbrew" / "chat.sqlite3")))
 TOKEN = os.getenv("NIGHTBREW_SESSION_TOKEN") or secrets.token_urlsafe(32)
 
@@ -104,6 +105,8 @@ def ai_settings():
 def update_ai_settings(policy: ai.Policy):
     if licensing.local_preview() and (policy.cloud_allowed or policy.billing_source != "BYOK"):
         raise HTTPException(403, "Local preview only supports local Ollama; cloud inference is disabled")
+    if licensing.byok_preview() and policy.billing_source != "BYOK":
+        raise HTTPException(403, "API preview requires your own API key; included credits are unavailable")
     with connect() as db:
         store.put(db, "ai_policy", policy.model_dump())
         store.audit(db, "ai_policy_updated", "settings")
@@ -151,6 +154,70 @@ def cloud_key(request: KeyRequest):
     }
 
 
+@app.get("/settings/cloud-connection", dependencies=[Depends(authorize)])
+def cloud_connection():
+    try:
+        present = bool(credentials.cloud_key())
+        available = True
+    except Exception:
+        present, available = False, False
+    return {
+        "key_present": present, "vault_available": available,
+        "local_only_preview": licensing.local_preview(),
+        "byok_preview": licensing.byok_preview(),
+        "models": model_settings.load(connect).model_dump(),
+    }
+
+
+class ConnectionCheck(BaseModel):
+    consent: bool = False
+
+
+@app.post("/settings/cloud-connection/test", dependencies=[Depends(authorize)])
+def test_cloud_connection(request: ConnectionCheck):
+    if not request.consent:
+        raise HTTPException(403, "Explicit consent is required to send the key to the configured AI provider")
+    if licensing.local_preview():
+        raise HTTPException(403, "Local preview only supports local Ollama; use the separate API preview build")
+    try:
+        licensing.enforce(connect)
+    except ValueError as exc:
+        raise HTTPException(403, str(exc)) from None
+    with connect() as db:
+        db.execute("BEGIN IMMEDIATE")
+        if store.get(db, "emergency_stop", False):
+            raise HTTPException(409, "Emergency stop is active")
+        previous = store.get(db, "cloud_connection_check_at", 0)
+        if time.time() - previous < 10:
+            raise HTTPException(429, "Wait 10 seconds before testing again")
+        store.put(db, "cloud_connection_check_at", time.time())
+    models = model_settings.load(connect)
+    try:
+        key = credentials.cloud_key()
+    except Exception:
+        raise HTTPException(503, "Credential store unavailable") from None
+    if not key:
+        raise HTTPException(422, "Save an API key before testing")
+    try:
+        base = ai.cloud_base(models.cloud_url)
+        # Explicit connection test only: no business data, chat inference or retries.
+        with httpx.Client(timeout=15, follow_redirects=False, trust_env=True) as provider:
+            with provider.stream("GET", base + "/models", headers={"Authorization": "Bearer " + key}) as response:
+                response.raise_for_status()
+                body = bytearray()
+                for chunk in response.iter_bytes():
+                    body.extend(chunk)
+                    if len(body) > 2 * 1024**2:
+                        raise ValueError("Response too large")
+                data = json.loads(body)
+        available = any(isinstance(item, dict) and item.get("id") == models.cloud_model for item in data["data"])
+    except (httpx.HTTPError, ValueError, KeyError, TypeError):
+        raise HTTPException(502, "AI connection check failed. Check the key, provider URL, model and network. Providers without a models endpoint cannot be verified by this check.") from None
+    with connect() as db:
+        store.audit(db, "cloud_connection_checked", models.cloud_model, "model listed" if available else "model not listed")
+    return {"authenticated": True, "model_available": available, "inference_tested": False}
+
+
 @app.get("/usage", dependencies=[Depends(authorize)])
 def usage():
     with connect() as db:
@@ -182,6 +249,8 @@ def chat(request: ai.Chat):
             raise HTTPException(409, "Emergency stop is active")
         policy = ai.Policy(**store.get(db, "ai_policy", {}))
         measured = store.get(db, "benchmark")
+    if licensing.byok_preview() and policy.billing_source != "BYOK":
+        raise HTTPException(403, "API preview requires your own API key")
     try:
         selected = ai.select(request, policy, measured, local_model)
     except ValueError as exc:
@@ -347,6 +416,8 @@ def estimate_chat(request: ai.Chat):
     with connect() as db:
         policy = ai.Policy(**store.get(db, "ai_policy", {}))
         measured = store.get(db, "benchmark")
+    if licensing.byok_preview() and policy.billing_source != "BYOK":
+        raise HTTPException(403, "API preview requires your own API key")
     try:
         selected = ai.select(
             request, policy, measured, model_settings.load(connect).local_model
@@ -436,6 +507,19 @@ def task_history(employee_id: str | None = None):
         }
         for row in rows
     ]
+
+
+@app.get("/tasks/{identifier}", dependencies=[Depends(authorize)])
+def task_status(identifier: str):
+    with connect() as db:
+        row = db.execute(
+            "SELECT t.*, a.employee_id FROM tasks t LEFT JOIN assignments a ON a.task_id=t.id WHERE t.id=?",
+            (identifier,),
+        ).fetchone()
+    if not row:
+        raise HTTPException(404, "Task not found")
+    return {**dict(row), "payload": json.loads(row["payload"]),
+            "result": json.loads(row["result"]) if row["result"] else None}
 
 
 @app.post("/tasks/{identifier}/approve", dependencies=[Depends(authorize)])

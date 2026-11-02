@@ -1,4 +1,4 @@
-param([switch]$LocalPreview)
+param([switch]$LocalPreview, [switch]$ApiPreview)
 $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $false
 trap {
@@ -28,8 +28,12 @@ if ($LocalPreview) {
     $policy = Get-Content 'release\win-unpacked\resources\release-policy.json' -Raw | ConvertFrom-Json
     if (-not $policy.local_preview -or -not $policy.development_unsigned) { throw 'Expected explicit local development preview policy' }
 }
+if ($ApiPreview) {
+    $policy = Get-Content 'release\win-unpacked\resources\release-policy.json' -Raw | ConvertFrom-Json
+    if (-not $policy.byok_preview -or -not $policy.development_unsigned -or $policy.local_preview) { throw 'Expected separate API development preview policy' }
+}
 Test-OwnedApplication 'release\win-unpacked\NightBrew AI Employee.exe'
-$pattern = if ($LocalPreview) { 'release\NightBrew-LOCAL-PREVIEW-*.exe' } else { 'release\NightBrew-DEV-UNSIGNED-*.exe' }
+$pattern = if ($ApiPreview) { 'release\NightBrew-API-PREVIEW-*.exe' } elseif ($LocalPreview) { 'release\NightBrew-LOCAL-PREVIEW-*.exe' } else { 'release\NightBrew-DEV-UNSIGNED-*.exe' }
 $installer = Get-ChildItem $pattern | Select-Object -First 1
 if (-not $installer) { throw 'No development installer produced' }
 $destination = "$env:RUNNER_TEMP\NightBrewInstalled"
@@ -40,6 +44,10 @@ if ($installation.ExitCode -ne 0) { throw "Silent installation failed (exit $($i
 if ($LocalPreview) {
     $installedPolicy = Get-Content "$destination\resources\release-policy.json" -Raw | ConvertFrom-Json
     if (-not $installedPolicy.local_preview) { throw 'Installed application is not the local preview' }
+}
+if ($ApiPreview) {
+    $installedPolicy = Get-Content "$destination\resources\release-policy.json" -Raw | ConvertFrom-Json
+    if (-not $installedPolicy.byok_preview) { throw 'Installed application is not the API preview' }
 }
 Write-Host 'Silent installation passed'
 Test-OwnedApplication "$destination\NightBrew AI Employee.exe"
