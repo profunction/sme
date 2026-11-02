@@ -182,7 +182,7 @@ def test_missing_permissions_gives_actionable_message(monkeypatch):
 
 
 def test_bundled_script_contains_no_code_evaluation_or_keystroke_fallback():
-    script = mac.SCRIPT.read_text()
+    script = mac.SCRIPT.read_text(encoding="utf-8")
     for forbidden in ["eval(", "new Function", "doShellScript", "keystroke(", "keyCode(", ".click("]:
         assert forbidden not in script
     assert "AXSecureTextField" in script

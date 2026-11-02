@@ -30,7 +30,7 @@ const path = require("node:path");
       .locator(".connection-pill.connected")
       .waitFor({ timeout: 15000 });
     await window
-      .getByRole("heading", { name: "工作台", exact: false })
+      .getByRole("heading", { name: "AI 助理", exact: true })
       .waitFor();
     const subscription = window.getByRole("button", {
       name: "Subscription",
