@@ -1,4 +1,6 @@
-# NightBrew AI Employee — 0.9.3 development release
+# NightBrew AI Employee — 0.9.4 development release
+
+0.9.4 adds guided DeepSeek/API-key setup, a separate customer-key **API-PREVIEW** distribution, accurate employee task status with approval/results/downloads, clickable dashboard metrics and direct employee chat entry. [中文上手步骤](docs/QUICK_START_ZH.md) · [changes, checks and limitations](docs/USABILITY_0.9.4.md). The existing LOCAL-PREVIEW remains Ollama-only; neither preview grants a paid subscription or shared cloud allowance. Live provider credentials and billing remain unverified.
 
 0.9.3 adds a simpler bilingual assistant: ask, draft an editable reply, then move it into a reviewed filling workflow. New browser/Windows field inspection, Excel template edits and an experimental Mac Accessibility adapter remain bounded by approval. See [simple usage and precise limits](docs/SIMPLE_ASSISTANT_0.9.3.md); no universal website/app compatibility or automatic sending is claimed.
 
