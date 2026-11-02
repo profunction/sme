@@ -21,6 +21,8 @@ ALLOWED_TOOLS = {
     "purchase_order.import",
     "purchase_order.review",
     "purchase_order.export",
+    "excel.inspect", "excel.preview", "excel.fill", "browser.inspect", "browser.fill",
+    "macos.inspect", "macos.fill", "windows.inspect", "windows.fill",
 }
 
 
@@ -34,7 +36,7 @@ class Employee(BaseModel):
             "excel.analyze",
             "document.extract",
         ],
-        max_length=20,
+        max_length=32,
     )
     connectors: dict[str, list[Literal["read", "write"]]] = Field(
         default_factory=dict, max_length=50

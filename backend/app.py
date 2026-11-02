@@ -32,7 +32,7 @@ async def lifespan(_app):
     yield
 
 
-app = FastAPI(title="NightBrew AI Employee", version="0.9.2", lifespan=lifespan)
+app = FastAPI(title="NightBrew AI Employee", version="0.9.3", lifespan=lifespan)
 DB = Path(os.getenv("NIGHTBREW_DB", str(Path.home() / ".nightbrew" / "chat.sqlite3")))
 TOKEN = os.getenv("NIGHTBREW_SESSION_TOKEN") or secrets.token_urlsafe(32)
 
@@ -200,6 +200,7 @@ def chat(request: ai.Chat):
         licensing.reserve_task(connect, operation_id, request.employee_id)
     except ValueError as exc:
         raise HTTPException(403, str(exc)) from None
+    employee_instructions = ai.instructions(request, employee_instructions)
     cloud = selected == "CLOUD_ONLY"
     if cloud and policy.billing_source == "INCLUDED":
         reservation = None
@@ -360,6 +361,7 @@ def estimate_chat(request: ai.Chat):
                 system_text = f"Role: {employee.role}\n{employee.instructions}"
         except ValueError as exc:
             raise HTTPException(403, str(exc)) from None
+    system_text = ai.instructions(request, system_text)
     if selected == "CLOUD_ONLY" and policy.billing_source == "INCLUDED":
         import uuid
 
@@ -622,6 +624,23 @@ def update_plans(config: Plans):
 
 
 from backend import automation
+
+
+@app.get("/automation/capabilities", dependencies=[Depends(authorize)])
+def automation_capabilities():
+    import platform
+    from backend import macos_automation
+    system = platform.system()
+    return {
+        "platform": system,
+        "browser": automation.browser_capabilities(connect),
+        "windows": {"available": system == "Windows", "reason": (
+            "Requires an interactive Windows session and an explicitly allowed application"
+            if system == "Windows" else "Windows application control requires Windows")},
+        "macos": macos_automation.capabilities(),
+        "excel": {"available": True, "reason": "Reviewed XLSX template editing creates a new file; it does not control the Excel application"},
+        "automatic_sending": False,
+    }
 
 
 @app.get("/automation/policy", dependencies=[Depends(authorize)])

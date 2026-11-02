@@ -31,6 +31,15 @@ class Chat(BaseModel):
     privacy: Literal["private", "standard"] = "standard"
     employee_id: str | None = Field(default=None, max_length=80)
     complexity: Literal["simple", "complex"] = "simple"
+    response_language: Literal["zh", "en"] | None = None
+    intent: Literal["ask", "reply"] = "ask"
+
+
+def instructions(request, employee_instructions=""):
+    language = {"zh": "请用中文回复。", "en": "Reply in English."}.get(request.response_language, "")
+    draft = ("Draft an editable reply using only the supplied facts. Do not invent prices, policies or promises; ask if information is missing. Do not send messages or control software."
+             if request.intent == "reply" else "")
+    return "\n\n".join(value for value in (employee_instructions, language, draft) if value)
 
 
 def select(request, policy, measured, model):

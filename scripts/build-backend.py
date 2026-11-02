@@ -50,6 +50,7 @@ if sys.platform == "win32":
         "comtypes",
     ]
 if sys.platform == "darwin":
-    command += ["--hidden-import", "keyring.backends.macOS"]
+    command += ["--hidden-import", "keyring.backends.macOS",
+                "--add-data", str(Path("backend/macos_accessibility.jxa.js")) + ":backend"]
 command += ["backend/entrypoint.py"]
 subprocess.run(command, check=True)

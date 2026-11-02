@@ -5,7 +5,7 @@ import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 
-from backend import automation, documents, files, licensing, purchaseorders, store, workforce
+from backend import automation, documents, files, licensing, purchaseorders, spreadsheet_fill, store, workforce
 
 EXECUTOR = ThreadPoolExecutor(max_workers=2, thread_name_prefix="nightbrew-task")
 TOOLS = {
@@ -19,9 +19,38 @@ TOOLS = {
     "purchase_order.import",
     "purchase_order.review",
     "purchase_order.export",
+    "excel.inspect",
+    "excel.preview",
+    "excel.fill",
+    "browser.inspect",
+    "browser.fill",
+    "macos.inspect",
+    "macos.fill",
+    "windows.inspect",
+    "windows.fill",
 }
-APPROVAL = {"file.delete", "connector.write", "browser.run", "windows.run", "purchase_order.export"}
+APPROVAL = {"file.delete", "connector.write", "browser.run", "windows.run", "purchase_order.export",
+            "excel.fill", "browser.inspect", "browser.fill", "macos.inspect", "macos.fill",
+            "windows.inspect", "windows.fill"}
 TIMEOUT_SECONDS = 60
+SAFE_ERRORS = {
+    "Open the approved Windows application and exact window before inspecting":
+        "请先打开已允许的 Windows 软件及目标窗口。 / Open the allowed Windows application and its target window first.",
+    "Allow NightBrew in macOS Privacy & Security → Accessibility and Automation, then try again":
+        "请在 macOS 系统设置 → 隐私与安全性中允许 NightBrew 的辅助功能与自动化权限，再重试。 / Allow NightBrew in macOS Privacy & Security → Accessibility and Automation, then retry.",
+    "Open the approved Mac application first; its bundle ID must match exactly":
+        "请先打开已允许的 Mac 软件，并核对软件和窗口。 / Open the allowed Mac application and check the exact window first.",
+    "The exact Mac window was not found or is ambiguous; inspect it again":
+        "找不到唯一对应的 Mac 窗口，请核对标题并重新读取。 / Check the exact Mac window title and inspect again.",
+    "This window does not expose supported identifiable text fields through macOS Accessibility":
+        "此窗口没有提供目前可识别的文字字段，需要另外适配。 / This window has no supported identifiable text fields and needs a tested adapter.",
+    "Mac form changed; inspect it and request a new approval":
+        "Mac 窗口或内容已有变化，请重新读取并确认。 / The Mac form changed. Inspect and approve it again.",
+    "Page, fields or existing values changed; inspect and approve again":
+        "网页或原有内容已变化，请重新读取后确认。 / The page or existing values changed. Inspect and approve again.",
+    "Form changed during filling; stop and inspect again":
+        "填写时表单发生变化，已停止。请检查已填内容再重新读取。 / The form changed during filling. Check any completed edits and inspect again.",
+}
 # A single process owns the SQLite job queue. No external action is replayed after restart.
 
 
@@ -32,13 +61,21 @@ class Cancelled(Exception):
 def create(connect, tool, payload, employee_id=None):
     if tool not in TOOLS and tool != "connector.write":
         raise ValueError("Tool is not permitted")
-    if tool.startswith("purchase_order."):
+    if tool in ("excel.inspect", "excel.preview", "excel.fill"):
+        payload = spreadsheet_fill.prepare(tool, payload)
+    elif tool.startswith("macos."):
+        from backend import macos_automation
+        payload = macos_automation.prepare(tool, payload, automation.policy(connect).mac_applications)
+    elif tool in ("windows.inspect", "windows.fill"):
+        from backend import windows_forms
+        payload = windows_forms.prepare(tool, payload, automation.policy(connect).applications)
+    elif tool.startswith("purchase_order."):
         payload = purchaseorders.prepare(tool, payload)
     elif tool == "document.generate":
         payload = documents.BusinessDocument.model_validate(payload).model_dump(
             mode="json"
         )
-    elif tool in ("browser.run", "windows.run"):
+    elif tool in ("browser.run", "windows.run", "browser.inspect", "browser.fill"):
         payload = automation.prepare(connect, tool, payload)
     elif tool == "connector.read":
         from backend import connectors
@@ -105,12 +142,30 @@ def execute(connect, db_path, identifier):
     check = lambda: checkpoint(connect, identifier, deadline)
     result = None
     try:
+        prepared_payload = json.loads(row["payload"])
+        # Only validated browser form plans may extend the deadline by their
+        # bounded review period. Malformed persisted rows become failed tasks.
+        if row["tool"] in ("browser.inspect", "browser.fill"):
+            hold = prepared_payload.get("plan", {}).get("hold_seconds", 0)
+            if type(hold) is not int or not 0 <= hold <= 120:
+                raise ValueError("Invalid review period")
+            deadline += hold
         check()
         licensing.enforce(connect)
         employee_id = workforce.execution_check(connect, identifier)
         licensing.reserve_task(connect, identifier, employee_id)
-        payload = json.loads(row["payload"])
-        if row["tool"].startswith("purchase_order."):
+        payload = prepared_payload
+        if row["tool"] in ("excel.inspect", "excel.preview", "excel.fill"):
+            result = spreadsheet_fill.run(row["tool"], payload, connect, db_path, check)
+        elif row["tool"].startswith("macos."):
+            from backend import macos_automation
+            result = macos_automation.run(connect, db_path, payload, check)
+        elif row["tool"] in ("windows.inspect", "windows.fill"):
+            from backend import windows_forms
+            result = windows_forms.run(connect, db_path, payload, check)
+        elif row["tool"] in ("browser.inspect", "browser.fill"):
+            result = automation.browser_forms(connect, db_path, payload, check, row["tool"])
+        elif row["tool"].startswith("purchase_order."):
             result = purchaseorders.run(row["tool"], payload, connect, db_path, check)
         elif row["tool"] == "connector.write":
             from backend import connectors
@@ -164,6 +219,10 @@ def execute(connect, db_path, identifier):
                 else "Task failed; check input, connector configuration and permissions. External write outcome may be unknown; verify before retrying."
             )
         )
+        if isinstance(exc, ValueError) and str(exc) in SAFE_ERRORS:
+            # Return only reviewed constant messages, never target-provided
+            # content, subprocess stderr or credential-bearing exception text.
+            error = SAFE_ERRORS[str(exc)]
         with connect() as db:
             db.execute(
                 "UPDATE tasks SET status=?,error=?,updated_at=CURRENT_TIMESTAMP WHERE id=?",
