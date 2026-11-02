@@ -223,3 +223,27 @@ test("local preview is explicit, development-only and uses isolated data", () =>
     fs.rmSync(directory, { recursive: true, force: true });
   }
 });
+
+test("Mac local preview uses an explicit development policy and no Apple identity claim", () => {
+  const { spawnSync } = require("node:child_process");
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "nightbrew-mac-preview-"));
+  try {
+    const result = spawnSync(process.execPath, [path.resolve("scripts/prepare-release.cjs"),
+      "--development", "--local-preview", "--mac"], { cwd: directory, encoding: "utf8" });
+    assert.equal(result.status, 0, result.stderr);
+    const resources = path.join(directory, "build");
+    const config = JSON.parse(fs.readFileSync(path.join(resources, "electron-release.json")));
+    assert.equal(config.mac.identity, "-");
+    assert.equal(config.mac.notarize, false);
+    assert.equal(config.forceCodeSigning, false);
+    const packaged = configuration({ packaged: true, resources, root: directory,
+      dataDir: directory, platform: "darwin", environment: {} });
+    assert.equal(packaged.env.NIGHTBREW_LOCAL_PREVIEW, "1");
+    assert.equal(packaged.env.NIGHTBREW_ENFORCE_LICENSE, "0");
+    assert.equal(packaged.env.NIGHTBREW_ENV, "local-preview");
+    assert.equal(packaged.env.NIGHTBREW_ALLOW_MOCK_LICENSE, "0");
+    assert.equal(config.publish, null);
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});

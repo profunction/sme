@@ -19,6 +19,7 @@
     "test:electron": "node scripts/smoke-desktop.cjs",
     "desktop:install": "node node_modules/electron/install.js",
     "package:mac:unsigned": "node scripts/prepare-release.cjs --development --mac && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --mac dmg zip --config build/electron-release.json --publish never",
+    "package:mac:local": "node scripts/prepare-release.cjs --development --local-preview --mac && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --mac dmg zip --config build/electron-release.json --publish never",
     "package:win:local": "node scripts/prepare-release.cjs --development --local-preview && npm run build && npm run backend:build && python scripts/collect-notices.py && electron-builder --win nsis --config build/electron-release.json --publish never"
   },
   "dependencies": {

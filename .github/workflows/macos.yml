@@ -19,8 +19,10 @@ jobs:
         include:
           - runner: macos-15
             arch: arm64
+            local_preview: true
           - runner: macos-15-intel
             arch: x64
+            local_preview: false
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 35
     env:
@@ -58,17 +60,21 @@ jobs:
       - name: Build native macOS app and disk image
         run: |
           source .venv/bin/activate
-          npm run package:mac:unsigned
+          if [ '${{ matrix.local_preview }}' = 'true' ]; then
+            npm run package:mac:local
+          else
+            npm run package:mac:unsigned
+          fi
       - name: Verify bundled backend and application startup
         run: |
           source .venv/bin/activate
-          python scripts/verify-macos-package.py '${{ matrix.arch }}'
+          python scripts/verify-macos-package.py '${{ matrix.arch }}' ${{ matrix.local_preview && '--local-preview' || '' }}
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
-          name: NightBrew-macOS-${{ matrix.arch }}-DEV-UNSIGNED
+          name: NightBrew-macOS-${{ matrix.arch }}-${{ matrix.local_preview && 'LOCAL-PREVIEW' || 'DEV-UNSIGNED' }}
           path: |
             release/*.dmg
             release/*.zip
-            release/SHA256SUMS.txt
+            release/SHA256SUMS*.txt
           if-no-files-found: error
           retention-days: 14

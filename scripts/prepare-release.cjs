@@ -2,11 +2,12 @@ const fs = require("node:fs");
 const base = require("../package.json").build;
 const development = process.argv.includes("--development");
 const localPreview = process.argv.includes("--local-preview");
+const mac = process.argv.includes("--mac");
 if (localPreview && !development)
   throw Error(
     "Local preview is only available in an explicitly unsigned development build",
   );
-if (process.argv.includes("--mac") && !development)
+if (mac && !development)
   throw Error(
     "macOS production distribution requires a separate signing and notarization workflow",
   );
@@ -51,7 +52,13 @@ fs.writeFileSync("build/release-policy.json", JSON.stringify(policy, null, 2));
 const config = {
   ...base,
   forceCodeSigning: !development,
-  mac: { ...base.mac, identity: null },
+  mac: {
+    ...base.mac,
+    identity: mac && localPreview ? "-" : null,
+    // Ad-hoc signing verifies development bundle integrity without claiming
+    // an Apple Developer identity or notarization. Production is gated above.
+    ...(mac && localPreview ? { hardenedRuntime: false, notarize: false } : {}),
+  },
   win: {
     ...base.win,
     target: "nsis",

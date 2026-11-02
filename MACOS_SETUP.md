@@ -4,6 +4,8 @@ The initial supported baseline is macOS 15 or later (the CI validation platform)
 
 ## Download the development app
 
+For a runnable Apple Silicon local trial without the undeployed commercial license service, use **NightBrew-macOS-arm64-LOCAL-PREVIEW** and follow [MACOS_LOCAL_TRIAL.md](MACOS_LOCAL_TRIAL.md). This preview has isolated local data, local Ollama only, document/PO tools and no paid/cloud entitlements. Its ad-hoc integrity signature is not Apple Developer signing or notarization. The ordinary DEV-UNSIGNED policy described below remains available via `npm run package:mac:unsigned`; the Intel CI artifact retains that policy.
+
 Open [macOS build runs](https://github.com/profunction/sme/actions/workflows/macos.yml), select a successful run, and download the artifact matching your processor (GitHub login required). Unzip the artifact, open its DMG, and drag NightBrew AI Employee to Applications. The ZIP inside the artifact is an alternative application distribution. SHA256SUMS.txt records package checksums.
 
 These are unsigned, unnotarized development builds. macOS may block opening them. Only if you trust this repository and build, use System Settings → Privacy & Security → Open Anyway after the first launch attempt. Do not disable Gatekeeper globally. Organization-managed Macs may require administrator approval. Production distribution still needs an Apple Developer certificate and notarization.

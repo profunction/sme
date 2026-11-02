@@ -6,6 +6,8 @@ A Windows desktop AI workforce application with an additional macOS development 
 
 **0.9.2 fixes:** exact trusted USD cost ledger and immutable pricing snapshots, discrepancy reconciliation, malformed license/payment handling, employee chat quota accounting, real PostgreSQL adapter/migration fixes and local reviewed CSV/XLSX purchase-order export. See [executed results and remaining gaps](docs/BUGFIX_REPORT_0.9.2.md). Separate customer Credit units, full tenant/user policies, live payments/providers and signed Windows acceptance remain unfinished. The audit paragraphs describe the older baseline; the fix report records current evidence.
 
+Apple Silicon Mac local preview: [download/install guidance](MACOS_LOCAL_TRIAL.md). The arm64 CI artifact is **NightBrew-macOS-arm64-LOCAL-PREVIEW**; local tools require no commercial activation, and local chat uses Ollama installed separately on the Mac. The package is not Apple notarized.
+
 **This is not yet a verified commercial Windows release.** Windows CI has passed native UIA/vault, managed Electron, frozen backend and NSIS installation/startup checks; the [verified run](https://github.com/profunction/sme/actions/runs/41037603208) contains the unsigned development installer. Real model inference, merchant payments, deployed licensing/gateway services, code signing and signed update-chain validation require their actual runtime/owner configuration. See [ROADMAP.md](ROADMAP.md) for implementation versus verification status.
 
 ## Start in cloud
