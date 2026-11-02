@@ -37,3 +37,13 @@ After updating, send a short non-sensitive message in Cloud AI mode, with consen
 - Timeout: the provider may have processed a request; check provider usage before deciding to retry.
 
 No live customer key was supplied. The customer's original failure cause and live connectivity remain unverified until their actual provider response is observed. Native installer evidence is tracked separately against the exact code commit. These remain development previews, not signed commercial releases.
+
+
+## Native preview checks
+
+Code commit `8d75aed`:
+
+- [Windows run](https://github.com/profunction/sme/actions/runs/41477961391): native tests, managed Electron startup, API-preview frozen boundary checks and NSIS installation/startup checks passed. **NightBrew-Windows-API-PREVIEW** was uploaded (187 MB).
+- [macOS run](https://github.com/profunction/sme/actions/runs/41477961413): ARM64 API-preview native tests, bundle build, integrity, startup and owned-fixture checks passed. **NightBrew-macOS-arm64-API-PREVIEW** was uploaded (391 MB). The artifact includes DMG/ZIP/checksums. This is still ad-hoc signed and not Apple notarized.
+
+These checks do not verify the customer's DeepSeek account. The customer confirmed that the failing request used Cloud AI and a DeepSeek key; the old generic error does not reveal its original HTTP status. A new actual request is required to identify that failure category. No live provider credentials were used in development tests.

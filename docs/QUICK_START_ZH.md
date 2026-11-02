@@ -1,11 +1,11 @@
-# NightBrew 0.9.4：API Key、聊天与任务结果
+# NightBrew 0.9.5：API Key、聊天与任务结果
 
-## 下载 0.9.4 API 试用版
+## 下载 0.9.5 API 试用版
 
 打开下面对应页面，在下方 **Artifacts** 下载指定名称（需登录 GitHub，试用包保留 14 天）：
 
-- [Windows 下载页](https://github.com/profunction/sme/actions/runs/41463665490)：选 **NightBrew-Windows-API-PREVIEW**，解压后运行 `.exe`。
-- [Apple Silicon Mac 下载页](https://github.com/profunction/sme/actions/runs/41463664972)：选 **NightBrew-macOS-arm64-API-PREVIEW**，解压后使用 `.dmg` 或应用 ZIP。适用于 M 系列芯片，需 macOS 15 或以上。
+- [Windows 下载页](https://github.com/profunction/sme/actions/runs/41477961391)：选 **NightBrew-Windows-API-PREVIEW**，解压后运行 `.exe`。
+- [Apple Silicon Mac 下载页](https://github.com/profunction/sme/actions/runs/41477961413)：选 **NightBrew-macOS-arm64-API-PREVIEW**，解压后使用 `.dmg` 或应用 ZIP。适用于 M 系列芯片，需 macOS 15 或以上。
 
 这些包已通过对应平台的安装或启动检查。真实 AI Key 尚待用户自行验证，开发包的系统签名限制见文末。
 
@@ -13,7 +13,7 @@
 
 请打开 **AI 与隐私设置**，不用配置业务系统连接中的 POS / WMS / TMS。
 
-1. 想使用自己的 DeepSeek API Key：安装名称带 **API-PREVIEW** 的 0.9.4 版本。**LOCAL-PREVIEW** 保留为只用本机 Ollama 的版本。
+1. 想使用自己的 DeepSeek API Key：安装名称带 **API-PREVIEW** 的 0.9.5 版本。**LOCAL-PREVIEW** 保留为只用本机 Ollama 的版本。
 2. 点击 **使用 DeepSeek**。默认模型名为 `deepseek-chat`，API 地址为 `https://api.deepseek.com/v1`。实际可用性以连接测试及服务商账号为准。
 3. 把你自己的 Key 填入密码框，点击 **保存密钥与配置**。不要把 Key 发到聊天或截图里。Windows 使用凭据管理器，Mac 使用钥匙串。
 4. 核对服务地址，勾选允许连接测试，点击 **测试 AI 连接**。这是模型列表检查，不会生成回答；通过也不代表账户有余额。
@@ -27,6 +27,12 @@
 界面右上角可以切换中文 / English，未发送的内容会保留。
 
 没有 Key 也可使用本机 Ollama；在 **Ollama 与模型进阶设置** 中检测模型并保存。本软件不会替你购买 API 额度或下载大模型。
+
+## 已填 Key，但云端仍然报错
+
+0.9.5 会直接显示当前模式与模型，并区分 Key / 权限、服务商余额或计费（HTTP 402）、接口或模型（404）、限流（429）、网络与超时。旧版“AI provider unavailable”没有提供这些细节，不能单凭旧截图确定原因。
+
+从 API-PREVIEW 0.9.4 更新到 API-PREVIEW 0.9.5 不改工作区路径或密钥名称。先退出旧应用，再覆盖安装，保留现有 Key；重试一条不含敏感资料的短消息。如果失败，可提供新错误类别和 HTTP 代码，**不要提供密钥**。实际账户连接状态尚待这一步验证。
 
 ## 我要跟某个 AI 员工聊
 
