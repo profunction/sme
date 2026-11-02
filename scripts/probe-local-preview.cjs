@@ -57,6 +57,13 @@ const { startBackend, stopBackend } = require("../desktop/backend.cjs");
     const license = await api("/license");
     assert.equal(license.body.required, false);
     assert.equal(license.body.claims.environment, "local_preview");
+    const capabilities = await api("/automation/capabilities");
+    assert.equal(capabilities.status, 200);
+    assert.equal(capabilities.body.excel.available, true);
+    if (process.platform === "darwin")
+      assert.equal(capabilities.body.macos.available, true, "Mac Accessibility bridge must be included in the package");
+    if (process.platform === "win32")
+      assert.equal(capabilities.body.windows.available, true);
     assert.equal(
       (await api("/settings/models", "PUT", { local_model: "fixture:3b" }))
         .status,
