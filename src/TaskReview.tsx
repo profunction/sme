@@ -1,3 +1,4 @@
+import { useLanguage } from "./i18n";
 const labels: Record<string, string> = {
   platform: "系统",
   cpu: "处理器",
@@ -39,17 +40,26 @@ const labels: Record<string, string> = {
   browser_hosts: "允许的网站",
   browser_writes: "允许网页写入",
   applications: "允许的应用",
+  mac_applications: "允许的 Mac 应用",
+  values: "确认填写的内容",
+  form_snapshot: "已读取的表单",
+  visible: "显示独立浏览器",
+  hold_seconds: "浏览器保留时间（秒）",
+  allow_network_writes: "允许此网页任务自动保存或写入",
+  preview_hash: "确认内容的校验值",
+  source_sha256: "原文件校验值",
 };
 export function TaskReview({ value }: { value: unknown }) {
+  const { language, t } = useLanguage();
   if (value === null || typeof value !== "object")
     return (
       <span className="review-value">
         {typeof value === "boolean"
           ? value
-            ? "是"
-            : "否"
+            ? t("是", "Yes")
+            : t("否", "No")
           : value === null
-            ? "无"
+            ? t("无", "None")
             : String(value)}
       </span>
     );
@@ -67,7 +77,7 @@ export function TaskReview({ value }: { value: unknown }) {
     <dl className="task-review">
       {Object.entries(value).map(([key, entry]) => (
         <div key={key}>
-          <dt>{labels[key] || key}</dt>
+          <dt>{language === "en" ? key.replaceAll("_", " ") : labels[key] || key}</dt>
           <dd>
             <TaskReview value={entry} />
           </dd>

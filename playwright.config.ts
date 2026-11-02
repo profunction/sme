@@ -24,6 +24,7 @@ export default defineConfig({
       url: "http://127.0.0.1:8765/health",
       reuseExistingServer: false,
       env: {
+        NIGHTBREW_ENV: "test",
         NIGHTBREW_SESSION_TOKEN: "nightbrew-e2e-not-production",
         NIGHTBREW_DB: database,
       },

@@ -3,6 +3,7 @@ import type { FormEvent } from "react";
 import { errorText, type API } from "./api";
 import { TaskReview } from "./TaskReview";
 import { PurchaseOrder, type POImport, type POReport } from "./PurchaseOrder";
+import { ExcelFill, type SpreadsheetInspection, type SpreadsheetPreview } from "./ExcelFill";
 type FileEntry = { id: string; name: string; size: number };
 type Task = {
   id: string;
@@ -14,6 +15,8 @@ type Task = {
     file?: FileEntry;
     purchase_order?: POImport;
     po_review?: POReport;
+    spreadsheet?: SpreadsheetInspection;
+    spreadsheet_preview?: SpreadsheetPreview;
     totals?: { subtotal: string; tax: string; total: string; currency: string };
     sheets?: {
       sheet: string;
@@ -319,6 +322,7 @@ export function Business({ api, token }: { api: API; token: string }) {
         </fieldset>
       </form>
       <PurchaseOrder api={api} files={files} tasks={tasks} disabled={busy || stopped} action={action} />
+      <ExcelFill api={api} files={files} tasks={tasks} disabled={busy || stopped} action={action} />
       <h2>上传文件与分析 / Files & analysis</h2>
       <label>
         Upload XLSX, PDF, Word or CSV (maximum 10 MiB)

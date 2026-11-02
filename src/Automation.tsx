@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { errorText, type API } from "./api";
-type Policy = {
-  browser_hosts: string[];
-  browser_writes: boolean;
-  applications: Record<string, string>;
-};
+import { Autofill, type AutomationPolicy } from "./Autofill";
+type Policy = AutomationPolicy;
 type Step = {
   key: string;
   action: string;
@@ -23,7 +20,7 @@ const emptyStep = (): Step => ({
   auto_id: "",
   control_type: "",
 });
-export function Automation({ api }: { api: API }) {
+export function Automation({ api, initialSource, employeeId }: { api: API; initialSource?: string; employeeId?: string }) {
   const [policy, setPolicy] = useState<Policy>({
       browser_hosts: [],
       browser_writes: false,
@@ -61,6 +58,8 @@ export function Automation({ api }: { api: API }) {
     setSteps(steps.map((s, j) => (j === i ? { ...s, [key]: value } : s)));
   return (
     <>
+      <Autofill initialSource={initialSource} employeeId={employeeId} api={api} policy={policy} setPolicy={(next) => { setPolicy(next); setHosts(next.browser_hosts.join(", ")); }} />
+      <details><summary>高级操作与权限配置 / Advanced automation</summary>
       <p>
         Build an exact action plan, then approve it in Business tools. No
         unrestricted shell commands or page JavaScript are accepted. Windows
@@ -273,6 +272,7 @@ export function Automation({ api }: { api: API }) {
           action(() =>
             api("/tasks", "POST", {
               tool: mode === "browser" ? "browser.run" : "windows.run",
+              employee_id: employeeId || null,
               payload: {
                 ...(mode === "browser"
                   ? { url }
@@ -286,6 +286,7 @@ export function Automation({ api }: { api: API }) {
         Request plan approval
       </button>
       <pre role="status">{message}</pre>
+      </details>
     </>
   );
 }

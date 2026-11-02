@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { type API } from "./api";
 import { Icon } from "./Icon";
+import { useLanguage, localizedPrompt, localizedCategory } from "./i18n";
 import { prompts, type Page, type Prompt } from "./workspace";
 type Task = { id: string; tool: string; status: string; error?: string };
 type Hardware = {
@@ -40,6 +41,7 @@ export function Dashboard({
   go: (p: Page) => void;
   usePrompt: (p: Prompt) => void;
 }) {
+  const { t, language } = useLanguage();
   const [tasks, setTasks] = useState<Task[] | null>(null);
   const [employees, setEmployees] = useState<{ active: boolean }[] | null>(
     null,
@@ -89,30 +91,30 @@ export function Dashboard({
     tasks ? tasks.filter((t) => s.includes(t.status)).length : "—";
   const metrics = [
     {
-      name: "工作中的 AI 员工",
+      name: t("工作中的 AI 员工", "Active AI employees"),
       value: employees ? employees.filter((e) => e.active).length : "—",
-      detail: "已启用的员工",
+      detail: t("已启用的员工", "Enabled employees"),
       icon: "people",
       color: "blue",
     },
     {
-      name: "进行中的任务",
+      name: t("进行中的任务", "Tasks in progress"),
       value: count(["running", "queued"]),
-      detail: "运行与排队中",
+      detail: t("运行与排队中", "Running and queued"),
       icon: "clock",
       color: "violet",
     },
     {
-      name: "等待你的审批",
+      name: t("等待你的审批", "Awaiting your approval"),
       value: count(["pending_approval"]),
-      detail: "确认后才会执行",
+      detail: t("确认后才会执行", "Runs only after approval"),
       icon: "shield",
       color: "amber",
     },
     {
-      name: "已完成任务",
+      name: t("已完成任务", "Completed tasks"),
       value: count(["completed"]),
-      detail: `失败 ${count(["failed", "interrupted"])} 项 · 最近 100 项`,
+      detail: t(`失败 ${count(["failed", "interrupted"])} 项 · 最近 100 项`, `Failed ${count(["failed", "interrupted"])} · latest 100 tasks`),
       icon: "check",
       color: "green",
     },
@@ -123,17 +125,17 @@ export function Dashboard({
         <div className="welcome-copy">
           <span className="eyebrow">LESS BUSYWORK. MORE BUSINESS.</span>
           <h2>
-            把重复的工作，
+            {t("把重复的工作，", "Less repeated work.")}
             <br />
-            交给你的 AI 团队。
+            {t("交给你的 AI 团队。", "More help from your assistant.")}
           </h2>
           <p>
-            从一封客户邮件、一份报价单开始。
+            {t("从一句话开始，告诉助理你想完成什么。", "Start with one sentence. Tell the assistant what you need.")}
             <br />
-            你负责决定，NightBrew 帮你做好准备。
+            {t("你负责决定，NightBrew 帮你做好准备。", "You decide; NightBrew prepares the work.")}
           </p>
-          <button onClick={() => go("Guide")}>
-            带我完成第一件事 <Icon name="arrow" size={17} />
+          <button onClick={() => go("Assistant")}>
+            {t("开始对话", "Start a conversation")} <Icon name="arrow" size={17} />
           </button>
         </div>
         <div className="hero-visual" aria-hidden="true">
@@ -145,15 +147,15 @@ export function Dashboard({
           </div>
           <div className="float-chip chip-one">
             <Icon name="file" />
-            报价与文档
+            {t("报价与文档", "Quotes and documents")}
           </div>
           <div className="float-chip chip-two">
             <Icon name="people" />
-            你的 AI 团队
+            {t("你的 AI 团队", "Your AI team")}
           </div>
           <div className="float-chip chip-three">
             <Icon name="shield" />
-            由你审核决定
+            {t("由你审核决定", "You review and decide")}
           </div>
         </div>
       </div>
@@ -161,7 +163,7 @@ export function Dashboard({
         <div className="notice">
           <Icon name="shield" />
           <div>
-            <strong>先看看如何使用</strong>
+            <strong>{t("先看看如何使用", "See how to start")}</strong>
             <p>
               当前未连接工作区，数字显示为“—”。指南和提示词可以直接浏览；真实任务需要应用连接成功。
             </p>
@@ -173,7 +175,7 @@ export function Dashboard({
         <div className="notice warning">
           <Icon name="card" />
           <div>
-            <strong>需要完成设备授权</strong>
+            <strong>{t("需要完成设备授权", "Device activation required")}</strong>
             <p>
               此安装包尚未激活。你仍可查看指南；正式 AI 与任务功能需要有效授权。
             </p>
@@ -197,8 +199,8 @@ export function Dashboard({
       </div>
       <div className="section-heading">
         <div>
-          <h2>今天，想先完成什么？</h2>
-          <p>选一个常用任务，不需要自己想提示词。</p>
+          <h2>{t("今天，想先完成什么？", "What would you like to do first?")}</h2>
+          <p>{t("选一个常用任务，不需要自己想提示词。", "Choose a task, or tell the assistant what you need.")}</p>
         </div>
         <button className="text-button" onClick={() => go("Guide")}>
           查看全部模板 <Icon name="arrow" size={16} />
@@ -214,11 +216,11 @@ export function Dashboard({
             <span className="workflow-icon">
               <Icon name={p.icon} size={24} />
             </span>
-            <span className="workflow-category">{p.category}</span>
-            <strong>{p.title}</strong>
-            <span>{p.description}</span>
+            <span className="workflow-category">{localizedCategory(p.category, language)}</span>
+            <strong>{localizedPrompt(p, language).title}</strong>
+            <span>{localizedPrompt(p, language).description}</span>
             <span className="card-action">
-              {p.destination ? "打开工作工具" : "使用提示词"}{" "}
+              {p.destination ? t("打开工作工具", "Open tool") : t("使用提示词", "Use example")}{" "}
               <Icon name="arrow" size={16} />
             </span>
           </button>
@@ -227,27 +229,27 @@ export function Dashboard({
       <div className="dashboard-bottom">
         <div className="panel">
           <div className="section-heading compact">
-            <h2>最近任务</h2>
+            <h2>{t("最近任务", "Recent tasks")}</h2>
             <button
               className="text-button"
               onClick={() => go("Business tools")}
             >
-              查看任务与审批 →
+              {t("查看任务与审批 →", "Tasks and approvals →")}
             </button>
           </div>
           {tasks?.length ? (
             <ul className="recent-list">
-              {tasks.slice(0, 4).map((t) => (
-                <li key={t.id}>
+              {tasks.slice(0, 4).map((task) => (
+                <li key={task.id}>
                   <div className="recent-icon">
                     <Icon name="file" />
                   </div>
                   <div>
-                    <strong>{toolNames[t.tool] || t.tool}</strong>
-                    <small>{t.id.slice(0, 8)}</small>
+                    <strong>{t(toolNames[task.tool] || task.tool, task.tool)}</strong>
+                    <small>{task.id.slice(0, 8)}</small>
                   </div>
-                  <span className={`status-badge ${t.status}`}>
-                    {statusNames[t.status] || t.status}
+                  <span className={`status-badge ${task.status}`}>
+                    {t(statusNames[task.status] || task.status, task.status.replaceAll("_", " "))}
                   </span>
                 </li>
               ))}
@@ -257,49 +259,49 @@ export function Dashboard({
               <Icon name="file" size={30} />
               <strong>
                 {tasks
-                  ? "还没有任务，先做一个小尝试"
-                  : "连接后，你的任务会显示在这里"}
+                  ? t("还没有任务，先做一个小尝试", "No tasks yet. Try something small.")
+                  : t("连接后，你的任务会显示在这里", "Your tasks appear here after connecting.")}
               </strong>
-              <p>生成一份报价草稿，就能看到进度和结果。</p>
+              <p>{t("生成一份报价草稿，就能看到进度和结果。", "Create a quotation draft to see its progress and result.")}</p>
               <button
                 className="secondary"
                 onClick={() => go("Business tools")}
               >
-                制作第一份报价
+                {t("制作第一份报价", "Create a quotation")}
               </button>
             </div>
           )}
         </div>
         <div className="panel system-panel">
-          <h2>工作区状态</h2>
+          <h2>{t("工作区状态", "Workspace status")}</h2>
           <div className="system-line">
-            <span>本地 AI</span>
+            <span>{t("本地 AI", "Local AI")}</span>
             <span
               className={hardware?.ollama_available ? "good-text" : "muted"}
             >
               {hardware
                 ? hardware.ollama_available
-                  ? "Ollama 已连接"
-                  : "尚未连接 Ollama"
-                : "待检查"}
+                  ? t("Ollama 已连接", "Ollama connected")
+                  : t("尚未连接 Ollama", "Ollama disconnected")
+                : t("待检查", "Not checked")}
             </span>
           </div>
           <div className="system-line">
-            <span>可用本地模型</span>
+            <span>{t("可用本地模型", "Installed local models")}</span>
             <strong>{hardware ? hardware.models.length : "—"}</strong>
           </div>
           <div className="system-line">
-            <span>云端使用许可</span>
+            <span>{t("云端使用许可", "Cloud permission")}</span>
             <span>
               {usage
                 ? usage.policy.cloud_allowed
-                  ? "已允许 · 仍需逐次同意"
-                  : "默认关闭"
-                : "待检查"}
+                  ? t("已允许 · 仍需逐次同意", "Allowed · consent for each request")
+                  : t("默认关闭", "Off by default")
+                : t("待检查", "Not checked")}
             </span>
           </div>
           <div className="system-line">
-            <span>近期云端费用记录</span>
+            <span>{t("近期云端费用记录", "Recent cloud usage records")}</span>
             <strong>
               {usage
                 ? `USD ${usage.entries.reduce((sum, e) => sum + e.cost, 0).toFixed(2)}`
@@ -307,7 +309,7 @@ export function Dashboard({
             </strong>
           </div>
           <small>
-            最近 100 笔本地记录，可能含预留金额，并非服务商账单或已购买余额。
+            {t("最近 100 笔本地记录，可能含预留金额，并非服务商账单或已购买余额。", "Latest 100 local records, which may include reservations. These are not provider invoices or purchased credit balances.")}
           </small>
           <button
             className="secondary full-width"

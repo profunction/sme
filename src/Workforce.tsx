@@ -35,6 +35,9 @@ const tools = [
   "connector.write",
   "browser.run",
   "windows.run",
+  "purchase_order.import", "purchase_order.review", "purchase_order.export",
+  "excel.inspect", "excel.preview", "excel.fill", "browser.inspect", "browser.fill",
+  "windows.inspect", "windows.fill", "macos.inspect", "macos.fill",
 ];
 export function Workforce({ api }: { api: API }) {
   const [employees, setEmployees] = useState<Employee[]>([]),

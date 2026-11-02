@@ -50,6 +50,7 @@ test("guided draft survives connecting, remains unsent and keeps cloud consent o
     .fill("nightbrew-e2e-not-production");
   await page.getByRole("button", { name: "连接工作区", exact: true }).click();
   await expect(page.getByLabel("Message")).toContainText("安全的测试资料");
+  await page.getByText("AI 与隐私选项", { exact: true }).click();
   await page.getByLabel("处理方式").selectOption("CLOUD_ONLY");
   await expect(page.getByRole("checkbox")).not.toBeChecked();
   await expect(page.getByLabel("Message")).not.toHaveValue("");

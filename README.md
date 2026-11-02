@@ -1,4 +1,6 @@
-# NightBrew AI Employee — 0.9.2 development release
+# NightBrew AI Employee — 0.9.3 development release
+
+0.9.3 adds a simpler bilingual assistant: ask, draft an editable reply, then move it into a reviewed filling workflow. New browser/Windows field inspection, Excel template edits and an experimental Mac Accessibility adapter remain bounded by approval. See [simple usage and precise limits](docs/SIMPLE_ASSISTANT_0.9.3.md); no universal website/app compatibility or automatic sending is claimed.
 
 A Windows desktop AI workforce application with an additional macOS development build. Existing foundations include chat, business document drafts, explicit approved tools, scoped employees, licensing/billing protocols and packaging recipes. These building blocks do not establish complete commercial workflows.
 

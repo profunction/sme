@@ -12,9 +12,24 @@ import { Dashboard } from "./Dashboard";
 import { Guide } from "./Guide";
 import { Icon } from "./Icon";
 import { pages, type Page, type Prompt } from "./workspace";
+import { LanguageProvider, useLanguage } from "./i18n";
 import "./style.css";
 function App() {
+  const { language, setLanguage, t } = useLanguage();
+  const englishPages: Record<Page, [string, string]> = {
+    Dashboard: ["Dashboard", "Start with one useful task."],
+    Assistant: ["AI Assistant", "Ask a question, draft a reply, or fill a reviewed form."],
+    Employees: ["My AI Employees", "Assign roles, tools and work budgets."],
+    "Business tools": ["Documents & Excel", "Prepare documents and review your uploaded spreadsheets."],
+    "Computer tools": ["Fill for me", "Choose a permitted target, review the fields, then approve."],
+    Connectors: ["Business connections", "Configure and test your authorized business systems."],
+    "AI & privacy": ["AI & privacy", "Check local AI, cloud consent and spending limits."],
+    Subscription: ["Subscription & usage", "Review your license, plan and usage."],
+    Guide: ["Guide & templates", "Start simply, with examples when you need them."],
+  };
+  const label = (p: typeof pages[number]) => t(p.label, englishPages[p.id][0]);
   const [token, setToken] = useState("");
+  const [appVersion, setAppVersion] = useState("");
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem("nightbrew.theme");
     return ["navy", "light", "midnight"].includes(saved || "")
@@ -38,7 +53,7 @@ function App() {
     setSessionError(false);
     window.nightbrew
       ?.session()
-      .then((s) => setToken(s.token))
+      .then((s) => { setToken(s.token); setAppVersion(s.version || ""); setTab("Assistant"); })
       .catch(() => setSessionError(true));
   }
   useEffect(connectDesktop, []);
@@ -82,11 +97,11 @@ function App() {
         <div className="workspace-switch">
           <div className="workspace-avatar">N</div>
           <div>
-            <strong>我的企业工作区</strong>
-            <small>每一件小事，都值得做好</small>
+            <strong>{t("我的企业工作区", "My business workspace")}</strong>
+            <small>{t("说出任务，由你确认", "Tell me the task. You stay in control.")}</small>
           </div>
         </div>
-        <span className="nav-heading">WORKSPACE / 工作空间</span>
+        <span className="nav-heading">{t("工作空间", "WORKSPACE")}</span>
         <nav aria-label="主导航">
           {pages.slice(0, 6).map((p) => (
             <button
@@ -97,12 +112,12 @@ function App() {
               onClick={() => go(p.id)}
             >
               <Icon name={p.icon} />
-              <span>{p.label}</span>
+              <span>{label(p)}</span>
               {tab === p.id && <span className="active-dot" />}
             </button>
           ))}
         </nav>
-        <span className="nav-heading">MANAGE / 管理与帮助</span>
+        <span className="nav-heading">{t("管理与帮助", "MANAGE & HELP")}</span>
         <nav aria-label="管理导航">
           {pages.slice(6).map((p) => (
             <button
@@ -113,51 +128,54 @@ function App() {
               onClick={() => go(p.id)}
             >
               <Icon name={p.icon} />
-              <span>{p.label}</span>
+              <span>{label(p)}</span>
             </button>
           ))}
         </nav>
         <div className="sidebar-help">
           <Icon name="book" size={23} />
-          <strong>第一次使用 NightBrew？</strong>
-          <p>不用懂技术，从一份草稿开始。</p>
+          <strong>{t("不知道怎样开始？", "Not sure where to start?")}</strong>
+          <p>{t("先告诉助理你想做什么。", "Tell the assistant what you need.")}</p>
           <button onClick={() => go("Guide")}>
-            查看使用指南 <Icon name="arrow" size={15} />
+            {t("查看使用指南", "Open the guide")} <Icon name="arrow" size={15} />
           </button>
         </div>
         <div className="sidebar-foot">
           <span className={`connection-dot ${token ? "online" : ""}`} />
-          {token ? "工作区已连接" : "尚未连接工作区"}
-          <small>Windows & macOS · v0.9.1</small>
+          {token ? t("工作区已连接", "Workspace connected") : t("尚未连接工作区", "Workspace disconnected")}
+          <small>Windows & macOS{appVersion ? ` · v${appVersion}` : ""}</small>
         </div>
       </aside>
       <div className="main-area">
         <header className="topbar">
           <div>
             <span className="breadcrumb">
-              工作空间 <span>/</span> {page.label}
+              {t("工作空间", "Workspace")} <span>/</span> {label(page)}
             </span>
           </div>
           <div className="topbar-actions">
+            <select className="theme-switch" aria-label="界面语言 / Interface language" value={language} onChange={(event) => setLanguage(event.target.value as "zh" | "en")}>
+              <option value="zh">中文</option><option value="en">English</option>
+            </select>
             <select
               className="theme-switch"
-              aria-label="外观主题"
+              aria-label={t("外观主题", "Appearance theme")}
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
             >
-              <option value="navy">商务深蓝</option>
-              <option value="light">明亮简洁</option>
-              <option value="midnight">深色模式</option>
+              <option value="navy">{t("商务深蓝", "Business navy")}</option>
+              <option value="light">{t("明亮简洁", "Light")}</option>
+              <option value="midnight">{t("深色模式", "Dark")}</option>
             </select>
             <button className="help-button" onClick={() => go("Guide")}>
               <Icon name="book" size={17} />
-              使用指南
+              {t("使用指南", "Guide")}
             </button>
             <span className="topbar-divider" />
             <div className="user-avatar">NB</div>
             <div className="workspace-user">
-              <strong>我的工作区</strong>
-              <small>由你审核 · 由你决定</small>
+              <strong>{t("我的工作区", "My workspace")}</strong>
+              <small>{t("由你审核 · 由你决定", "Review first. You decide.")}</small>
             </div>
           </div>
         </header>
@@ -166,23 +184,23 @@ function App() {
             <div>
               <span className="eyebrow">NIGHTBREW WORKSPACE</span>
               <h1>
-                {page.label}
+                {label(page)}
                 {tab === "Dashboard" && <span className="heading-dot">.</span>}
               </h1>
-              <p>{page.description}</p>
+              <p>{t(page.description, englishPages[page.id][1])}</p>
             </div>
             <span className={`connection-pill ${token ? "connected" : ""}`}>
               <span className={`connection-dot ${token ? "online" : ""}`} />
-              {token ? "已连接" : "界面预览"}
+              {token ? t("已连接", "Connected") : t("界面预览", "Interface preview")}
             </span>
           </div>
           {sessionError && (
             <div className="notice warning" role="alert">
               <Icon name="shield" />
               <div>
-                <strong>暂时无法连接应用服务</strong>
-                <p>请稍等后重试；若仍失败，请重新打开应用。</p>
-                <button onClick={connectDesktop}>重新连接</button>
+                <strong>{t("暂时无法连接应用服务", "Cannot connect to the app service")}</strong>
+                <p>{t("请稍等后重试；若仍失败，请重新打开应用。", "Retry shortly, or reopen the app if the problem continues.")}</p>
+                <button onClick={connectDesktop}>{t("重新连接", "Reconnect")}</button>
               </div>
             </div>
           )}
@@ -198,12 +216,12 @@ function App() {
           ) : !token ? (
             <div className="panel empty-state connection-empty">
               <Icon name="shield" size={40} />
-              <h2>连接工作区后，就可以开始工作</h2>
+              <h2>{t("连接工作区后，就可以开始工作", "Connect your workspace to start")}</h2>
               <p>
-                桌面应用会自动连接。当前可先浏览指南和提示词，尚未发起任何真实任务。
+                {t("桌面应用会自动连接。当前可先浏览指南和提示词，尚未发起任何真实任务。", "The desktop app connects automatically. You can browse the guide first; no task has been started.")}
               </p>
               <button onClick={() => go("Guide")}>
-                先看看怎么使用 <Icon name="arrow" size={17} />
+                {t("先看看怎么使用", "Show me how")} <Icon name="arrow" size={17} />
               </button>
             </div>
           ) : (
@@ -217,13 +235,14 @@ function App() {
                     setDraft((current) => ({ ...current, text: "" }))
                   }
                   onGuide={() => go("Guide")}
+                  onSettings={() => go("AI & privacy")}
                 />
               ) : tab === "Business tools" ? (
                 <>
                   <div className="feature-guide">
                     <Icon name="file" />
                     <div>
-                      <strong>先填资料，再生成草稿，最后检查并下载</strong>
+                      <strong>{t("先填资料，再生成草稿，最后检查并下载", "Enter the facts, create a draft, then review and download")}</strong>
                       <p>
                         金额按你填写的数量、单价及税率计算。上传 Excel 后点击
                         Analyze Excel；下方可查看任务进度与审批。
@@ -237,7 +256,7 @@ function App() {
                   <div className="feature-guide">
                     <Icon name="link" />
                     <div>
-                      <strong>请由企业管理员配置连接</strong>
+                      <strong>{t("请由企业管理员配置连接", "Ask your administrator to configure connections")}</strong>
                       <p>
                         标有 Mock
                         的是演示系统，不是你的真实库存。先测试只读连接，再按需开启写入和审批。
@@ -251,10 +270,9 @@ function App() {
                   <div className="feature-guide">
                     <Icon name="shield" />
                     <div>
-                      <strong>先设定允许范围，再检查并批准计划</strong>
+                      <strong>{t("选择目标，再检查并批准填写内容", "Choose the target, review the values, then approve")}</strong>
                       <p>
-                        这是进阶功能。Windows 应用操作只支持
-                        Windows；浏览器自动化需要先配置兼容浏览器。
+                        {t("先读取获准的表单，再核对要填的内容。可操作范围取决于当前系统、权限和软件支持。", "Read an approved form, then review what will be filled. Availability depends on your OS, permissions and supported controls.")}
                       </p>
                     </div>
                   </div>
@@ -271,7 +289,7 @@ function App() {
           )}
           {!window.nightbrew && (
             <details className="developer-connection">
-              <summary>开发者连接（浏览器预览）</summary>
+              <summary>{t("开发者连接（浏览器预览）", "Developer connection (browser preview)")}</summary>
               <p>
                 顾客的桌面应用自动连接，不需要输入会话密钥。此处只用于本机开发调试；密钥不会保存到浏览器存储。
               </p>
@@ -301,18 +319,18 @@ function App() {
                   />
                 </label>
                 <button disabled={connecting || !connectionInput.trim()}>
-                  {connecting ? "连接中…" : "连接工作区"}
+                  {connecting ? t("连接中…", "Connecting…") : t("连接工作区", "Connect workspace")}
                 </button>
               </form>
             </details>
           )}
           <footer className="page-footer">
             <span>NightBrew AI Employee</span>
-            <span>重要决定，由你掌握。AI 生成内容请审核后使用。</span>
+            <span>{t("重要决定，由你掌握。AI 生成内容请审核后使用。", "You control important decisions. Review AI content before using it.")}</span>
           </footer>
         </section>
       </div>
     </main>
   );
 }
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!).render(<LanguageProvider><App /></LanguageProvider>);
