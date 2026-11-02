@@ -32,7 +32,7 @@ function App() {
   const [taskFilter, setTaskFilter] = useState("all");
   const [taskFocus, setTaskFocus] = useState("");
   const [chatEmployeeId, setChatEmployeeId] = useState("");
-  const [chatMode, setChatMode] = useState("LOCAL_ONLY");
+  const [chatMode, setChatMode] = useState<string>();
   const [appVersion, setAppVersion] = useState("");
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem("nightbrew.theme");
@@ -242,6 +242,7 @@ function App() {
                   onSettings={() => go("AI & privacy")}
                   initialEmployeeId={chatEmployeeId}
                   initialMode={chatMode}
+                  onModeChange={setChatMode}
                 />
               ) : tab === "Business tools" ? (
                 <>

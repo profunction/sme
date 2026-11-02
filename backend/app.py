@@ -21,6 +21,7 @@ from backend import (
     files,
     hardware,
     model_settings,
+    provider_errors,
     licensing,
     store,
     tasks,
@@ -33,7 +34,7 @@ async def lifespan(_app):
     yield
 
 
-app = FastAPI(title="NightBrew AI Employee", version="0.9.4", lifespan=lifespan)
+app = FastAPI(title="NightBrew AI Employee", version="0.9.5", lifespan=lifespan)
 DB = Path(os.getenv("NIGHTBREW_DB", str(Path.home() / ".nightbrew" / "chat.sqlite3")))
 TOKEN = os.getenv("NIGHTBREW_SESSION_TOKEN") or secrets.token_urlsafe(32)
 
@@ -211,8 +212,8 @@ def test_cloud_connection(request: ConnectionCheck):
                         raise ValueError("Response too large")
                 data = json.loads(body)
         available = any(isinstance(item, dict) and item.get("id") == models.cloud_model for item in data["data"])
-    except (httpx.HTTPError, ValueError, KeyError, TypeError):
-        raise HTTPException(502, "AI connection check failed. Check the key, provider URL, model and network. Providers without a models endpoint cannot be verified by this check.") from None
+    except (httpx.HTTPError, ValueError, KeyError, TypeError) as failure:
+        raise HTTPException(502, provider_errors.describe(failure, cloud=True, model=models.cloud_model, operation="connection_check")) from None
     with connect() as db:
         store.audit(db, "cloud_connection_checked", models.cloud_model, "model listed" if available else "model not listed")
     return {"authenticated": True, "model_available": available, "inference_tested": False}
@@ -380,12 +381,12 @@ def chat(request: ai.Chat):
             )
             if not isinstance(answer, str) or not answer.strip():
                 raise ValueError("Empty answer")
-    except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError):
+    except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError) as failure:
         if reservation:
             ai.settle(connect, reservation, None, policy, False)
         raise HTTPException(
             502,
-            "AI provider unavailable or returned an invalid response; no automatic fallback was attempted",
+            provider_errors.describe(failure, cloud=cloud, model=model),
         ) from None
     if reservation:
         try:

@@ -1,4 +1,6 @@
-# NightBrew AI Employee — 0.9.4 development release
+# NightBrew AI Employee — 0.9.5 development release
+
+0.9.5 fixes opaque cloud chat failures: sanitized provider error categories and HTTP status, visible processing mode/model, bilingual actionable messages, and preserved drafts without retries or provider fallback. An already enabled/configured cloud policy is reflected when opening chat; a key alone never authorizes cloud use. See [diagnostics and verification](docs/CHAT_ERRORS_0.9.5.md). This does not establish the cause of any customer's earlier generic error or verify their live API account.
 
 0.9.4 adds guided DeepSeek/API-key setup, a separate customer-key **API-PREVIEW** distribution, accurate employee task status with approval/results/downloads, clickable dashboard metrics and direct employee chat entry. [中文上手步骤](docs/QUICK_START_ZH.md) · [changes, checks and limitations](docs/USABILITY_0.9.4.md). The existing LOCAL-PREVIEW remains Ollama-only; neither preview grants a paid subscription or shared cloud allowance. Live provider credentials and billing remain unverified.
 

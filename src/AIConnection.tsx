@@ -6,7 +6,7 @@ type Models = { local_model: string; cloud_model: string; cloud_url: string };
 type Policy = { billing_source: string; cloud_allowed: boolean; monthly_limit_usd: number; credit_balance_usd: number; input_usd_per_million: number; output_usd_per_million: number; pricing_confirmed: boolean; local_complex_capable: boolean; max_output_tokens: number };
 type Connection = { key_present: boolean; local_only_preview: boolean; byok_preview: boolean; models: Models };
 export function AIConnection({ api, onChat, onSaved }: { api: API; onChat?: () => void; onSaved: () => Promise<void> }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [connection, setConnection] = useState<Connection>();
   const [models, setModels] = useState<Models>();
   const [policy, setPolicy] = useState<Policy>();
@@ -30,7 +30,7 @@ export function AIConnection({ api, onChat, onSaved }: { api: API; onChat?: () =
     if (busy) return;
     setBusy(true); setError(""); setMessage("");
     try { await fn(); }
-    catch (failure) { setError(errorText(failure)); }
+    catch (failure) { setError(errorText(failure, language)); }
     finally { setBusy(false); }
   }
   function modelField(name: keyof Models, value: string) {

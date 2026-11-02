@@ -69,19 +69,21 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           npm run test:electron
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-      - name: Build unsigned development installer
+      - name: Build API key preview installer
         run: |
           .venv\Scripts\Activate.ps1
-          npm run package:win:unsigned
+          npm run package:win:api
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-      - name: Validate packaged backend and silent installation
-        run: scripts/verify-windows-package.ps1
+      - name: Verify API preview boundaries in the frozen package
+        run: node scripts/probe-local-preview.cjs release/win-unpacked/resources --byok-preview
+      - name: Validate packaged backend and API preview installation
+        run: scripts/verify-windows-package.ps1 -ApiPreview
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
-          name: NightBrew-Windows-DEV-UNSIGNED
-          path: release/NightBrew-DEV-UNSIGNED-*.exe
+          name: NightBrew-Windows-API-PREVIEW
+          path: release/NightBrew-API-PREVIEW-*.exe
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 14
 
       - name: Build local Ollama preview using the validated native backend
         run: |
@@ -100,19 +102,17 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-      - name: Build API key preview using the validated native backend
+      - name: Build licensed development preview using the validated native backend
         run: |
-          node scripts/prepare-release.cjs --development --byok-preview
+          node scripts/prepare-release.cjs --development
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           npx electron-builder --win nsis --config build/electron-release.json --publish never
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-      - name: Verify API preview boundaries in the frozen package
-        run: node scripts/probe-local-preview.cjs release/win-unpacked/resources --byok-preview
-      - name: Validate API preview installation
-        run: scripts/verify-windows-package.ps1 -ApiPreview
+      - name: Validate licensed development installation
+        run: scripts/verify-windows-package.ps1
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
-          name: NightBrew-Windows-API-PREVIEW
-          path: release/NightBrew-API-PREVIEW-*.exe
+          name: NightBrew-Windows-DEV-UNSIGNED
+          path: release/NightBrew-DEV-UNSIGNED-*.exe
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 7
