@@ -50,7 +50,10 @@ if sys.platform == "win32":
         "comtypes",
     ]
 if sys.platform == "darwin":
+    mac_bridge = Path(__file__).resolve().parent.parent / "backend/macos_accessibility.jxa.js"
+    if not mac_bridge.is_file():
+        raise SystemExit("The bundled Mac Accessibility bridge source is missing")
     command += ["--hidden-import", "keyring.backends.macOS",
-                "--add-data", str(Path("backend/macos_accessibility.jxa.js")) + ":backend"]
+                "--add-data", str(mac_bridge) + ":backend"]
 command += ["backend/entrypoint.py"]
 subprocess.run(command, check=True)
