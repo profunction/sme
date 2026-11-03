@@ -45,10 +45,14 @@ TypeScript and the Vite website build passed. Three Playwright browser tests pas
 Real AI chat and persistent business data require a backend with protected login, same-origin APIs, server-side key protection, spending enforcement and clearly scoped user/tenant authorization. The existing desktop backend must not be exposed publicly without that boundary. Website control of a customer's Windows/macOS software additionally requires an explicitly connected local companion; this preview does not implement that connection.
 
 
-## Initial publication result
+## Publication follow-up — 2026-11-03
 
-Code commit `12502a3`, [workflow run](https://github.com/profunction/sme/actions/runs/41658859688): website build, three browser tests and both static artifact uploads passed. The GitHub Pages configuration/deploy job was blocked: `Resource not accessible by integration` when creating the Pages site. The site is not yet published and no public preview URL has been verified.
+Code commit `3ba99f5`, [workflow run](https://github.com/profunction/sme/actions/runs/41672842087): backend security tests, website build, browser integration tests, static artifact uploads and Pages configuration/deployment all report success. GitHub reports the deployed environment URL as **https://profunction.github.io/sme/**. The earlier Pages permission error below is historical. A direct fetch from this execution environment returned a proxy connection error, so independent public HTTP/browser access was not verified here. This deployment serves only static assets; the new key field is disabled until a protected same-origin website backend is hosted. No public AI backend or live provider test was deployed.
 
-The repository owner must open [Pages settings](https://github.com/profunction/sme/settings/pages), then set **Build and deployment → Source → GitHub Actions**. The workflow can then be run again from [the website workflow](https://github.com/profunction/sme/actions/workflows/web-preview.yml). The current workflow token cannot grant itself repository-administration permission; no personal access token is requested.
+## Initial publication result (historical)
+
+Code commit `12502a3`, [workflow run](https://github.com/profunction/sme/actions/runs/41658859688): website build, three browser tests and both static artifact uploads passed. The GitHub Pages configuration/deploy job was blocked: `Resource not accessible by integration` when creating the Pages site. At that initial run, the site was not published and no public preview URL had been verified.
+
+For that initial failure, the repository owner needed to open [Pages settings](https://github.com/profunction/sme/settings/pages), then set **Build and deployment → Source → GitHub Actions**. The workflow could then be run again from [the website workflow](https://github.com/profunction/sme/actions/workflows/web-preview.yml). The current workflow token cannot grant itself repository-administration permission; no personal access token is requested.
 
 The built artifact is **NightBrew-Web-Preview** on the verified build run. The local task preview is served by Vite at `/web-preview.html`; its localhost address is an environment-local address, not a public link for the customer's computer.
