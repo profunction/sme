@@ -1,5 +1,17 @@
 # Feature status — 2026-11-01
 
+**Website follow-up — 2026-11-03:** the optional personal website has an API-key entry page and an isolated single-owner backend. The baseline matrix below continues to describe its stated desktop/authority scope.
+
+| Website scope | Status | Evidence and limit |
+| --- | --- | --- |
+| Owner login/revocable sessions, CSRF, encrypted key save/delete, fixed DeepSeek destination | IMPLEMENTED AND TESTED | 9 backend tests; browser flow through actual local FastAPI, provider mocked |
+| Per-message consent, BYOK budget reservation, chat and stored history | IMPLEMENTED AND TESTED | Actual website-to-backend browser test; sends only the current message, not prior history; no real key used |
+| Source launcher and website Docker/Compose recipes | IMPLEMENTED BUT UNVERIFIED | Launcher help and backend imports tested; Docker build and deployment not executed |
+| Public functional AI website | BLOCKED BY EXTERNAL DEPENDENCY | Requires chosen backend host, HTTPS setup and real provider acceptance; GitHub Pages alone is static |
+| Multi-company website, enterprise login, web agents/document upload, computer control | NOT IMPLEMENTED | Personal website does not expose privileged desktop routes; existing preview drafts are session-only |
+
+Details: [WEBSITE_AI_SETUP.md](WEBSITE_AI_SETUP.md).
+
 **0.9.2 update:** [BUGFIX_REPORT_0.9.2.md](BUGFIX_REPORT_0.9.2.md) supersedes affected baseline rows below. It records implemented exact USD accounting, registry limits, local chat quotas, payment validation, real PostgreSQL testing and the structured CSV/XLSX PO review/export GUI. Native Gemini/Claude, distinct customer Credit units, full corporate RBAC/budgets, OCR/vendor submission and commercial live acceptance remain incomplete.
 
 Baseline `ca68b44`; Phase 1 follow-up is listed separately. Status applies only to the precisely described scope. **IMPLEMENTED AND TESTED** includes repeatable mocked protocols, not live vendor certification. **IMPLEMENTED BUT UNVERIFIED** means code exists without relevant acceptance evidence. **PARTIALLY IMPLEMENTED** means essential behavior is missing. **NOT IMPLEMENTED** means no implementation was found. **BLOCKED BY EXTERNAL DEPENDENCY** identifies release acceptance requiring an external service, account or platform. Root documents describing historical phases do not override this matrix.

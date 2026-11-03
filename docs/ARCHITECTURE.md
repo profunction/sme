@@ -23,3 +23,9 @@ Retain existing local document tools, approvals, employee permissions, connector
 Schema proposal: [REPOSITORY_AUDIT.md, section 9](REPOSITORY_AUDIT.md#9-database-changes-proposed-not-applied). Do not make destructive changes or rewrite applied migration 001. Introduce additive migrations with reconciliation, actual PostgreSQL tests and restore evidence first.
 
 FieldOps remains a separate product and database. Its mobile authorization and sync features are not shared with this desktop today.
+
+## Personal website follow-up — 2026-11-03
+
+The optional website now uses a dedicated `backend/web_ai.py` FastAPI service with the built React assets at the same origin. It serves a single owner, using a hashed workspace password, revocable cookie sessions, CSRF protection, encrypted server-side DeepSeek key storage and the existing BYOK usage reservation/settlement functions. Its SQLite database is separate from desktop data. Only login, settings, provider checks, chat/history and usage routes are exposed; desktop task, hardware, connector and automation routes are absent.
+
+This service does not replace the commercial licensing/payment authority or implement tenant RBAC. GitHub Pages can publish the static interface but cannot run this backend. Public HTTPS hosting, a real provider account and operator acceptance remain outstanding. Local service/browser integration was exercised with mocked provider responses. See [website setup and limitations](WEBSITE_AI_SETUP.md).
