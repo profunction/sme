@@ -29,3 +29,9 @@ fieldops/mobile/web/
 fieldops/mobile/analysis_options.yaml
 fieldops/mobile/*.iml
 fieldops/mobile/.metadata
+
+.venv-web/
+
+private-config.json
+
+*.sqlite3-*

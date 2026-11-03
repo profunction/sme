@@ -1,6 +1,6 @@
 # NightBrew website interface preview
 
-This is an independently built website preview alongside the existing Electron desktop application. It is not a production SaaS release and is not connected to the desktop backend or a customer account.
+This website is built independently alongside the existing Electron desktop app. It is not a production SaaS release. The static GitHub Pages variant has no backend; the new personal website backend provides protected DeepSeek key entry and chat when served at the same origin. See [website AI setup](WEBSITE_AI_SETUP.md).
 
 Working features:
 
@@ -9,7 +9,7 @@ Working features:
 - Session-only task briefs and employee configuration drafts, clearly labelled as unexecuted.
 - Exact integer-decimal quotation calculations with CSV download. Uploaded files, product data and tax rates are not guessed. Spreadsheet formula prefixes in text fields are neutralized on export. CSV output is a draft requiring review, not an issued invoice or accounting entry.
 - Local file selection lists only metadata; it does not upload or read contents.
-- No provider calls, API-key form, cloud storage, paid activation, fake usage or computer-control claims. Refreshing clears all business drafts. Only the existing language preference is retained in browser storage.
+- The static variant makes only a same-origin backend availability check. Its API-key input remains disabled without the personal backend and owner login. It does not transmit provider keys, upload files, activate subscriptions or control computers. Business drafts remain session-only; only language preferences use browser storage.
 
 ## Build and run
 
@@ -24,7 +24,7 @@ node_modules/.bin/playwright test --config playwright.web.config.ts
 
 Output: `build/web-preview/index.html` and its assets. Local development: `node_modules/.bin/vite --config vite.web.config.ts`, then open `/web-preview.html` on that server. This environment's localhost address is not a public website URL.
 
-The dedicated entry is `src/web-main.tsx`; desktop entrypoints and authentication remain unchanged. The static preview's CSP disables network connections and native form submissions. It does not provide a proxy to the privileged local backend.
+The dedicated entry is `src/web-main.tsx`; desktop entrypoints and authentication remain unchanged. The preview CSP permits only same-origin connections and disables native form submissions. It does not provide a proxy to the privileged local backend.
 
 ## Publication
 

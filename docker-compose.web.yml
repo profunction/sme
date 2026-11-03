@@ -1,0 +1,30 @@
+# Existing-server deployment recipe, not automatic provisioning.
+services:
+  personal-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    environment:
+      NIGHTBREW_WEB_ORIGIN: ${NIGHTBREW_WEB_ORIGIN:?Set the exact HTTPS website origin}
+    ports:
+      - '127.0.0.1:8787:8787'
+    volumes:
+      - personal_web_data:/data
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,noexec,nosuid
+    cap_drop: [ALL]
+    security_opt: ['no-new-privileges:true']
+    logging:
+      driver: json-file
+      options:
+        max-size: '5m'
+        max-file: '3'
+    healthcheck:
+      test: ['CMD', 'python', '-c', "import os,json,urllib.request,urllib.parse; host=urllib.parse.urlsplit(os.environ['NIGHTBREW_WEB_ORIGIN']).netloc; r=urllib.request.urlopen(urllib.request.Request('http://127.0.0.1:8787/web-api/status',headers={'Host':host}),timeout=5); assert json.load(r)['website_backend']"]
+      interval: 30s
+      timeout: 6s
+      retries: 3
+volumes:
+  personal_web_data:

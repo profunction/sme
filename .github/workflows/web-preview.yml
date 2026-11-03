@@ -2,7 +2,7 @@ name: Publish website interface preview
 on:
   push:
     branches: [main]
-    paths: ['src/WebPreview.tsx', 'src/web-main.tsx', 'src/web-preview.css', 'src/i18n.tsx', 'src/Icon.tsx', 'web-preview.html', 'vite.web.config.ts', 'playwright.web.config.ts', 'web-tests/**', '.github/workflows/web-preview.yml', 'package.json', 'package-lock.json']
+    paths: ['src/WebPreview.tsx', 'src/WebAI.tsx', 'backend/web_ai.py', 'backend/requirements-web.lock.txt', 'backend/tests/test_web_ai.py', 'src/web-main.tsx', 'src/web-preview.css', 'src/i18n.tsx', 'src/Icon.tsx', 'web-preview.html', 'vite.web.config.ts', 'playwright.web.config.ts', 'web-tests/**', '.github/workflows/web-preview.yml', 'package.json', 'package-lock.json']
   workflow_dispatch:
 permissions:
   contents: read
@@ -15,13 +15,23 @@ jobs:
     timeout-minutes: 12
     env:
       NIGHTBREW_CHROMIUM: /usr/bin/google-chrome
+      NIGHTBREW_WEB_BACKEND_TEST: '1'
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '24'
           cache: npm
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
       - run: npm ci
+      - name: Install website backend dependencies
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install -r backend/requirements-web.lock.txt pytest==9.2.0
+      - name: Test website authentication, encrypted keys and cost controls
+        run: .venv/bin/python -m pytest --noconftest backend/tests/test_web_ai.py -q
       - name: Build standalone interface preview
         run: |
           node_modules/.bin/tsc --noEmit

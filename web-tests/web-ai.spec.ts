@@ -1,0 +1,42 @@
+import { test, expect } from '@playwright/test';
+
+test('website owner can sign in, encrypt a key, check models, authorize chat and reload actual history', async ({ page }) => {
+  test.skip(process.env.NIGHTBREW_WEB_BACKEND_TEST !== '1', 'Requires the owned test backend');
+  const key = 'fixture-provider-key-for-web-ui';
+  const externalCalls: string[] = [];
+  page.on('request', request => { if (request.url().startsWith('https://api.deepseek.com')) externalCalls.push(request.url()); });
+  await page.goto('http://127.0.0.1:8789/');
+  await page.getByRole('button', { name: '填写 DeepSeek API Key', exact: true }).click();
+  const setup = page.getByRole('region', { name: 'DeepSeek API 连接', exact: true });
+  await setup.getByLabel('Website workspace password', { exact: true }).fill('fixture-owner-password-123');
+  await setup.getByRole('button', { name: '登录工作区', exact: true }).click();
+  await expect(setup.getByLabel('DeepSeek API key', { exact: true })).toBeEnabled();
+  await setup.getByLabel('DeepSeek API key', { exact: true }).fill(key);
+  await setup.getByRole('button', { name: '保存 API Key', exact: true }).click();
+  await expect(setup.getByLabel('DeepSeek API key', { exact: true })).toHaveValue('');
+  await expect(setup.getByRole('status')).toContainText('密钥已加密保存');
+  const status = await page.evaluate(async () => (await fetch('/web-api/status')).json());
+  expect(status.settings.key_present).toBe(true);
+  expect(JSON.stringify(status)).not.toContain(key);
+  expect(await page.evaluate(() => JSON.stringify(localStorage))).not.toContain(key);
+  await setup.getByRole('button', { name: '同意查询 DeepSeek 模型列表', exact: true }).click();
+  await expect(setup.getByRole('status')).toContainText('模型列表可访问');
+  await setup.getByLabel('input_usd_per_million', { exact: true }).fill('1');
+  await setup.getByLabel('output_usd_per_million', { exact: true }).fill('2');
+  await setup.getByLabel('monthly_limit_usd', { exact: true }).fill('1');
+  await setup.getByLabel('我已核实当前模型价格', { exact: true }).check();
+  await setup.getByLabel('允许使用我自己的付费 DeepSeek API', { exact: true }).check();
+  await setup.getByRole('button', { name: '保存模型与预算', exact: true }).click();
+  await expect(setup.getByRole('status')).toContainText('模型与预算已保存');
+  await setup.getByRole('button', { name: '开始 DeepSeek 聊天', exact: true }).click();
+  await page.getByLabel('任务内容', { exact: true }).fill('A non-sensitive test question');
+  await page.getByRole('button', { name: '同意云端处理并发送', exact: true }).click();
+  await expect(page.getByLabel('AI 聊天记录')).toContainText('Owned browser-test AI answer');
+  await expect(page.getByLabel('任务内容', { exact: true })).toHaveValue('');
+  await page.reload();
+  await expect(page.getByLabel('AI 聊天记录')).toContainText('Owned browser-test AI answer');
+  await page.getByRole('button', { name: '连接与设置', exact: true }).click();
+  await page.getByRole('button', { name: '退出网站工作区', exact: true }).click();
+  await expect(page.getByLabel('DeepSeek API key', { exact: true })).toBeDisabled();
+  expect(externalCalls).toEqual([]); // Provider calls belong to the backend, not the browser.
+});

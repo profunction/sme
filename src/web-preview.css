@@ -823,3 +823,16 @@ small {
     padding:12px 14px
   }
 }
+
+.web-ai-fields { border: 0; margin: 0; padding: 0; min-width: 0; }
+.web-ai-fields h3 { margin: 26px 0 10px; }
+.web-ai-fields p { font-size: 12px; }
+.web-ai-fields button { margin: 5px 8px 5px 0; }
+.web-secondary { background: #edf2fb; color: #4b688f; border: 1px solid #dce5f4; border-radius: 9px; padding: 12px 15px; font-size: 12px; cursor: pointer; }
+.web-check { display: flex; gap: 9px; align-items: flex-start; line-height: 1.8; }
+.web-check input { width: auto; margin-top: 5px; }
+.web-error { background: #fff2f3; color: #a74151; border: 1px solid #f5d6dc; border-radius: 10px; padding: 14px; font-size: 12px; }
+.web-ai-messages { max-height: 420px; overflow: auto; margin: 22px 0; }
+.web-ai-message { background: #f6f8fd; border: 1px solid #e2e9f5; border-radius: 10px; padding: 15px; margin-bottom: 12px; }
+.web-ai-message strong { font-size: 11px; color: #6d86ae; }
+.web-ai-message p { white-space: pre-wrap; overflow-wrap: anywhere; margin: 8px 0 0; font-size: 13px; color: #3e587f; }

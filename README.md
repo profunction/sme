@@ -1,5 +1,7 @@
 # NightBrew AI Employee — 0.9.6 development release
 
+The website now has a **DeepSeek API-key settings panel** and a separate single-owner backend with protected login, encrypted key storage, model checking and consented/budgeted chat. [Website AI setup](docs/WEBSITE_AI_SETUP.md). GitHub Pages alone cannot run this service: its key field stays disabled until the same-origin backend is deployed and the owner signs in. This personal website service does not grant a paid subscription or expose the desktop automation API.
+
 0.9.6 moves per-message cloud consent into the explicit **Consent and send to cloud** button beside the composer. It avoids the distant checkbox/reset loop, prevents duplicate sends, blocks private cloud-only submissions and reports when submitted consent is rejected. Server policy and spending gates remain enforced. [Change details and executed tests](docs/CLOUD_SEND_0.9.6.md).
 
 0.9.5 fixes opaque cloud chat failures: sanitized provider error categories and HTTP status, visible processing mode/model, bilingual actionable messages, and preserved drafts without retries or provider fallback. An already enabled/configured cloud policy is reflected when opening chat; a key alone never authorizes cloud use. See [diagnostics and verification](docs/CHAT_ERRORS_0.9.5.md). This does not establish the cause of any customer's earlier generic error or verify their live API account.

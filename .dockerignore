@@ -7,3 +7,11 @@ build
 release
 fieldops
 *.sqlite3
+
+.venv-web
+
+.local
+
+private-config.json
+
+*.sqlite3-*

@@ -21,7 +21,8 @@ test('web preview preserves drafts across pages and language changes without con
   await page.getByRole('button', { name: 'AI workspace', exact: true }).click();
   await expect(page.getByLabel('Task brief', { exact: true })).toHaveValue('请整理星期五交货的客户跟进事项。');
   await page.getByRole('button', { name: 'Connections', exact: true }).click();
-  await expect(page.getByText('Not connected; no API keys collected', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Enter your DeepSeek API key here', exact: true })).toBeVisible();
+  await expect(page.getByLabel('DeepSeek API key', { exact: true })).toBeDisabled();
   expect(writes).toEqual([]);
 });
 
