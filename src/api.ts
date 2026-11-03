@@ -9,6 +9,7 @@ export class APIError extends Error {
   }
 }
 const providerMessages: Record<string, [string, string]> = {
+  AI_CONSENT_REJECTED: ["本次请求已提交云端许可，但服务仍拒绝该许可。消息已保留，没有自动重试；请记录这个错误供排查。", "This request included cloud consent, but the service still rejected it. Your message is retained and was not retried. Report this error for investigation."],
   AI_CLOUD_CHECK_TIMEOUT: ["查询云端模型列表超时。请检查网络与 API 服务地址；本次没有发起生成回答。", "Cloud model-list check timed out. Check the network and API URL; no answer generation was requested."],
   AI_CLOUD_CHECK_RESPONSE: ["模型列表接口没有返回预期资料，无法验证此连接。请检查地址；有些兼容服务不支持这个检查接口。", "Model-list endpoint returned an unexpected response. Check the URL; some compatible providers do not support this check."],
   AI_CLOUD_AUTH: ["云端拒绝了 API Key（无效、已过期或没有使用权限）。请确认密钥属于当前服务商，并在 AI 设置重新测试。", "Cloud API key rejected: invalid, expired or missing permission. Check that the key belongs to the selected provider and test it in AI settings."],
@@ -59,8 +60,14 @@ export function errorText(e: unknown, language: "zh" | "en" = "zh") {
     return "无法连接本机应用服务。请重新打开应用，或检查工作区是否已连接。";
   if (/license|entitlement|subscription|activate/i.test(message))
     return "此功能需要有效设备授权。请到“订阅与用量”检查激活状态，或联系企业管理员。";
+  if (/Cloud AI is disabled in privacy settings/i.test(message))
+    return language === "en" ? "Cloud use is not enabled yet. Complete cloud permission and spending protection in AI settings, then send again." : "尚未启用云端使用许可。请到“AI 与隐私设置”完成云端许可和费用保护，再发送。";
+  if (/Confirm provider pricing/i.test(message))
+    return language === "en" ? "Confirm the provider's current prices and save spending protection in AI settings before using cloud AI." : "请先到“AI 与隐私设置”核实服务商当前价格，并保存费用保护，再使用云端 AI。";
+  if (/Configure cloud API key and model/i.test(message))
+    return language === "en" ? "No usable cloud key or model was found. Check your saved key and model in AI settings." : "未读取到可用的云端 Key 或模型。请在“AI 与隐私设置”检查已保存的 Key 和模型。";
   if (/consent/i.test(message))
-    return "需要你同意本次消息使用云端 AI。勾选同意后再试；私密资料请选择本地模式。";
+    return language === "en" ? "This request needs explicit cloud consent. Confirm this request before sending; use Local AI for private data." : "本次云端请求需要明确同意。请确认本次发送许可后再试；私密资料请选择本地模式。";
   if (/benchmark|ollama|local model/i.test(message))
     return "本地 AI 尚未就绪。请先启动 Ollama、准备配置的模型，再到“AI 与隐私设置”检查或测速。";
   if (/unauthorized|invalid.*token/i.test(message))

@@ -52,7 +52,7 @@ test("guided draft survives connecting, remains unsent and keeps cloud consent o
   await expect(page.getByLabel("Message")).toContainText("安全的测试资料");
   await page.getByText("AI 与隐私选项", { exact: true }).click();
   await page.getByLabel("处理方式").selectOption("CLOUD_ONLY");
-  await expect(page.getByRole("checkbox")).not.toBeChecked();
+  await expect(page.getByRole("button", { name: "同意云端处理并发送 →", exact: true })).toBeVisible();
   await expect(page.getByLabel("Message")).not.toHaveValue("");
   await page.getByRole("button", { name: "Dashboard", exact: true }).click();
   await expect(page.locator(".metric-card").first()).not.toContainText("—");

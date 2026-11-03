@@ -22,7 +22,8 @@ export function Assistant({ api, initialDraft, onGuide, onDraftLoaded, onSetting
   const [replyDraft, setReplyDraft] = useState("");
   const [fillSource, setFillSource] = useState("");
   const [mode, setMode] = useState(initialMode || "LOCAL_ONLY");
-  const [consent, setConsent] = useState(false);
+  const sending = useRef(false);
+  const cloudSendButton = useRef<HTMLButtonElement>(null);
   const [privacy, setPrivacy] = useState("standard");
   const [complexity, setComplexity] = useState("simple");
   const [busy, setBusy] = useState(false);
@@ -51,7 +52,7 @@ export function Assistant({ api, initialDraft, onGuide, onDraftLoaded, onSetting
   }, [api]);
   function chooseMode(value: string) {
     modeTouched.current = true; setMode(value); onModeChange?.(value);
-    setConsent(false); setEstimate(""); setError(null);
+    setEstimate(""); setError(null);
   }
   const sourceName = mode === "LOCAL_ONLY" ? t("本地 Ollama", "Local Ollama") : mode === "HYBRID" ? t("混合 AI", "Hybrid AI") : t("云端 API", "Cloud API");
   const modelName = mode === "LOCAL_ONLY" ? connection?.models.local_model : mode === "CLOUD_ONLY" ? connection?.models.cloud_model : undefined;
@@ -70,18 +71,36 @@ export function Assistant({ api, initialDraft, onGuide, onDraftLoaded, onSetting
   useEffect(() => {
     if (initialDraft?.text) { setMessage(initialDraft.text); onDraftLoaded?.(); }
   }, [initialDraft?.revision]);
-  function payload() { return { message, response_language: language, intent: intent === "reply" ? "reply" : "ask", mode, privacy, complexity,
-    cloud_consent: consent, employee_id: employeeId || null }; }
+  const needsCloudApproval = mode !== "LOCAL_ONLY" && privacy !== "private";
+  const privateCloudConflict = mode === "CLOUD_ONLY" && privacy === "private";
+  function payload(cloudConsent = false) { return { message, response_language: language, intent: intent === "reply" ? "reply" : "ask", mode, privacy, complexity,
+    cloud_consent: cloudConsent, employee_id: employeeId || null }; }
   async function send(event: FormEvent) {
-    event.preventDefault(); setBusy(true); setError(null); setCopied(false);
+    event.preventDefault();
+    if (sending.current || !modeReady || !message.trim() || privateCloudConflict) return;
+    const submitter = (event.nativeEvent as SubmitEvent).submitter;
+    const explicitlyApproved = needsCloudApproval && submitter instanceof HTMLButtonElement && submitter.dataset.cloudConsent === "true";
+    if (needsCloudApproval && !explicitlyApproved) {
+      setError(new Error("Explicit cloud data consent is required"));
+      cloudSendButton.current?.focus();
+      return;
+    }
+    // Capture authorization and content together. No checkbox state is consumed
+    // on failure, and no estimate or previous message authorizes this request.
+    const request = payload(explicitlyApproved);
+    sending.current = true; setBusy(true); setError(null); setCopied(false);
     try {
-      const data = await api<{ answer: string; provider: string }>("/chat", "POST", payload());
-      setHistory((current) => [...current, { role: "user", content: message },
+      const data = await api<{ answer: string; provider: string }>("/chat", "POST", request);
+      setHistory((current) => [...current, { role: "user", content: request.message },
         { role: `NightBrew · ${data.provider}`, content: data.answer }]);
       if (intent === "reply") setReplyDraft(data.answer);
       setMessage("");
-    } catch (failure) { setError(failure); }
-    finally { setBusy(false); setConsent(false); }
+    } catch (failure) {
+      setError(request.cloud_consent && failure instanceof Error && /consent/i.test(failure.message)
+        ? new APIError("Cloud consent was submitted but rejected", "AI_CONSENT_REJECTED", request.mode, modelName || "")
+        : failure);
+    }
+    finally { sending.current = false; setBusy(false); }
   }
   async function load() {
     try { setHistory(await api<Message[]>("/messages")); setError(null); }
@@ -128,26 +147,22 @@ export function Assistant({ api, initialDraft, onGuide, onDraftLoaded, onSetting
         <label>{t("选择助理", "Assistant")}<select value={employeeId} onChange={(event) => setEmployeeId(event.target.value)}>
           <option value="">{t("业务助理", "Business assistant")}</option>{employees.map((employee) => <option key={employee.id} value={employee.id}>{employee.name}</option>)}</select></label>
         <div className="row">
-          <label>{t("资料隐私", "Data privacy")}<select value={privacy} onChange={(event) => setPrivacy(event.target.value)}>
+          <label>{t("资料隐私", "Data privacy")}<select aria-label={t("资料隐私", "Data privacy")} value={privacy} onChange={(event) => setPrivacy(event.target.value)}>
             <option value="standard">{t("一般资料", "Standard data")}</option><option value="private">{t("私密资料 · 仅本地", "Private data · local only")}</option>
           </select></label>
-          <label>{t("内容复杂度", "Task complexity")}<select value={complexity} onChange={(event) => setComplexity(event.target.value)}>
+          <label>{t("内容复杂度", "Task complexity")}<select aria-label={t("内容复杂度", "Task complexity")} value={complexity} onChange={(event) => setComplexity(event.target.value)}>
             <option value="simple">{t("一般文字", "Simple text")}</option><option value="complex">{t("复杂文字", "Complex text")}</option>
           </select></label>
         </div>
         <button className="secondary" onClick={load}>{t("加载聊天记录", "Load chat history")}</button>
-        <button className="secondary" disabled={!message.trim() || busy} onClick={async () => {
+        <button className="secondary" disabled={!message.trim() || busy || privateCloudConflict} onClick={async () => {
           try {
-            const value = await api<{ provider: string; estimated_max_cost_usd: number }>("/ai/estimate", "POST", payload());
+            const value = await api<{ provider: string; estimated_max_cost_usd: number }>("/ai/estimate", "POST", payload(needsCloudApproval));
             setEstimate(`${value.provider} · ${t("预计预留 USD", "estimated reservation USD")} ${value.estimated_max_cost_usd.toFixed(6)}`); setError(null);
           } catch (failure) { setError(failure); }
-        }}>{t("先估算本次用量", "Estimate this request")}</button>
+        }}>{needsCloudApproval ? t("同意本次云端估算", "Consent to this cloud estimate") : t("先估算本次用量", "Estimate this request")}</button>
         {estimate && <p role="status">{estimate}</p>}
       </details>
-      {mode !== "LOCAL_ONLY" && privacy !== "private" && <label>
-        <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} />{' '}
-        {t("我同意将这一次消息发送给已配置的云端 AI；私密资料不会发送。", "I consent to sending this message to the configured cloud AI. Private data will not be sent.")}
-      </label>}
       <article className="conversation" aria-label={t("聊天记录", "Conversation")} aria-live="polite">
         {history.map((entry, index) => <div className={`chat-bubble ${entry.role === "user" ? "user-message" : "assistant-message"}`} key={index}>
           <strong>{entry.role === "user" ? t("你", "You") : t("NightBrew 助理", "NightBrew assistant")}</strong>
@@ -164,12 +179,16 @@ export function Assistant({ api, initialDraft, onGuide, onDraftLoaded, onSetting
       {error !== null && <div role="alert">
         <p>{errorText(error, language)}</p>
         {error instanceof APIError && <p>{t("本次请求使用", "This request used")}: {error.mode === "LOCAL_ONLY" ? t("本地 Ollama", "Local Ollama") : t("云端 API", "Cloud API")} · {error.model}{error.providerStatus ? ` · HTTP ${error.providerStatus}` : ""}</p>}
-        <button type="button" className="secondary" onClick={onSettings}>{t("去检查 AI 连接", "Check AI connection")}</button>
+        {error instanceof Error && /consent/i.test(error.message) && !(error instanceof APIError && error.code === "AI_CONSENT_REJECTED")
+          ? <p>{t("请点击输入框旁的“同意云端处理并发送”，仅授权这一次请求。", "Click Consent and send beside the message box to authorize only this request.")}</p>
+          : <button type="button" className="secondary" onClick={onSettings}>{t("去检查 AI 连接", "Check AI connection")}</button>}
       </div>}
+      {privateCloudConflict && <p role="status">{t("这条消息设为私密资料，请先选择本地 AI 后再发送。", "This message is private. Select Local AI before sending.")}</p>}
+      {needsCloudApproval && <p id="cloud-send-notice">{t("点击下方同意按钮，仅允许将本条消息及所选助理的工作说明发给已配置的云端 AI，可能产生服务商 API 费用。每条消息单独确认，电脑操作仍须单独批准。", "Click the consent button below to send only this message and the selected assistant instructions to your configured cloud AI. Provider API charges may apply. Each message is confirmed separately; computer actions require separate approval.")}</p>}
       <form className="chat-composer" onSubmit={send}>
-        <textarea aria-label="Message" value={message} onChange={(event) => setMessage(event.target.value)}
+        <textarea aria-label="Message" disabled={busy} value={message} onChange={(event) => setMessage(event.target.value)}
           placeholder={intent === "reply" ? t("粘贴客户消息，补充已确认的事实和期望语气…", "Paste the customer's message, confirmed facts and preferred tone…") : t("你想让我帮什么？", "What can I help you with?")} required maxLength={30000} />
-        <button disabled={busy || !modeReady || !message.trim()}>{busy ? t("正在准备回复…", "Preparing a reply…") : intent === "reply" ? t("帮我起草 →", "Draft my reply →") : t("发送给助理 →", "Ask assistant →")}</button>
+        <button type="submit" ref={cloudSendButton} data-cloud-consent={needsCloudApproval ? "true" : "false"} aria-describedby={needsCloudApproval ? "cloud-send-notice" : undefined} disabled={busy || !modeReady || !message.trim() || privateCloudConflict}>{busy ? t("正在准备回复…", "Preparing a reply…") : needsCloudApproval ? (intent === "reply" ? t("同意云端处理并起草 →", "Consent and draft in cloud →") : t("同意云端处理并发送 →", "Consent and send to cloud →")) : intent === "reply" ? t("帮我起草 →", "Draft my reply →") : t("发送给助理 →", "Ask assistant →")}</button>
       </form>
       {intent === "reply" && replyDraft && <section className="panel" aria-label={t("可编辑回复草稿", "Editable reply draft")}>
         <h3>{t("看看这段回复，满意后再用。", "Review and edit this reply before using it.")}</h3>

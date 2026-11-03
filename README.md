@@ -1,4 +1,6 @@
-# NightBrew AI Employee — 0.9.5 development release
+# NightBrew AI Employee — 0.9.6 development release
+
+0.9.6 moves per-message cloud consent into the explicit **Consent and send to cloud** button beside the composer. It avoids the distant checkbox/reset loop, prevents duplicate sends, blocks private cloud-only submissions and reports when submitted consent is rejected. Server policy and spending gates remain enforced. [Change details and executed tests](docs/CLOUD_SEND_0.9.6.md).
 
 0.9.5 fixes opaque cloud chat failures: sanitized provider error categories and HTTP status, visible processing mode/model, bilingual actionable messages, and preserved drafts without retries or provider fallback. An already enabled/configured cloud policy is reflected when opening chat; a key alone never authorizes cloud use. See [diagnostics and verification](docs/CHAT_ERRORS_0.9.5.md). This does not establish the cause of any customer's earlier generic error or verify their live API account.
 

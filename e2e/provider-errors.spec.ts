@@ -23,16 +23,15 @@ test('configured cloud choice is visible, billing failures are bilingual and dra
   await expect(page.getByLabel('处理方式', { exact: true })).toHaveValue('CLOUD_ONLY');
   await expect(page.getByLabel('当前 AI 连接')).toContainText('deepseek-chat');
   expect(calls).toBe(0);
-  await expect(page.getByRole('checkbox')).not.toBeChecked();
+  await expect(page.getByRole('button', { name: '同意云端处理并发送 →', exact: true })).toBeVisible();
   const draft = '帮我想一下我要怎样用你做东西';
   await page.getByLabel('Message', { exact: true }).fill(draft);
-  await page.getByRole('checkbox').check();
-  await page.getByRole('button', { name: '发送给助理 →', exact: true }).click();
+  await page.getByRole('button', { name: '同意云端处理并发送 →', exact: true }).click();
   await expect(page.getByRole('alert')).toContainText('云端返回余额或计费问题');
   await expect(page.getByRole('alert')).toContainText('HTTP 402');
   await expect(page.getByRole('alert')).toContainText('deepseek-chat');
   await expect(page.getByLabel('Message', { exact: true })).toHaveValue(draft);
-  await expect(page.getByRole('checkbox')).not.toBeChecked();
+  await expect(page.getByRole('button', { name: '同意云端处理并发送 →', exact: true })).toBeVisible();
   await page.getByLabel('界面语言 / Interface language').selectOption('en');
   await expect(page.getByRole('alert')).toContainText('billing or balance issue');
   await expect(page.getByLabel('Message', { exact: true })).toHaveValue(draft);
@@ -48,7 +47,7 @@ test('saving an API key alone does not authorize cloud processing', async ({ pag
   await expect(page.getByLabel('处理方式', { exact: true })).toHaveValue('LOCAL_ONLY');
   await expect(page.getByLabel('当前 AI 连接')).toContainText('已保存 API Key，但当前选择的是本地 Ollama');
   await page.getByLabel('处理方式', { exact: true }).selectOption('CLOUD_ONLY');
-  await expect(page.getByRole('checkbox')).not.toBeChecked();
+  await expect(page.getByRole('button', { name: '同意云端处理并发送 →', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Dashboard', exact: true }).click();
   await page.getByRole('button', { name: 'Assistant', exact: true }).click();
   await expect(page.getByLabel('处理方式', { exact: true })).toHaveValue('CLOUD_ONLY');

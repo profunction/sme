@@ -95,7 +95,7 @@ test("AI key entry is distinct from demo business connectors and never starts in
     await setup.getByRole("button", { name: "开始 AI 聊天", exact: true }).click();
     await page.getByText("AI 与隐私选项", { exact: true }).click();
     await expect(page.getByLabel("处理方式", { exact: true })).toHaveValue("CLOUD_ONLY");
-    await expect(page.getByRole("checkbox")).not.toBeChecked();
+    await expect(page.getByRole("button", { name: "同意云端处理并发送 →", exact: true })).toBeVisible();
     expect(chatCount).toBe(0);
     expect(await page.evaluate(() => JSON.stringify(localStorage))).not.toContain("fixture-not-a-real-api-key");
   } finally {
