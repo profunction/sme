@@ -28,3 +28,13 @@
 - 桌面与构建检查 **16 项通过**。
 
 HTTP 调用和回复使用测试夹具，验证实际构造的请求字段；没有使用客户的真实 Key，也没有支付或替客户充值。真实 DeepSeek 余额、可用性及客户现场失败原因仍须实际请求结果确认。原生 Windows / macOS 打包结果按对应代码提交单独记录。
+
+
+## 已验证的原生试用包
+
+代码提交 `29f9ad4`：
+
+- [Windows 构建](https://github.com/profunction/sme/actions/runs/41592329791)：原生测试、Electron 启动、API 试用模式边界及 NSIS 安装后启动检查通过，已上传 **NightBrew-Windows-API-PREVIEW**（187 MB）。
+- [macOS 构建](https://github.com/profunction/sme/actions/runs/41592329780)：ARM64 API 试用包的原生测试、构建、临时签名完整性、启动及测试夹具检查通过，已上传 **NightBrew-macOS-arm64-API-PREVIEW**（391 MB，含 DMG / ZIP / 校验文件）。Mac 尚未经 Apple 公证。
+
+这些记录对应指定平台的已完成检查，并不表示签名商业发布已完成。真实客户 DeepSeek Key 未在开发环境中调用；若服务端仍拒绝已提交的许可，新界面会保留该区别供排查。

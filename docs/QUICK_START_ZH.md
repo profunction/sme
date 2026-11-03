@@ -1,11 +1,11 @@
-# NightBrew 0.9.5：API Key、聊天与任务结果
+# NightBrew 0.9.6：API Key、聊天与任务结果
 
-## 下载 0.9.5 API 试用版
+## 下载 0.9.6 API 试用版
 
 打开下面对应页面，在下方 **Artifacts** 下载指定名称（需登录 GitHub，试用包保留 14 天）：
 
-- [Windows 下载页](https://github.com/profunction/sme/actions/runs/41477961391)：选 **NightBrew-Windows-API-PREVIEW**，解压后运行 `.exe`。
-- [Apple Silicon Mac 下载页](https://github.com/profunction/sme/actions/runs/41477961413)：选 **NightBrew-macOS-arm64-API-PREVIEW**，解压后使用 `.dmg` 或应用 ZIP。适用于 M 系列芯片，需 macOS 15 或以上。
+- [Windows 下载页](https://github.com/profunction/sme/actions/runs/41592329791)：选 **NightBrew-Windows-API-PREVIEW**，解压后运行 `.exe`。
+- [Apple Silicon Mac 下载页](https://github.com/profunction/sme/actions/runs/41592329780)：选 **NightBrew-macOS-arm64-API-PREVIEW**，解压后使用 `.dmg` 或应用 ZIP。适用于 M 系列芯片，需 macOS 15 或以上。
 
 这些包已通过对应平台的安装或启动检查。真实 AI Key 尚待用户自行验证，开发包的系统签名限制见文末。
 
@@ -13,12 +13,12 @@
 
 请打开 **AI 与隐私设置**，不用配置业务系统连接中的 POS / WMS / TMS。
 
-1. 想使用自己的 DeepSeek API Key：安装名称带 **API-PREVIEW** 的 0.9.5 版本。**LOCAL-PREVIEW** 保留为只用本机 Ollama 的版本。
+1. 想使用自己的 DeepSeek API Key：安装名称带 **API-PREVIEW** 的 0.9.6 版本。**LOCAL-PREVIEW** 保留为只用本机 Ollama 的版本。
 2. 点击 **使用 DeepSeek**。默认模型名为 `deepseek-chat`，API 地址为 `https://api.deepseek.com/v1`。实际可用性以连接测试及服务商账号为准。
 3. 把你自己的 Key 填入密码框，点击 **保存密钥与配置**。不要把 Key 发到聊天或截图里。Windows 使用凭据管理器，Mac 使用钥匙串。
 4. 核对服务地址，勾选允许连接测试，点击 **测试 AI 连接**。这是模型列表检查，不会生成回答；通过也不代表账户有余额。
 5. 按服务商官方当前价格填写输入和输出单价，单位是 **USD / 每百万 token**，并设置本月最高预算。应用没有核实实时价格，不应猜数字。确认价格与付费 API 使用后，点击 **保存费用保护**。本机预算不是服务商的余额或购买额度。
-6. 点击 **开始 AI 聊天**。聊天页选的是云端模式，但不会自动发消息；每条消息仍需你同意发送内容。
+6. 点击 **开始 AI 聊天**。填写消息后，点击输入框旁 **同意云端处理并发送**。起草回复时按钮显示 **同意云端处理并起草**。每次点击仅确认本条消息，可能产生服务商 API 费用，不需要另找勾选框。
 
 可以这样说：
 
@@ -30,9 +30,9 @@
 
 ## 已填 Key，但云端仍然报错
 
-0.9.5 会直接显示当前模式与模型，并区分 Key / 权限、服务商余额或计费（HTTP 402）、接口或模型（404）、限流（429）、网络与超时。旧版“AI provider unavailable”没有提供这些细节，不能单凭旧截图确定原因。
+0.9.6 会直接显示当前模式与模型，并区分 Key / 权限、服务商余额或计费（HTTP 402）、接口或模型（404）、限流（429）、网络与超时。旧版“AI provider unavailable”没有提供这些细节，不能单凭旧截图确定原因。
 
-从 API-PREVIEW 0.9.4 更新到 API-PREVIEW 0.9.5 不改工作区路径或密钥名称。先退出旧应用，再覆盖安装，保留现有 Key；重试一条不含敏感资料的短消息。如果失败，可提供新错误类别和 HTTP 代码，**不要提供密钥**。实际账户连接状态尚待这一步验证。
+从 API-PREVIEW 0.9.4 / 0.9.5 更新到 API-PREVIEW 0.9.6 不改工作区路径或密钥名称。先退出旧应用，再覆盖安装，保留现有 Key；重试一条不含敏感资料的短消息。如果失败，可提供新错误类别和 HTTP 代码，**不要提供密钥**。实际账户连接状态尚待这一步验证。若仍提示许可拒绝，新版会区分“没有点击确认按钮”和“已提交确认但服务仍拒绝”，不会继续让你重复找勾选框。
 
 ## 我要跟某个 AI 员工聊
 
