@@ -170,7 +170,8 @@ const L={
   tierDefault:"默认（按配置）",tierStandard:"普通客户",individuals:"个人客户",groups:"群组",countText:(n,w)=>"· "+n+" 个"+(w?"，"+w+" 个等人工":""),waiting:"等人工",
   groupHint:"机器人不会在群里自动回复，只帮你记录。群里的问题由你们人工回复；群发通知可以发到群里。",noGroups:"还没有群",groupSub:"群组 · 机器人不在群里自动回复",
   number:"号码",aiOff:"AI 关闭",kb:"知识库",connected:"已连接",disconnected:"已断开",connecting:"连接中",demo:"演示",starting:"启动中",
-  pairIntro:"在手机 WhatsApp 输入配对码（1 分钟内）：",pairPath:"已连接的设备 → 连接设备 → 改用电话号码连接",
+  pairIntro:"在手机 WhatsApp 输入配对码（1 分钟内）：",pairPath:"已连接的设备 → 连接设备 → 改用电话号码连接",pairFail:"手机显示无法连接？停掉程序，改用二维码：npm run qr",
+  qrIntro:"用手机 WhatsApp 扫这个二维码：",qrPath:"已连接的设备 → 连接设备 → 对准这个二维码。二维码每 20 秒左右会自动更新。",
   bot:"机器人",human:"人工",paused:"机器人暂停中",newCustomerName:"新客人",typeBelow:"以客人身份在下面打字",ownerText:"好的，我们的技术员马上联系您。",
   reason:{rule:"知识库",option_chosen:"知识库",menu:"菜单",menu_choice:"菜单",category:"选问题",solved:"已解决",step:"分步排查",why:"解释原因",steps_exhausted:"全部试过，转技术员",tech_requested:"转技术员",visit_prompt:"安排上门",suggest:"推荐相关问题",describe:"请客人描述",ai:"AI",fallback:"兜底回复",handoff_requested:"转人工",urgent:"紧急",visit_details:"上门登记",other_prompt:"其他问题",other_report:"其他问题已通知",prompt_fallback:"改用数字",broadcast:"群发通知",opt_out:"退订",opt_in:"订阅"},
   mode:{fix:"自己解决",explain:"了解原因",visit:"要上门",other:"其他问题"},
@@ -195,7 +196,8 @@ const L={
   tierDefault:"Default (from config)",tierStandard:"Standard customer",individuals:"Individual customers",groups:"Groups",countText:(n,w)=>"· "+n+(w?", "+w+" waiting":""),waiting:"Waiting",
   groupHint:"The bot never auto-replies in groups; it only records them here. Your team answers group questions; broadcasts can be posted to groups.",noGroups:"No groups yet",groupSub:"Group · the bot does not auto-reply here",
   number:"Number",aiOff:"AI off",kb:"Knowledge base",connected:"Connected",disconnected:"Disconnected",connecting:"Connecting",demo:"Demo",starting:"Starting",
-  pairIntro:"Enter this pairing code in WhatsApp on your phone within a minute:",pairPath:"Linked devices → Link a device → Link with phone number instead",
+  pairIntro:"Enter this pairing code in WhatsApp on your phone within a minute:",pairPath:"Linked devices → Link a device → Link with phone number instead",pairFail:"Phone says it could not link? Stop the program and link by QR instead: npm run qr",
+  qrIntro:"Scan this QR code with WhatsApp on your phone:",qrPath:"Linked devices → Link a device → point the camera at this code. It refreshes about every 20 seconds.",
   bot:"Bot",human:"Human",paused:"Bot paused",newCustomerName:"New customer",typeBelow:"Type below as this customer",ownerText:"OK, our technician will contact you right away.",
   reason:{rule:"knowledge base",option_chosen:"knowledge base",menu:"menu",menu_choice:"menu",category:"pick a problem",solved:"solved",step:"guided step",why:"explained why",steps_exhausted:"all steps tried, handed over",tech_requested:"handed to technician",visit_prompt:"arranging a visit",suggest:"related topics",describe:"asked to describe",ai:"AI",fallback:"fallback",handoff_requested:"handoff",urgent:"urgent",visit_details:"visit request",other_prompt:"other issue",other_report:"other issue, team alerted",prompt_fallback:"asked for a number",broadcast:"broadcast",opt_out:"unsubscribe",opt_in:"subscribe"},
   mode:{fix:"Fix myself",explain:"Explain",visit:"Wants visit",other:"Other issue"},
@@ -253,8 +255,9 @@ function renderStatus(){
   const cls=s.connection==="open"?"ok":s.connection==="close"?"bad":"warn";
   const text={open:T("connected"),close:T("disconnected"),connecting:T("connecting"),demo:T("demo"),starting:T("starting")}[s.connection]||s.connection;
   box.append(el("span","pill "+cls,text)," ",el("b","",s.phone?"+"+s.phone:"—"),s.profile?" · "+s.profile:"",s.aiEnabled?" · AI: "+s.aiProvider:" · "+T("aiOff")," · "+T("kb")+" "+state.knowledgeCount);
-  const p=$("pairing");p.textContent="";p.hidden=!s.pairingCode;
-  if(s.pairingCode)p.append(el("div","",T("pairIntro")),el("div","code",s.pairingCode),el("div","muted",T("pairPath")));
+  const p=$("pairing");p.textContent="";p.hidden=!s.pairingCode&&!s.qr;
+  if(s.qr){const img=el("img");img.src=s.qr;img.alt="QR";img.width=260;img.height=260;img.style.cssText="display:block;margin:8px 0;border-radius:8px;background:#fff";p.append(el("div","",T("qrIntro")),img,el("div","muted",T("qrPath")));}
+  else if(s.pairingCode)p.append(el("div","",T("pairIntro")),el("div","code",s.pairingCode),el("div","muted",T("pairPath")),el("div","muted",T("pairFail")));
   $("demo-card").hidden=!state.demo;$("compose").hidden=!state.demo;
   const st=$("stats");st.textContent="";
   for(const [k,v] of [[T("inbound"),state.stats.inbound24h],[T("botReplies"),state.stats.botReplies24h],[T("humanReplies"),state.stats.humanReplies24h],[T("contacts"),state.stats.contacts]]){const d=el("div","stat");d.append(el("span","",k),el("b","",String(v)));st.append(d);}

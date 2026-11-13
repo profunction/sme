@@ -95,6 +95,14 @@ npm start
 
 窗口显示 8 位配对码，一分钟内在手机上输入。显示"已连接"后就开始工作了。过期了会自动给新的码。
 
+**手机显示"无法连接设备 / Could not link device"？** 改用扫二维码，这是 WhatsApp 的标准方式，更稳定：
+
+```bash
+npm run qr
+```
+
+打开窗口里显示的后台地址，页面上会出现二维码。手机 WhatsApp → 已连接的设备 → 连接设备，对准二维码扫。配对码失败的常见原因：输的是旧码（每次重连会换新码）、短时间试太多次被 WhatsApp 暂时限制（等 10 到 30 分钟）、手机"已连接的设备"里有残留的旧记录（先删掉）。
+
 - 窗口不能关，电脑不能睡眠。
 - 以后重开只要 `npm start`，不用重新配对。
 - 后台地址看窗口里的"后台 / Dashboard"那一行。
@@ -234,6 +242,7 @@ npm run check
 | `npm run setup` | 设置向导，生成配置 |
 | `npm run demo` | 演示模式，不连 WhatsApp |
 | `npm start` | 连接 WhatsApp 开始工作 |
+| `npm run qr` | 用二维码连接（配对码失败时用） |
 | `npm run relink` | 清除登录，下次启动重新配对 |
 | `npm run check` | 检查知识库 |
 | `npm test` | 自动测试 |

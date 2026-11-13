@@ -4,6 +4,7 @@
 import fs from "node:fs";
 import { createHash } from "node:crypto";
 import pino from "pino";
+import QRCode from "qrcode";
 import baileys, {
   decryptPollVote,
   DisconnectReason,
@@ -103,6 +104,7 @@ export async function connect({ config, authDir, status, onMessage, onGroupMessa
 
   handle.sock = sock;
   let pairingRequested = false;
+  let qrAnnounced = false;
   let reconnectDelay = backoffMs;
   const reconnect = (delay, nextBackoff) =>
     setTimeout(
@@ -114,7 +116,22 @@ export async function connect({ config, authDir, status, onMessage, onGroupMessa
 
   sock.ev.on("connection.update", async (update) => {
     const { connection, lastDisconnect, qr } = update;
-    if (qr && !state.creds.registered && !pairingRequested) {
+    if (qr && !state.creds.registered && config.link_with === "qr") {
+      // Scanning a QR code is WhatsApp's standard way to link and the most reliable one.
+      try {
+        status.qr = await QRCode.toDataURL(qr, { margin: 2, width: 320 });
+        status.pairingCode = null;
+        if (!qrAnnounced) {
+          qrAnnounced = true;
+          log(`请在浏览器打开后台扫二维码 / Open the dashboard and scan the QR code: http://127.0.0.1:${status.dashboardPort || config.dashboard_port}`);
+          log("手机 WhatsApp → 已连接的设备 → 连接设备 → 对准电脑屏幕上的二维码。 / Phone WhatsApp → Linked devices → Link a device → scan the code on this computer.");
+          console.log(await QRCode.toString(qr, { type: "terminal", small: true }));
+        }
+      } catch (error) {
+        status.lastError = `QR failed: ${error.message}`;
+        log(status.lastError);
+      }
+    } else if (qr && !state.creds.registered && !pairingRequested) {
       pairingRequested = true;
       try {
         const code = await sock.requestPairingCode(config.phone_number);
@@ -130,6 +147,7 @@ export async function connect({ config, authDir, status, onMessage, onGroupMessa
     if (connection) status.connection = connection;
     if (connection === "open") {
       status.pairingCode = null;
+      status.qr = null;
       status.connectedAt = Date.now();
       status.lastError = null;
       reconnectDelay = 2000;
@@ -143,7 +161,13 @@ export async function connect({ config, authDir, status, onMessage, onGroupMessa
         if (state.creds.registered) {
           log("此设备已在手机上被登出，正在重新开始配对。 / Logged out from the phone; starting a fresh pairing.");
         } else {
-          log("配对码已过期或未被输入，10 秒后生成新的配对码。 / Pairing code expired or was not entered; a new code comes in 10s.");
+          log(
+            config.link_with === "qr"
+              ? "二维码已过期，10 秒后出新的。 / QR code expired; a new one comes in 10s."
+              : "配对失败或配对码过期，10 秒后生成新的配对码（旧的作废）。如果一直失败，改用二维码：npm run qr / Pairing failed or the code expired; a NEW code comes in 10s (the old one is void). If it keeps failing, link by QR instead: npm run qr"
+          );
+          status.qr = null;
+          status.pairingCode = null;
         }
         fs.rmSync(authDir, { recursive: true, force: true });
         reconnect(10_000, 10_000);

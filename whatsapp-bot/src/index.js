@@ -10,14 +10,17 @@ const log = (line) => console.log(`[${new Date().toLocaleTimeString()}] ${line}`
 // `npm start` runs the default account; `npm start -- second` runs the account
 // set up as profile "second" with its own login, database and dashboard.
 async function main() {
-  const paths = profilePaths(process.cwd(), process.argv[2]);
+  const args = process.argv.slice(2);
+  const paths = profilePaths(process.cwd(), args.find((arg) => !arg.startsWith("--")));
   const config = load(paths.config);
+  if (args.includes("--qr")) config.link_with = "qr";
   const store = new Store(paths.db);
   const status = {
     connection: "starting",
     profile: paths.profile,
     phone: config.phone_number,
     pairingCode: null,
+    qr: null,
     connectedAt: null,
     lastError: null,
     aiEnabled: config.ai.enabled,

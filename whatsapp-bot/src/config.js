@@ -8,6 +8,8 @@ export const DEFAULTS = {
   phone_number: "",
   // Fill these once; every text can use {company}, {email}, {phone}, {address}.
   business: { company: "", email: "", phone: "", address: "" },
+  // How to link the WhatsApp account: "code" (8-digit pairing code) or "qr" (scan a QR code in the dashboard).
+  link_with: "code",
   // "poll": choices are sent as a tappable WhatsApp poll; "text": as a numbered list to answer by number.
   menu_style: "text",
   // Optional tappable main menu: { question: {zh,en}, options: [{ label: {zh,en}, send: "1" }] }.
@@ -198,6 +200,7 @@ export function validate(config) {
   }
   if (!["observe", "ignore"].includes(config.groups)) problems.push('groups must be "observe" or "ignore"');
   if (!["poll", "text"].includes(config.menu_style)) problems.push('menu_style must be "poll" or "text"');
+  if (!["code", "qr"].includes(config.link_with)) problems.push('link_with must be "code" or "qr"');
   if (config.main_menu) {
     const options = config.main_menu.options;
     if (!Array.isArray(options) || options.length < 2 || options.length > 12) problems.push("main_menu.options needs 2 to 12 options");
