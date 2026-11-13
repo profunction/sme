@@ -330,3 +330,36 @@ test("demo phone buttons walk a whole conversation through the API", async () =>
     demo.store.close();
   }
 });
+
+test("while waiting for a technician the customer is acknowledged once, not ignored", async () => {
+  const { store, out, handler } = harness();
+  await handler({ jid: C, phone: "6591112222", text: "hi", name: "Sarah", id: "w1", fromMe: false });
+  await handler({ jid: C, phone: "6591112222", text: "0", name: "Sarah", id: "w2", fromMe: false });
+  assert.ok(store.contact(C).mutedUntil > Date.now());
+
+  out.length = 0;
+  const first = await handler({ jid: C, phone: "6591112222", text: "Hi my projector cannot open", name: "Sarah", id: "w3", fromMe: false });
+  assert.equal(first.decision.reason, "waiting_ack");
+  assert.deepEqual(out.map((m) => m.jid), [C, STAFF], "the customer gets an answer and the team sees the new message");
+  assert.match(out[0].text, /^Our technician already has your message/);
+  assert.match(out[1].text, /^【客户还在等，又发来消息 \/ Customer is still waiting and wrote again】\nSarah \+6591112222\n.*\n\nHi my projector cannot open$/s);
+
+  out.length = 0;
+  for (const [i, text] of ["Hi", "在吗", "你好"].entries()) {
+    const quiet = await handler({ jid: C, phone: "6591112222", text, name: "Sarah", id: `w${4 + i}`, fromMe: false });
+    assert.equal(quiet.decision.reason, "handoff_mute");
+  }
+  assert.equal(out.length, 0, "no spam: one acknowledgement per quarter hour");
+
+  const resumed = await handler({ jid: C, phone: "6591112222", text: "菜单", name: "Sarah", id: "w8", fromMe: false });
+  assert.equal(resumed.decision.reason, "menu");
+  assert.equal(store.contact(C).mutedUntil, null, "MENU brings the bot back");
+  assert.equal(out.at(-1).type, "poll");
+
+  await handler({ jid: C, text: "I will call you now", id: "owner-1", fromMe: true });
+  out.length = 0;
+  const owner = await handler({ jid: C, phone: "6591112222", text: "ok thanks", name: "Sarah", id: "w9", fromMe: false });
+  assert.equal(owner.decision.reason, "human_active", "once a person replies, the bot stays fully out of the way");
+  assert.equal(out.length, 0);
+  store.close();
+});

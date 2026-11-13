@@ -10,6 +10,7 @@ const ALERTS = {
   tech_requested: "排查中途要求技术员 / Asked for a technician",
   steps_exhausted: "步骤全部试过仍未解决 / All steps tried, not solved",
   fallback: "机器人未能解答 / Bot could not answer",
+  waiting_ack: "客户还在等，又发来消息 / Customer is still waiting and wrote again",
 };
 
 /**
@@ -129,6 +130,7 @@ export function createHandler({ config, store, send, sendPoll = null, log, insta
     const recorded = decision.prompt ? [decision.lead, decision.prompt.question].filter(Boolean).join("\n\n") : reply;
     store.recordBotReply(jid, recorded, decision.reason, decision.language, Date.now(), labels);
     if (decision.handoff) store.silence(jid, now + config.handoff_minutes * 60_000);
+    if (decision.unmute) store.silence(jid, null);
     if (decision.setMode) store.setMode(jid, decision.setMode);
     if (typeof decision.optOut === "boolean") store.setOptOut(jid, decision.optOut);
     store.setPending(jid, decision.pending || null);

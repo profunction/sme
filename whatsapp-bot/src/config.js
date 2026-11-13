@@ -117,6 +117,12 @@ export const DEFAULTS = {
       en: "Sure, I will have a technician contact you directly. I will tell them what you have already tried, so you will not have to explain again.",
       ms: "Baik, saya akan minta juruteknik menghubungi anda terus dan maklumkan langkah yang sudah dicuba.",
     },
+    // Sent (at most every 15 minutes) when a customer writes again while waiting for a technician.
+    waiting_ack: {
+      zh: "您的信息技术员已经收到了，会尽快联系您。\n有新的情况直接写下来就行，我会一起转给他。想先让我陪您排查的话，回复「菜单」。",
+      en: "Our technician already has your message and will contact you as soon as possible.\nIf anything has changed, just write it here and I will pass it on. If you would like me to help in the meantime, reply MENU.",
+      ms: "Juruteknik kami sudah menerima mesej anda dan akan menghubungi anda secepat mungkin.\nJika ada perubahan, tulis di sini dan saya akan sampaikan. Balas MENU jika mahu bantuan saya dahulu.",
+    },
     // Closing line after handing over to a technician.
     contact_also: { zh: "", en: "", ms: "" },
     visit_prompt: {

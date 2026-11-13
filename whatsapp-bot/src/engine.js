@@ -234,6 +234,8 @@ export function tierOf(config, contact, phone) {
 
 // ---- the decision -----------------------------------------------------------
 
+export const RESUME_WORDS = ["菜单", "主菜单", "menu", "main menu", "bot", "机器人", "继续"];
+const WAITING_ACK_MINUTES = 15;
 export const OPT_OUT_WORDS = ["stop", "unsubscribe", "退订", "取消订阅"];
 export const OPT_IN_WORDS = ["start", "subscribe", "订阅", "恢复订阅"];
 export const HANDOFF_WORDS = ["0", "人工", "客服", "真人", "技术员", "human", "agent", "person", "staff", "operator", "technician", "manusia"];
@@ -313,7 +315,30 @@ export function decide(config, input) {
 
   if ((input.repliesThisMinute ?? 0) >= config.max_replies_per_minute) return silent("global_rate_limit");
   if (contact.lastHumanOutboundAt && now - contact.lastHumanOutboundAt < config.handoff_minutes * minute) return silent("human_active");
-  if (contact.mutedUntil && contact.mutedUntil > now) return silent("handoff_mute");
+  // Handed to a technician who has not replied yet: never leave the customer talking
+  // to nobody. Acknowledge once (then stay quiet for a while), pass the new message on,
+  // and let the customer bring the bot back with "menu".
+  if (contact.mutedUntil && contact.mutedUntil > now) {
+    if (RESUME_WORDS.includes(normalize(input.text))) {
+      const menu = config.main_menu;
+      const prompt = menu?.options?.length ? { question: local(menu.question), options: menu.options.map((item) => ({ label: local(item.label), send: item.send })) } : null;
+      const body = prompt ? "" : t("menu");
+      return {
+        action: "reply",
+        text: prompt ? renderPrompt(prompt) : body,
+        lead: body,
+        language,
+        reason: "menu",
+        parts: [],
+        prompt,
+        pending: prompt ? prompt.options.map((option) => option.send) : null,
+        unmute: true,
+      };
+    }
+    const ackedRecently = input.lastBotReason === "waiting_ack" && contact.lastBotOutboundAt && now - contact.lastBotOutboundAt < WAITING_ACK_MINUTES * minute;
+    if (ackedRecently || !t("waiting_ack")) return silent("handoff_mute");
+    return { action: "reply", text: t("waiting_ack"), lead: t("waiting_ack"), language, reason: "waiting_ack", parts: [], pending: null, report: true };
+  }
   // A tap on an option right after the prompt arrived is not a burst; never drop it.
   if (!input.selected && contact.lastBotOutboundAt && now - contact.lastBotOutboundAt < config.min_seconds_between_replies_per_contact * 1000) {
     return silent("contact_rate_limit");

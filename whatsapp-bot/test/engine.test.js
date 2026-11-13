@@ -83,9 +83,14 @@ test("stays silent while the owner is replying", () => {
   assert.equal(later.action, "reply");
 });
 
-test("stays silent while a handoff mute is active", () => {
-  const d = decide(base, { text: "hello?", contact: { lastInboundAt: OPEN_TIME - 1000, mutedUntil: OPEN_TIME + 60_000 }, now: OPEN_TIME });
+test("while a handoff is pending: one acknowledgement, then quiet", () => {
+  const waiting = { lastInboundAt: OPEN_TIME - 1000, mutedUntil: OPEN_TIME + 60_000 };
+  const ack = decide(base, { text: "hello?", contact: waiting, now: OPEN_TIME });
+  assert.deepEqual([ack.action, ack.reason, ack.report], ["reply", "waiting_ack", true]);
+  const d = decide(base, { text: "hello?", contact: { ...waiting, lastBotOutboundAt: OPEN_TIME - 60_000 }, lastBotReason: "waiting_ack", now: OPEN_TIME });
   assert.deepEqual([d.action, d.reason], ["silent", "handoff_mute"]);
+  const later = decide(base, { text: "hello?", contact: { ...waiting, lastBotOutboundAt: OPEN_TIME - 16 * 60_000 }, lastBotReason: "waiting_ack", now: OPEN_TIME });
+  assert.equal(later.reason, "waiting_ack");
   const expired = decide(base, { text: "1", contact: { lastInboundAt: OPEN_TIME - 1000, mutedUntil: OPEN_TIME - 1 }, now: OPEN_TIME });
   assert.equal(expired.action, "reply");
 });
