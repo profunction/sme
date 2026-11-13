@@ -59,13 +59,16 @@ test("search ranks related entries and feeds A/B/C suggestions", () => {
   assert.deepEqual(search(kb, "ok thanks"), []);
   const offer = decide(base, { text: "apple tv copy protection problem", contact: seen(), now: OPEN_TIME });
   assert.equal(offer.reason, "suggest");
-  assert.match(offer.text, /A\) HDCP error with Apple TV/);
-  assert.deepEqual(offer.pending, ["hdcp"]);
+  assert.match(offer.text, /Which of these is your problem\?\n1\) HDCP error with Apple TV\n2\) None of these, let me describe/);
+  assert.deepEqual(offer.pending, ["pick:entry:hdcp", "pick:describe"]);
+  assert.deepEqual(offer.prompt.options.map((o) => o.label), ["HDCP error with Apple TV", "None of these, let me describe"]);
   const chosen = decide(base, { text: "A", contact: seen({ pending: offer.pending }), now: OPEN_TIME });
-  assert.equal(chosen.reason, "suggestion_chosen");
+  assert.equal(chosen.reason, "option_chosen");
+  assert.equal(decide(base, { text: "1)", contact: seen({ pending: offer.pending }), now: OPEN_TIME }).entry, "hdcp");
+  assert.equal(decide(base, { text: "2", contact: seen({ pending: offer.pending, language: "en" }), now: OPEN_TIME }).reason, "describe");
   assert.equal(chosen.text, "Use another port\n\nStill stuck? Email help@acme.test or post in the group");
   const stale = decide(base, { text: "a", contact: seen({ pending: null }), now: OPEN_TIME });
-  assert.notEqual(stale.reason, "suggestion_chosen");
+  assert.notEqual(stale.reason, "option_chosen");
 });
 
 test("every knowledge answer carries the email-or-group footer, in each mode", () => {
@@ -122,7 +125,7 @@ test("handler applies tiers, remembers suggestions and gives the AI its knowledg
   const jid = "6591112222@s.whatsapp.net";
   store.recordInbound(jid, "earlier", "Ali", Date.now() - 3600_000);
   await handler({ jid, text: "apple tv copy protection problem", id: "b", fromMe: false });
-  assert.deepEqual(store.contact(jid).pending, ["hdcp"]);
+  assert.deepEqual(store.contact(jid).pending, ["pick:entry:hdcp", "pick:describe"]);
   await handler({ jid, text: "a", id: "c", fromMe: false });
   assert.ok(sent.at(-1).startsWith("Use another port"));
   assert.equal(store.contact(jid).pending, null, "suggestions are cleared after use");
@@ -207,7 +210,7 @@ test("shipped knowledge base passes its checks and answers real questions", () =
   assert.equal(explained.entry, "core-no-sound");
   assert.match(explained.text, /^Sound travels/);
   assert.match(explained.text, /email us at help@acme\.test or post in the group/);
-  assert.match(ask("你好", null).text, /1 来不及了/);
+  assert.match(ask("你好", null).text, /1\) 来不及了/);
   assert.equal(ask("3").setMode, "visit");
 });
 
@@ -257,7 +260,7 @@ test("demo mode answers through HTTP with the shipped AV config", async () => {
   try {
     const hello = await send("你好");
     assert.equal(hello.decision.reason, "menu");
-    assert.match(hello.reply, /1 来不及了/);
+    assert.match(hello.reply, /1\) 来不及了/);
     assert.equal((await send("1")).decision.reason, "menu_choice");
     const fix = await send("投影机没画面");
     assert.match(fix.reply, /^投影机没画面，按顺序做/);

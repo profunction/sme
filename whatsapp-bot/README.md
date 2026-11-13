@@ -7,7 +7,8 @@
 **自动回复**
 
 - 用 8 位配对码连接你的号码（和 WhatsApp 网页版同一个机制），之后自动重连。
-- 三选一菜单：1 我要现在自己解决、2 我想知道是什么原因、3 我需要技术员上门。同一个问题，选 1 给最快的处理步骤，选 2 给原因解释。
+- **可以点的选项**：客人不用打字，一路点下去：主菜单 → 设备类别 → 具体问题 → 答案 → "这样解决了吗？"。选"其他"可以直接描述情况，并通知你或同事的 WhatsApp。
+- 主菜单：自己解决、了解原因、要技术员上门、其他、直接联系技术员。同一个问题，选"自己解决"给最快的处理步骤，选"了解原因"给原因解释。
 - AV 故障知识库：`knowledge/av/` 里有 170 条投影、显示屏、LED、音响、麦克风、视频会议、信号、中控、网络、活动现场的故障，每条都有"快速解决"和"原因说明"两个版本，中英文。
 - 按关键词稀有度打分，越具体的描述越优先；匹配不到时列出最相关的几条让客人回复 A / B / C。
 - 每个答案后面自动加一句：如果还是不行，欢迎 email 我们，或在群组里留言。
@@ -30,6 +31,18 @@
 - 可选 AI：本地 Ollama（免费）、DeepSeek 或 Claude，只根据检索到的知识库条目回答。默认关闭。
 
 所有数据存在你电脑的 `data/` 文件夹，不会上传到任何地方。
+
+## 可以点的选项是怎么做的
+
+WhatsApp 真正的"按钮"只开放给官方 Business API。在这种非官方连接上，按钮消息发不出去或对方看不到。所以这里用 WhatsApp 的**投票消息**来做：客人看到一个问题和几个选项，点一下就选好了。
+
+- 客人也可以直接回复选项的数字，或者干脆打字描述问题，三种方式都有效。
+- 如果程序读不到客人点了哪个（WhatsApp 对投票加密，个别情况会解不开），它会自动把同样的选项用数字列表再发一次。
+- 想完全不用投票，把 `config.json` 里的 `menu_style` 改成 `"text"`，所有选项都变成"请回复数字"的列表。
+- 主菜单在 `main_menu`，设备类别和每类列出的问题在 `categories`，每类最多 10 个问题。
+- `notify.numbers` 填你或同事的 WhatsApp 号码（不能是机器人自己的号码）。客人选"其他"并描述情况、要求上门、标记紧急或要求人工时，机器人会把内容发到这些号码。
+
+投票点选的读取在真实 WhatsApp 上还没有验证过，第一次使用请用另一部手机完整点一遍。
 
 ## 必须先知道的风险
 
@@ -130,7 +143,11 @@ npm start -- second
 |---|---|
 | `business` | 公司名、email、电话、地址。文字里的 `{company}` `{email}` `{phone}` `{address}` 会自动替换 |
 | `texts.greeting` | 问候语 |
-| `texts.menu` | 三选一菜单 |
+| `menu_style` | `"poll"` 可点选的选项，`"text"` 数字列表 |
+| `main_menu` / `categories` | 主菜单选项、设备类别和每类的常见问题 |
+| `follow_up` | 答案后面是否问"这样解决了吗？" |
+| `notify.numbers` | 客人选"其他"、要上门、紧急时通知哪些 WhatsApp 号码 |
+| `texts.menu` | 文字版主菜单 |
 | `texts.escalate` | 每个答案后面加的那句话 |
 | `texts.after_hours` | 非营业时间提示 |
 | `hours` | 营业时间，`days` 里 0 是周日 |
@@ -227,7 +244,8 @@ npm run check
 
 Zero-cost WhatsApp auto-reply bot with a local back office. It links to your own number with an 8-digit pairing code (WhatsApp Web multi-device protocol via the open-source Baileys library) and runs on your own Windows or Mac machine.
 
-- Three-way menu: fix it myself now, explain what is going on, or send a technician. Each of the 170 AV troubleshooting entries under `knowledge/av/` has a quick-steps answer and an explanation, in Chinese and English.
+- Tappable choices sent as WhatsApp polls (real buttons need the official API): main menu, equipment category, problem, answer, then "did that solve it?". Typing a number or describing the problem also works, and an unreadable tap falls back to a numbered list. "Other" takes a free-text report and alerts the staff numbers in `notify.numbers`. Reading poll taps has not been verified against live WhatsApp.
+- Menu: fix it myself now, explain what is going on, send a technician, other, or talk to a person. Each of the 170 AV troubleshooting entries under `knowledge/av/` has a quick-steps answer and an explanation, in Chinese and English.
 - Rarity-weighted phrase matching, A/B/C suggestions when nothing matches exactly, and a configurable "email us or post in the group" footer on every answer.
 - Back office in Chinese or English with four pages: Chats (phone view plus separate individual and group lists), Broadcast, Customers, Knowledge base.
 - Broadcast: write news or an offer, tick the groups and individuals, send. Recipients are limited to chats and groups that already exist in the account; individual messages are queued 20 to 45 seconds apart with a daily cap and an unsubscribe line; STOP and START are honoured.

@@ -8,6 +8,17 @@ export const DEFAULTS = {
   phone_number: "",
   // Fill these once; every text can use {company}, {email}, {phone}, {address}.
   business: { company: "", email: "", phone: "", address: "" },
+  // "poll": choices are sent as a tappable WhatsApp poll; "text": as a numbered list to answer by number.
+  menu_style: "text",
+  // Optional tappable main menu: { question: {zh,en}, options: [{ label: {zh,en}, send: "1" }] }.
+  // `send` is what tapping means: a menu key ("1"), "0" for a person, or "pick:other".
+  main_menu: null,
+  // Device categories offered after "fix" or "explain": [{ id, title: {zh,en}, entries: [knowledge ids] }]
+  categories: [],
+  // After each knowledge answer, ask "did that solve it?" with tappable choices.
+  follow_up: false,
+  // WhatsApp numbers of staff who get an alert for "other" reports, visit requests, emergencies and handoffs.
+  notify: { numbers: [] },
   // Folders or files with knowledge-base entries ({id,title,match,reply,explain}); appended to faq.
   knowledge: [],
   // Customer tiers, e.g. { vip: { label, priority, ignore_hours, bot: "on"|"off", texts: {...overrides} } }
@@ -65,11 +76,33 @@ export const DEFAULTS = {
     },
     // Appended after every FAQ answer. Leave empty to disable.
     escalate: { zh: "", en: "", ms: "" },
-    // Offered when no entry matches exactly but related topics exist. {options} is the lettered list.
-    suggest: {
-      zh: "我找到这些相关的问题，请回复字母查看：\n{options}\n都不对的话，请把现象描述得具体一点。",
-      en: "I found these related topics. Reply with the letter:\n{options}\nIf none fits, please describe the symptom in more detail.",
-      ms: "Saya jumpa topik berkaitan ini. Balas dengan hurufnya:\n{options}\nJika tiada yang sesuai, sila terangkan masalah dengan lebih terperinci.",
+    // Question shown above related topics when nothing matches exactly.
+    suggest: { zh: "您说的是哪一个问题？", en: "Which of these is your problem?", ms: "Yang mana satu masalah anda?" },
+    choose_category: { zh: "是哪一类设备？请选择，或直接打字描述问题。", en: "Which kind of equipment? Choose one, or just type what is happening.", ms: "Jenis peralatan yang mana? Pilih satu, atau taip masalah anda." },
+    choose_issue: { zh: "是哪个问题？", en: "Which problem is it?", ms: "Masalah yang mana?" },
+    describe: {
+      zh: "好的，请直接打字描述：什么设备、出现什么情况。可以发照片。",
+      en: "OK. Please type what equipment it is and what is happening. Photos are welcome.",
+      ms: "Baik. Sila taip peralatan apa dan apa yang berlaku. Gambar dialu-alukan.",
+    },
+    follow_up: { zh: "这样解决了吗？", en: "Did that solve it?", ms: "Adakah masalah selesai?" },
+    option_solved: { zh: "解决了，谢谢", en: "Solved, thank you", ms: "Selesai, terima kasih" },
+    option_not_solved: { zh: "还是不行，请技术员联系我", en: "Still not working, have a technician contact me", ms: "Masih tidak berfungsi, minta juruteknik hubungi saya" },
+    option_show_explain: { zh: "告诉我是什么原因", en: "Tell me what causes this", ms: "Terangkan puncanya" },
+    option_show_fix: { zh: "给我处理步骤", en: "Give me the steps to fix it", ms: "Beri langkah pembaikan" },
+    option_menu: { zh: "回到主菜单", en: "Back to the main menu", ms: "Kembali ke menu utama" },
+    solved: { zh: "太好了，问题解决了就好。之后再有状况随时找我们。", en: "Great, glad it is sorted. Reach out any time if it happens again.", ms: "Bagus, gembira ia selesai. Hubungi kami bila-bila masa." },
+    option_other: { zh: "其他（告诉我们发生什么事）", en: "Other (tell us what happened)", ms: "Lain-lain (beritahu kami)" },
+    option_none: { zh: "都不是，我自己描述", en: "None of these, let me describe", ms: "Tiada, saya terangkan sendiri" },
+    other_prompt: {
+      zh: "好的，请告诉我们发生了什么情况：什么设备、在哪里、从什么时候开始。可以发照片或语音，我们的同事会亲自查看并回复您。",
+      en: "Sure. Please tell us what happened: which equipment, where, and since when. Photos or voice notes are welcome; a member of our team will read it and reply to you.",
+      ms: "Baik. Sila beritahu apa yang berlaku: peralatan apa, di mana dan sejak bila. Gambar atau nota suara dialu-alukan; pasukan kami akan membaca dan membalas.",
+    },
+    other_received: {
+      zh: "已收到，并已通知我们的同事，会尽快回复您。还有补充的直接发过来即可。",
+      en: "Received, and our team has been notified. We will reply shortly. Send anything else you want to add here.",
+      ms: "Diterima dan pasukan kami telah dimaklumkan. Kami akan membalas sebentar lagi.",
     },
     opt_out: {
       zh: "已为您取消通知订阅。需要技术支持仍可随时发消息给我们；回复「订阅」可恢复。",
@@ -127,6 +160,19 @@ export function validate(config) {
     }
   }
   if (!["observe", "ignore"].includes(config.groups)) problems.push('groups must be "observe" or "ignore"');
+  if (!["poll", "text"].includes(config.menu_style)) problems.push('menu_style must be "poll" or "text"');
+  if (config.main_menu) {
+    const options = config.main_menu.options;
+    if (!Array.isArray(options) || options.length < 2 || options.length > 12) problems.push("main_menu.options needs 2 to 12 options");
+    else if (options.some((o) => !o.label || typeof o.send !== "string")) problems.push("each main_menu option needs label and send");
+  }
+  const knowledgeIds = new Set(config.faq.map((entry) => entry.id).filter(Boolean));
+  for (const category of config.categories || []) {
+    if (!category.id || !category.title || !Array.isArray(category.entries)) problems.push("each category needs id, title and entries");
+    else for (const id of category.entries) if (!knowledgeIds.has(id)) problems.push(`category ${category.id} lists unknown knowledge id ${id}`);
+  }
+  if ((config.categories || []).length > 11) problems.push("at most 11 categories (a WhatsApp poll holds 12 options)");
+  for (const number of config.notify?.numbers || []) if (!/^\d{8,15}$/.test(String(number))) problems.push(`notify.numbers: ${number} must be digits with country code`);
   const pace = config.broadcast?.delay_seconds;
   if (!pace || !(pace.min >= 5) || !(pace.max >= pace.min)) problems.push("broadcast.delay_seconds needs min of at least 5 and max no smaller than min");
   if (!(config.broadcast?.max_per_day >= 1)) problems.push("broadcast.max_per_day must be at least 1");
@@ -160,7 +206,7 @@ export function validate(config) {
 export function merge(base, override) {
   const out = { ...base };
   for (const [key, value] of Object.entries(override || {})) {
-    if (value && typeof value === "object" && !Array.isArray(value) && typeof base[key] === "object" && !Array.isArray(base[key])) {
+    if (value && typeof value === "object" && !Array.isArray(value) && base[key] && typeof base[key] === "object" && !Array.isArray(base[key])) {
       out[key] = merge(base[key], value);
     } else {
       out[key] = value;

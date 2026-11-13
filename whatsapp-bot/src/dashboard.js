@@ -38,6 +38,11 @@ const PAGE = String.raw`<!doctype html>
   .msg .meta{display:flex;justify-content:flex-end;gap:6px;font-size:11px;color:var(--muted);margin-top:2px}
   .msg .tag{font-weight:600}.msg.human .tag{color:var(--accent)}
   .sender{font-weight:600;font-size:12.5px;color:var(--accent);margin-bottom:1px}
+  .opts{display:grid;gap:4px;margin:6px 0 2px}
+  .opt{font:inherit;font-size:13.5px;text-align:left;padding:6px 10px;border-radius:8px;border:1px solid rgba(0,0,0,.14);background:rgba(255,255,255,.55);color:inherit}
+  @media (prefers-color-scheme:dark){.opt{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.08)}}
+  button.opt{cursor:pointer}button.opt:hover{background:rgba(255,255,255,.9)}
+  @media (prefers-color-scheme:dark){button.opt:hover{background:rgba(255,255,255,.18)}}
   .empty{margin:auto;text-align:center;color:var(--muted);padding:24px;white-space:pre-line}
   .compose{display:flex;gap:8px;padding:8px;background:var(--card);border-top:1px solid var(--line)}
   .compose input{flex:1;min-width:0;border-radius:20px;padding:9px 14px}
@@ -167,8 +172,8 @@ const L={
   number:"号码",aiOff:"AI 关闭",kb:"知识库",connected:"已连接",disconnected:"已断开",connecting:"连接中",demo:"演示",starting:"启动中",
   pairIntro:"在手机 WhatsApp 输入配对码（1 分钟内）：",pairPath:"已连接的设备 → 连接设备 → 改用电话号码连接",
   bot:"机器人",human:"人工",paused:"机器人暂停中",newCustomerName:"新客人",typeBelow:"以客人身份在下面打字",ownerText:"好的，我们的技术员马上联系您。",
-  reason:{rule:"知识库",suggestion_chosen:"知识库",menu:"菜单",menu_choice:"菜单",suggest:"推荐相关问题",ai:"AI",fallback:"兜底回复",handoff_requested:"转人工",urgent:"紧急",visit_details:"上门登记",broadcast:"群发通知",opt_out:"退订",opt_in:"订阅"},
-  mode:{fix:"自己解决",explain:"了解原因",visit:"要上门"},
+  reason:{rule:"知识库",option_chosen:"知识库",menu:"菜单",menu_choice:"菜单",category:"选问题",solved:"已解决",suggest:"推荐相关问题",describe:"请客人描述",ai:"AI",fallback:"兜底回复",handoff_requested:"转人工",urgent:"紧急",visit_details:"上门登记",other_prompt:"其他问题",other_report:"其他问题已通知",prompt_fallback:"改用数字",broadcast:"群发通知",opt_out:"退订",opt_in:"订阅"},
+  mode:{fix:"自己解决",explain:"了解原因",visit:"要上门",other:"其他问题"},
   bcWrite:"写最新消息或优惠",bcPlaceholder:"例如：本月会议室 AV 保养优惠，预约即送一次免费检查……",bcChars:n=>n+" / 2000 字",bcFooterNote:"发给个人时会自动加上退订提示；发到群里不加。",
   bcWho:"发给谁",bcSearch:"搜索名字或号码",bcAllGroups:"全选群组",bcAllPeople:"全选个人",bcVip:"只选重点客户",bcClear:"清空",
   bcWhoHint:"这里列出的是你 WhatsApp 里已有的对话和群。发到群里一条就能通知全群，最安全。已退订的客户不能选。",
@@ -192,8 +197,8 @@ const L={
   number:"Number",aiOff:"AI off",kb:"Knowledge base",connected:"Connected",disconnected:"Disconnected",connecting:"Connecting",demo:"Demo",starting:"Starting",
   pairIntro:"Enter this pairing code in WhatsApp on your phone within a minute:",pairPath:"Linked devices → Link a device → Link with phone number instead",
   bot:"Bot",human:"Human",paused:"Bot paused",newCustomerName:"New customer",typeBelow:"Type below as this customer",ownerText:"OK, our technician will contact you right away.",
-  reason:{rule:"knowledge base",suggestion_chosen:"knowledge base",menu:"menu",menu_choice:"menu",suggest:"related topics",ai:"AI",fallback:"fallback",handoff_requested:"handoff",urgent:"urgent",visit_details:"visit request",broadcast:"broadcast",opt_out:"unsubscribe",opt_in:"subscribe"},
-  mode:{fix:"Fix myself",explain:"Explain",visit:"Wants visit"},
+  reason:{rule:"knowledge base",option_chosen:"knowledge base",menu:"menu",menu_choice:"menu",category:"pick a problem",solved:"solved",suggest:"related topics",describe:"asked to describe",ai:"AI",fallback:"fallback",handoff_requested:"handoff",urgent:"urgent",visit_details:"visit request",other_prompt:"other issue",other_report:"other issue, team alerted",prompt_fallback:"asked for a number",broadcast:"broadcast",opt_out:"unsubscribe",opt_in:"subscribe"},
+  mode:{fix:"Fix myself",explain:"Explain",visit:"Wants visit",other:"Other issue"},
   bcWrite:"Write your news or offer",bcPlaceholder:"For example: meeting room AV servicing offer this month, book now for a free check-up…",bcChars:n=>n+" / 2000 characters",bcFooterNote:"An unsubscribe line is added for individuals; nothing is added in groups.",
   bcWho:"Recipients",bcSearch:"Search name or number",bcAllGroups:"All groups",bcAllPeople:"All individuals",bcVip:"Priority customers only",bcClear:"Clear",
   bcWhoHint:"These are the chats and groups already in your WhatsApp. One post in a group reaches everyone in it and is the safest route. Unsubscribed customers cannot be selected.",
@@ -303,6 +308,8 @@ async function renderChat(){
     const b=el("div","msg "+(m.direction==="in"?"in":"out")+(m.direction==="human"?" human":""));
     if(m.sender&&m.direction==="in")b.append(el("div","sender",m.sender));
     b.append(document.createTextNode(m.text));
+    if(m.options){const box=el("div","opts"),live=state.demo&&m.id===data.messages.at(-1).id;
+      m.options.forEach((text,i)=>{const o=el(live?"button":"div","opt",(i+1)+"  "+text);if(live){o.type="button";o.addEventListener("click",async()=>{await post("/demo/send",{jid:selected,option:i});chatKey="";refresh();});}box.append(o);});b.append(box);}
     const meta=el("div","meta");
     if(m.direction==="bot")meta.append(el("span","tag",m.reason==="broadcast"?T("reason").broadcast:T("bot")+" · "+(T("reason")[m.reason]||m.reason||"")));
     if(m.direction==="human")meta.append(el("span","tag",T("human")));

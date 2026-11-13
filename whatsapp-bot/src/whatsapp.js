@@ -2,8 +2,10 @@
 // This is an unofficial client: WhatsApp's terms do not allow it, numbers can be banned,
 // and the library may stop working after a WhatsApp update. Use a spare number.
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import pino from "pino";
 import baileys, {
+  decryptPollVote,
   DisconnectReason,
   fetchLatestBaileysVersion,
   isJidBroadcast,
@@ -52,7 +54,30 @@ export function formatPairingCode(code) {
  * @param {(event: {jid: string, text: string, name?: string, id: string, fromMe: boolean}) => Promise<void>} options.onMessage
  * @param {(line: string) => void} options.log
  */
-export async function connect({ config, authDir, status, onMessage, onGroupMessage = null, onDirectory = null, log, backoffMs = 2000, handle = null }) {
+// Which option of one of our polls a customer tapped. WhatsApp encrypts the vote with
+// the poll's secret plus the ids of creator and voter, and each of those can be a phone
+// number id or an anonymous LID, so every pairing is tried until one decrypts.
+// Returns the option index, -1 when the vote was withdrawn, or null when unreadable.
+export function readPollVote({ vote, pollId, secret, labels, creators, voters, decrypt = decryptPollVote }) {
+  if (!secret || !vote?.encPayload || !vote?.encIv) return null;
+  const pollEncKey = Buffer.from(secret, "base64");
+  for (const pollCreatorJid of [...new Set(creators.filter(Boolean))]) {
+    for (const voterJid of [...new Set(voters.filter(Boolean))]) {
+      try {
+        const result = decrypt({ encPayload: vote.encPayload, encIv: vote.encIv }, { pollCreatorJid, pollMsgId: pollId, pollEncKey, voterJid });
+        const chosen = (result.selectedOptions || []).map((hash) => Buffer.from(hash).toString("hex"));
+        if (!chosen.length) return -1;
+        const index = labels.findIndex((label) => chosen.includes(createHash("sha256").update(Buffer.from(label)).digest("hex")));
+        return index >= 0 ? index : null;
+      } catch {
+        // wrong pairing: the authentication tag does not verify, try the next one
+      }
+    }
+  }
+  return null;
+}
+
+export async function connect({ config, authDir, status, onMessage, onGroupMessage = null, onDirectory = null, onPollVote = null, getPoll = null, log, backoffMs = 2000, handle = null }) {
   // One handle survives reconnects; index.js keeps sending through it after WhatsApp
   // forces a restart (status 515 right after pairing, or any network drop).
   handle = handle || { sock: null, sendText: null, groupNames: new Map(), contactNames: new Map() };
@@ -81,7 +106,7 @@ export async function connect({ config, authDir, status, onMessage, onGroupMessa
   let reconnectDelay = backoffMs;
   const reconnect = (delay, nextBackoff) =>
     setTimeout(
-      () => connect({ config, authDir, status, onMessage, onGroupMessage, onDirectory, log, backoffMs: nextBackoff, handle }).catch((e) => log(e.message)),
+      () => connect({ config, authDir, status, onMessage, onGroupMessage, onDirectory, onPollVote, getPoll, log, backoffMs: nextBackoff, handle }).catch((e) => log(e.message)),
       delay
     );
 
@@ -201,6 +226,18 @@ export async function connect({ config, authDir, status, onMessage, onGroupMessa
         const jid = msg.key?.remoteJid;
         if (!msg.message || !jid) continue;
         if (msg.message.protocolMessage || msg.message.reactionMessage) continue;
+        const vote = msg.message.pollUpdateMessage;
+        if (vote) {
+          const pollId = vote.pollCreationMessageKey?.id;
+          const poll = !msg.key.fromMe && onPollVote && getPoll && pollId ? getPoll(pollId) : null;
+          if (!poll || isJidGroup(jid)) continue;
+          const mine = [sock.user?.id, sock.user?.lid].filter(Boolean).map((value) => jidNormalizedUser(value));
+          const theirs = [jid, msg.key.senderPn, msg.key.senderLid, msg.key.participant].filter(Boolean).map((value) => jidNormalizedUser(value));
+          const index = readPollVote({ vote: vote.vote, pollId, secret: poll.secret, labels: poll.labels, creators: mine, voters: theirs });
+          if (index === -1) continue; // vote withdrawn
+          await onPollVote({ jid: jidNormalizedUser(jid), phone: phoneNumberOf(msg.key), name: msg.pushName, pollId, index });
+          continue;
+        }
         const text = extractText(msg.message);
         if (!text) continue;
         if (isJidGroup(jid)) {
@@ -255,6 +292,15 @@ export async function connect({ config, authDir, status, onMessage, onGroupMessa
       }
       const sent = await sock.sendMessage(jid, { text });
       return sent?.key?.id;
+  };
+  // Tappable choices: a single-answer poll. Returns its id and the secret needed to read votes.
+  handle.sendPoll = async function sendPoll(jid, question, labels, { delayMs = 0 } = {}) {
+    const sock = handle.sock;
+    if (status.connection !== "open") throw new Error("WhatsApp is not connected right now");
+    if (delayMs > 0) await new Promise((r) => setTimeout(r, delayMs));
+    const sent = await sock.sendMessage(jid, { poll: { name: question.slice(0, 255), values: labels.map((label) => label.slice(0, 100)), selectableCount: 1 } });
+    const secret = sent?.message?.messageContextInfo?.messageSecret;
+    return { id: sent?.key?.id, secret: secret ? Buffer.from(secret).toString("base64") : null };
   };
   return handle;
 }

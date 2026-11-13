@@ -37,6 +37,8 @@ export function buildConfig(templateKey, answers) {
     phone: answers.phone || config.business?.phone || "",
     address: answers.address || config.business?.address || "",
   };
+  const staff = String(answers.notify || "").split(/[,;，、\n]+/).map((n) => n.replace(/\D/g, "")).filter((n) => n && n !== config.phone_number);
+  config.notify = { numbers: staff };
   if (config.phone_number.startsWith("65")) config.timezone = "Asia/Singapore";
   else if (config.phone_number.startsWith("60")) config.timezone = "Asia/Kuala_Lumpur";
   if (answers.port) config.dashboard_port = Number(answers.port);
@@ -90,6 +92,12 @@ async function main() {
     email: flags.email ?? (await ask("客户可以联系的 email / Support email", previous.email || "")),
     phone: flags.phone ?? (await ask("公司电话 / Company phone", previous.phone || "")),
     address: flags.address ?? (await ask("公司地址 / Company address", previous.address || "")),
+    notify:
+      flags.notify ??
+      (await ask(
+        "客人选「其他」、要上门或紧急时，要通知哪个 WhatsApp 号码？（你或同事的另一个号码，可留空）/ Staff WhatsApp number to alert (another number, optional)",
+        (existing?.notify?.numbers || []).join(",")
+      )),
     port: flags.port || (profile ? 8797 : ""),
   };
   rl?.close();

@@ -21,7 +21,15 @@ export async function startDemo({ configFile, port, store = new Store(":memory:"
   if (problems.length) throw new Error(`${path.basename(file)} problems:\n - ${problems.join("\n - ")}`);
   const status = { connection: "demo", phone: config.phone_number, pairingCode: null, lastError: null, aiEnabled: config.ai.enabled, aiProvider: config.ai.provider };
   let counter = 0;
-  const handler = createHandler({ config, store, log, instant: true, send: async () => `demo-${++counter}`, ...(ai ? { ai } : {}) });
+  const handler = createHandler({
+    config,
+    store,
+    log,
+    instant: true,
+    send: async () => `demo-${++counter}`,
+    sendPoll: async () => ({ id: `demo-poll-${++counter}`, secret: null }),
+    ...(ai ? { ai } : {}),
+  });
   const recordGroup = createGroupRecorder({ store, log });
   // Stand-ins for the chats WhatsApp would report after linking a real account.
   if (seed) {
@@ -58,7 +66,8 @@ export async function startDemo({ configFile, port, store = new Store(":memory:"
         if (text) await recordGroup({ jid: groupJid, groupName: body.name ? String(body.name).slice(0, 80) : null, sender: String(body.sender || "Member").slice(0, 40), text, fromMe: !!body.fromMe });
       } else if (url.pathname === "/demo/send") {
         const text = String(body.text || "").slice(0, 2000);
-        if (text) result = (await handler({ jid, phone: jid.split("@")[0], text, name: body.name || null, id: `in-${++counter}`, fromMe: false })) || {};
+        if (Number.isInteger(body.option)) result = (await handler.choose({ jid, phone: jid.split("@")[0], name: body.name || null, index: body.option })) || {};
+        else if (text) result = (await handler({ jid, phone: jid.split("@")[0], text, name: body.name || null, id: `in-${++counter}`, fromMe: false })) || {};
       } else if (url.pathname === "/demo/owner") {
         await handler({ jid, text: String(body.text || "ok"), id: `owner-${++counter}`, fromMe: true });
       } else {

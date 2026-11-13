@@ -223,99 +223,204 @@ export function tierOf(config, contact, phone) {
 export const OPT_OUT_WORDS = ["stop", "unsubscribe", "退订", "取消订阅"];
 export const OPT_IN_WORDS = ["start", "subscribe", "订阅", "恢复订阅"];
 export const HANDOFF_WORDS = ["0", "人工", "客服", "真人", "技术员", "human", "agent", "person", "staff", "operator", "technician", "manusia"];
-const LETTERS = ["a", "b", "c", "d", "e"];
-const VISIT_ACK_MINUTES = 10;
+const LETTERS = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"];
+const QUIET_MINUTES = 10;
+
+// Which option of the last prompt a typed "2", "2)" or "B" refers to. Digits are
+// 1-based; "0" is never an option because it always means "talk to a person".
+export function optionIndex(text, count) {
+  const cleaned = normalize(text).replace(/[).。、．]/g, "");
+  let index = -1;
+  if (/^\d{1,2}$/.test(cleaned)) index = Number(cleaned) - 1;
+  else if (cleaned.length === 1) index = LETTERS.indexOf(cleaned);
+  return index >= 0 && index < count ? index : -1;
+}
+
+// A prompt as plain text, for chats where tappable options are not available.
+export function renderPrompt(prompt) {
+  return [prompt.question, ...prompt.options.map((option, index) => `${index + 1}) ${option.label}`)].join("\n");
+}
 
 /**
  * Decide how to respond to one incoming customer message.
  * @param {object} config
  * @param {object} input { text, name, tier, contact, lastBotReason, now, repliesThisMinute }
+ *
+ * A decision may carry `prompt` = { question, options: [{ label, send }] }: a set of
+ * choices the customer can tap (sent as a poll) or answer with a number. `send` is
+ * what the choice means, fed back into decide() as if the customer had typed it.
  */
 export function decide(config, input) {
   const now = input.now ?? Date.now();
-  const language = detectLanguage(input.text, config.languages, config.default_language);
+  const contact = input.contact || {};
+  const minute = 60 * 1000;
+  const firstContactInWhile =
+    !contact.lastInboundAt || now - contact.lastInboundAt > config.greeting_cooldown_hours * 60 * minute;
+
+  // A number or letter answering the last prompt stands for that option.
+  let text = input.text;
+  let viaOption = false;
+  if (!firstContactInWhile && Array.isArray(contact.pending) && contact.pending.length) {
+    const index = optionIndex(text, contact.pending.length);
+    if (index >= 0) {
+      text = contact.pending[index];
+      viaOption = true;
+    }
+  }
+  const isPick = text.startsWith("pick:");
+
+  // Language: a tapped option says nothing about language, so keep the customer's last one.
+  const language =
+    (isPick || viaOption) && contact.language && config.languages.includes(contact.language)
+      ? contact.language
+      : detectLanguage(input.text, config.languages, contact.language || config.default_language);
   const tier = input.tier ? config.tiers?.[input.tier] : null;
   const texts = tier?.texts ? { ...config.texts, ...tier.texts } : config.texts;
-  const contact = input.contact || {};
   const vars = { ...(config.business || {}), name: input.name || contact.name || "" };
-  const t = (key) => pick(texts[key], language, config.default_language, vars).trim();
-  const minute = 60 * 1000;
+  const local = (value) => pick(value, language, config.default_language, vars).trim();
+  const t = (key) => local(texts[key]);
   const silent = (reason) => ({ action: "silent", language, reason, parts: [] });
 
   if ((input.repliesThisMinute ?? 0) >= config.max_replies_per_minute) return silent("global_rate_limit");
   if (contact.lastHumanOutboundAt && now - contact.lastHumanOutboundAt < config.handoff_minutes * minute) return silent("human_active");
   if (contact.mutedUntil && contact.mutedUntil > now) return silent("handoff_mute");
-  if (contact.lastBotOutboundAt && now - contact.lastBotOutboundAt < config.min_seconds_between_replies_per_contact * 1000) {
+  // A tap on an option right after the prompt arrived is not a burst; never drop it.
+  if (!input.selected && contact.lastBotOutboundAt && now - contact.lastBotOutboundAt < config.min_seconds_between_replies_per_contact * 1000) {
     return silent("contact_rate_limit");
   }
   // Some customers are handled by people only; the message still lands on the waiting list.
   if (tier?.bot === "off") return silent("tier_bot_off");
 
   const parts = [];
-  const firstContactInWhile =
-    !contact.lastInboundAt || now - contact.lastInboundAt > config.greeting_cooldown_hours * 60 * minute;
   if (firstContactInWhile) parts.push(t("greeting"));
   if (firstContactInWhile && !tier?.ignore_hours && !isOpen(config, new Date(now))) parts.push(t("after_hours"));
 
-  const reply = (reason, extra = {}) => ({
-    action: "reply",
-    text: parts.filter(Boolean).join("\n\n"),
-    language,
-    reason,
-    parts,
-    pending: null,
-    ...extra,
-  });
+  const reply = (reason, extra = {}) => {
+    const body = parts.filter(Boolean).join("\n\n");
+    const prompt = extra.prompt || null;
+    return {
+      action: "reply",
+      // `text` is the complete plain-text form; `lead` is what precedes a tappable prompt.
+      text: prompt ? [body, renderPrompt(prompt)].filter(Boolean).join("\n\n") : body,
+      lead: body,
+      language,
+      reason,
+      parts,
+      pending: prompt ? prompt.options.map((option) => option.send) : null,
+      ...extra,
+    };
+  };
 
-  const normalized = normalize(input.text);
+  const normalized = normalize(text);
   // Unsubscribing from announcements must always work, whatever else is going on.
-  if (OPT_OUT_WORDS.includes(normalized)) return { action: "reply", text: t("opt_out"), language, reason: "opt_out", parts: [], pending: null, optOut: true };
-  if (OPT_IN_WORDS.includes(normalized) && contact.optedOut) return { action: "reply", text: t("opt_in"), language, reason: "opt_in", parts: [], pending: null, optOut: false };
+  if (OPT_OUT_WORDS.includes(normalized)) return { action: "reply", text: t("opt_out"), lead: t("opt_out"), language, reason: "opt_out", parts: [], pending: null, optOut: true };
+  if (OPT_IN_WORDS.includes(normalized) && contact.optedOut) return { action: "reply", text: t("opt_in"), lead: t("opt_in"), language, reason: "opt_in", parts: [], pending: null, optOut: false };
   if (HANDOFF_WORDS.includes(normalized)) {
     parts.push(t("handoff"));
     return reply("handoff_requested", { handoff: true });
   }
 
   // Mode is what the customer chose from the menu: "fix" (quick steps), "explain"
-  // (what is going on), "visit" (send a technician). A new conversation starts clean.
+  // (what is going on), "visit" (send a technician), "other" (tell us what happened).
+  // A new conversation starts clean.
   const mode = firstContactInWhile ? null : contact.mode || null;
   const footer = t("escalate");
+  const entryById = (id) => config.faq.find((entry) => entry.id === id);
+  const option = (label, send) => ({ label: local(label), send });
+  const otherOption = () => option(texts.option_other, "pick:other");
 
-  const answer = (rule, reason) => {
-    const variant = mode === "explain" && rule.explain ? rule.explain : rule.reply;
-    parts.push(pick(variant, language, config.default_language, vars));
+  // The answer, then (when follow_up is on) a short "did that solve it?" prompt so the
+  // customer can confirm, ask for a person, or see the other version without typing.
+  const answer = (rule, reason, as = mode) => {
+    const explaining = as === "explain" && !!rule.explain;
+    parts.push(pick(explaining ? rule.explain : rule.reply, language, config.default_language, vars));
     if (footer && rule.escalate !== false) parts.push(footer);
-    return reply(reason, { entry: rule.id || null });
+    const extra = { entry: rule.id || null };
+    if (config.follow_up && rule.id) {
+      const options = [option(texts.option_solved, "pick:solved"), option(texts.option_not_solved, "0")];
+      if (explaining) options.push(option(texts.option_show_fix, `pick:fix:${rule.id}`));
+      else if (rule.explain) options.push(option(texts.option_show_explain, `pick:explain:${rule.id}`));
+      options.push(option(texts.option_menu, "pick:menu"));
+      extra.prompt = { question: t("follow_up"), options };
+    }
+    return reply(reason, extra);
   };
+  const mainMenu = () => {
+    const menu = config.main_menu;
+    if (!menu?.options?.length) {
+      parts.push(t("menu"));
+      return reply("menu");
+    }
+    return reply("menu", { prompt: { question: local(menu.question), options: menu.options.map((item) => option(item.label, item.send)) } });
+  };
+  const categoryPrompt = () => ({
+    question: t("choose_category"),
+    options: [...config.categories.map((category) => option(category.title, `pick:cat:${category.id}`)), otherOption()],
+  });
 
-  // "A" / "B" / "C" after the bot offered related topics.
-  const letter = normalized.replace(/[).。、]/g, "");
-  const pendingIndex = LETTERS.indexOf(letter);
-  if (!firstContactInWhile && pendingIndex >= 0 && Array.isArray(contact.pending) && contact.pending[pendingIndex]) {
-    const chosen = config.faq.find((entry) => entry.id === contact.pending[pendingIndex]);
-    if (chosen) return answer(chosen, "suggestion_chosen");
+  // ---- choices made by tapping an option or answering its number ----
+  if (isPick) {
+    if (text === "pick:other") {
+      parts.push(t("other_prompt"));
+      return reply("other_prompt", { setMode: "other" });
+    }
+    if (text === "pick:describe") {
+      parts.push(t("describe"));
+      return reply("describe");
+    }
+    if (text === "pick:menu") return mainMenu();
+    if (text === "pick:solved") {
+      parts.push(t("solved"));
+      return reply("solved");
+    }
+    for (const as of ["explain", "fix"]) {
+      if (!text.startsWith(`pick:${as}:`)) continue;
+      const entry = entryById(text.slice(as.length + 6));
+      if (entry) return { ...answer(entry, "option_chosen", as), setMode: as };
+    }
+    if (text.startsWith("pick:cat:")) {
+      const category = (config.categories || []).find((item) => item.id === text.slice(9));
+      const entries = (category?.entries || []).map(entryById).filter(Boolean).slice(0, 10);
+      if (entries.length) {
+        return reply("category", {
+          prompt: {
+            question: t("choose_issue"),
+            options: [...entries.map((entry) => option(entry.title, `pick:entry:${entry.id}`)), option(texts.option_none, "pick:describe")],
+          },
+        });
+      }
+    }
+    if (text.startsWith("pick:entry:")) {
+      const entry = entryById(text.slice(11));
+      if (entry) return answer(entry, viaOption || input.selected ? "option_chosen" : "rule");
+    }
+    return mainMenu(); // an option that no longer exists
   }
 
-  const menuRule = matchRule(config.menu, input.text);
+  const menuRule = matchRule(config.menu, text);
   if (menuRule) {
-    parts.push(pick(menuRule.reply, language, config.default_language, vars));
+    const lead = pick(menuRule.reply, language, config.default_language, vars);
+    if (menuRule.prompt === "categories" && config.categories?.length) {
+      return reply("menu_choice", { setMode: menuRule.mode || undefined, prompt: categoryPrompt() });
+    }
+    parts.push(lead);
     return reply(menuRule.urgent ? "urgent" : "menu_choice", { urgent: !!menuRule.urgent, setMode: menuRule.mode || undefined });
   }
 
-  // Once a visit is requested, stop sending self-help: acknowledge the details
-  // once, then stay quiet while the customer sends address, photos and so on.
-  if (mode === "visit") {
-    const recentlyAcked =
-      input.lastBotReason === "visit_details" && contact.lastBotOutboundAt && now - contact.lastBotOutboundAt < VISIT_ACK_MINUTES * minute;
-    if (recentlyAcked) return silent("visit_collecting");
-    parts.push(t("visit_received"));
-    return reply("visit_details");
+  // Once a visit is requested or the customer is describing "something else", stop
+  // sending self-help: acknowledge once, then stay quiet while details arrive.
+  if (mode === "visit" || mode === "other") {
+    const ack = mode === "visit" ? "visit_details" : "other_report";
+    const recentlyAcked = input.lastBotReason === ack && contact.lastBotOutboundAt && now - contact.lastBotOutboundAt < QUIET_MINUTES * minute;
+    if (recentlyAcked) return silent(mode === "visit" ? "visit_collecting" : "other_collecting");
+    parts.push(t(mode === "visit" ? "visit_received" : "other_received"));
+    return reply(ack, { report: true });
   }
 
   // A confident match answers straight away. When only a generic word matched
   // and the wider search points somewhere else, let the customer choose instead.
-  const matched = matchDetailed(config.faq, input.text);
-  let related = search(config.faq, input.text);
+  const matched = matchDetailed(config.faq, text);
+  let related = search(config.faq, text);
   if (matched.rule) {
     const unsure = !matched.confident && matched.rule.id && related.length && related[0] !== matched.rule;
     if (!unsure) return answer(matched.rule, "rule");
@@ -324,19 +429,15 @@ export function decide(config, input) {
   if (config.ai.enabled) {
     return { action: "ai", language, reason: "ai", parts, mode, footer, context: related, pending: null };
   }
-
   if (related.length) {
-    const options = related
-      .map((entry, index) => `${LETTERS[index].toUpperCase()}) ${pick(entry.title, language, config.default_language)}`)
-      .join("\n");
-    parts.push(t("suggest").replace("{options}", options));
-    return reply("suggest", { pending: related.map((entry) => entry.id) });
+    return reply("suggest", {
+      prompt: {
+        question: t("suggest"),
+        options: [...related.map((entry) => option(entry.title, `pick:entry:${entry.id}`)), option(texts.option_none, "pick:describe")],
+      },
+    });
   }
-
-  if (firstContactInWhile || normalized.length <= 12) {
-    parts.push(t("menu"));
-    return reply("menu");
-  }
+  if (firstContactInWhile || normalized.length <= 12) return mainMenu();
   parts.push(t("fallback"));
   return reply("fallback");
 }

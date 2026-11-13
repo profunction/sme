@@ -29,10 +29,19 @@ export class Store {
         text TEXT NOT NULL,
         reason TEXT,
         created_at INTEGER NOT NULL,
-        sender TEXT
+        sender TEXT,
+        options TEXT
       );
       CREATE INDEX IF NOT EXISTS messages_jid ON messages(jid, created_at);
       CREATE TABLE IF NOT EXISTS sent_ids (id TEXT PRIMARY KEY, created_at INTEGER NOT NULL);
+      CREATE TABLE IF NOT EXISTS polls (
+        id TEXT PRIMARY KEY,       -- WhatsApp message id of the poll we sent
+        jid TEXT NOT NULL,
+        secret TEXT,               -- base64 key needed to read the votes
+        labels TEXT NOT NULL,
+        sends TEXT NOT NULL,
+        created_at INTEGER NOT NULL
+      );
       CREATE TABLE IF NOT EXISTS broadcasts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         text TEXT NOT NULL,
@@ -58,6 +67,7 @@ export class Store {
     if (!columns.includes("chat_at")) this.db.exec("ALTER TABLE contacts ADD COLUMN chat_at INTEGER");
     const messageColumns = this.db.prepare("PRAGMA table_info(messages)").all().map((c) => c.name);
     if (!messageColumns.includes("sender")) this.db.exec("ALTER TABLE messages ADD COLUMN sender TEXT");
+    if (!messageColumns.includes("options")) this.db.exec("ALTER TABLE messages ADD COLUMN options TEXT");
     if (!columns.includes("pending")) this.db.exec("ALTER TABLE contacts ADD COLUMN pending TEXT");
   }
 
@@ -107,7 +117,7 @@ export class Store {
       .run(jid, fromMe ? "human" : "in", text, now, fromMe ? null : sender ?? null);
   }
 
-  recordBotReply(jid, text, reason, language, now = Date.now()) {
+  recordBotReply(jid, text, reason, language, now = Date.now(), options = null) {
     this.db
       .prepare(
         `INSERT INTO contacts(jid, last_bot_outbound_at, language) VALUES(?, ?, ?)
@@ -115,8 +125,27 @@ export class Store {
       )
       .run(jid, now, language);
     this.db
-      .prepare("INSERT INTO messages(jid, direction, text, reason, created_at) VALUES(?, 'bot', ?, ?, ?)")
-      .run(jid, text, reason, now);
+      .prepare("INSERT INTO messages(jid, direction, text, reason, created_at, options) VALUES(?, 'bot', ?, ?, ?, ?)")
+      .run(jid, text, reason, now, options && options.length ? JSON.stringify(options) : null);
+  }
+
+  // Polls we sent, so a tap on an option can be mapped back to what it means.
+  savePoll(id, jid, secret, labels, sends, now = Date.now()) {
+    this.db
+      .prepare("INSERT OR REPLACE INTO polls(id, jid, secret, labels, sends, created_at) VALUES(?, ?, ?, ?, ?, ?)")
+      .run(id, jid, secret ?? null, JSON.stringify(labels), JSON.stringify(sends), now);
+    this.db.prepare("DELETE FROM polls WHERE created_at < ?").run(now - 7 * 24 * 3600 * 1000);
+  }
+
+  poll(id) {
+    const row = this.db.prepare("SELECT * FROM polls WHERE id = ?").get(id);
+    return row ? { id: row.id, jid: row.jid, secret: row.secret, labels: JSON.parse(row.labels), sends: JSON.parse(row.sends) } : null;
+  }
+
+  // Labels of the options shown in the bot's latest message to this chat.
+  lastBotOptions(jid) {
+    const row = this.db.prepare("SELECT options FROM messages WHERE jid = ? AND direction = 'bot' AND reason IS NOT 'broadcast' ORDER BY id DESC LIMIT 1").get(jid);
+    return row?.options ? JSON.parse(row.options) : null;
   }
 
   recordHumanReply(jid, text, now = Date.now()) {
@@ -245,9 +274,10 @@ export class Store {
 
   messages(jid, limit = 200) {
     return this.db
-      .prepare("SELECT id, direction, text, reason, created_at, sender FROM messages WHERE jid = ? ORDER BY id DESC LIMIT ?")
+      .prepare("SELECT id, direction, text, reason, created_at, sender, options FROM messages WHERE jid = ? ORDER BY id DESC LIMIT ?")
       .all(jid, limit)
-      .reverse();
+      .reverse()
+      .map((row) => ({ ...row, options: row.options ? JSON.parse(row.options) : null }));
   }
 
   // Mute the bot on this chat until the given time. The customer stays on the
