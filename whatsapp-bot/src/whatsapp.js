@@ -52,10 +52,10 @@ export function formatPairingCode(code) {
  * @param {(event: {jid: string, text: string, name?: string, id: string, fromMe: boolean}) => Promise<void>} options.onMessage
  * @param {(line: string) => void} options.log
  */
-export async function connect({ config, authDir, status, onMessage, log, backoffMs = 2000, handle = null }) {
+export async function connect({ config, authDir, status, onMessage, onGroupMessage = null, onDirectory = null, log, backoffMs = 2000, handle = null }) {
   // One handle survives reconnects; index.js keeps sending through it after WhatsApp
   // forces a restart (status 515 right after pairing, or any network drop).
-  handle = handle || { sock: null, sendText: null };
+  handle = handle || { sock: null, sendText: null, groupNames: new Map(), contactNames: new Map() };
   const logger = pino({ level: process.env.BAILEYS_LOG_LEVEL || "silent" });
   const { state, saveCreds } = await useMultiFileAuthState(authDir);
   let version;
@@ -81,7 +81,7 @@ export async function connect({ config, authDir, status, onMessage, log, backoff
   let reconnectDelay = backoffMs;
   const reconnect = (delay, nextBackoff) =>
     setTimeout(
-      () => connect({ config, authDir, status, onMessage, log, backoffMs: nextBackoff, handle }).catch((e) => log(e.message)),
+      () => connect({ config, authDir, status, onMessage, onGroupMessage, onDirectory, log, backoffMs: nextBackoff, handle }).catch((e) => log(e.message)),
       delay
     );
 
@@ -109,6 +109,7 @@ export async function connect({ config, authDir, status, onMessage, log, backoff
       status.lastError = null;
       reconnectDelay = 2000;
       log(`已连接 / Connected as ${jidNormalizedUser(sock.user?.id || "")}`);
+      syncGroups();
     }
     if (connection === "close") {
       const code = lastDisconnect?.error?.output?.statusCode;
@@ -133,15 +134,88 @@ export async function connect({ config, authDir, status, onMessage, log, backoff
     }
   });
 
+  // The account's own chat list. Groups can be listed at any time; individual chats
+  // arrive from WhatsApp only in the history sync that follows pairing.
+  const report = (entries) => {
+    if (!onDirectory || !entries.length) return;
+    try {
+      onDirectory(entries);
+    } catch (error) {
+      log(`directory import failed: ${error.message}`);
+    }
+  };
+  async function syncGroups() {
+    try {
+      const groups = await sock.groupFetchAllParticipating();
+      const entries = Object.values(groups || {}).map((group) => ({ jid: group.id, name: group.subject || null, at: (group.creation || 0) * 1000 || null }));
+      for (const entry of entries) if (entry.name) handle.groupNames.set(entry.jid, entry.name);
+      report(entries);
+      if (entries.length) log(`已读取 ${entries.length} 个群 / Found ${entries.length} groups`);
+    } catch (error) {
+      log(`could not list groups: ${error.message}`);
+    }
+  }
+  const rememberNames = (contacts) => {
+    for (const contact of contacts || []) {
+      const name = contact?.name || contact?.verifiedName || contact?.notify;
+      if (contact?.id && name) handle.contactNames.set(jidNormalizedUser(contact.id), name);
+    }
+  };
+  const chatEntries = (chats) =>
+    (chats || [])
+      .filter((chat) => chat?.id && (isJidGroup(chat.id) || isCustomerChat(chat.id)))
+      .map((chat) => {
+        const jid = isJidGroup(chat.id) ? chat.id : jidNormalizedUser(chat.id);
+        const stamp = Number(chat.conversationTimestamp?.low ?? chat.conversationTimestamp ?? 0);
+        return { jid, name: chat.name || handle.contactNames.get(jid) || handle.groupNames.get(jid) || null, at: stamp ? stamp * 1000 : null };
+      });
+  sock.ev.on("messaging-history.set", ({ chats, contacts }) => {
+    rememberNames(contacts);
+    const entries = chatEntries(chats);
+    report(entries);
+    if (entries.length) log(`已读取 ${entries.length} 个现有对话 / Imported ${entries.length} existing chats`);
+  });
+  sock.ev.on("contacts.upsert", rememberNames);
+  sock.ev.on("contacts.update", rememberNames);
+  sock.ev.on("chats.upsert", (chats) => report(chatEntries(chats)));
+
+  // Group subjects are fetched once and cached; a failed lookup just leaves the name empty.
+  async function groupName(jid) {
+    if (!handle.groupNames.has(jid)) {
+      try {
+        handle.groupNames.set(jid, (await sock.groupMetadata(jid))?.subject || null);
+      } catch {
+        return null;
+      }
+    }
+    return handle.groupNames.get(jid);
+  }
+  sock.ev.on("groups.update", (updates) => {
+    for (const update of updates) if (update.id && update.subject) handle.groupNames.set(update.id, update.subject);
+  });
+
   sock.ev.on("messages.upsert", async ({ messages, type }) => {
     if (type !== "notify") return;
     for (const msg of messages) {
       try {
         const jid = msg.key?.remoteJid;
-        if (!msg.message || !isCustomerChat(jid)) continue;
+        if (!msg.message || !jid) continue;
         if (msg.message.protocolMessage || msg.message.reactionMessage) continue;
         const text = extractText(msg.message);
         if (!text) continue;
+        if (isJidGroup(jid)) {
+          if (!onGroupMessage) continue;
+          await onGroupMessage({
+            jid,
+            groupName: await groupName(jid),
+            sender: msg.pushName || phoneNumberOf({ participantPn: msg.key.participantPn, remoteJid: msg.key.participant }) || "",
+            text,
+            fromMe: !!msg.key.fromMe,
+            id: msg.key.id,
+          });
+          continue;
+        }
+        if (!isCustomerChat(jid)) continue;
         await onMessage({
           jid: jidNormalizedUser(jid),
           phone: phoneNumberOf(msg.key),

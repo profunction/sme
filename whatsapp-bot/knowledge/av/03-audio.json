@@ -1,0 +1,314 @@
+[
+  {
+    "id": "audio-amp-protect-light",
+    "title": { "zh": "功放红灯亮（保护/CLIP）", "en": "Amplifier red PROTECT or CLIP light is on" },
+    "match": ["功放红灯", "功放亮红灯", "保护灯", "功放保护", "功放过热", "功放自己关", "protect light", "clip light", "amp red light", "amplifier red light", "amplifier protect", "amp overheating", "amp cut off"],
+    "reply": {
+      "zh": "功放亮红灯（PROTECT / CLIP）：\n1) 先把功放音量和调音台总音量关小。\n2) CLIP 灯只是跟着音乐闪：信号太大了，把调音台或电脑的音量调低，直到红灯不再亮。\n3) PROTECT 灯长亮、没声音：关掉功放电源，等 10 分钟让它散热。\n4) 看功放前后通风口有没有被纸箱、文件挡住，机柜门打开通风。\n5) 重新开机：先开调音台等前级设备，最后才开功放，音量慢慢加上去。\n6) 一开机又马上亮 PROTECT：不要反复开关，保持关机，需要技术员检查。\n7) 有烧焦味、冒烟或电闸再次跳闸：立刻关掉墙上电源，停止使用。",
+      "en": "Amplifier red light (PROTECT / CLIP):\n1) First turn down the amplifier volume and the mixer master volume.\n2) CLIP light flashing with the music: the signal is too strong. Lower the mixer or laptop volume until the red light stops.\n3) PROTECT light stays on and there is no sound: switch the amplifier off and let it cool for 10 minutes.\n4) Check that the front and back air vents are not blocked by boxes or papers; open the rack door for airflow.\n5) Power on again: mixer and other source equipment first, amplifier last, then raise the volume slowly.\n6) PROTECT comes back straight away: do not keep switching it on and off. Leave it off; a technician needs to check it.\n7) Burning smell, smoke, or the breaker trips again: switch off at the wall socket immediately and stop using it."
+    },
+    "explain": {
+      "zh": "功放红灯是它在自我保护，分两种：\n• CLIP / PEAK（削波）：输入信号过大，声音会破，长期这样会烧喇叭。调低音量即可，用户可以自己处理。\n• PROTECT（保护）：功放过热、喇叭线短路、负载太重或内部故障，功放会切断输出来保护自己和喇叭。\n• 过热最常见：机柜不通风、风扇积尘、冷气关了又长时间大音量。\n• 散热后恢复正常属于轻微；一开机就保护，多半是喇叭线路或机器本身有问题，需要技术员。\n请不要自己拆机或去碰喇叭接线端子。",
+      "en": "The red light means the amplifier is protecting itself. There are two kinds:\n• CLIP / PEAK: the input signal is too strong. The sound breaks up and over time it can burn out the speakers. Turning the volume down fixes it; you can handle this yourself.\n• PROTECT: the amplifier is overheated, a speaker cable is shorted, the speaker load is too heavy, or there is an internal fault. It cuts the output to protect itself and the speakers.\n• Overheating is the most common cause: a rack with no airflow, dusty fans, or long loud use with the air-con off.\n• If it recovers after cooling, it is minor. If it goes into protect the moment it is switched on, the speaker wiring or the unit itself is likely faulty and a technician is needed.\nPlease do not open the unit or touch the speaker terminals."
+    }
+  },
+  {
+    "id": "audio-one-side-silent",
+    "title": { "zh": "只有一边喇叭有声音", "en": "Only the left or right speaker is working" },
+    "match": ["一边没声音", "只有一边响", "左边不响", "右边不响", "单边没声", "一边喇叭不响", "only one speaker", "left speaker not working", "right speaker not working", "one side no sound", "one side only", "one speaker dead", "left side silent"],
+    "reply": {
+      "zh": "只有左边或右边喇叭有声音：\n1) 换一个音源试（另一首歌或另一台电脑），有些影片本身只有单边声音。\n2) 电脑：打开声音设置，看左右平衡 Balance 有没有偏到一边。\n3) 调音台：看该通道的 PAN / BAL 旋钮是否在中间，主输出 L 和 R 推子是否一样高。\n4) 先把功放音量关小，再把音频线两头（3.5mm 或红白 RCA）拔出重新插紧。\n5) 功放或有源喇叭：两边都要开机、电源灯亮，两边音量旋钮都要开。\n6) 音量关小后，把左右两条输入线对调：没声的那边跟着换了，就是线或音源的问题；还是同一只喇叭不响，就是那只喇叭或那一路功放，需要技术员。",
+      "en": "Only the left or right speaker has sound:\n1) Try another source (a different song or laptop). Some videos only have sound on one side.\n2) Laptop: open Sound settings and check the left/right Balance is not pushed to one side.\n3) Mixer: check the channel PAN / BAL knob is in the centre and the main L and R faders are at the same level.\n4) Turn the amplifier volume down first, then unplug and firmly re-plug both ends of the audio cable (3.5mm or red/white RCA).\n5) Amplifier or powered speakers: both sides must be switched on with the power light lit, and both volume knobs turned up.\n6) With the volume down, swap the left and right input cables. If the silent side moves, the cable or source is at fault. If the same speaker stays silent, that speaker or amplifier channel needs a technician."
+    },
+    "explain": {
+      "zh": "一边有声一边没声，通常是信号在半路少了一边：\n• 最常见：3.5mm 或 RCA 插头没插到底，或线内部断了一芯。\n• 第二常见：电脑的左右平衡或调音台的 PAN 被转到一边。\n• 有源喇叭（自带功放）每只都有自己的电源和音量，其中一只被关掉或拔了插头也会这样。\n• 以上都正常，才怀疑喇叭、喇叭线或功放其中一路坏了，这部分需要技术员。\n不算紧急，可以先用单边继续开会。请不要自己去碰喇叭背后的接线端子或功放的喇叭输出。",
+      "en": "Sound on one side only usually means one side of the signal is lost along the way:\n• Most common: a 3.5mm or RCA plug not pushed fully in, or one wire broken inside the cable.\n• Next: the laptop left/right balance or the mixer PAN is turned to one side.\n• Powered speakers (built-in amplifier) each have their own power and volume; one switched off or unplugged gives the same symptom.\n• Only if all of that is fine should you suspect a faulty speaker, speaker cable or amplifier channel, which needs a technician.\nIt is not urgent; you can carry on the meeting on one side. Please do not touch the terminals behind the speakers or the amplifier's speaker outputs."
+    }
+  },
+  {
+    "id": "audio-subwoofer-bass",
+    "title": { "zh": "低音炮没低音或太轰", "en": "Subwoofer has no bass or is too boomy" },
+    "match": ["低音炮", "超低音", "没有低音", "低音太重", "低音很轰", "重低音", "subwoofer", "no bass", "too much bass", "bass too boomy", "sub not working", "bass booming", "bass too loud"],
+    "reply": {
+      "zh": "低音炮没低音或低音太轰：\n1) 看低音炮背后的电源灯：不亮就检查电源开关和插座。有些机型没信号会自动待机，播放音乐约 10 秒后才醒。\n2) 背后的 Level / Gain 旋钮先调到中间（约 12 点钟位置）。\n3) 没低音：先把音量关小，再把接到 SUB / LFE 的信号线两头插紧。\n4) 太轰：把 Level 调低一点；Crossover / Low Pass 旋钮调到大约 80–100Hz。\n5) 低音发虚没力：把 Phase 开关（0 / 180）拨到另一边，哪边低音比较结实就用哪边。\n6) 调音台或电脑 EQ 的低频（LOW / BASS）调回中间，不要开到最大。",
+      "en": "Subwoofer has no bass or is too boomy:\n1) Check the power light on the back of the subwoofer. If it is off, check the power switch and socket. Some models sleep when there is no signal and wake up after about 10 seconds of music.\n2) Set the Level / Gain knob on the back to the middle (about 12 o'clock) first.\n3) No bass: turn the volume down first, then push in both ends of the signal cable going to SUB / LFE.\n4) Too boomy: turn Level down a little, and set the Crossover / Low Pass knob to around 80–100Hz.\n5) Bass sounds weak and hollow: flip the Phase switch (0 / 180) to the other side and keep whichever sounds fuller.\n6) Set the LOW / BASS EQ on the mixer or laptop back to the middle; do not turn it to maximum."
+    },
+    "explain": {
+      "zh": "低音炮是独立的一只喇叭，大多数自带功放和自己的调节旋钮：\n• 没低音：多半是没通电、进入自动待机、信号线松了，或 Level 被转到最小。\n• 太轰：Level 开太大、Crossover 设太高，或低音炮被塞在墙角 / 柜子里，低音会被放大。\n• Phase 设错时，低音炮和主喇叭互相抵消，低音会变少变虚。\n• 小音量也有拍打声、破裂声，或电源灯闪红：可能是内置功放或喇叭单元有问题，需要技术员。\n旋钮都在机身外面，用户可以自己调。调之前先用手机拍下原本的位置，方便调回。",
+      "en": "A subwoofer is a separate speaker; most have a built-in amplifier and their own knobs:\n• No bass: usually no power, auto standby, a loose signal cable, or the Level knob turned right down.\n• Too boomy: Level too high, Crossover set too high, or the subwoofer is pushed into a corner or cabinet, which boosts the bass.\n• A wrong Phase setting makes the subwoofer and main speakers cancel each other, so the bass gets thinner.\n• Flapping or cracking noise even at low volume, or a power light flashing red: the built-in amplifier or driver may be faulty and a technician is needed.\nThe knobs are on the outside, so you can adjust them yourself. Take a phone photo of the original positions first so you can go back."
+    }
+  },
+  {
+    "id": "audio-speaker-rattle",
+    "title": { "zh": "喇叭播到低音就震动作响", "en": "Speaker rattles or buzzes on certain notes" },
+    "match": ["喇叭震", "震到响", "共振", "嗡嗡震", "天花板震", "哒哒响", "speaker rattling", "speaker rattle", "rattling sound", "speaker vibrating", "buzzes on bass", "ceiling rattling", "vibration sound"],
+    "reply": {
+      "zh": "喇叭在某些音（多数是低音）震动作响：\n1) 把音量降低两三格。震动声消失，就说明音量超过了喇叭的承受范围。\n2) 找出声音从哪里来：很多时候不是喇叭，而是旁边的东西在共振，例如天花板、灯罩、冷气出风口、柜门、白板。\n3) 把喇叭上面或旁边的杂物拿走（杯子、遥控器、文件夹），落地或桌面喇叭要放稳。\n4) 调音台或电脑的 EQ 把低频 LOW / BASS 调小一点，有 Low Cut / HPF 按钮就按下。\n5) 换一首歌、换一个音源试，确认不是录音本身的问题。\n6) 小音量也有沙沙、破裂声，或网罩松脱：喇叭单元可能受损，停止大音量使用，需要技术员。吊装和天花喇叭请不要自己去碰。",
+      "en": "Speaker rattles or buzzes on certain notes (usually bass):\n1) Turn the volume down two or three steps. If the rattle goes away, the volume was beyond what the speaker can handle.\n2) Find where the noise comes from. Often it is not the speaker but something nearby vibrating: ceiling tiles, light covers, air-con vents, cabinet doors, a whiteboard.\n3) Remove anything on or beside the speaker (cups, remotes, folders). Floor or desktop speakers should sit firmly.\n4) Turn the LOW / BASS EQ down a little on the mixer or laptop. If there is a Low Cut / HPF button, press it in.\n5) Try another song or source to make sure it is not the recording itself.\n6) Scratchy or cracking sound even at low volume, or a loose grille: the driver may be damaged. Stop playing loud; a technician is needed. Do not touch hanging or ceiling speakers yourself."
+    },
+    "explain": {
+      "zh": "喇叭在特定音符嗡嗡震，多数是「共振」而不是喇叭坏：\n• 低音的震动会带动旁边松动的东西一起响：天花板、灯具、出风口、柜门、喇叭上的杂物。\n• 音量或低频开得太大，超过小喇叭的能力，也会出现拍打声。\n• 如果是喇叭本身：网罩松了、单元破损或掉进了异物，这种在小音量也听得到。\n• 降低音量和低频就消失的，属于轻微，可以继续用。\n• 天花喇叭、吊挂喇叭或支架松动要由技术员处理。如果看到喇叭本身在晃动，请先停止使用，人不要站在下方。",
+      "en": "A buzz on particular notes is usually resonance, not a broken speaker:\n• Bass vibration shakes loose things nearby so they sound along: ceiling tiles, light fittings, vents, cabinet doors, objects on the speaker.\n• Volume or bass pushed beyond what a small speaker can do also causes a flapping sound.\n• If it is the speaker itself: a loose grille, a torn driver or something fallen inside. This is heard even at low volume.\n• If it stops when you lower the volume and bass, it is minor and you can keep using the system.\n• Ceiling speakers, hanging speakers and loose brackets must be handled by a technician. If the speaker itself is visibly shaking, stop using it and keep people away from underneath."
+    }
+  },
+  {
+    "id": "audio-volume-changes-itself",
+    "title": { "zh": "音量自己变或开机很大声", "en": "Volume changes by itself or is very loud at start-up" },
+    "match": ["音量自己变", "自己变大声", "忽大忽小", "一开机很大声", "音量乱跳", "突然很大声", "volume keeps changing", "volume jumps", "volume by itself", "suddenly very loud", "volume goes up", "loud at start", "volume up and down"],
+    "reply": {
+      "zh": "音量自己变，或一开机就很大声：\n1) 先用墙上面板、遥控器或调音台把总音量拉低。\n2) 检查是不是有几个地方同时在控制音量：电脑、会议软件、墙上面板、功放旋钮。只用一个来调，其它固定在七八成。\n3) 电脑：Zoom / Teams 的麦克风设置里，把「自动调整麦克风音量」关掉；Windows 声音设置 > 更多声音设置 > 通信，选「不执行任何操作」。\n4) 电视或音响的「自动音量 / AVL / Night Mode」关掉试试。\n5) 遥控器或面板按键卡住，会让音量一直升或降：看按键有没有陷下去、遥控器有没有被东西压着，拿掉电池测试。\n6) 每次开机都很大声：是系统的开机默认音量设得高。开机前先把音量拉低；默认值需要技术员在控制系统里改。",
+      "en": "Volume changes by itself, or is very loud at start-up:\n1) First pull the main volume down at the wall panel, remote or mixer.\n2) Check if volume is controlled in more than one place: laptop, meeting app, wall panel, amplifier knob. Use one only and leave the others at about 70–80%.\n3) Laptop: in Zoom / Teams microphone settings, turn off 'Automatically adjust microphone volume'. In Windows: Sound settings > More sound settings > Communications > 'Do nothing'.\n4) On a TV or sound system, try turning off Auto Volume / AVL / Night Mode.\n5) A stuck button on the remote or panel makes volume keep rising or falling: check no button is jammed and nothing rests on the remote; take its batteries out to test.\n6) Very loud every time it starts: the start-up default volume is set high. Pull the volume down before switching on; the default must be changed by a technician in the control system."
+    },
+    "explain": {
+      "zh": "音量自己变，通常不是机器坏，而是有东西在「帮你调」：\n• 会议软件和 Windows 会自动调整麦克风音量，或在通话时压低其它声音。\n• 电视 / 音响的自动音量功能会把小声放大、大声压小。\n• 同一个房间有多个音量控制（面板、遥控器、电脑、功放），互相叠加就会忽大忽小。\n• 遥控器或面板按键卡住，会让音量一直往上或往下跑。\n• 每次开机很大声：控制系统或处理器里保存的开机音量太高，改这个需要技术员。\n突然很大声会吓到人，也可能伤喇叭，所以要养成开机前先把音量拉低的习惯。",
+      "en": "When volume moves by itself, the equipment is usually not faulty; something is adjusting it for you:\n• Meeting apps and Windows automatically adjust microphone level, or lower other sounds during a call.\n• Auto volume on a TV or sound system boosts quiet parts and squashes loud parts.\n• Several volume controls in one room (panel, remote, laptop, amplifier) stack on top of each other, so levels swing.\n• A stuck remote or panel button keeps pushing the volume up or down.\n• Loud at every start-up: the start-up level saved in the control system or processor is too high; changing it needs a technician.\nA sudden loud burst startles people and can damage speakers, so make it a habit to pull the volume down before switching on."
+    }
+  },
+  {
+    "id": "audio-hdmi-plays-from-laptop",
+    "title": { "zh": "接了HDMI声音还是从电脑出", "en": "HDMI connected but sound still plays from the laptop" },
+    "match": ["电脑自己响", "声音从电脑出", "声音在电脑", "hdmi没声音", "手提电脑出声", "声音输出", "sound from laptop", "laptop speaker only", "hdmi no audio", "hdmi no sound", "plays from laptop", "audio output device", "sound coming from laptop"],
+    "reply": {
+      "zh": "接了 HDMI，声音还是从手提电脑出：\n1) Windows：点右下角喇叭图标，再点音量条旁边的箭头，选会议室的设备（名字通常是电视或投影机的型号，或 HDMI）。\n2) Mac：系统设置 > 声音 > 输出，选 HDMI 或电视 / 投影机的名字。\n3) 选好后把电脑音量调到七八成，并确认没有静音。\n4) 只有某个程序没声音：Windows 右键喇叭图标 > 音量合成器（Volume Mixer），看该程序的输出设备和音量。\n5) Zoom / Teams：在它自己的音频设置里，把扬声器 Speaker 也选成会议室设备。\n6) 列表里没有 HDMI 设备：先把音量调低，拔出 HDMI 线等 5 秒再插回，或换一个转接头。有些 USB-C 转 VGA 转接头不带声音。\n7) 电脑一直自动跳去耳机或显示器喇叭：把蓝牙耳机关掉，再重新选一次输出。",
+      "en": "HDMI connected, but sound still comes from the laptop:\n1) Windows: click the speaker icon at bottom right, then the arrow beside the volume bar, and choose the room device (usually the TV or projector name, or HDMI).\n2) Mac: System Settings > Sound > Output, choose HDMI or the TV / projector name.\n3) Then set laptop volume to about 70–80% and check it is not muted.\n4) Only one app is silent: on Windows right-click the speaker icon > Volume Mixer and check that app's output device and level.\n5) Zoom / Teams: in the app's own audio settings, set Speaker to the room device too.\n6) No HDMI device in the list: turn the room volume down, unplug the HDMI cable, wait 5 seconds and plug it back, or try another adapter. Some USB-C to VGA adapters carry no sound.\n7) Laptop keeps jumping to a headset or monitor speakers: switch off the Bluetooth headset, then choose the output again."
+    },
+    "explain": {
+      "zh": "电脑同时有好几个声音输出，它不一定会自动选对：\n• 接 HDMI 后，声音应该跟着画面送到电视或会议室音响，但 Windows / Mac 有时仍停在内置喇叭、蓝牙耳机或上次用过的设备。\n• Windows 可以让每个程序用不同的输出，所以可能 YouTube 有声、PowerPoint 没声。\n• 会议软件有自己的扬声器设置，和系统设置是分开的。\n• VGA 线和部分转接头只传画面不传声音，这种房间通常另外有一条 3.5mm 音频线要插。\n这是设置问题，不是故障，用户自己可以解决，一般不需要技术员。",
+      "en": "A laptop has several sound outputs and does not always pick the right one:\n• With HDMI connected, sound should follow the picture to the TV or room system, but Windows / Mac sometimes stays on the built-in speakers, a Bluetooth headset or the last device used.\n• Windows lets each app use a different output, so YouTube may play while PowerPoint is silent.\n• Meeting apps have their own Speaker setting, separate from the system setting.\n• VGA cables and some adapters carry picture only. Rooms like that normally have a separate 3.5mm audio cable to plug in.\nThis is a settings matter, not a fault. You can fix it yourself; normally no technician is needed."
+    }
+  },
+  {
+    "id": "audio-shared-video-sound",
+    "title": { "zh": "播放影片时对方听不到声音", "en": "Video sound not heard when presenting or sharing screen" },
+    "match": ["影片没声音", "视频没声音", "分享屏幕没声", "共享声音", "对方听不到影片", "播片没声", "share sound", "share computer sound", "include computer sound", "video no audio", "video no sound", "youtube no sound", "shared video silent"],
+    "reply": {
+      "zh": "播放影片时，现场或线上的人听不到影片声音：\n1) 先分清谁听不到：现场的人，还是线上（Zoom / Teams）的人。\n2) 线上听不到：Zoom 共享屏幕时勾选左下角「共享声音 Share sound」；Teams 共享时打开「包含计算机声音 Include computer sound」（或 Include sound）。要停止共享再重新共享才生效。\n3) 现场听不到：电脑的声音输出要选会议室设备（HDMI 或会议音箱），不是电脑自己的喇叭。\n4) 检查播放器本身没有静音：YouTube 播放条的小喇叭、PowerPoint 影片上的音量图标。\n5) PowerPoint 里的影片：点一下影片，在「播放 Playback」里看音量不是「静音」。\n6) 用无线投屏（如 ClickShare、AirPlay、Miracast）：部分设备要在电脑上另外选它作为声音输出。\n7) 重要会议前，先播 10 秒影片测试一次。",
+      "en": "Video sound not heard in the room or by online participants:\n1) First work out who cannot hear: people in the room, or online (Zoom / Teams).\n2) Online cannot hear: in Zoom tick 'Share sound' at the bottom left when sharing; in Teams switch on 'Include computer sound' (or 'Include sound'). Stop sharing and share again for it to take effect.\n3) Room cannot hear: the laptop sound output must be the room device (HDMI or the conference speaker), not the laptop's own speakers.\n4) Check the player itself is not muted: the small speaker icon on YouTube, the volume icon on a PowerPoint video.\n5) PowerPoint video: click the video and check under Playback that Volume is not set to Mute.\n6) Wireless presentation (e.g. ClickShare, AirPlay, Miracast): on some devices you must also select it as the sound output on the laptop.\n7) Before an important meeting, test-play 10 seconds of the video."
+    },
+    "explain": {
+      "zh": "影片的声音和你讲话的声音走的是两条路：\n• 视频会议默认只送麦克风的声音。影片的声音要另外打开「共享声音」，线上的人才听得到。\n• 如果只是让会议室麦克风去收喇叭播出来的影片声，对方会听到很小、断续的声音，因为软件把它当成噪音滤掉了。\n• 现场听不到，则是电脑的输出设备选错，或播放器本身被静音。\n• 无线投屏设备对声音的支持各有不同。\n这是操作设置，不是故障，用户自己可以处理。",
+      "en": "The video's sound and your voice travel by two different paths:\n• Meeting apps send only the microphone by default. Video sound must be shared separately with the share sound option, or online people will not hear it.\n• If you just let the room microphone pick up the video from the speakers, the far side hears it faint and choppy, because the app treats it as noise and filters it out.\n• If the room cannot hear, the laptop output device is wrong or the player itself is muted.\n• Wireless presentation devices differ in how they support sound.\nThis is a settings matter, not a fault, and you can handle it yourself."
+    }
+  },
+  {
+    "id": "audio-lavalier-headset-noise",
+    "title": { "zh": "领夹麦/头戴麦沙沙声或太小声", "en": "Clip-on or headset mic rustles, pops or is too quiet" },
+    "match": ["领夹麦", "夹式麦", "头戴麦", "耳挂麦", "衣服摩擦声", "夹在衣服", "lavalier", "lapel mic", "clip-on mic", "clip on mic", "headset mic", "collar mic", "rustling sound"],
+    "reply": {
+      "zh": "领夹麦 / 头戴麦有沙沙声、噗噗声或太小声：\n1) 领夹麦夹在胸口正中、下巴往下大约一个手掌的位置，麦头朝上对着嘴巴。\n2) 不要让头发、项链、挂牌、围巾、外套领子碰到或盖住麦头。沙沙声多数是衣服摩擦。\n3) 线在夹子处绕一个小圈，再收进衣服里，腰包夹在腰带上，可减少拉线的声音。\n4) 头戴麦：麦头放在嘴角旁边约两指宽，不要正对嘴巴，否则会有噗噗的喷气声。\n5) 套上原装的防风海绵。\n6) 太小声：先调好位置，再把腰包上的 Gain 调高一格，或请控台把该通道推高。麦头接腰包的插头要拧紧。\n7) 一碰线就啪啪响：多半是线或插头坏了，先换备用麦，坏的需要技术员更换。",
+      "en": "Clip-on / headset mic rustles, pops or is too quiet:\n1) Clip the lavalier at the centre of the chest, about one hand-width below the chin, with the mic head pointing up at the mouth.\n2) Keep hair, necklaces, lanyards, scarves and jacket collars from touching or covering the mic. Rustling is mostly clothing rubbing.\n3) Loop the cable once at the clip, run it inside the clothing and clip the bodypack to the belt to reduce cable noise.\n4) Headset mic: place the mic head about two finger-widths from the corner of the mouth, not directly in front, or breath will pop.\n5) Fit the original foam windscreen.\n6) Too quiet: fix the position first, then raise the bodypack Gain one step or ask the operator to raise the channel. Tighten the mic plug on the bodypack.\n7) Crackles when the cable is touched: cable or plug is likely broken. Use a spare mic; a technician must replace the faulty one."
+    },
+    "explain": {
+      "zh": "领夹麦和头戴麦很小、很敏感，位置差几公分，效果差很多：\n• 沙沙声：衣服、头发、首饰摩擦麦头或线。\n• 噗噗声：麦头正对嘴巴或鼻子的气流。\n• 太小声：夹得太低、被衣服盖住、麦头朝下，或讲者常转头。\n• 把 Gain 开很大来补救，只会更容易啸叫，所以要先调位置。\n• 一动线就啪啪响、时有时无：线或插头内部断了。这种细线属于消耗品，需要更换。\n位置和佩戴用户自己可以调，上台前花一分钟试音最有效。",
+      "en": "Lavalier and headset mics are tiny and sensitive; a few centimetres of placement makes a big difference:\n• Rustling: clothing, hair or jewellery rubbing the mic head or cable.\n• Popping: the mic sits directly in the breath from the mouth or nose.\n• Too quiet: clipped too low, covered by clothing, pointing down, or the speaker keeps turning their head.\n• Turning Gain up high to compensate only brings feedback sooner, so fix placement first.\n• Crackling or cutting in and out when the cable moves: the wire or plug is broken inside. These thin cables are consumables and need replacing.\nPlacement is something you can adjust yourself; a one-minute sound check before going on stage helps most."
+    }
+  },
+  {
+    "id": "audio-table-mic-handling-noise",
+    "title": { "zh": "桌面麦收到敲桌翻纸键盘声", "en": "Table mic picks up tapping, paper and keyboard noise" },
+    "match": ["敲桌子声", "敲桌声", "键盘声", "翻纸声", "鹅颈麦", "桌面麦很吵", "打字声", "gooseneck mic", "keyboard noise", "typing noise", "table mic noise", "tapping sound", "paper noise", "boundary mic"],
+    "reply": {
+      "zh": "桌面 / 鹅颈麦收到敲桌、翻纸、键盘声：\n1) 手提电脑、文件、水杯离麦克风至少 30 公分，不要在麦克风旁边打字或按笔。\n2) 鹅颈麦：把麦头拉向讲话的人，距离嘴巴 15–20 公分。这样音量可以调低，杂声自然少。\n3) 不讲话的人按麦克风上的按钮静音（通常红色＝静音，绿色＝开，因品牌而异）。\n4) 平板式桌面麦不要被文件盖住，也不要放在电脑风扇出风口或投影机旁。\n5) 麦克风底座下垫防震垫或鼠标垫，可减少桌子传来的震动声。\n6) 视频会议：Zoom / Teams 的音频设置把「噪音抑制 Noise suppression」调到「高」。\n7) 调音台该通道有 Low Cut / HPF 按钮的，把它按下。",
+      "en": "Table / gooseneck mic picks up tapping, paper and keyboard noise:\n1) Keep laptops, papers and cups at least 30cm from the mic. Do not type or click pens beside it.\n2) Gooseneck: bend the mic towards the talker, 15–20cm from the mouth. The volume can then be lower and noise drops with it.\n3) People who are not speaking should press the mic button to mute (usually red = muted, green = on; it varies by brand).\n4) Do not cover flat table mics with paper, or put them near a laptop fan outlet or a projector.\n5) A shock pad or mouse pad under the mic base reduces vibration coming through the table.\n6) Video calls: in Zoom / Teams audio settings set Noise suppression to High.\n7) If the mixer channel has a Low Cut / HPF button, press it in."
+    },
+    "explain": {
+      "zh": "桌面麦离桌面很近，桌上的声音对它来说比人声还大：\n• 敲桌、放杯子、打字的震动会直接经桌面传进麦克风。\n• 人离麦越远，音量就要开越大，杂声也跟着被放大。\n• 多支麦同时开着，每一支都在收环境声，加起来就很吵。\n• 软件的噪音抑制可以减少键盘声，但开太强会让人声变得断续。\n这属于使用习惯，不是设备故障。如果整个系统长期太敏感，技术员可以在处理器里加自动混音、噪声门和低切来改善。",
+      "en": "A table mic sits right on the table, so table noises are louder to it than voices:\n• Tapping, putting down cups and typing travel straight through the table into the mic.\n• The further people sit from the mic, the more volume is needed, and noise is amplified with it.\n• With many mics open at once, each one adds room noise and it builds up.\n• Software noise suppression reduces keyboard noise, but set too strong it makes voices choppy.\nThis is about usage habits, not faulty equipment. If the whole system is always too sensitive, a technician can add auto-mixing, a noise gate and low-cut in the processor."
+    }
+  },
+  {
+    "id": "audio-ceiling-mic-distant",
+    "title": { "zh": "天花麦收音远、声音空洞", "en": "Ceiling mic: far-end voices sound distant and hollow" },
+    "match": ["天花麦", "吊顶麦", "声音很远", "声音空洞", "后面的人听不清", "收音很远", "像在浴室", "ceiling mic", "ceiling microphone", "sounds far away", "sounds hollow", "voice very distant", "mic array", "cannot hear far end"],
+    "reply": {
+      "zh": "天花麦克风收不到远处的人，声音又远又空：\n1) 请远处的人坐到天花麦克风下方附近，面向会议桌讲话，不要背对或低头对着电脑。\n2) 讲话大声一点，一次一个人讲。天花麦离嘴巴远，小声讲一定收不好。\n3) 关门、关窗，把很吵的冷气风速调低一档。投影机和风扇的声音会盖过人声。\n4) 确认会议软件选的麦克风是会议室系统，不是手提电脑自带的麦克风。这是声音「很远」最常见的原因。\n5) 看麦克风的灯：通常绿色或白色＝开，红色＝静音。\n6) 有桌面麦或手持无线麦的，重要发言人改用它们。\n7) 重新摆过桌椅或加了隔间后才变差：收音范围需要技术员重新设定。请不要自己去碰天花上的设备。",
+      "en": "Ceiling mic does not pick up people far away; voices sound distant and hollow:\n1) Ask people at the far end to sit near the area under the ceiling mic and face the table when speaking, not turned away or looking down at a laptop.\n2) Speak up, one person at a time. A ceiling mic is far from the mouth and picks up soft voices poorly.\n3) Close doors and windows and lower a noisy air-con fan by one step. Projector and fan noise covers voices.\n4) Check the meeting app is using the room system as microphone, not the laptop's built-in mic. This is the most common reason for a far-away sound.\n5) Check the mic light: usually green or white = on, red = muted.\n6) If there are table mics or wireless handheld mics, give them to the main speakers.\n7) Worse only after furniture was moved or partitions added: the pickup zones need a technician to reset. Please do not touch equipment on the ceiling."
+    },
+    "explain": {
+      "zh": "天花麦方便，但它离嘴巴有两三米，天生比手持麦或桌面麦吃亏：\n• 距离越远，收到的房间回响越多，听起来就又远又空，像在浴室里。\n• 玻璃墙、硬地板、空荡的房间回响更重。\n• 阵列麦克风有设定好的收音区域，坐在区域外或背对它的人会明显变小声。\n• 如果软件误选了手提电脑的麦克风，全房间都会很远。\n• 座位改了或加了隔间：需要技术员重新调整收音区域和增益。\n用户能做的是坐近、面向会议桌、讲大声一点和减少噪音。",
+      "en": "Ceiling mics are convenient, but they are two to three metres from the mouth, so they start at a disadvantage against handheld or table mics:\n• The further away, the more room reverberation is picked up, so voices sound distant and hollow, like in a bathroom.\n• Glass walls, hard floors and empty rooms make it worse.\n• Array mics have set pickup zones. People outside the zones or facing away are clearly quieter.\n• If the app picked the laptop mic by mistake, the whole room sounds far away.\n• Seating changed or partitions added: a technician must readjust the zones and gain.\nWhat you can do: sit closer, face the table, speak up and cut the noise."
+    }
+  },
+  {
+    "id": "audio-uneven-voice-levels",
+    "title": { "zh": "有人很大声有人很小声", "en": "One speaker is very loud, another very soft" },
+    "match": ["一个大一个小", "音量不平均", "有的麦小声", "大小声不一样", "拿麦太远", "讲话太小声", "uneven volume", "one loud one soft", "different mic levels", "voices not balanced", "some too soft", "how to hold mic", "mic technique"],
+    "reply": {
+      "zh": "有人很大声、有人很小声：\n1) 手持麦：麦头对着嘴巴，距离约一个拳头（5–10 公分），不要拿在胸口或肚子前面。\n2) 手握麦克风握柄的中间，不要包住网头，否则声音会闷，而且容易啸叫。\n3) 讲话小声的人把麦拿近一点，大嗓门的人拿远一点，这比一直去调音量更快。\n4) 调音台：每支麦用自己通道的推子单独调，小声的推高一点，大声的拉低一点，总音量不要动。\n5) 某个通道的 PEAK / CLIP 红灯常亮，把那一路的 Gain 调低一点。\n6) 桌面麦：每个人把麦头转向自己；两个人共用一支时放在两人中间。\n7) 视频会议：对方觉得忽大忽小，可在 Zoom / Teams 开启「自动调整麦克风音量」。",
+      "en": "One person very loud, another very soft:\n1) Handheld mic: point the head at the mouth, about one fist away (5–10cm). Do not hold it at chest or stomach level.\n2) Hold the middle of the handle. Do not cup the grille, or the voice turns muffled and feedback starts easily.\n3) Soft talkers hold the mic closer, loud talkers a bit further. This is quicker than chasing the volume.\n4) Mixer: adjust each mic with its own channel fader, soft ones up a little and loud ones down a little. Leave the master alone.\n5) If a channel's PEAK / CLIP light stays red, turn that channel's Gain down a little.\n6) Table mics: each person turns the mic head towards themselves; two people sharing one mic put it between them.\n7) Video calls: if the far side hears levels swinging, turn on 'Automatically adjust microphone volume' in Zoom / Teams."
+    },
+    "explain": {
+      "zh": "音量不平均，十次有九次是拿麦的方法，不是设备问题：\n• 麦离嘴巴的距离加倍，音量就掉一大截；每个人距离不同，声音就一大一小。\n• 每个人的嗓门本来就不同，所以每支麦要分开调，而不是只调总音量。\n• 把小声的人推得很高，容易啸叫，所以先请他把麦拿近。\n• 包住网头会改变麦克风的收音方向，声音变闷又容易啸叫。\n• 常用的房间可以由技术员加自动混音和压缩，让系统自动把大小声拉近。\n活动开始前，请每位讲者试讲一句最有效。",
+      "en": "Uneven volume is nine times out of ten about how the mic is held, not the equipment:\n• Doubling the distance from mouth to mic drops the level a lot. Different distances give loud and soft voices.\n• People naturally speak at different levels, so each mic needs its own adjustment, not only the master volume.\n• Pushing a soft talker very high invites feedback, so ask them to bring the mic closer first.\n• Cupping the grille changes the mic's pickup pattern: muffled sound and easier feedback.\n• For rooms used often, a technician can add auto-mixing and compression so the system evens out levels by itself.\nHaving each speaker say one test sentence before the event works best."
+    }
+  },
+  {
+    "id": "audio-digital-mixer-scene",
+    "title": { "zh": "数字调音台场景变了或全静音", "en": "Digital mixer: scene changed or channels muted" },
+    "match": ["数字调音台", "数位混音器", "场景不见", "调回场景", "通道全静音", "调音台乱了", "recall scene", "load scene", "scene changed", "digital mixer", "mixer settings changed", "channels muted", "x32", "yamaha tf"],
+    "reply": {
+      "zh": "数字调音台设定乱了、通道被静音或场景变了：\n1) 先不要乱按。把主推子（Main / Stereo / LR）拉低，避免突然很大声。\n2) 看通道的 MUTE 或 ON 键：有的品牌灯亮＝已静音，有的（如 Yamaha）ON 灯亮才＝通道开着。对照一路正常的通道来判断。\n3) 看有没有 Mute Group 被按下，或屏幕显示整组静音。\n4) 推子位置奇怪：可能切到了别的推子层 Layer，或进了 Sends on Fader 模式，按回主层 / Home。\n5) 调回场景：按 Scene / Scenes / Library，选平时用的场景（通常有名字，如 Meeting、Default），按 Recall / Load / Go 并确认。\n6) 调回前确认现场没有人在讲话，声音会瞬间改变。\n7) 不要按 Store / Save 覆盖场景，也不要按 Initialize。从来没保存过场景的，需要技术员重新设定。",
+      "en": "Digital mixer settings changed, channels muted or wrong scene:\n1) Do not press buttons at random. Pull the main fader (Main / Stereo / LR) down first to avoid a sudden loud burst.\n2) Check the channel MUTE or ON keys. On some brands a lit key means muted; on others (e.g. Yamaha) ON must be lit for the channel to be on. Compare with a working channel.\n3) Check whether a Mute Group is pressed or the screen shows a group muted.\n4) Faders look wrong: you may be on another Layer or in Sends on Fader mode. Press the main layer / Home.\n5) Recall the scene: press Scene / Scenes / Library, pick the usual scene (often named, e.g. Meeting or Default), press Recall / Load / Go and confirm.\n6) Recall only when nobody is speaking; the sound changes instantly.\n7) Do not press Store / Save over the scene, and do not press Initialize. If no scene was ever saved, a technician must set it up again."
+    },
+    "explain": {
+      "zh": "数字调音台把所有设定存成「场景 Scene」，一按就整台改变：\n• 有人误按了别的场景、换了推子层，或上一位使用者改完没有调回。\n• 停电后大多数机型会回到关机前的状态，但也有回到别的场景的情况。\n• 调回（Recall）平时的场景就能恢复，这一步用户可以自己做。\n• 保存（Store）会覆盖原来的设定，初始化（Initialize）会清空全部，这两个请不要按。\n• 如果平时的场景已经被覆盖或不见了，需要技术员重新设定或从备份恢复。\n建议请技术员把常用场景锁定，并备份到 USB。",
+      "en": "A digital mixer stores all its settings as a Scene, and one press changes the whole desk:\n• Someone recalled another scene by mistake, changed fader layer, or the last user did not set things back.\n• After a power cut most models return to the state before shutdown, but some come back in a different scene.\n• Recalling the usual scene restores everything, and you can do this yourself.\n• Store overwrites the saved settings and Initialize wipes everything. Please do not press these two.\n• If the usual scene was overwritten or is missing, a technician must rebuild it or restore it from a backup.\nWe suggest having a technician lock the regular scene and back it up to USB."
+    }
+  },
+  {
+    "id": "audio-mixer-meters-no-output",
+    "title": { "zh": "调音台灯在跳但喇叭没声", "en": "Mixer meters move but no sound from the speakers" },
+    "match": ["推子推了没声", "solo键", "灯会跳但没声", "电平灯在跳", "主输出没声", "调音台有信号", "混音器有信号", "pfl", "meters moving", "mixer meters", "only when pfl", "main mix", "mixer no output", "signal on mixer"],
+    "reply": {
+      "zh": "调音台电平灯在跳，但喇叭没声音（或按 PFL / Solo 才听到）：\n1) 看该通道的 MUTE 键没有按下（部分机型是 ON 键要亮）。\n2) 看通道推子旁的分配键：L-R / MAIN / ST / MIX 要按下，这一路才会送到主输出。只按了 1-2 或 3-4 就只去编组。\n3) PFL / Solo 只是给耳机监听用的，听完把所有 PFL / Solo 键放开。\n4) 主推子（MAIN / STEREO / L-R，通常红色或黄色）推到 0 的位置，主输出的 MUTE 不要亮。\n5) 用了编组 Group / Sub 的，把编组推子推上去，并按下编组上的 L-R 键。\n6) 主输出灯也在跳但还是没声：问题在调音台之后。看功放或有源喇叭有没有开机、音量有没有开；先关小音量，再看 MAIN OUT 的线有没有松。\n7) 有些房间调音台后面还有处理器 DSP，看它的电源灯有没有亮。",
+      "en": "Mixer meters move but no sound from speakers (or only with PFL / Solo):\n1) Check the channel MUTE key is not pressed (on some models the ON key must be lit).\n2) Check the assign buttons beside the channel fader: L-R / MAIN / ST / MIX must be pressed to reach the main output. With only 1-2 or 3-4 pressed, it goes to groups only.\n3) PFL / Solo is for headphone listening only. Release all PFL / Solo buttons when done.\n4) Push the main fader (MAIN / STEREO / L-R, usually red or yellow) up to the 0 mark; the main MUTE must not be lit.\n5) If Group / Sub is used, raise the group fader and press its L-R button.\n6) Main meters also move but still no sound: the problem is after the mixer. Check the amplifier or powered speakers are on and turned up; with volume down, check the MAIN OUT cables are firm.\n7) Some rooms have a DSP processor after the mixer; check its power light is on."
+    },
+    "explain": {
+      "zh": "电平灯会跳，说明声音已经进了调音台，只是没有被送出去：\n• 每一路通道要「分配」到主输出，才会到喇叭。分配键没按下是最常见的原因。\n• PFL / Solo 是监听功能，只送到耳机和电平表，所以灯会跳、耳机有声，但喇叭没有。\n• 主推子被拉到底，或主输出被静音。\n• 如果主输出的灯也在跳，调音台是好的，问题在后面的处理器、功放或喇叭。\n按键和推子用户都可以放心检查，不会弄坏设备。功放背后的喇叭线请不要动。",
+      "en": "Moving meters mean sound is reaching the mixer; it is just not being sent out:\n• Each channel must be assigned to the main output to reach the speakers. An assign button not pressed is the most common cause.\n• PFL / Solo is a monitoring function that feeds only the headphones and meters, so meters move and headphones work but speakers stay silent.\n• The main fader is fully down, or the main output is muted.\n• If the main output meters also move, the mixer is fine and the problem is in the processor, amplifier or speakers after it.\nButtons and faders are safe for you to check; you will not damage anything. Please do not touch the speaker cables behind the amplifier."
+    }
+  },
+  {
+    "id": "audio-dante-device-missing",
+    "title": { "zh": "Dante网络音频设备不见或红色", "en": "Dante / network audio device missing or showing red" },
+    "match": ["dante", "网络音频", "音频交换机", "订阅红色", "接口箱离线", "网线传声音", "dante controller", "network audio", "audio over network", "unsubscribed", "stage box offline", "dante red", "aes67"],
+    "reply": {
+      "zh": "Dante / 网络音频设备不见了或显示红色：\n1) 看音响机柜里的网络交换机（Switch）有没有通电、网口灯有没有闪。停电或有人拔了插头后最常出这个问题。\n2) 检查设备背后标有 Dante / Primary 的网线两头有没有插紧（听到「咔」一声），网口灯要亮。\n3) 不要把 Dante 的网线换到别的网口或办公室网络的墙座上，也不要插到 Secondary 口。\n4) 按顺序重启：先开交换机，等 2 分钟，再开调音台 / 处理器，最后开功放和接口箱。\n5) 等 2–3 分钟，设备会自己重新连线，红色通常会变回绿色。\n6) 最近有人换过网络交换机、改过 IP 或把设备搬去别的房间的，请告诉我们。\n7) 重启后还是红色或找不到设备：是订阅或时钟设定的问题，需要技术员用 Dante Controller 处理，请不要自己更改设定。",
+      "en": "Dante / network audio device missing or showing red:\n1) Check the network switch in the audio rack has power and its port lights are blinking. This usually follows a power cut or a pulled plug.\n2) Check the network cable marked Dante / Primary behind the device is clicked in at both ends and the port light is on.\n3) Do not move Dante cables to other ports or to office network wall points, and do not use the Secondary port.\n4) Restart in order: switch first, wait 2 minutes, then mixer / processor, amplifiers and stage boxes last.\n5) Wait 2–3 minutes. Devices reconnect by themselves and red normally turns green.\n6) Tell us if someone recently replaced the network switch, changed IP settings or moved a device to another room.\n7) Still red or missing after the restart: a subscription or clock setting issue. A technician must fix it in Dante Controller; do not change settings yourself."
+    },
+    "explain": {
+      "zh": "Dante 是用网线和交换机来传声音的系统，一条网线可以取代几十条音频线：\n• 它依赖交换机。交换机断电或网线松脱，整套声音就会消失。\n• 红色或 Unsubscribed 表示设备之间的「订阅」（谁送给谁）断了，或时钟不同步。\n• 常见起因：停电后开机顺序不对、有人把网线插错口、IT 更换了交换机或改了网络设定。\n• 检查电源、网线和按顺序重启，用户可以做。\n• 订阅、时钟主机、IP 设定需要技术员用电脑软件处理，改错会让整个系统没声。",
+      "en": "Dante carries audio over network cables and a switch; one network cable replaces dozens of audio cables:\n• It depends on the switch. If the switch loses power or a network cable comes loose, the whole sound system goes quiet.\n• Red or Unsubscribed means the subscription between devices (who sends to whom) is broken, or the clocks are out of sync.\n• Usual triggers: wrong power-up order after a power cut, a cable in the wrong port, or IT replacing the switch or changing network settings.\n• Checking power and cables and restarting in order is something you can do.\n• Subscriptions, clock master and IP settings need a technician with the software; a wrong change can silence the whole system."
+    }
+  },
+  {
+    "id": "audio-dsp-preset-room-combine",
+    "title": { "zh": "停电后音响预设错/合并房间错", "en": "After power cut: wrong DSP preset or room combine setting" },
+    "match": ["合并房间", "隔间打开", "活动隔墙", "处理器预设", "预设不对", "隔壁房有声", "停电后音响", "room combine", "combined room", "partition open", "dsp preset", "wrong preset", "biamp", "q-sys"],
+    "reply": {
+      "zh": "停电后音响不对，或合并 / 分开房间后声音错乱：\n1) 触控面板或墙上面板：先按 System Off，等 1 分钟再按 On，让系统重新载入设定。\n2) 在面板上找 Room Combine / 合并、Divide / 分开，按实际情况选：隔墙打开选合并，隔墙关上选分开。\n3) 有些房间靠隔墙上的感应器自动判断：把活动隔墙完全关到底或完全打开，不要停在一半。\n4) 面板上有 Preset / Mode / 场景的，选回平时用的模式（如 Meeting / Presentation）。\n5) 停电后整套没反应：到机柜把处理器（DSP）的电源关掉，等 30 秒再开，等 2–3 分钟启动完成。功放最后才开。\n6) 重启后麦克风和喇叭的对应还是错（例如 A 房的麦在 B 房出声）：预设需要技术员重新载入，请不要自己用电脑软件去改。",
+      "en": "Sound wrong after a power cut, or after combining / dividing rooms:\n1) Touch panel or wall panel: press System Off, wait 1 minute, then press On so the system reloads its settings.\n2) Look for Room Combine / Divide on the panel and choose what matches reality: partition open = Combine, partition closed = Divide.\n3) Some rooms detect this with a sensor on the partition: push the movable wall fully closed or fully open, not halfway.\n4) If the panel has Preset / Mode / Scene, choose the usual one (e.g. Meeting / Presentation).\n5) Nothing responds after a power cut: at the rack, switch the processor (DSP) off, wait 30 seconds, switch on and allow 2–3 minutes to boot. Switch amplifiers on last.\n6) Mics and speakers still mismatched after restarting (e.g. Room A mic heard in Room B): the preset must be reloaded by a technician. Please do not change it with the PC software yourself."
+    },
+    "explain": {
+      "zh": "音频处理器（DSP）是会议室音响的「大脑」，决定哪支麦送去哪组喇叭：\n• 停电或跳电后，处理器可能回到另一个预设，或控制面板和处理器失去连线，声音就会不对。\n• 可合并的房间有「合并 / 分开」两套设定。设定和隔墙的实际状态不符时，会出现隔壁房有声、本房没声，或啸叫。\n• 隔墙感应器没有感应到位，也会让系统判断错误。\n• 用面板重新选择模式和重启电源，用户可以做。\n• 预设内容本身要用专用软件修改，需要技术员；乱改可能让整层楼的音响失效。",
+      "en": "The audio processor (DSP) is the brain of the room's sound system; it decides which mic goes to which speakers:\n• After a power cut or trip, the processor may start in a different preset, or the control panel may lose its link to the processor, so the sound is wrong.\n• Combinable rooms have two sets of settings, combined and divided. If the setting does not match the real partition position, you get sound from next door, no sound in your room, or feedback.\n• A partition sensor that is not fully engaged also misleads the system.\n• Re-selecting the mode on the panel and restarting power is something you can do.\n• The preset contents are edited with special software and need a technician; a wrong change can take out the sound for a whole floor."
+    }
+  },
+  {
+    "id": "audio-wireless-rf-no-audio",
+    "title": { "zh": "无线麦接收机有信号但没声", "en": "Wireless receiver shows RF signal but no audio" },
+    "match": ["有信号没声", "rf灯亮", "接收机有信号", "af灯不亮", "接收机没声", "对频了没声", "rf but no audio", "rf light on", "receiver no audio", "af meter", "no af", "receiver shows signal", "encryption mismatch"],
+    "reply": {
+      "zh": "无线麦接收机有 RF 信号，但没有声音：\n1) 看麦克风或腰包上的 Mute 开关：有些机型有三段（Off / Mute / On），要推到 On。\n2) 对着麦讲话，看接收机的 AF / Audio 灯：不跳，问题在麦这边；会跳但没声，问题在接收机之后。\n3) AF 不跳：腰包的话，先关机，把领夹 / 头戴麦的插头拔出再插紧拧好，再开机；Gain 太低的调高一两格。\n4) AF 会跳：把接收机的 Volume / Level 旋钮开大，并看调音台该通道没有静音、推子有推上。\n5) 屏幕显示锁头 / 钥匙图标，或提示 Encryption mismatch：把麦和接收机重新同步一次（通常是打开电池盖，对准接收机红外窗按 Sync）。\n6) 声音是别人的或很杂：可能收到别的麦或干扰，换一个频道再同步。\n7) 先把音量关小，再把接收机背后的输出线插紧。",
+      "en": "Wireless receiver shows RF signal but no sound:\n1) Check the Mute switch on the mic or bodypack. Some have three positions (Off / Mute / On): slide to On.\n2) Speak and watch the receiver's AF / Audio light. Not moving = problem at the mic. Moving but silent = after the receiver.\n3) AF not moving: on a bodypack, switch it off, re-plug and tighten the lavalier / headset plug, switch on. Raise Gain a step or two if very low.\n4) AF moving: turn up the receiver's Volume / Level knob and check the mixer channel is unmuted, fader up.\n5) Lock / key icon or Encryption mismatch message: sync mic and receiver again (usually open the battery cover, aim at the receiver's IR window, press Sync).\n6) Sound is someone else's or very noisy: it may be another mic or interference. Change channel and sync again.\n7) Turn the volume down first, then push in the output cable behind the receiver."
+    },
+    "explain": {
+      "zh": "RF 灯表示「收到无线电信号」，AF 灯表示「收到声音」，两者是分开的：\n• RF 有、AF 没有：麦被静音、领夹麦插头松了、麦头坏了，或发射器 Gain 太低。\n• 加密不一致：数字无线麦开了加密后，麦和接收机的密钥不同，就会有 RF 没声，重新同步即可。\n• AF 有但喇叭没声：接收机输出音量被关小、输出线松了，或调音台通道被静音。\n• RF 也可能来自别的发射器或干扰，不是你手上的那支麦。把麦关机，看 RF 灯会不会灭就知道。\n开关、同步和音量，用户都可以自己处理。",
+      "en": "The RF light means a radio signal is received; the AF light means audio is received. They are separate:\n• RF but no AF: mic muted, lavalier plug loose, mic capsule faulty, or transmitter Gain too low.\n• Encryption mismatch: on digital systems with encryption on, RF shows but there is no sound if the keys differ. Syncing again fixes it.\n• AF but nothing from the speakers: receiver output level turned down, output cable loose, or mixer channel muted.\n• The RF may also come from another transmitter or interference, not your mic. Switch your mic off and see whether the RF light goes out.\nSwitches, syncing and volume are all things you can handle yourself."
+    }
+  },
+  {
+    "id": "audio-wireless-frequency-clash",
+    "title": { "zh": "两支无线麦互相干扰/只有一支响", "en": "Two wireless mics clash, or only one of them works" },
+    "match": ["两支麦干扰", "同一个频率", "撞频", "对频", "腰包麦不响", "只有一支麦响", "换频率", "same frequency", "frequency clash", "bodypack not working", "sync the mic", "change mic channel", "two mics interfere", "ir sync"],
+    "reply": {
+      "zh": "两支无线麦互相干扰，或手持麦有声、腰包没声：\n1) 一个接收通道同一时间只能配一支发射器。手持和腰包如果配的是同一个接收通道，只能开其中一支，另一支要关机。\n2) 两支要同时用：每支麦要有自己的接收通道，而且频率不能一样。看接收机屏幕上的频率 / 频道号，一样就要改。\n3) 改频率：在其中一台接收机按 Scan（或 Group / Channel），选一个新的空频道。\n4) 再同步：打开麦的电池盖，把红外窗对准接收机的 IR 窗（约 10 公分），按 Sync，直到屏幕显示成功或 RF 灯亮。\n5) 每支麦和它的接收机贴上同样的编号，避免下次拿错。\n6) 隔壁或楼上也用无线麦：两边频道要错开，关掉一边测试就知道是不是互相干扰。\n7) 麦关机时接收机 RF 灯还亮：这个频率有外来干扰，换频道。",
+      "en": "Two wireless mics interfere, or handheld works but bodypack does not:\n1) One receiver channel works with one transmitter at a time. If handheld and bodypack share the same channel, switch on only one of them.\n2) To use both together, each mic needs its own receiver channel on a different frequency. Compare the frequency / channel on the receiver screens; if they match, change one.\n3) To change: on one receiver press Scan (or Group / Channel) and pick a free channel.\n4) Then sync: open the mic's battery cover, hold its IR window about 10cm from the receiver's IR window and press Sync; the screen confirms or the RF light comes on.\n5) Label each mic and its receiver with the same number to avoid mix-ups.\n6) Wireless mics next door or upstairs: the rooms need different channels. Switch one room off to test.\n7) RF light on while your mic is off: outside interference. Change channel."
+    },
+    "explain": {
+      "zh": "每支无线麦都要有自己专用的频率，就像每个电台一个频道：\n• 两支发射器用同一个频率，接收机会收到混在一起的信号，出现杂声、断续或完全没声。\n• 手持和腰包共用一个接收通道很常见，这种设计本来就是二选一。\n• 多支麦的频率不能随便选，要用同一个 Group 里的不同 Channel，才不会互相干扰。\n• 附近的无线麦、数字电视和 LED 屏也会占用或干扰频率。\n扫描和同步用户可以自己做。支数多（大约 8 支以上）或干扰一直解决不了，需要技术员做频率规划。",
+      "en": "Every wireless mic needs its own frequency, like each radio station has its own channel:\n• Two transmitters on one frequency give the receiver a mixed signal: noise, dropouts or silence.\n• A handheld and bodypack sharing one receiver channel is common; that design is meant as either-or.\n• Frequencies for several mics cannot be picked at random. Use different Channels within the same Group so they do not interfere.\n• Nearby wireless mics, digital TV and LED screens also occupy or disturb frequencies.\nScanning and syncing are things you can do yourself. With many mics (roughly 8 or more), or interference that will not go away, a technician should do a frequency plan."
+    }
+  },
+  {
+    "id": "audio-mic-charging-dock",
+    "title": { "zh": "无线麦充电座充不进电", "en": "Wireless mic charging dock is not charging" },
+    "match": ["充电座", "充不进电", "充电底座", "充电灯不亮", "充电电池", "充了没电", "charging dock", "charging station", "charging cradle", "mic not charging", "charger light", "rechargeable battery", "charge the mic"],
+    "reply": {
+      "zh": "无线麦放在充电座上充不进电：\n1) 看充电座的电源灯：不亮就检查变压器有没有插紧、插座开关有没有开，换一个插座试。\n2) 把麦或电池拿起来，方向对好再放回去，要放到底。很多充电座放歪一点就接触不到。\n3) 用干布或棉花棒擦一擦麦底部和充电座里的金属接点，灰尘和汗渍会造成接触不良。\n4) 确认麦里装的是原厂充电电池。普通碱性电池（一次性的）不能充电，放上去充很危险，请马上拿出来。\n5) 换另一个充电位或另一支麦对比：只有一支充不进，多半是那颗电池老化了。\n6) 灯的意思因品牌而异，通常红色 / 橙色＝充电中，绿色＝充满，闪烁＝错误。闪烁时重新放一次。\n7) 电池鼓起、发烫或漏液：停止使用，不要再充，需要更换。",
+      "en": "Wireless mic will not charge on the charging dock:\n1) Check the dock's power light. If it is off, check the adapter is plugged in firmly and the socket is on; try another socket.\n2) Lift the mic or battery, turn it the right way and seat it fully. Many docks lose contact if it sits slightly crooked.\n3) Wipe the metal contacts on the mic base and in the dock with a dry cloth or cotton bud. Dust and sweat cause poor contact.\n4) Make sure the mic holds the maker's rechargeable battery. Ordinary alkaline (single-use) batteries cannot be charged and are dangerous on a dock; remove them at once.\n5) Compare with another slot or mic. If only one will not charge, that battery is probably worn out.\n6) Lights vary by brand; usually red / orange = charging, green = full, flashing = error. If flashing, reseat it.\n7) Battery swollen, hot or leaking: stop using and charging it; it must be replaced."
+    },
+    "explain": {
+      "zh": "充电座充不进，多数是接触或电池的问题：\n• 充电座没通电，或变压器松了。\n• 麦没放到位，或接点脏了。\n• 电池老化：充电电池用两三年后容量会明显下降，充满也用不久。\n• 装了一次性碱性电池：不能充电，强行充会漏液甚至发热，有危险。\n• 有些机型要在菜单里选对电池类型，电量显示才准确。\n清洁接点、重新放好、换电池，用户可以自己做。电池鼓包、发烫、有异味时，请立刻停止充电并拔掉充电座电源，需要技术员更换。\n活动当天来不及充：机型支持的话，可先换上新的 AA 碱性电池使用（但不要放上充电座）。",
+      "en": "When a dock will not charge, it is mostly a contact or battery problem:\n• The dock has no power or its adapter is loose.\n• The mic is not seated properly, or the contacts are dirty.\n• Battery ageing: after two to three years a rechargeable battery holds far less, so even a full charge does not last.\n• Single-use alkaline batteries fitted: they cannot be charged; forcing a charge can make them leak or heat up, which is dangerous.\n• On some models the battery type must be set in the menu for the level display to be accurate.\nCleaning contacts, reseating and swapping batteries are things you can do. If a battery is swollen, hot or smells, stop charging at once and unplug the dock; a technician must replace it.\nNo time to charge on the event day: if your model supports it, use fresh AA alkaline batteries (but never put them on the dock)."
+    }
+  },
+  {
+    "id": "audio-mic-muffled-thin-pops",
+    "title": { "zh": "麦克风声音闷、单薄或噗噗声", "en": "Mic sounds muffled or thin, or pops on breath" },
+    "match": ["声音很闷", "声音闷闷", "声音很薄", "噗噗声", "喷麦", "呼吸声", "声音很尖", "sounds muffled", "muffled sound", "sounds thin", "mic popping", "plosive", "breathing noise", "tinny sound"],
+    "reply": {
+      "zh": "麦克风声音很闷、很单薄，或有噗噗的喷气声：\n1) 噗噗声 / 呼吸声：麦不要正对嘴巴，放在嘴巴下方或斜一点的位置，距离一个拳头，并套上防风海绵。\n2) 声音闷：手不要包住网头。看防风海绵是不是太厚或湿了，网头有没有被口水、口红堵住，可用干布擦外面。\n3) 又闷又轰：麦离嘴巴太近，拿远一点；调音台该通道的 LOW 旋钮调小一点，并按下 Low Cut / HPF。\n4) 单薄、很尖：麦离太远或拿歪了，对准嘴巴拿近一点；LOW 调回中间，HIGH 不要开太大。\n5) 不确定就把 EQ 的 HIGH / MID / LOW 全部转回中间 12 点钟位置（中间有一格卡位）。\n6) 领夹麦：看有没有被衣服盖住。\n7) 换另一支麦对比：只有这一支不对，可能是摔过、麦头受损，需要更换。",
+      "en": "Mic sounds muffled or thin, or has popping breath noise:\n1) Popping / breath noise: do not aim straight at the mouth. Hold it just below or slightly to the side, one fist away, and fit the foam windscreen.\n2) Muffled: do not cup the grille. Check the foam is not too thick or damp and the grille not clogged (saliva, lipstick); wipe the outside with a dry cloth.\n3) Muffled and boomy: the mic is too close; move it back. Turn the channel LOW knob down a little and press Low Cut / HPF.\n4) Thin and sharp: the mic is too far or off-aim; aim at the mouth and move closer. Set LOW back to the middle and keep HIGH moderate.\n5) Not sure: turn the HIGH / MID / LOW EQ knobs back to the centre 12 o'clock position (it clicks at centre).\n6) Lavalier: check it is not covered by clothing.\n7) Compare with another mic. If only this one is wrong, it may have been dropped and damaged; it needs replacing."
+    },
+    "explain": {
+      "zh": "麦克风的音色主要由「距离、角度、EQ」三样决定：\n• 离嘴巴很近，低频会变多，声音又闷又轰，喷气声也明显。\n• 离太远或没对准，声音就薄、空、不清楚。\n• EQ 旋钮被人转过：LOW 太大就闷，HIGH 太大就尖刺，全部回中间通常就正常。\n• Low Cut / HPF 会切掉讲话用不到的超低频，对人声几乎只有好处。\n• 网头堵塞或麦摔过，也会让声音变闷变小。\n拿法和 EQ 用户都可以自己调。调好位置、EQ 回正后还是不对，才需要更换麦克风。",
+      "en": "A mic's tone comes mainly from three things: distance, angle and EQ:\n• Very close to the mouth, bass builds up, so the voice is muffled and boomy and breath pops are obvious.\n• Too far or off-aim, the voice is thin, hollow and unclear.\n• EQ knobs that someone has turned: too much LOW is muffled, too much HIGH is harsh. Setting all to centre usually fixes it.\n• Low Cut / HPF removes very low frequencies that speech does not use; for talking it is almost always a benefit.\n• A clogged grille or a dropped mic also sounds dull and quiet.\nHolding technique and EQ are things you can adjust yourself. Only if it is still wrong after fixing position and centring the EQ does the mic need replacing."
+    }
+  },
+  {
+    "id": "audio-bgm-player-stopped",
+    "title": { "zh": "背景音乐播放器停了/没歌单", "en": "Background music player stopped or has no playlist" },
+    "match": ["背景音乐", "音乐停了", "播放器停了", "歌单不见", "音乐自己停", "店里没音乐", "bgm", "background music", "music stopped", "music keeps stopping", "music player", "playlist missing", "spotify"],
+    "reply": {
+      "zh": "背景音乐停了，或播放器没有歌单：\n1) 先看播放器的屏幕或灯：是暂停、停止，还是显示 No Network / Offline（没有网络）。\n2) 按 Play。如果是播完就停，把「重复播放 Repeat / Loop」打开。\n3) 网络串流的（Spotify、网络电台、音乐盒）：看 Wi-Fi 或网线有没有连上。路由器重启后，播放器也要重启一次。\n4) 账号问题：同一个账号在别的手机或电脑播放时，这边会被停掉。另外确认订阅没有过期、没有被登出。\n5) 用 USB / SD 卡的：先停止播放，把 USB 拔出再插回。显示 No File 说明歌曲格式不支持或 USB 坏了，换成 MP3 再试。\n6) 播放器在播、但店里没声：看功放或墙上面板的音源有没有选到 BGM / Music / AUX，音量有没有开。\n7) 播放器死机：关电源 30 秒再开。",
+      "en": "Background music stopped, or the player shows no playlist:\n1) Look at the player's screen or lights: paused, stopped, or showing No Network / Offline?\n2) Press Play. If it stops when the list ends, switch on Repeat / Loop.\n3) Streaming players (Spotify, internet radio, music box): check Wi-Fi or the network cable is connected. After a router restart, restart the player too.\n4) Account: if the same account plays on another phone or computer, this player stops. Also check the subscription has not expired and the player is still logged in.\n5) USB / SD players: stop playback, pull out the USB and plug it back. No File means the song format is not supported or the USB is faulty; try MP3 files.\n6) Player is playing but the shop is silent: check the amplifier or wall panel source is set to BGM / Music / AUX and the volume is up.\n7) Player frozen: power it off for 30 seconds, then on again."
+    },
+    "explain": {
+      "zh": "背景音乐停掉，原因多数在「音源」而不是喇叭：\n• 串流播放器要一直有网络，网络断过之后不一定会自动续播。\n• 个人版音乐账号同一时间只能在一个设备播放，别人一用，店里就停。\n• USB / SD 播放器遇到不支持的格式、坏档案或 USB 松了就会停。\n• 没开重复播放，歌单播完就安静了。\n• 功放的音源被切到别的输入，或被广播 / 麦克风优先功能压住。\n以上用户都可以自己检查。提醒：商业场所播放音乐一般需要商用授权的音乐服务，个人账号可能不符合使用条款。",
+      "en": "When background music stops, the cause is usually the source, not the speakers:\n• Streaming players need the network all the time, and do not always resume by themselves after a dropout.\n• A personal music account plays on one device at a time; when someone else uses it, the shop goes quiet.\n• USB / SD players stop on unsupported formats, damaged files or a loose USB.\n• With Repeat off, the room goes silent when the playlist ends.\n• The amplifier source was switched to another input, or paging / mic priority is holding the music down.\nAll of these are things you can check yourself. Note: music in commercial premises generally requires a business-licensed music service; a personal account may not meet the terms of use."
+    }
+  },
+  {
+    "id": "audio-laptop-stutter-clicks",
+    "title": { "zh": "电脑播音断续、卡顿、啪啪声", "en": "Laptop audio stutters or has clicks and pops" },
+    "match": ["声音卡顿", "电脑声音卡", "声音一卡一卡", "啪啪声", "声音跳针", "usb声卡", "audio stutter", "audio stuttering", "clicks and pops", "audio glitch", "choppy audio", "sample rate", "usb audio", "sound keeps breaking"],
+    "reply": {
+      "zh": "电脑播放的声音卡顿、断续或有啪啪声：\n1) 关掉不用的程序和浏览器分页。电脑太忙（CPU 很高）声音就会卡。\n2) 插上电源适配器，并把电源模式调到「最佳性能」；省电模式容易卡。\n3) USB 音频线 / 会议音箱：换一个 USB 口，直接插电脑，不要经过 USB 扩展器或很长的延长线。\n4) 只有线上影片或视频会议才卡：是网络问题。靠近 Wi-Fi 路由器、改用网线，或先把影片下载好再播。\n5) Windows：声音设置 > 该输出设备 > 属性 > 高级，把格式改成 48000 Hz（或 44100 Hz）试一试，并关闭「音频增强」。\n6) 把会议室音量调低，重启电脑，再重新插一次线。\n7) 换另一台电脑就正常：是原来那台电脑的设置或驱动问题，请公司 IT 更新声卡驱动。",
+      "en": "Laptop audio stutters, breaks up or has clicks and pops:\n1) Close unused apps and browser tabs. When the laptop is too busy (high CPU), audio stutters.\n2) Plug in the power adapter and set the power mode to Best performance; power saving mode causes stutter.\n3) USB audio cable / conference speaker: try another USB port, directly on the laptop, not through a USB hub or a long extension.\n4) Stutters only on online video or video calls: it is the network. Move closer to the Wi-Fi router, use a network cable, or download the video first.\n5) Windows: Sound settings > the output device > Properties > Advanced, try the format 48000 Hz (or 44100 Hz) and turn off Audio enhancements.\n6) Turn the room volume down, restart the laptop and re-plug the cable.\n7) Another laptop works fine: the original laptop's settings or driver are the cause; ask your company IT to update the audio driver."
+    },
+    "explain": {
+      "zh": "断续和啪啪声是数字音频「来不及送」造成的：\n• 电脑太忙、省电模式或 USB 供电不足，声音数据就会掉。\n• USB 扩展器和过长的 USB 线最容易出问题。\n• 线上内容卡顿通常是 Wi-Fi 信号弱或网络拥挤。\n• 电脑和音频设备的采样率不一致（44.1kHz 和 48kHz），有些设备会出现规律的咔咔声。\n• 驱动程序过旧，或刚更新过系统。\n这类问题几乎都在电脑这边，会议室的音响通常没坏。换一台电脑测试是最快的判断方法；电脑本身的问题请找公司 IT。",
+      "en": "Stutter and clicks happen when digital audio cannot be delivered in time:\n• A busy laptop, power saving mode or weak USB power makes audio data drop.\n• USB hubs and over-long USB cables are the usual trouble spots.\n• Stutter on online content is normally weak Wi-Fi or a congested network.\n• A sample rate mismatch between laptop and audio device (44.1kHz vs 48kHz) causes regular clicks on some devices.\n• Old drivers, or a recent system update.\nThese problems are almost always on the laptop side; the room's sound system is usually fine. Testing with another laptop is the quickest way to tell. For problems with the laptop itself, please ask your company IT."
+    }
+  },
+  {
+    "id": "audio-recording-no-audio",
+    "title": { "zh": "录音/录影没有声音或只有一边", "en": "Recording has no audio or sound on one side only" },
+    "match": ["录音没声音", "录影没声音", "录不到声音", "录到一边", "录音很小声", "直播没声音", "recording no audio", "recording no sound", "recording one side", "recording too soft", "record feed", "aux send", "livestream no audio"],
+    "reply": {
+      "zh": "录音 / 录影没有声音，或只有一边有声：\n1) 正式录之前先试录 10 秒再回放，这是最重要的一步。\n2) 用电脑录（Zoom / Teams / OBS）：软件的麦克风要选会议室音频设备，不是电脑内置麦克风。看输入电平条有没有跳。\n3) 录音线从调音台的 REC OUT / AUX OUT / USB，接到录音设备的 LINE IN（不是耳机孔）。\n4) 用 AUX 送录音的：每一路要录的通道，都要把对应的 AUX 旋钮开到约 12 点钟，AUX 总输出 Master 也要开。喇叭有声不代表 AUX 有送。\n5) 只有一边有声：很常见。单声道的线接进立体声输入，只会录到左边。在剪辑软件转成 Mono 即可，或下次把录音设成 Mono。\n6) 太小声或爆音：调录音设备的输入音量，让电平大约在三分之二、不到红色。\n7) 摄影机：在菜单里把音频输入改成 External / Line。",
+      "en": "Recording has no sound, or sound on one side only:\n1) Before the real recording, record 10 seconds and play it back. This step matters most.\n2) Laptop recording (Zoom / Teams / OBS): the app's microphone must be the room audio device, not the built-in mic. Check the input level bar moves.\n3) Record cable: from the mixer's REC OUT / AUX OUT / USB to the recorder's LINE IN (not the headphone socket).\n4) Recording from an AUX: on each channel to record, turn its AUX knob to about 12 o'clock and raise the AUX Master. Speakers working does not mean the AUX is sending.\n5) One side only: very common. A mono cable into a stereo input records the left only. Convert to Mono in editing software, or next time set the recorder to Mono.\n6) Too soft or distorted: set the recorder's input level so the meter sits about two-thirds, below red.\n7) Camera: in the menu set audio input to External / Line."
+    },
+    "explain": {
+      "zh": "录音走的是另一条独立的路，喇叭有声不代表录得到：\n• 录音设备要从调音台的 REC / AUX / USB 输出拿信号，这一路有自己的音量。\n• 软件选错麦克风，就会录到电脑内置麦克风，声音又远又小。\n• 只有一边：单声道信号接到立体声输入，属于正常现象，后期转成 Mono 就可以。\n• 把线路信号插进麦克风孔会爆音，把麦克风信号插进 Line 孔会太小声。\n• 有些会议室的处理器有专门的录音输出，如果那里完全没信号，需要技术员检查设定。\n最保险的做法：每次正式录之前先试录并回放。",
+      "en": "Recording uses its own separate path; sound in the speakers does not mean it is being recorded:\n• The recorder takes its signal from the mixer's REC / AUX / USB output, which has its own level.\n• If the app has the wrong microphone selected, you record the laptop's built-in mic: distant and soft.\n• One side only: a mono signal into a stereo input. This is normal and can be converted to Mono afterwards.\n• A line signal into a mic socket distorts; a mic signal into a line socket is too soft.\n• Some rooms have a dedicated record output from the processor. If there is no signal at all there, a technician must check the settings.\nThe safest habit: test-record and play back before every real recording."
+    }
+  },
+  {
+    "id": "audio-stage-monitor-silent",
+    "title": { "zh": "舞台返听喇叭没声/听不到自己", "en": "Stage monitor silent or presenter cannot hear themselves" },
+    "match": ["返听", "监听喇叭", "听不到自己", "舞台喇叭没声", "返送", "台上听不到", "stage monitor", "foldback", "monitor speaker", "monitor wedge", "floor monitor", "cannot hear myself", "can't hear myself"],
+    "reply": {
+      "zh": "舞台返听喇叭没声，或台上的人听不到自己：\n1) 看返听喇叭背后：电源开关开了、电源灯亮，背后的 Level 旋钮开到一半。\n2) 返听的声音通常由调音台的 AUX / MON / MIX 输出送出，先找到对应的 AUX 旋钮（常标 AUX 1 或 MON 1）。\n3) 在要听的那支麦的通道上，把 AUX 1 旋钮慢慢开到 12 点钟位置，再把 AUX 1 的总输出 Master 推上去。\n4) 数字调音台：按该 Mix / Aux 的选择键或 Sends on Fader，用推子把各通道送进返听，调完记得按回主画面。\n5) 先把音量关小，再检查调音台 AUX OUT 到返听喇叭的线两头有没有插紧。\n6) 返听要慢慢加，开太大会马上啸叫。让麦克风的尾部朝向返听喇叭，不要把麦头指向它。\n7) 没有返听的会议室：讲者听不到自己是正常的，可请同事在后排确认音量。",
+      "en": "Stage monitor silent, or the presenter cannot hear themselves:\n1) Back of the monitor speaker: power switch on, power light lit, Level knob at about half.\n2) Monitor sound normally comes from the mixer's AUX / MON / MIX output. Find that AUX knob (often marked AUX 1 or MON 1).\n3) On the mic channel you want to hear, slowly turn AUX 1 up to 12 o'clock, then raise the AUX 1 Master.\n4) Digital mixer: press that Mix / Aux select key or Sends on Fader, then use the faders to send channels to the monitor. Return to the main view after.\n5) Turn the volume down first, then check the cable from the mixer AUX OUT to the monitor is firm at both ends.\n6) Raise the monitor slowly; too much causes instant feedback. Keep the back of the mic towards the monitor; never point the mic head at it.\n7) Rooms without monitors: not hearing yourself is normal. Ask a colleague at the back to check the level."
+    },
+    "explain": {
+      "zh": "返听（Monitor / Foldback）是给台上的人听的喇叭，和观众听的主喇叭是分开的一路：\n• 它由调音台的 AUX / MON 输出控制，每个通道要送多少都要另外开。主喇叭有声，不代表返听有声。\n• 最常见的原因：AUX 旋钮没开、AUX 总输出没推、返听喇叭自己没开机。\n• 返听离麦克风很近，是最容易啸叫的地方，所以音量要一点一点加。\n• 讲话的活动只需要很少的返听；唱歌和乐队才需要比较多。\n旋钮和电源用户可以自己检查。如果要多路返听或耳返系统，需要技术员设定。",
+      "en": "A monitor (foldback) is a speaker for the people on stage, on a path separate from the main speakers for the audience:\n• It is fed from the mixer's AUX / MON output, and each channel's send must be turned up separately. Sound in the main speakers does not mean sound in the monitor.\n• Most common causes: AUX knob down, AUX master down, or the monitor speaker itself switched off.\n• Monitors sit close to the mics, so they are the easiest place for feedback. Raise the level little by little.\n• Speech events need very little monitor; singers and bands need more.\nKnobs and power are things you can check yourself. Multiple monitor mixes or in-ear systems need a technician to set up."
+    }
+  },
+  {
+    "id": "audio-jack-loose-wiggle",
+    "title": { "zh": "3.5mm音频线松、摇一摇才有声", "en": "3.5mm audio jack loose, sound cuts unless wiggled" },
+    "match": ["耳机孔松", "音频线松", "摇一摇才有声", "要按着线", "aux线", "音频孔", "3.5mm", "3.5 mm", "audio jack", "aux cable", "jack loose", "wiggle the cable", "headphone jack"],
+    "reply": {
+      "zh": "3.5mm 音频线松，要摇一摇或按着才有声，或只有一边有声：\n1) 先把功放或喇叭音量关小，避免插拔时「啪」一声。\n2) 把插头用力插到底，要感觉到「咔」一下。手机或电脑的保护壳太厚会顶住插头，先拿掉壳。\n3) 看插孔里有没有灰尘、棉絮：关机后轻轻吹一吹，不要用金属物去挖。\n4) 换一条 3.5mm 线。这是最常见的原因，线靠近插头的地方最容易内部折断。\n5) 换一台设备（另一部手机或电脑）接同一条线：别的设备正常，就是原来那台的耳机孔松了，可改用 USB 或 HDMI 输出声音。\n6) 换线换设备都一样：是桌面插座或墙上面板的音频孔磨损了，需要技术员更换。\n7) 临时应急：把线轻轻固定在不会被拉扯的位置，不要让插头吊着受力。",
+      "en": "3.5mm audio cable loose: sound only when wiggled or held, or on one side only:\n1) Turn the amplifier or speaker volume down first to avoid a loud pop when plugging.\n2) Push the plug in firmly until it clicks. A thick phone or laptop case can stop the plug going fully in; remove the case.\n3) Check the socket for dust or lint. With the device off, blow it out gently; do not dig with anything metal.\n4) Try another 3.5mm cable. This is the most common cause; the wire breaks inside near the plug.\n5) Try another phone or laptop on the same cable. If that works, the original device's headphone socket is worn; use USB or HDMI audio instead.\n6) Same with a new cable and another device: the audio socket on the table box or wall plate is worn and needs a technician to replace it.\n7) Temporary fix: secure the cable gently where it will not be pulled, so the plug does not hang under strain."
+    },
+    "explain": {
+      "zh": "3.5mm 插头又小又常被插拔，是整套音响里最容易坏的地方：\n• 插头没插到底时，只会接通一边，或声音又小又空（人声不见、只剩伴奏）。\n• 线靠近插头的位置反复弯折，里面的铜线会断，所以摇一摇才有声。\n• 设备上的耳机孔用久了会变松，也会接触不良。\n• 换线就好的，属于消耗品正常损耗，建议会议室常备一条备用线。\n• 桌面插座或墙上面板的插孔坏了，需要技术员更换，请不要自己拆面板。\n很多新手机和电脑已经没有耳机孔，改用 HDMI 或 USB 输出声音会更稳定。",
+      "en": "The 3.5mm plug is small and constantly plugged and unplugged, so it is the weakest point in the system:\n• A plug not fully inserted connects one side only, or gives a thin hollow sound (vocals vanish, only the backing remains).\n• Repeated bending near the plug breaks the copper inside, which is why it works only when wiggled.\n• The headphone socket on a device wears loose over time and loses contact.\n• If a new cable fixes it, that is normal wear of a consumable. Keep a spare cable in the meeting room.\n• A damaged socket on a table box or wall plate needs a technician. Please do not remove the plate yourself.\nMany new phones and laptops have no headphone socket; HDMI or USB audio is more reliable."
+    }
+  }
+]

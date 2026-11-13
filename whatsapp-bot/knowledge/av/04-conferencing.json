@@ -1,0 +1,314 @@
+[
+  {
+    "id": "vc-calendar-meeting-missing",
+    "title": { "zh": "会议室屏幕没显示今天的会议", "en": "Room console shows no meetings / today's meeting missing" },
+    "match": ["没显示会议", "看不到会议", "会议没出现", "日历是空的", "日历没同步", "今天的会议不见", "no meetings today", "meeting not showing", "meeting missing", "calendar empty", "calendar not syncing", "no upcoming meetings", "room calendar"],
+    "reply": {
+      "zh": "会议室屏幕/控制面板上没有今天的会议：\n1) 先确认订会议时有把「会议室」加进邀请（Outlook / Google Calendar 里的 Room 或 Location）。只邀请同事是不会出现在会议室的。\n2) 看会议室有没有「接受 Accepted」。被拒绝通常是时间冲突，或重复会议排得太远。\n3) 刚订的会议要等 2 到 5 分钟才同步；在面板的会议列表往下拉刷新，或退回主画面再看。\n4) 还是没有：把系统重启一次（面板的 Settings / Restart，或关电 30 秒再开）。\n5) 赶时间：在面板按 Join /「用 ID 加入」，输入会议 ID 和密码直接进会议。",
+      "en": "Room console shows no meetings / today's meeting is missing:\n1) Check that the room itself was invited when the meeting was booked (added as a Room or Location in Outlook / Google Calendar). Inviting only people does not put it on the room.\n2) Check that the room Accepted. A decline usually means a time clash or a recurring series that runs too far ahead.\n3) A new booking takes 2 to 5 minutes to sync. Pull down on the meeting list to refresh, or go back to the home screen and look again.\n4) Still missing: restart the system once (Settings / Restart on the console, or power off 30 seconds and on).\n5) In a hurry: press Join / Join with an ID on the console and type the meeting ID and passcode."
+    },
+    "explain": {
+      "zh": "会议室的屏幕只显示「会议室邮箱」日历里的会议，不是您个人的日历：\n• 最常见是订会议时没邀请会议室，或会议室自动拒绝了。\n• 外部公司发来的邀请，转发给会议室后可能被系统过滤掉，这要 IT 在后台调整。\n• 标记为 Private 的会议只会显示「Private」，不显示标题。\n• 所有会议都不见、或显示日历错误，多半是会议室账号的日历连接断了（密码过期、授权失效），需要 IT 管理员或技术员处理。\n只是单一会议不见，用户自己重新邀请会议室就能解决。",
+      "en": "The room screen only shows meetings that are in the room mailbox calendar, not your personal calendar:\n• The most common cause is that the room was not invited, or the room auto-declined.\n• Invites from outside companies that are forwarded to the room may be filtered out; IT has to adjust this in the admin settings.\n• Meetings marked Private show only as Private, without the title.\n• If every meeting is missing or there is a calendar error, the room account has probably lost its calendar connection (expired password or permission). That needs your IT admin or a technician.\nA single missing meeting can be fixed by the user by inviting the room again."
+    }
+  },
+  {
+    "id": "vc-join-button-missing",
+    "title": { "zh": "一键 Join 按钮不见或按不了", "en": "One-touch Join button missing or greyed out" },
+    "match": ["join按钮", "没有join", "加入按钮", "按不了加入", "不能一键加入", "join是灰色", "join button missing", "no join button", "join greyed out", "join button grey", "one touch join", "cannot press join"],
+    "reply": {
+      "zh": "会议在列表里，但没有 Join 按钮或按钮是灰色：\n1) Join 通常在会议开始前 5 到 10 分钟才亮，太早会是灰色。\n2) 确认邀请里有会议链接：Teams Rooms 要是 Teams 会议，Zoom Rooms 要有 Zoom 链接。只订了房间、没加线上会议的不会有 Join。\n3) 请主办人打开邀请，加上线上会议链接后发送更新，再等几分钟。\n4) 别的平台的会议（例如在 Teams 房间开 Zoom）要管理员开启「第三方会议」功能才有 Join。\n5) 马上要开：按「Join / 用 ID 加入」，手动输入会议 ID 和密码。\n6) 再不行，用手提电脑加入，接上会议室的屏幕。",
+      "en": "Meeting is listed but there is no Join button, or it is greyed out:\n1) Join usually lights up only 5 to 10 minutes before the start time. Earlier than that it can be grey.\n2) Check the invite has a meeting link: a Teams Room needs a Teams meeting, a Zoom Room needs a Zoom link. A room-only booking with no online meeting has no Join.\n3) Ask the organiser to open the invite, add the online meeting link and send the update. Wait a few minutes.\n4) Meetings on another platform (for example Zoom on a Teams Room) only get a Join button if the admin has turned on third-party meetings.\n5) Starting now: press Join / Join with an ID and type the meeting ID and passcode by hand.\n6) If that fails, join from a laptop and connect it to the room screen."
+    },
+    "explain": {
+      "zh": "Join 按钮是系统从邀请内容里读到会议链接后才生成的：\n• 邀请里没有链接、链接放在附件里、或被邮件安全系统改写了，就读不到。\n• 外部公司的邀请转发进来时，正文常被会议室邮箱删掉，需要 IT 改邮箱设置。\n• 会议室账号的授权或日历出问题时，所有会议都不会有 Join。\n只是个别会议没有 Join，属于订会议的方式问题，用户可以自己解决；每个会议都没有，就要 IT 管理员或技术员检查账号设置。",
+      "en": "The Join button is created only when the system can read a meeting link inside the invite:\n• No link, a link hidden in an attachment, or a link rewritten by an email security filter cannot be read.\n• When an outside company's invite is forwarded in, the room mailbox often deletes the body text. IT needs to change the mailbox settings.\n• If the room account's licence or calendar has a problem, no meeting will have Join.\nIf only some meetings lack Join, it is about how the meeting was booked and users can fix it. If every meeting lacks Join, your IT admin or a technician must check the account settings."
+    }
+  },
+  {
+    "id": "vc-cross-platform-join",
+    "title": { "zh": "Teams房间开Zoom会议或相反", "en": "Joining a Zoom meeting from a Teams Room (or the reverse)" },
+    "match": ["对方用zoom", "客户用zoom", "webex链接", "跨平台", "别的平台", "其他平台", "第三方会议", "direct guest join", "guest join", "cross platform", "different platform", "third party meeting", "join by id", "zoom on teams room"],
+    "reply": {
+      "zh": "在 Teams 房间加入 Zoom / Webex 会议，或在 Zoom 房间加入 Teams 会议：\n1) 把会议邀请转发给会议室（或订会议时加入会议室），几分钟后面板上会出现该会议，直接按 Join。\n2) 没有 Join：在面板找「用 ID 加入 / Join with an ID / More」，选对平台（Zoom、Webex、Teams），输入会议 ID 和密码。\n3) 找不到这些选项，表示管理员还没开启「第三方会议 / Direct Guest Join」，要请 IT 开。\n4) 进去后功能会比较少：通常只有一个屏幕、布局选择少，HDMI 分享内容可能用不了。\n5) 需要完整功能或赶时间：用手提电脑加入会议，接上会议室的屏幕和 USB 摄像头/喇叭（BYOD）。",
+      "en": "Joining a Zoom / Webex meeting from a Teams Room, or a Teams meeting from a Zoom Room:\n1) Forward the invite to the room (or add the room when booking). After a few minutes the meeting appears on the console; press Join.\n2) No Join: look for Join with an ID / More on the console, pick the right platform (Zoom, Webex, Teams) and enter the meeting ID and passcode.\n3) If those options are not there, the admin has not enabled third-party meetings / Direct Guest Join. Ask IT to turn it on.\n4) Expect fewer features once inside: usually one screen, fewer layouts, and HDMI content sharing may not work.\n5) Need full features or in a hurry: join from a laptop and connect it to the room screen and the USB camera / speaker (BYOD)."
+    },
+    "explain": {
+      "zh": "会议室系统是为自己的平台设计的，加入别家的会议是用「访客」方式：\n• Teams Rooms 多数版本支持加入 Zoom 和 Webex；Zoom Rooms 多数版本支持加入 Teams 和 Google Meet。实际要看设备型号和软件版本。\n• 这个功能默认可能是关的，要管理员在后台开启一次。\n• 访客方式是通过网页版连接，所以画质、双屏、分享内容、录影等会受限制，这是正常的，不是故障。\n• 对方会议如果只允许已登录用户或设有等候室，要等主持人放行。\n开启功能属于 IT 管理员或技术员的工作；日常使用用户自己可以操作。",
+      "en": "A room system is built for its own platform and joins other platforms as a guest:\n• Most Teams Rooms versions can join Zoom and Webex; most Zoom Rooms versions can join Teams and Google Meet. It depends on the device model and software version.\n• The feature may be off by default; an admin has to enable it once.\n• Guest join works through the web version of the meeting, so picture quality, dual screens, content sharing and recording are limited. That is normal, not a fault.\n• If the other meeting allows signed-in users only or has a waiting room, you must wait for the host to admit the room.\nEnabling the feature is a job for your IT admin or a technician; day-to-day use is fine for users."
+    }
+  },
+  {
+    "id": "vc-hdmi-share-not-seen",
+    "title": { "zh": "插HDMI分享，对方看不到内容", "en": "Laptop on room HDMI cable, far end cannot see the content" },
+    "match": ["对方看不到分享", "对方看不到屏幕", "看不到ppt", "hdmi分享", "插了hdmi", "分享不出去", "看不到我的屏幕", "hdmi share", "hdmi sharing", "far end cannot see", "cannot see my screen", "content not showing", "share via hdmi", "cannot see my slides"],
+    "reply": {
+      "zh": "手提电脑插了会议室的 HDMI 线，房间屏幕或对方看不到内容：\n1) 会议中在面板按「Share / 分享内容」，选 HDMI / Laptop。有些房间插线后不会自动分享。\n2) Windows 按 Windows+P 选「复制 Duplicate」；Mac 到「显示器」打开镜像。电脑不要进入睡眠。\n3) HDMI 线和转接头两头插紧，或换电脑的另一个接口、另一个转接头试。\n4) 房间屏幕看得到、对方看不到：在面板上停止分享，再按一次 Share。\n5) 播 Netflix 等受版权保护的影片会被挡成黑画面，这是正常的。\n6) 先开会：用电脑自己加入会议，关掉电脑的麦克风和喇叭，再按 Share Screen。",
+      "en": "Laptop is plugged into the room HDMI cable but the room screen or the far end shows nothing:\n1) During the meeting press Share / Share Content on the console and choose HDMI / Laptop. Some rooms do not share automatically when you plug in.\n2) On Windows press Windows+P and choose Duplicate; on a Mac turn on mirroring under Displays. Keep the laptop awake.\n3) Push the HDMI cable and adapter in firmly at both ends, or try another port or another adapter.\n4) Room screen shows it but the far end does not: stop sharing on the console and press Share again.\n5) Protected video such as Netflix is blocked and shows black. That is normal.\n6) To get started: join the meeting from the laptop itself, mute its microphone and speaker, then press Share Screen."
+    },
+    "explain": {
+      "zh": "会议室的 HDMI 线不是直接接电视，而是先进会议系统（HDMI 输入 / ingest），再由系统发给屏幕和远端：\n• 所以要系统「看见」信号并处于分享状态，对方才看得到。\n• 最常见是电脑没输出画面、转接头接触不良，或面板上没按分享。\n• 用了很久的转接头和桌面线盒里的 HDMI 线容易松或坏，换一条线试就知道。\n• 每台电脑都不行，可能是桌面线、HDMI 采集器或系统设置的问题，需要技术员检查，请不要自己拆桌面线盒。\n个别电脑的问题用户可以自己解决。",
+      "en": "The room HDMI cable does not go straight to the TV. It goes into the meeting system first (HDMI input / ingest), which then sends it to the screen and to the far end:\n• So the system must detect a signal and be in sharing mode before the far end sees anything.\n• Usual causes: the laptop is not sending a picture, a loose adapter, or Share was not pressed on the console.\n• Old adapters and the HDMI cable in the table box often get loose or fail; trying another cable tells you quickly.\n• If no laptop works, the table cable, the HDMI capture device or the system settings may be at fault. That needs a technician; please do not open the table cable box.\nProblems with one particular laptop can be solved by the user."
+    }
+  },
+  {
+    "id": "vc-screen-share-black",
+    "title": { "zh": "分享屏幕是黑的或只有桌布", "en": "Screen share shows black or only the wallpaper" },
+    "match": ["分享黑屏", "分享是黑的", "只看到桌布", "只看到壁纸", "分享窗口黑", "屏幕录制权限", "share screen black", "black screen share", "only wallpaper", "sharing black window", "screen recording permission", "shared screen blank"],
+    "reply": {
+      "zh": "分享屏幕时对方只看到黑画面或桌面壁纸：\n1) Mac：打开「系统设置 > 隐私与安全性 > 屏幕录制」（新版叫「屏幕与系统音频录制」），把 Zoom / Teams / 浏览器打开，然后完全退出该 app 再重开。\n2) 停止分享，重新分享时选「整个屏幕 Screen / Desktop」，不要只选单一窗口。\n3) 接了外接屏幕时，确认选的是放着内容的那个屏幕（Screen 1 / Screen 2）。\n4) 被分享的窗口不要最小化；PowerPoint 全屏播放时改为分享整个屏幕。\n5) Netflix、部分银行或加密文件 app 会故意显示黑色，无法分享。\n6) 还是黑：重启电脑，或改用浏览器、另一台电脑加入。",
+      "en": "Screen share shows a black picture or only the desktop wallpaper to others:\n1) Mac: open System Settings > Privacy & Security > Screen Recording (newer versions: Screen & System Audio Recording), switch on Zoom / Teams / your browser, then fully quit the app and reopen it.\n2) Stop sharing and share again, choosing the whole Screen / Desktop instead of a single window.\n3) With an external monitor connected, make sure you pick the screen that has your content (Screen 1 / Screen 2).\n4) Do not minimise the window you are sharing. For a full-screen PowerPoint show, share the whole screen.\n5) Netflix and some banking or protected-document apps show black on purpose and cannot be shared.\n6) Still black: restart the laptop, or join from a browser or another laptop."
+    },
+    "explain": {
+      "zh": "通常是电脑的权限或分享方式问题，会议室设备本身没坏：\n• Mac 没给会议 app「屏幕录制」权限时，对方只看到壁纸，看不到任何窗口。系统或 app 更新后，权限可能要重新打开。\n• 分享单一窗口时，窗口被最小化或换到另一个桌面，就会变黑或停住。\n• 有版权保护的影片和部分安全软件会挡掉屏幕截取。\n• 公司电脑如果权限开关是灰色的、不能改，是公司的管理策略，要找 IT 管理员。\n这类问题用户几分钟内可以自己解决，不需要技术员到场。",
+      "en": "This is usually a laptop permission or sharing-choice problem; the room equipment is fine:\n• On a Mac, if the meeting app has no Screen Recording permission, others see only the wallpaper and none of your windows. After a system or app update the permission may need to be switched on again.\n• When sharing a single window, minimising it or moving it to another desktop makes it go black or freeze.\n• Copyright-protected video and some security software block screen capture.\n• On a company laptop, if the permission switch is greyed out and cannot be changed, it is a company policy; ask your IT admin.\nUsers can normally fix this themselves in a few minutes; no technician visit is needed."
+    }
+  },
+  {
+    "id": "vc-share-video-choppy",
+    "title": { "zh": "分享影片对方很卡或没声音", "en": "Shared video is choppy or has no sound for the far end" },
+    "match": ["分享影片", "分享视频", "播影片很卡", "播视频很卡", "影片没声音", "听不到影片", "share sound", "share video choppy", "video clip no sound", "optimise for video", "optimize for video", "include computer sound", "youtube no sound", "shared video lagging"],
+    "reply": {
+      "zh": "会议中分享影片，对方看到很卡或听不到影片声音：\n1) Zoom：按 Share 后，在窗口下方勾选「Share sound」和「Optimize for video clip」，再选屏幕。\n2) Teams：按 Share 后打开「Include computer sound」（新版叫 Include sound）。\n3) Google Meet：选分享「A tab / 标签页」并勾选分享标签页音频。Webex：选「Optimize for motion and video」。\n4) 已经在分享中：先停止分享，勾好再重新分享。\n5) 电脑接网线或靠近 Wi-Fi；关掉其他占网速的程序。\n6) 用房间 HDMI 线播放时，电脑的声音输出要选 HDMI / 会议室设备。\n7) 还是卡：把影片链接发到聊天，让大家各自播放。",
+      "en": "Sharing a video in a meeting and the far end sees it choppy or hears no sound:\n1) Zoom: after pressing Share, tick Share sound and Optimize for video clip at the bottom of the window, then pick the screen.\n2) Teams: after pressing Share, switch on Include computer sound (Include sound on newer versions).\n3) Google Meet: share A tab and tick the option to share tab audio. Webex: choose Optimize for motion and video.\n4) Already sharing: stop sharing, tick the options, then share again.\n5) Plug the laptop into the network cable or move closer to the Wi-Fi; close other programs that use the internet.\n6) When playing through the room HDMI cable, set the laptop sound output to HDMI / the room device.\n7) Still choppy: post the video link in the chat and let everyone play it themselves."
+    },
+    "explain": {
+      "zh": "屏幕分享默认是为文件和简报设计的，不是为影片：\n• 默认每秒只传几格画面，而且不传电脑声音，所以影片会卡、没声音。勾选上面的选项后才会改成流畅模式。\n• 影片模式很吃上传网速，Wi-Fi 弱或很多人同时用网时仍然会卡。\n• 靠会议室麦克风去「收」电脑喇叭的声音，对方听起来会很差，一定要用分享声音的功能。\n• 通过房间 HDMI 输入播放的声音，要系统支持 HDMI 音频才有；每台电脑都没声音时，需要技术员检查设置。\n一般属于操作问题，用户自己可以解决。",
+      "en": "Screen sharing is designed for documents and slides by default, not for video:\n• By default it sends only a few frames per second and no computer sound, so video looks choppy and silent. The options above switch it to a smooth mode.\n• Video mode needs a lot of upload speed, so weak Wi-Fi or a busy office network can still make it choppy.\n• Letting the room microphone pick up the laptop speaker sounds very poor at the far end; always use the share-sound option.\n• Sound played through the room HDMI input only works if the system supports HDMI audio. If no laptop gives sound that way, a technician should check the settings.\nThis is normally a how-to issue that users can fix themselves."
+    }
+  },
+  {
+    "id": "vc-ptz-camera-wrong-direction",
+    "title": { "zh": "镜头对着别处、不会转或预设位不见", "en": "Camera pointing the wrong way, stuck, or preset lost" },
+    "match": ["镜头歪了", "对着墙", "对着天花板", "镜头不会转", "镜头转不了", "预设位", "镜头卡住", "camera wrong direction", "camera pointing wrong", "ptz not moving", "camera preset", "camera stuck", "camera facing wall", "camera control not working"],
+    "reply": {
+      "zh": "摄像头对着墙或天花板、不会转，或原本的预设位置不见了：\n1) 在面板按摄像头图标 / Camera Control，用方向键和 +/- 调回来。\n2) 有「Home」或「Preset 1」就按一下，镜头会回到默认位置。\n3) 开着「自动取景 Auto framing」时方向键通常没作用，先关掉或改成手动。\n4) 确认不是对方在遥控你们的镜头（远端摄像头控制），可以在面板上停止。\n5) 整个系统关电 30 秒再开，镜头会自己归位。请不要用手扳镜头，也不要爬高去调。\n6) 位置调好后，在预设按钮上长按几秒保存（多数系统如此）。",
+      "en": "Camera is pointing at the wall or ceiling, will not move, or the saved preset is gone:\n1) Tap the camera icon / Camera Control on the console and use the arrows and +/- to bring it back.\n2) If there is a Home or Preset 1 button, press it; the camera returns to its default position.\n3) While Auto framing is on, the arrows usually do nothing. Turn it off or switch to manual first.\n4) Check that the far end is not controlling your camera (far-end camera control); you can stop it on the console.\n5) Power the whole system off for 30 seconds and on again; the camera re-centres itself. Do not turn the camera head by hand or climb up to reach it.\n6) When the view is right, press and hold the preset button for a few seconds to save it (this works on most systems)."
+    },
+    "explain": {
+      "zh": "电动云台（PTZ）摄像头靠马达转动，位置是软件记住的：\n• 断电、软件更新或有人长按了预设键，预设位置会被覆盖或清掉，重新保存即可。\n• 自动取景和手动控制不能同时用，这是最常见的「按了没反应」。\n• 镜头开机时不会自己转动归位、转动有异响、或转到一半停住，可能是马达或控制线故障，需要技术员。\n• 固定镜头的一体机（video bar）只能数字缩放，本来就不会真的转。\n用手硬扳会弄坏齿轮。吊装或高处的摄像头请留给技术员处理。",
+      "en": "A motorised (PTZ) camera is moved by motors and its positions are stored in software:\n• A power cut, a software update or someone holding a preset button can overwrite or clear the preset. Just save it again.\n• Auto framing and manual control cannot work together; this is the most common reason the buttons seem dead.\n• If the camera does not do its start-up movement, makes grinding noises or stops halfway, a motor or control cable may have failed and a technician is needed.\n• All-in-one video bars with a fixed lens only zoom digitally; they never physically turn.\nForcing the head by hand can damage the gears. Leave ceiling-mounted or high cameras to a technician."
+    }
+  },
+  {
+    "id": "vc-autoframing-jumping",
+    "title": { "zh": "自动取景乱跳或拍错人", "en": "Auto-framing keeps jumping or frames the wrong person" },
+    "match": ["自动取景", "自动追踪", "镜头乱跳", "镜头一直动", "拍错人", "跟错人", "一直缩放", "autoframing", "auto framing", "speaker tracking", "camera keeps moving", "camera keeps zooming", "frames wrong person", "camera jumping"],
+    "reply": {
+      "zh": "自动取景 / 发言人追踪一直跳来跳去，或拍到不对的人：\n1) 在面板的摄像头设置里，把模式从「Speaker tracking 发言人追踪」改成「Group framing 群体取景」，画面会稳定很多。\n2) 还是乱跳：直接关掉自动取景，改用手动或预设位置。\n3) 拉上玻璃墙的窗帘或百叶，关掉房里正在显示人像的电视或手提电脑屏幕。\n4) 请大家坐在镜头看得到的范围内，不要坐在镜头正下方或太靠边。\n5) 多人同时讲话，或有翻纸、敲键盘的声音时，追踪会来回切换，属于正常现象。\n6) 设置改了没变化：重启系统一次再设。",
+      "en": "Auto-framing / speaker tracking keeps jumping around or frames the wrong person:\n1) In the camera settings on the console, change the mode from Speaker tracking to Group framing. The picture becomes much steadier.\n2) Still jumping: turn auto-framing off and use manual control or a preset.\n3) Close the blinds on glass walls, and turn off any TV or laptop screen in the room that is showing people.\n4) Ask everyone to sit inside the camera's view, not right under the camera or at the far edges.\n5) When several people talk at once, or there is paper rustling or loud typing, tracking switches back and forth. That is normal.\n6) If the setting does not seem to change anything, restart the system once and set it again."
+    },
+    "explain": {
+      "zh": "自动取景靠人脸和人形识别，发言人追踪还会用麦克风判断声音方向：\n• 玻璃墙外走过的人、玻璃和白板的反光、墙上的人像海报、电视里的人，都会被当成与会者。\n• 回音大的房间里声音方向判断不准，镜头会转向墙壁或空位。\n• 各品牌叫法不同，例如 Logitech RightSight、Poly DirectorAI、Neat Symmetry，功能大同小异。\n• 一直偏向同一个方向，可能要重新校准或更新固件，这由技术员处理。\n这不是硬件坏了。小会议室用群体取景或固定画面通常最稳。",
+      "en": "Auto-framing works by detecting faces and bodies; speaker tracking also uses the microphones to judge where the voice comes from:\n• People walking past a glass wall, reflections in glass or a whiteboard, posters with faces and people on a TV are all treated as participants.\n• In a room with a lot of echo the voice direction is judged wrongly, so the camera turns to a wall or an empty seat.\n• Brands use different names, for example Logitech RightSight, Poly DirectorAI and Neat Symmetry; they work in a similar way.\n• If it always frames off to the same side, it may need recalibration or a firmware update by a technician.\nThe hardware is not broken. In small rooms, group framing or a fixed view is usually the most stable."
+    }
+  },
+  {
+    "id": "vc-camera-dark-backlight",
+    "title": { "zh": "镜头画面太暗太亮或人脸背光", "en": "Camera image too dark, too bright, or faces silhouetted" },
+    "match": ["镜头太暗", "镜头太亮", "脸很黑", "脸黑黑", "脸太暗", "逆光", "背着窗", "看不清脸", "video too dark", "camera too dark", "camera too bright", "faces dark", "silhouette", "backlit"],
+    "reply": {
+      "zh": "摄像头画面太暗、太亮，或背着窗的人变成黑影：\n1) 把房间的灯全开；人的背后有窗就拉上窗帘或百叶，这是最有效的一步。\n2) 让人坐到面向窗或侧对窗的位置，不要背对窗户。\n3) 面板的摄像头设置里如果有「背光补偿 BLC / HDR / WDR」，把它打开。\n4) 有「亮度 Brightness / 曝光 Exposure」就调高或调低一两格；调乱了可以选「恢复默认」。\n5) 画面太亮发白：关掉直射脸部的射灯，或把亮度/曝光调低。\n6) 镜头上的保护膜要撕掉；镜头脏了用干的软布轻擦（伸手可及才擦）。",
+      "en": "Camera picture is too dark or too bright, or people in front of a window look like shadows:\n1) Turn on all the room lights. If there is a window behind the people, close the curtains or blinds. This is the most effective step.\n2) Seat people facing the window or side-on to it, not with their backs to it.\n3) If the camera settings on the console have Backlight compensation (BLC) / HDR / WDR, turn it on.\n4) If there is Brightness or Exposure, move it one or two steps up or down. If it gets worse, choose Restore default.\n5) Picture too bright and washed out: switch off spotlights that shine straight on faces, or lower brightness / exposure.\n6) Peel off any protective film on the lens, and wipe a dirty lens gently with a dry soft cloth (only if it is within easy reach)."
+    },
+    "explain": {
+      "zh": "摄像头是按整个画面的平均亮度来曝光的：\n• 背后有大窗户时，镜头为了应付窗外的强光把画面压暗，人脸就成了剪影。上午和下午的日照不同，所以会「有时好有时坏」。\n• 灯光不足时画面会又暗又有噪点，对方看起来模糊。\n• 一体机通常没有太多手动调节，改善光线比改设置有效。\n• 灯都开了、窗帘也拉上了还是很暗，可能是设置被改过或摄像头故障，需要技术员检查。\n多数情况靠窗帘和灯光就能改善。长期方案（加装灯光、调整摄像头位置）可以请技术员评估。",
+      "en": "A camera sets its exposure from the average brightness of the whole picture:\n• With a big window behind people, the camera darkens the picture to cope with the bright outside light, and faces become silhouettes. Sunlight changes between morning and afternoon, which is why it is sometimes fine and sometimes bad.\n• In poor light the picture is dark and grainy, and looks blurry to the far end.\n• All-in-one bars usually have few manual controls, so improving the lighting works better than changing settings.\n• If the lights are on and the blinds are closed but it is still very dark, a setting may have been changed or the camera may be faulty; a technician should check.\nMost cases improve with blinds and lights. For a lasting fix (extra lighting or moving the camera), a technician can assess the room."
+    }
+  },
+  {
+    "id": "vc-camera-blurry",
+    "title": { "zh": "摄像头画面模糊、对不到焦", "en": "Camera image blurry or out of focus" },
+    "match": ["镜头模糊", "摄像头模糊", "镜头蒙蒙", "对不到焦", "镜头失焦", "镜头脏", "人很模糊", "camera blurry", "video blurry", "camera out of focus", "blurry video", "lens dirty", "camera not focusing", "we look blurry"],
+    "reply": {
+      "zh": "摄像头画面模糊或对不到焦：\n1) 先看房间屏幕上自己的画面（Self view）。自己看是清楚的、只有对方说模糊，是网络问题：接网线，暂停其他大流量下载。\n2) 自己看也模糊：新设备先撕掉镜头保护膜；用干的眼镜布轻擦镜头（伸手可及才擦，不要喷清洁剂）。\n3) 在面板把镜头拉远（Zoom out）到底。数字放大太多一定会糊。\n4) 把镜头拉近再拉远一次，让它重新对焦；有「Auto focus」就打开。\n5) 把房间的灯开亮，光线不足会又糊又有噪点。\n6) 重启系统一次。",
+      "en": "Camera picture is blurry or will not focus:\n1) Look at your own picture (self view) on the room screen. If it looks sharp there and only the far end says it is blurry, it is the network: use a network cable and pause big downloads.\n2) Blurry in self view too: on a new device peel off the lens protective film; wipe the lens gently with a dry glasses cloth (only if within easy reach, no cleaning spray).\n3) On the console, zoom the camera all the way out. Heavy digital zoom always looks soft.\n4) Zoom in and out once so it refocuses; turn on Auto focus if there is such an option.\n5) Turn the room lights up. Low light makes the picture soft and grainy.\n6) Restart the system once."
+    },
+    "explain": {
+      "zh": "模糊分两种，分清楚就好处理：\n• 只有对方看到模糊：网速不够时系统会自动降低画质，属于网络问题，不是摄像头坏。\n• 两边都模糊：镜头脏、保护膜没撕、数字放大过头、光线太暗，或对焦停在错误的距离。\n• 天气潮湿加上冷气直吹，镜头偶尔会起雾，过一阵会自己散。\n• 一直对不到焦，或画面一边清楚一边糊，可能是镜头或对焦马达故障，需要技术员。\n装在高处或天花板的摄像头请不要自己爬上去擦，交给技术员。",
+      "en": "There are two kinds of blur, and telling them apart makes it easy:\n• Only the far end sees blur: when the connection is too slow the system lowers picture quality automatically. That is a network issue, not a camera fault.\n• Both sides see blur: dirty lens, film still on, too much digital zoom, poor light, or focus stuck at the wrong distance.\n• In humid weather with cold air-conditioning blowing on it, the lens can occasionally fog up; it clears by itself after a while.\n• If it never focuses, or one side of the picture is sharp and the other soft, the lens or focus motor may be faulty and a technician is needed.\nDo not climb up to clean cameras mounted high up or on the ceiling; leave that to a technician."
+    }
+  },
+  {
+    "id": "vc-camera-upside-down",
+    "title": { "zh": "摄像头画面上下颠倒或左右相反", "en": "Camera image upside down or mirrored" },
+    "match": ["镜头倒了", "摄像头倒了", "镜头颠倒", "人是倒的", "镜头左右反", "字是反的", "自己是反的", "camera upside down", "video upside down", "camera mirrored", "video mirrored", "camera flipped", "mirror my video", "text is backwards"],
+    "reply": {
+      "zh": "摄像头画面上下颠倒，或左右相反（字是反的）：\n1) 只是自己看到左右相反？这通常只是「自己画面」的镜像效果，对方看到是正常的。先请对方确认再处理。\n2) 用电脑开会：Zoom 在 Settings > Video 取消「Mirror my video」，预览旁边还有「旋转 90°」按钮；Teams 在 Device settings 关掉「Mirror my video」。\n3) 会议室系统：在面板的摄像头/设备设置里找「Flip / Invert / 倒装 / Ceiling mount」，切换一次。\n4) 找不到，或要管理员密码：重启系统一次，有些机型会自动侦测方向。\n5) 仍然颠倒：拍一张屏幕照片，需要技术员进入管理设置更改。",
+      "en": "Camera picture is upside down, or mirrored (text reads backwards):\n1) Is it only your own view that looks mirrored? That is usually just the self-view mirror effect; the far end sees you correctly. Ask them to confirm before changing anything.\n2) Meeting on a laptop: in Zoom go to Settings > Video and untick Mirror my video (there is also a Rotate 90° button next to the preview); in Teams turn off Mirror my video under Device settings.\n3) Room system: in the camera / device settings on the console look for Flip / Invert / Ceiling mount and switch it once.\n4) Cannot find it, or it asks for an admin passcode: restart the system once. Some models detect their orientation automatically.\n5) Still upside down: take a photo of the screen. A technician needs to change it in the admin settings."
+    },
+    "explain": {
+      "zh": "这多数是设置问题，不是摄像头坏了：\n• 摄像头倒挂安装（例如装在电视下方或吊装）时，要在设置里开启「倒装 / 翻转」把画面转正。恢复出厂设置、更新软件或换新机后，这个设置可能被重置。\n• 会议软件默认把自己的画面做成镜像，像照镜子一样，所以您看到字是反的，对方看到是正的。\n• 外接 USB 摄像头被移动过或倒着放回去，也会出现颠倒。\n• 翻转设置通常在管理员菜单里，需要 IT 管理员或技术员。\n请不要自己去拆装或转动固定好的摄像头。",
+      "en": "This is nearly always a setting, not a broken camera:\n• A camera that is installed upside down (for example under the TV or hung from above) needs the Invert / Flip setting to turn the picture the right way. A factory reset, software update or replacement unit can reset it.\n• Meeting apps mirror your own view by default, like a mirror, so you see text backwards while the far end sees it correctly.\n• An external USB camera that was moved or put back upside down gives the same result.\n• The flip setting is usually in the admin menu, so it needs your IT admin or a technician.\nPlease do not remove or turn a fixed camera yourself."
+    }
+  },
+  {
+    "id": "vc-console-disconnected",
+    "title": { "zh": "桌面控制面板断线、要配对或黑屏", "en": "Room console / touch panel disconnected, unpaired or black" },
+    "match": ["面板断线", "面板黑屏", "平板黑屏", "面板配对", "面板要配对", "tap黑屏", "tap断线", "console disconnected", "tap is black", "tap not working", "logitech tap", "pair to room", "room controller", "console not responding"],
+    "reply": {
+      "zh": "会议桌上的控制面板（Logitech Tap、Poly TC8、Yealink CTP 等）显示断线、要求配对或黑屏：\n1) 先点一下屏幕或在面板前挥手，可能只是休眠。\n2) 检查面板底部/背后那条线（网线或 USB）有没有被扯松，两头插紧。\n3) 看主机或 video bar 的电源灯有没有亮；主机没开，面板一定显示断线。\n4) 把主机 / video bar 关电 30 秒再开，等 3 到 5 分钟，面板通常会自动重新连接。\n5) 面板完全没电：它多半由网线供电（PoE），请 IT 检查那个网络端口。\n6) 出现配对码或要求登录：拍照发给 IT 管理员或我们，这一步需要管理员账号。\n7) 先开会：用手提电脑加入，接会议室屏幕。",
+      "en": "The touch console on the table (Logitech Tap, Poly TC8, Yealink CTP and similar) shows disconnected, asks to pair, or is black:\n1) Tap the screen or wave in front of it first; it may only be asleep.\n2) Check the cable at the bottom / back of the console (network or USB) has not been pulled loose. Push in both ends.\n3) Check the power light on the room PC or video bar. If that is off, the console will always show disconnected.\n4) Power the room PC / video bar off for 30 seconds and on again, then wait 3 to 5 minutes. The console usually reconnects by itself.\n5) Console completely dead: it is usually powered through the network cable (PoE). Ask IT to check that network port.\n6) Pairing code or sign-in screen: send a photo to your IT admin or us. This step needs the admin account.\n7) To start the meeting: join from a laptop connected to the room screen."
+    },
+    "explain": {
+      "zh": "控制面板只是「遥控器」，真正开会的是主机或 video bar：\n• 面板用 USB 线或网络连到主机。线松了、主机死机、网络交换机重启，都会显示断线。\n• 走网络的面板靠 PoE 供电，交换机端口或网线有问题时会整个黑屏。\n• 更新后，或换了路由器、改了网络设置后，面板可能「忘记」配对，需要管理员重新配对。\n• 屏幕有画面但触摸没反应，重启一次；仍没反应可能是面板故障。\n插紧线和重启用户可以自己做；重新配对、网络端口和更换面板要 IT 或技术员。",
+      "en": "The console is only the remote control; the room PC or video bar runs the meeting:\n• The console links to it by USB cable or over the network. A loose cable, a frozen PC or a network switch restart all show as disconnected.\n• Network consoles are powered by PoE, so a faulty switch port or cable makes the screen go completely black.\n• After an update, or after a router or network change, the console can lose its pairing and an admin must pair it again.\n• Picture but no response to touch: restart once. If still dead, the console may be faulty.\nUsers can reseat cables and restart; re-pairing, network ports and console replacement need IT or a technician."
+    }
+  },
+  {
+    "id": "vc-stuck-updating",
+    "title": { "zh": "系统卡在更新画面或一直重启", "en": "System stuck on updating screen or keeps rebooting" },
+    "match": ["卡在更新", "一直更新", "更新很久", "更新卡住", "一直重启", "重启循环", "不断重开", "stuck on update", "stuck updating", "keeps rebooting", "reboot loop", "keeps restarting", "update taking long", "updating screen"],
+    "reply": {
+      "zh": "会议室系统停在「更新中 / Updating」画面，或不断自己重启：\n1) 更新中请先不要拔电。一般 15 到 30 分钟会完成，中途会自己重启一两次。\n2) 确认网线插着、网络正常；没有网络时更新会卡住。\n3) 超过 45 分钟进度完全没动：关电 30 秒再开，只做一次。\n4) 重开后继续更新是正常的，等它完成。\n5) 仍然卡住或一直循环重启：不要反复拔电，拍下屏幕上的文字或错误代码。\n6) 先开会：用手提电脑加入会议，HDMI 接会议室屏幕；需要时用电脑自己的摄像头和麦克风。",
+      "en": "Room system is stuck on an Updating screen, or keeps restarting by itself:\n1) Do not pull the power during an update. It normally finishes in 15 to 30 minutes and restarts itself once or twice.\n2) Check the network cable is in and the network is working. Without a network the update stalls.\n3) If the progress has not moved at all for more than 45 minutes, power off for 30 seconds and on again. Do this once only.\n4) It is normal for the update to continue after the restart. Let it finish.\n5) Still stuck or restarting in a loop: stop pulling the power and take a photo of the text or error code on the screen.\n6) To start the meeting: join from a laptop with HDMI to the room screen, using the laptop's own camera and microphone if needed."
+    },
+    "explain": {
+      "zh": "会议室系统会自动下载更新，通常排在半夜，偶尔会在白天碰上：\n• 大版本更新时间较长，期间屏幕和面板可能黑一阵，看起来像坏了。\n• 更新中途断电或断网，是造成卡住和循环重启最常见的原因。\n• 主机储存空间不足，或公司防火墙挡住更新服务器，也会让更新一再失败。\n• 面板和主机的版本不一致时，面板会显示断线，等两边都更新完就恢复。\n等待和重启一次用户可以自己做；反复失败需要 IT 管理员或技术员重新安装或恢复系统，请不要自己尝试重置。",
+      "en": "Room systems download updates automatically, usually overnight, but sometimes one lands during the day:\n• Major updates take longer, and the screen and console may go black for a while, which looks like a fault.\n• Losing power or network halfway through is the most common cause of a stuck update or reboot loop.\n• Low storage on the unit, or a company firewall blocking the update servers, can make updates fail again and again.\n• When the console and the main unit are on different versions, the console shows disconnected until both finish updating.\nUsers can wait and restart once. Repeated failures need your IT admin or a technician to reinstall or recover the system; please do not try a reset yourself."
+    }
+  },
+  {
+    "id": "vc-teams-room-signed-out",
+    "title": { "zh": "Teams房间登出或要密码", "en": "Teams Room signed out / asks for password or MFA" },
+    "match": ["teams登出", "登出了", "要求登录", "重新登录", "登录不了", "登不进", "密码过期", "signed out", "can't sign in", "cant sign in", "cannot sign in", "mfa", "sign in failed", "password expired"],
+    "reply": {
+      "zh": "Teams Rooms 显示已登出、要求输入密码或 MFA 验证，或显示「Can't sign in」：\n1) 先确认网络：网线有没有插好，其他设备能不能上网。没有网络也会显示登录失败。\n2) 把系统重启一次（关电 30 秒再开），等 5 分钟看会不会自动登录。\n3) 不要用自己的个人账号登录会议室设备，也不要在聊天里发送任何密码或验证码。\n4) 拍下屏幕上的错误信息和代码，通知公司的 IT 管理员，并说明是哪一间房。\n5) 先开会：用手提电脑加入会议，HDMI 接会议室屏幕；可行的话用 USB 接上房间的摄像头和喇叭（BYOD）。",
+      "en": "Teams Room shows signed out, asks for a password or MFA code, or says Can't sign in:\n1) Check the network first: is the network cable in, and can other devices get online? No network also shows as a sign-in failure.\n2) Restart the system once (power off 30 seconds, then on) and wait 5 minutes to see if it signs in by itself.\n3) Do not sign in to the room device with your personal account, and do not send any password or verification code in chat.\n4) Take a photo of the error message and code on the screen, tell your company IT admin, and say which room it is.\n5) To start the meeting: join from a laptop with HDMI to the room screen and, if available, USB to the room camera and speaker (BYOD)."
+    },
+    "explain": {
+      "zh": "会议室设备是用一个专用的「会议室账号」登录的，问题几乎都在账号这一端：\n• 账号密码过期或被更改，设备就会被登出。\n• 公司开启了 MFA / 条件访问等安全策略，而会议室账号没有被排除，设备无法自己完成验证。\n• Teams Rooms 授权过期或没有分配。\n• 设备的日期时间不对，或防火墙挡住登录服务器。\n这些都要在 Microsoft 365 管理后台处理，属于 IT 管理员的工作，用户无法在面板上解决。我们的技术员可以配合 IT 在现场重新登录和测试，但密码只应由管理员亲自输入。",
+      "en": "The room device signs in with a dedicated room account, and the problem is almost always on the account side:\n• The account password expired or was changed, so the device was signed out.\n• The company turned on MFA / conditional access and the room account was not excluded, so the device cannot complete the check by itself.\n• The Teams Rooms licence expired or is not assigned.\n• The device date and time are wrong, or a firewall blocks the sign-in servers.\nAll of these are handled in the Microsoft 365 admin portal by your IT admin; users cannot fix them on the console. Our technician can work with IT on site to sign in again and test, but only the admin should type the password."
+    }
+  },
+  {
+    "id": "vc-zoom-room-activation-code",
+    "title": { "zh": "Zoom房间要激活码/授权错误", "en": "Zoom Room asks for activation code / licence error" },
+    "match": ["激活码", "启动码", "zoom登出", "授权错误", "授权过期", "没有授权", "授权到期", "activation code", "enter activation code", "zoom room not linked", "licence error", "license error", "license expired", "zoom rooms sign in"],
+    "reply": {
+      "zh": "Zoom Rooms 屏幕要求输入激活码（Activation Code）、显示未连接房间，或出现 License 错误：\n1) 确认网络正常：网线插好，同一网络的电脑能上网。\n2) 重启系统一次（关电 30 秒再开），等几分钟看会不会回到正常主画面。\n3) 还在激活/登录画面：拍下整个屏幕，包括显示的代码或错误信息。\n4) 把照片发给公司的 Zoom 管理员或 IT。激活码要由管理员从 Zoom 后台（Room Management）取得并输入。\n5) 不要用自己的 Zoom 账号登录，也不要在聊天里发送密码。\n6) 先开会：用手提电脑开 Zoom，HDMI 接会议室屏幕。",
+      "en": "Zoom Room screen asks for an Activation Code, says it is not linked to a room, or shows a licence error:\n1) Check the network: cable plugged in, and a computer on the same network can get online.\n2) Restart the system once (power off 30 seconds, then on) and wait a few minutes to see if the normal home screen returns.\n3) Still on the activation / sign-in screen: take a photo of the whole screen, including any code or error message.\n4) Send the photo to your company Zoom admin or IT. The activation code has to be taken from the Zoom admin portal (Room Management) and entered by the admin.\n5) Do not sign in with your own Zoom account, and do not send passwords in chat.\n6) To start the meeting: run Zoom on a laptop with HDMI to the room screen."
+    },
+    "explain": {
+      "zh": "Zoom Rooms 要「绑定」到公司 Zoom 账号里的某一间房才可以用：\n• 设备被重置、大更新之后，或有人在面板上按了 Sign out，就会回到激活画面。\n• 管理员在后台删除或更改了这间房，原来的绑定就失效。\n• Zoom Rooms 授权（License）到期、数量不够或被移到别的房间，会显示授权错误。\n• 面板和主机要分别配对到同一间房，只激活其中一个也不能用。\n这些都在 Zoom 管理后台处理，属于 IT 管理员的工作。我们的技术员可以到场协助输入和测试，但账号和授权必须由贵公司的管理员提供。",
+      "en": "A Zoom Room must be linked to one room in your company's Zoom account before it works:\n• After a device reset, a major update, or someone pressing Sign out on the console, it goes back to the activation screen.\n• If an admin deleted or changed the room in the portal, the old link no longer works.\n• If the Zoom Rooms licence expired, ran short or was moved to another room, a licence error appears.\n• The console and the main unit each have to be paired to the same room; activating only one is not enough.\nAll of this is done in the Zoom admin portal by your IT admin. Our technician can help on site with entering the code and testing, but the account and licence must come from your company's admin."
+    }
+  },
+  {
+    "id": "vc-dual-display-wrong-screen",
+    "title": { "zh": "双屏内容和人像位置错或一边黑", "en": "Dual screens: content/people on wrong side or one blank" },
+    "match": ["双屏", "两台电视", "第二台电视", "另一边黑", "一边没画面", "屏幕对调", "左右屏", "dual display", "dual screen", "second screen blank", "second tv blank", "one screen blank", "swap screens", "screens swapped"],
+    "reply": {
+      "zh": "双屏会议室：内容和人像显示在不对的屏幕，或其中一个屏幕没画面：\n1) 没画面的那台电视：确认电源开着，用遥控器把 Input 切到正确的 HDMI。\n2) 没人分享内容时，第二个屏幕空白或只有标志是正常的，有人分享后才会用到。\n3) 在面板按「View / Layout / Change View」换一个布局；部分版本有「Swap screens / 对调屏幕」。\n4) 重启系统一次，让它重新侦测两个屏幕；先开电视，再开主机。\n5) 重启后仍只认到一个屏幕，或左右永远相反：需要技术员在管理设置里调整，请不要自己去拔换电视后面的线。",
+      "en": "Dual-screen room: content and people are on the wrong screens, or one screen is blank:\n1) Blank TV: check it is switched on and use its remote to set Input to the correct HDMI.\n2) When nobody is sharing content, a blank second screen or one showing only a logo is normal. It is used once someone shares.\n3) Press View / Layout / Change View on the console and try another layout. Some versions have Swap screens.\n4) Restart the system once so it detects both screens again. Switch the TVs on first, then the main unit.\n5) If it still detects only one screen after a restart, or left and right are always reversed, a technician needs to adjust the admin settings. Please do not swap the cables behind the TVs yourself."
+    },
+    "explain": {
+      "zh": "双屏房间里，由系统决定哪个屏幕放人、哪个放内容：\n• 电视比主机晚开、电视进入省电或自己换了输入，系统就以为只有一个屏幕，重启一次通常恢复。\n• 「双屏模式」是管理设置里的一个开关，更新或重置后可能被关掉，变成两边一样或一边黑。\n• 有人把两条 HDMI 线对调过，左右就会相反。\n• 以访客方式加入别的平台的会议时，多数只能用一个屏幕，这是功能限制。\n• 其中一台无论如何都没画面，可能是 HDMI 线、延长器或电视故障。\n遥控器和布局用户可以自己调；设置和线路问题由技术员处理。",
+      "en": "In a dual-screen room the system decides which screen shows people and which shows content:\n• If a TV switched on later than the main unit, went into power saving or changed input by itself, the system thinks there is only one screen. A restart usually fixes it.\n• Dual-screen mode is a switch in the admin settings; an update or reset can turn it off, giving the same picture on both or one black screen.\n• If someone swapped the two HDMI cables, left and right are reversed.\n• When joining another platform's meeting as a guest, usually only one screen is used. That is a feature limit.\n• If one screen never shows anything, the HDMI cable, extender or TV may be faulty.\nUsers can handle the remote and layouts; settings and cabling are for a technician."
+    }
+  },
+  {
+    "id": "vc-poor-call-quality",
+    "title": { "zh": "画面定格、声音断续、网络不稳", "en": "Frozen video, robotic audio, unstable network warning" },
+    "match": ["网络不稳", "画面定格", "画面一直卡", "声音像机器人", "机器人声", "很lag", "视频很卡", "unstable network", "robotic audio", "robotic voice", "video freezing", "video frozen", "very laggy", "poor connection"],
+    "reply": {
+      "zh": "会议中画面定格、声音断续像机器人，或显示「网络不稳定」：\n1) 先分清是谁的问题：所有人都说你们卡，是你们这边；只有一位远端卡，是他那边的网络。\n2) 请办公室里的人暂停大文件下载、云端备份和影片串流。\n3) 看一下会议系统的网线有没有松；用电脑开会的，接网线或移到靠近 Wi-Fi 的位置。\n4) 暂时关掉自己的视频（Stop Video），只留声音，声音会马上好转。\n5) 对方说只是你们的画面定格、声音正常：把视频停掉再开一次；不行就重启系统。\n6) 退出会议再重新加入一次。\n7) 仍然很差：用手机拨入会议的电话号码听声音，或改用连手机热点的电脑。",
+      "en": "Video freezes, audio breaks up or sounds robotic, or an unstable network warning appears:\n1) Work out whose side it is: if everyone says your room is breaking up, it is your side; if only one remote person is bad, it is their network.\n2) Ask people in the office to pause large downloads, cloud backups and video streaming.\n3) Check the room system's network cable is not loose. On a laptop, plug in a network cable or move closer to the Wi-Fi.\n4) Turn your video off for a while (Stop Video) and keep audio only. The sound improves straight away.\n5) Far end says only your picture is frozen but sound is fine: stop the video and start it again; if not, restart the system.\n6) Leave the meeting and join again.\n7) Still bad: dial in to the meeting's phone number for audio, or use a laptop on a mobile hotspot."
+    },
+    "explain": {
+      "zh": "视频会议对网络的「稳定」比对「速度」更敏感：\n• 上传带宽不够或被其他人占用时，系统先牺牲画面（模糊、定格），再到声音（断续、机器人声）。\n• Wi-Fi 干扰、网线或交换机端口有问题，会造成丢包，测速看起来却正常。\n• 只在某些时段卡，多半是那段时间办公室用网高峰或正在跑备份。\n• 只有这间房卡、别的房正常，问题在这间房的线路或设备。\n关视频、重新加入用户可以自己做。经常发生就需要 IT 或技术员检查：改用有线、为会议流量设置优先级（QoS），或检查宽带线路。",
+      "en": "Video meetings care more about a steady connection than a fast one:\n• When upload bandwidth runs short or others are using it, the system gives up picture first (blur, freezing) and then sound (breaking up, robotic voice).\n• Wi-Fi interference or a faulty cable or switch port causes packet loss, even when a speed test looks normal.\n• If it only happens at certain times, the office network is probably busy or a backup is running then.\n• If only this room is bad and other rooms are fine, the fault is in this room's cabling or equipment.\nUsers can stop video and rejoin. If it happens often, IT or a technician should check: move to a wired connection, give meeting traffic priority (QoS), or check the broadband line."
+    }
+  },
+  {
+    "id": "vc-gallery-layout-tiny",
+    "title": { "zh": "远端的人太小、想换布局或固定", "en": "Remote people look tiny / change layout, pin or spotlight" },
+    "match": ["人太小", "人很小", "换布局", "画面布局", "固定画面", "放大对方", "只看到讲话的人", "gallery view", "speaker view", "change layout", "people too small", "pin participant", "pin someone", "faces too small"],
+    "reply": {
+      "zh": "屏幕上远端的人太小，或想换成画廊/发言人画面、固定某个人：\n1) 会议中在面板按「View / Layout / Change View」。\n2) 想看到所有人选 Gallery（画廊）；想把正在讲话的人放大选 Speaker（发言人）。\n3) 有人分享内容时人像会自动缩小。可选「内容和人像并排」之类的布局，或请对方暂停分享。\n4) 固定某个人：在面板打开 Participants（参与者），点那个人的名字，选 Pin（只影响本房间）或 Spotlight（所有人都看到，需要主持人权限）。\n5) 把自己房间的画面（Self view）隐藏或缩小，腾出位置。\n6) 布局选项没出现：退出再重新加入会议。",
+      "en": "Remote people look tiny on the screen, or you want gallery / speaker view or to pin someone:\n1) During the meeting press View / Layout / Change View on the console.\n2) Choose Gallery to see everyone, or Speaker to make the person talking large.\n3) People shrink automatically when someone shares content. Choose a layout with content and people side by side, or ask the presenter to pause sharing.\n4) To fix one person in place: open Participants on the console, tap their name and choose Pin (this room only) or Spotlight (everyone sees it; needs host rights).\n5) Hide or shrink your own room's picture (self view) to free up space.\n6) Layout options not showing: leave the meeting and join again."
+    },
+    "explain": {
+      "zh": "这是画面布局的选择，不是故障：\n• 参与人数越多，画廊里每一格就越小；单屏房间在分享内容时，人像只剩一排小格。\n• 各平台叫法不同：Zoom Rooms 是 Change View（Gallery、Speaker、Thumbnail 等），Teams Rooms 是 View（Gallery、Large gallery、Together、Front row 等），不同版本会有差别。\n• 加入别的平台的会议时，可选的布局会少很多。\n• 布局在每次会议开始时会回到默认值；想改默认布局要管理员在后台设置。\n• 如果是屏幕本身太小、后排看不清，那是屏幕尺寸的问题，可以请技术员评估加大或加第二个屏幕。",
+      "en": "This is a layout choice, not a fault:\n• The more participants, the smaller each tile in the gallery. In a single-screen room, people shrink to one row of small tiles while content is shared.\n• Names differ by platform: Zoom Rooms uses Change View (Gallery, Speaker, Thumbnail and so on); Teams Rooms uses View (Gallery, Large gallery, Together, Front row and so on). Versions vary.\n• When joining another platform's meeting, far fewer layouts are offered.\n• The layout returns to the default at the start of every meeting. Changing the default needs an admin setting.\n• If the screen itself feels too small for the back row, that is a screen size matter; a technician can assess a larger or second screen."
+    }
+  },
+  {
+    "id": "vc-call-external-sip",
+    "title": { "zh": "拨不出电话或SIP/H.323设备", "en": "Cannot call a phone number or a SIP / H.323 room system" },
+    "match": ["拨电话", "打外线", "拨号盘", "拨不出去", "用ip拨", "视讯终端", "旧视讯设备", "sip", "h.323", "h323", "dial out", "call phone number", "dial pad missing", "call by ip"],
+    "reply": {
+      "zh": "从会议室系统拨不出电话号码，或呼叫不到对方的 SIP / H.323 视讯设备（旧款 Polycom、Cisco 等）：\n1) 看面板有没有「Call / Phone / 拨号盘」。没有，表示这间房没有开通电话功能，不是坏了。\n2) 拨电话：号码前加国家码，例如 +65 或 +60，再试一次。\n3) 呼叫视讯设备：先进入一个会议，在「Invite / 邀请」里找「Room System / SIP / H.323」，输入对方的 IP 地址或 SIP 地址（样子像 name@domain）。\n4) 找不到这个选项，表示公司没有相关授权，要请 IT 管理员确认。\n5) 最快的办法：把会议链接发给对方，请对方用电脑、手机或他们设备上的「加入会议」功能进来。\n6) 对方只能用电话：把邀请里的拨入号码和会议 ID 给他。",
+      "en": "Cannot call a phone number from the room system, or cannot reach a SIP / H.323 video unit (older Polycom, Cisco and similar):\n1) Look for Call / Phone / a dial pad on the console. If there is none, phone calling is not enabled for this room; nothing is broken.\n2) Phone call: put the country code in front, for example +65 or +60, and try again.\n3) Video unit: join a meeting first, then under Invite look for Room System / SIP / H.323 and enter the other side's IP address or SIP address (it looks like name@domain).\n4) If that option is not there, your company does not have the licence for it; ask your IT admin to confirm.\n5) Fastest way: send the meeting link and ask the other side to join from a computer, a phone, or the join-meeting function on their device.\n6) If they can only use a phone, give them the dial-in number and meeting ID from the invite."
+    },
+    "explain": {
+      "zh": "能不能拨外线和旧式视讯设备，取决于授权，不取决于硬件：\n• 拨电话号码需要电话方案（例如 Zoom Phone、Teams Phone 或会议拨出功能）。\n• 呼叫 SIP / H.323 设备需要附加服务：Zoom 是 Conference Room Connector，Teams 是 Cloud Video Interop（CVI）；Webex 设备本身支持较多。\n• 公司防火墙也可能挡住这类呼叫，表现为拨得通但没画面，或几秒就断。\n• 对方设备很旧时，可能只支持较低画质或不支持内容分享。\n是否开通这些服务由贵公司决定；IT 管理员负责设置，我们的技术员可以协助测试对接。日常开会建议一律用会议链接，最省事。",
+      "en": "Calling phone numbers and older video units depends on licences, not on the hardware:\n• Calling a phone number needs a calling plan (for example Zoom Phone, Teams Phone or a meeting dial-out feature).\n• Calling SIP / H.323 units needs an add-on service: Conference Room Connector for Zoom, or Cloud Video Interop (CVI) for Teams. Webex devices support more of this natively.\n• A company firewall can also block these calls; the call connects but has no picture or drops after a few seconds.\n• Very old units may only manage lower picture quality or no content sharing.\nWhether to enable these services is your company's decision; the IT admin sets them up and our technician can help test the connection. For everyday meetings, a meeting link is the simplest way."
+    }
+  },
+  {
+    "id": "vc-recording-missing",
+    "title": { "zh": "找不到会议录影或房间不能录", "en": "Where is the recording / cannot record from the room" },
+    "match": ["录影在哪", "录像在哪", "找不到录影", "找不到录像", "不能录影", "不能录制", "没有录影按钮", "where is the recording", "cannot record", "record button missing", "find recording", "recording link", "start recording", "meeting recording"],
+    "reply": {
+      "zh": "找不到会议录影，或在会议室面板上不能开始录影：\n1) 面板上有 Record 就按它；没有的话看下一步，很多房间的面板本身不能录。\n2) 请一位用自己电脑加入会议的同事（最好是主办人）按 Record：Zoom 在工具栏的 Record，Teams 在 More > Record and transcribe > Start recording。\n3) 录完要等：短会议几分钟，长会议可能要一小时以上才处理好。\n4) Zoom 云端录影：链接会电邮给会议主持人，或在 Zoom 网页的 Recordings 里。\n5) Teams 录影：链接在该会议的聊天（Chat / Recap）里，文件在主办人（或开始录影的人）的 OneDrive；频道会议在 SharePoint。\n6) 录在本机（Local）的文件，只在按录影的那台电脑的「文档 Documents」里。",
+      "en": "Cannot find the meeting recording, or cannot start recording from the room console:\n1) If the console has Record, press it. If not, go to the next step; many room consoles cannot record.\n2) Ask a colleague who joined on their own laptop (ideally the organiser) to press Record: in Zoom it is Record on the toolbar; in Teams it is More > Record and transcribe > Start recording.\n3) Wait after the meeting: a few minutes for a short meeting, possibly over an hour for a long one.\n4) Zoom cloud recording: the link is emailed to the meeting host, or is under Recordings on the Zoom website.\n5) Teams recording: the link is in that meeting's chat (Chat / Recap); the file is in the OneDrive of the organiser (or the person who started it); channel meetings go to SharePoint.\n6) Local recordings are only on the computer that pressed Record, in its Documents folder."
+    },
+    "explain": {
+      "zh": "录影是跟着「账号」走的，不是存放在会议室设备里：\n• 会议室设备通常只能做云端录影，而且要管理员在后台允许；没开就不会有 Record 按钮。\n• 外部公司主办的会议，只有对方的主持人或获得许可的人可以录，录影也归对方。\n• 在会议室面板上开的即时会议，录影链接会发到会议室账号的邮箱或当时输入的电邮，很容易没人看到。\n• 云端储存空间满了，或公司设了自动删除期限，录影会不见。\n• 没人按 Record 的会议，事后是无法找回的。\n找录影用户自己可以做；开通录影权限、找回过期的录影要找 IT 管理员。",
+      "en": "Recordings belong to an account; they are not stored inside the room device:\n• Room devices can usually do cloud recording only, and the admin has to allow it. If it is not allowed there is no Record button.\n• In a meeting hosted by an outside company, only their host or someone they permit can record, and the recording belongs to them.\n• For an instant meeting started on the room console, the link goes to the room account's mailbox or to the email typed in at the time, where it is easily missed.\n• If cloud storage is full or the company has an auto-delete period, recordings disappear.\n• A meeting where nobody pressed Record cannot be recovered afterwards.\nUsers can look for recordings themselves; enabling recording or recovering expired recordings needs your IT admin."
+    }
+  },
+  {
+    "id": "vc-byod-laptop-no-room-devices",
+    "title": { "zh": "BYOD：电脑认不到房间摄像头喇叭", "en": "BYOD: laptop does not see the room camera or speakerphone" },
+    "match": ["byod", "认不到房间", "选不到房间", "用自己电脑开会", "切换到电脑", "usb切换", "电脑模式", "laptop mode", "device mode", "usb switcher", "switch to laptop", "laptop cannot detect", "room camera not listed", "use own laptop"],
+    "reply": {
+      "zh": "用自己的手提电脑开会（BYOD），电脑里选不到会议室的摄像头、麦克风或喇叭：\n1) 桌上那条 USB 线要直接插电脑，不要经过扩展坞或 USB hub；USB-C 转接头换一个试。\n2) 桌上或面板上有「BYOD / Laptop / PC / Mode」按钮或 USB 切换器的，按一下切到电脑模式，等 10 到 20 秒。\n3) 有些房间还要插上 HDMI 线，或把电视 Input 切到电脑。\n4) 在 Zoom / Teams 的音视频设置里，摄像头、麦克风、喇叭三项都选会议室设备（名字通常是 video bar 的品牌型号）。\n5) 选项里还是没有：拔出 USB 等 10 秒再插，或重启会议 app。\n6) 公司电脑若禁止外接 USB 设备，要找 IT。\n7) 用完拔掉线或按回 Room 模式，房间才会恢复正常。",
+      "en": "Using your own laptop for the meeting (BYOD) but it does not list the room camera, microphone or speaker:\n1) Plug the table USB cable straight into the laptop, not through a dock or USB hub. Try another USB-C adapter.\n2) If the table or console has a BYOD / Laptop / PC / Mode button or a USB switcher, press it to switch to laptop mode and wait 10 to 20 seconds.\n3) Some rooms also need the HDMI cable plugged in, or the TV Input switched to the laptop.\n4) In the Zoom / Teams audio and video settings, set camera, microphone and speaker all to the room device (usually named after the video bar model).\n5) Still not listed: unplug the USB, wait 10 seconds and plug in again, or restart the meeting app.\n6) If your company laptop blocks external USB devices, ask IT.\n7) When finished, unplug or switch back to Room mode so the room works normally again."
+    },
+    "explain": {
+      "zh": "BYOD 模式是把会议室的摄像头和喇叭麦克风「借」给您的电脑当 USB 设备用：\n• 同一时间只能给一方用：不是会议室主机，就是电脑，所以要有切换的动作（自动或按按钮）。\n• 扩展坞、太长或质量差的 USB 线、只能充电的转接头，是最常见的认不到原因。\n• 另一个程序正在占用摄像头时，会议 app 里会显示黑画面。\n• 用完没切回去，下一位用房间系统的人就会「没有摄像头」。\n• 每台电脑都认不到，可能是桌面 USB 线、延长器或切换器故障，需要技术员检查，请不要拆桌面线盒。\n个别电脑的问题用户可以自己解决。",
+      "en": "BYOD mode lends the room camera and speakerphone to your laptop as USB devices:\n• Only one side can use them at a time, either the room system or the laptop, so something has to switch (automatically or by a button).\n• Docks, long or poor USB cables and charge-only adapters are the most common reasons the laptop sees nothing.\n• If another program is already using the camera, the meeting app shows a black picture.\n• If nobody switches back afterwards, the next person using the room system finds there is no camera.\n• If no laptop can see the devices, the table USB cable, extender or switcher may be faulty and a technician should check. Please do not open the table cable box.\nProblems with one laptop can be solved by the user."
+    }
+  },
+  {
+    "id": "vc-laptops-same-room-howling",
+    "title": { "zh": "多台电脑同房加入会议啸叫回音", "en": "Howling when laptops join the meeting in the same room" },
+    "match": ["多台电脑", "电脑同时加入", "电脑也加入", "同一间房", "同房加入", "房间音频", "电脑一加入就", "same room", "room audio", "companion mode", "two laptops", "second laptop", "join with laptop", "laptops howling"],
+    "reply": {
+      "zh": "会议室已经在会议里，同房的人再用手提电脑加入时出现啸叫或很重的回音：\n1) 马上请同房的每一台电脑和手机：麦克风静音，并把喇叭音量关到零。\n2) 最稳的做法：电脑先离开会议，重新加入时在加入前的画面选「不使用音频 / Don't use audio」；Teams 侦测到附近的房间时可以选「Room audio」。\n3) Zoom：加入后不要按 Join Audio；已经加入的，在 Audio 旁的小箭头选「Leave Computer Audio」。\n4) Google Meet 选「Companion mode」；Zoom 新版也有类似的 Companion 模式。\n5) 只是想分享屏幕：不必加入会议，用房间的 HDMI 线或面板上的 Share 功能。\n6) 仍然有回音：逐台检查，一定还有一台电脑的喇叭或麦克风开着。",
+      "en": "The room is already in the meeting and loud howling or heavy echo starts when people in the same room join on laptops:\n1) Straight away, on every laptop and phone in the room: mute the microphone and turn the speaker volume to zero.\n2) Most reliable: leave the meeting on the laptop and rejoin, choosing Don't use audio on the pre-join screen. Teams offers Room audio when it detects a room nearby.\n3) Zoom: do not press Join Audio; if already joined, click the small arrow next to Audio and choose Leave Computer Audio.\n4) Google Meet: choose Companion mode. Newer Zoom versions have a similar companion mode.\n5) Only want to share your screen: there is no need to join the meeting; use the room HDMI cable or the Share function on the console.\n6) Echo still there: check each laptop one by one. One of them still has its speaker or microphone on."
+    },
+    "explain": {
+      "zh": "这是声音在房间里绕圈：\n• 远端的声音从会议室喇叭播出，被同房电脑的麦克风收到，再送回会议；电脑喇叭的声音又被会议室麦克风收到，一圈一圈放大，就成了啸叫。\n• 只关麦克风不够，电脑的喇叭也要关，否则远端会听到自己的回音。\n• 同一个房间里，只应该有一套设备负责声音，就是会议室系统。\n• 戴耳机的人可以保留自己的声音，但麦克风仍要静音。\n• 自动的「Room audio / 靠近加入」功能需要电脑开蓝牙，有些公司没有启用。\n这是使用习惯问题，设备没有坏，用户自己可以解决，不需要技术员。",
+      "en": "The sound is going round in a loop inside the room:\n• The far end's voice comes out of the room speakers, is picked up by a laptop microphone and sent back into the meeting; the laptop speaker is then picked up by the room microphone. Each round gets louder until it howls.\n• Muting the microphone is not enough. The laptop speaker must be off too, or the far end hears their own echo.\n• In one room, only one set of equipment should handle sound: the room system.\n• Someone wearing a headset can keep their own sound, but their microphone must stay muted.\n• The automatic Room audio / proximity join feature needs Bluetooth on the laptop, and some companies have not enabled it.\nThis is a usage habit, not a fault. Users can fix it themselves; no technician is needed."
+    }
+  },
+  {
+    "id": "vc-scheduling-panel-wrong-status",
+    "title": { "zh": "门口预订屏显示的状态不对", "en": "Door scheduling panel shows the wrong room status" },
+    "match": ["门口的屏", "门口面板", "预订屏", "订房屏", "显示使用中", "显示空闲", "房间被占用", "scheduling panel", "booking panel", "door panel", "room shows busy", "room shows available", "room display wrong", "release the room"],
+    "reply": {
+      "zh": "会议室门口的预订屏显示「使用中」但房里没人，或显示「空闲」却已经有人订：\n1) 核对屏上显示的时间和日期对不对。时间错了，状态一定不准。\n2) 明明订了却显示空闲：检查订会议时有没有把这间会议室加入邀请，以及会议室有没有接受。\n3) 没人用却显示使用中：有人订了没来，或会议提早结束。屏上有「End / Release / 结束会议」按钮的，按它释放房间。\n4) 临时要用：在屏上按「Book now / Reserve / 立即预订」，选时长。\n5) 新订的会议要等 2 到 5 分钟才更新。\n6) 屏幕黑、卡住或显示离线：告诉 IT 或我们是哪一间房，并拍张照片。",
+      "en": "The booking panel outside the room shows In use when the room is empty, or Available when it is booked:\n1) Check the time and date shown on the panel. If they are wrong, the status will be wrong.\n2) Booked but showing Available: check the room itself was added to the meeting invite and that the room accepted.\n3) Empty but showing In use: someone booked and did not turn up, or the meeting ended early. Press End / Release / End meeting on the panel to free the room, if that button exists.\n4) Need the room right now: press Book now / Reserve on the panel and pick a duration.\n5) A new booking takes 2 to 5 minutes to appear.\n6) Panel black, frozen or showing offline: tell IT or us which room it is and send a photo."
+    },
+    "explain": {
+      "zh": "门口的预订屏只是把会议室的日历显示出来，它不知道房里实际有没有人：\n• 状态不对，绝大多数是日历的问题：订了没邀请会议室、被会议室拒绝、重复会议已经结束，或有人订了没出现。\n• 有些系统设有「签到 Check-in」，开始后若干分钟内没人签到就自动释放，所以会突然变回空闲。\n• 有人数或感应器的房间，感应器被挡住或位置不好时，人数会不准。\n• 预订屏多数由网线供电，黑屏或离线通常是网络端口、供电或账号登出的问题，需要 IT 或技术员。\n日历类问题用户自己可以解决；预订屏离线、时间错误和签到规则的调整，由管理员或技术员处理。",
+      "en": "The door panel only displays the room calendar; it does not know whether anyone is actually inside:\n• A wrong status is nearly always a calendar matter: the room was not invited, the room declined, a recurring series has ended, or someone booked and never showed up.\n• Some systems use Check-in: if nobody checks in within a set number of minutes after the start, the room is released automatically, so it can suddenly turn Available.\n• In rooms with people-count or occupancy sensors, a blocked or badly placed sensor gives wrong numbers.\n• Most panels are powered through the network cable. A black or offline panel usually means a network port, power or signed-out account problem, which needs IT or a technician.\nUsers can fix calendar issues themselves; offline panels, wrong time and check-in rules are for the admin or a technician."
+    }
+  },
+  {
+    "id": "vc-video-bar-power-status-light",
+    "title": { "zh": "一体机没电或指示灯颜色异常", "en": "Video bar has no power or an unusual status light" },
+    "match": ["一体机没电", "一体机不亮", "一体机开不了", "bar没电", "bar不亮", "bar的灯", "bar亮红灯", "bar no power", "bar not turning on", "bar wont turn on", "bar light blinking", "bar light flashing", "bar red light", "video bar light"],
+    "reply": {
+      "zh": "一体式 video bar（Poly Studio、Logitech Rally Bar、Yealink MeetingBar、Neat 等）完全不亮，或指示灯的颜色、闪烁不寻常：\n1) 墙上或桌下插座的开关有没有开？排插有没有开？这是最常见的原因。\n2) 看电源适配器（火牛）上的小灯有没有亮；电源线在适配器和机器两头插紧。\n3) 机器背面或侧面有电源键的，按一下，然后等 2 到 3 分钟开机。\n4) 灯在慢慢闪或像呼吸一样：多半是开机中或更新中，等 15 到 30 分钟，期间不要拔电。\n5) 亮红灯：在很多机型上只是「麦克风静音」，按一下静音键看会不会变。\n6) 换一个确定有电的插座试。\n7) 仍然不亮或灯一直异常：拍一段指示灯的短片，方便判断。",
+      "en": "All-in-one video bar (Poly Studio, Logitech Rally Bar, Yealink MeetingBar, Neat and similar) is completely dark, or the status light looks unusual:\n1) Is the switch on the wall or under-table socket on? Is the power strip on? This is the most common cause.\n2) Check the small light on the power adapter is lit, and push the power cable in firmly at both the adapter and the bar.\n3) If there is a power button on the back or side, press it once and wait 2 to 3 minutes.\n4) Light slowly blinking or pulsing: it is usually starting up or updating. Wait 15 to 30 minutes and do not pull the power.\n5) Red light: on many models this only means the microphone is muted. Press the mute button and see if it changes.\n6) Try another socket that you know is working.\n7) Still dark or the light stays odd: take a short video of the light so it can be identified."
+    },
+    "explain": {
+      "zh": "指示灯是机器的「状态语言」，各品牌颜色不同，以下是常见情况：\n• 完全不亮：电没有到机器，先怀疑插座、排插、电源适配器或电源线，最后才是机器本身。\n• 稳定亮（常见白色、蓝色或绿色）：正常待机或通话中。\n• 红色：通常是静音，不是故障。\n• 闪烁或呼吸：开机、更新或配对中；持续很久不停才算异常。\n• 橙/黄色或快速闪：可能是没有网络或出现错误。\n适配器要用原装的，电压不对的替代品会损坏机器。适配器不亮、有焦味或机身很烫，请立即关掉插座开关并停止使用，交给技术员检查，不要自己打开机器。",
+      "en": "The status light is how the bar tells you its state. Colours differ by brand; these are the common cases:\n• Completely dark: no power is reaching the bar. Suspect the socket, power strip, power adapter or cable first, and the bar itself last.\n• Steady light (often white, blue or green): normal standby or in a call.\n• Red: usually muted, not a fault.\n• Blinking or pulsing: starting up, updating or pairing. It is only abnormal if it goes on for a very long time.\n• Amber / yellow or fast blinking: possibly no network or an error.\nOnly use the original power adapter; a substitute with the wrong voltage can damage the bar. If the adapter is dark, smells burnt or the bar is very hot, switch off at the socket, stop using it and let a technician check. Do not open the unit."
+    }
+  }
+]

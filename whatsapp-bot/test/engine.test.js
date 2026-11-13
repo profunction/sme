@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { DEFAULTS, merge } from "../src/config.js";
-import { decide, detectLanguage, isOpen, matchRule, randomDelay } from "../src/engine.js";
+import { decide, detectLanguage, isOpen, matchRule, pick, randomDelay, render } from "../src/engine.js";
 
 const base = merge(DEFAULTS, {
   phone_number: "60123456789",
@@ -56,7 +56,7 @@ test("after hours notice only on first contact", () => {
 
 test("menu keys and faq answer directly", () => {
   const d = decide(base, { text: "1", contact: { lastInboundAt: OPEN_TIME - 1000 }, now: OPEN_TIME });
-  assert.equal(d.reason, "rule");
+  assert.equal(d.reason, "menu_choice");
   assert.equal(d.text, "价格表");
   const ms = decide(base, { text: "harga", contact: { lastInboundAt: OPEN_TIME - 1000 }, now: OPEN_TIME });
   assert.equal(ms.text, "Senarai harga");
@@ -107,6 +107,24 @@ test("unknown long message falls back; ai mode defers", () => {
   const ai = decide(merge(base, { ai: { enabled: true } }), { text: "tell me more", contact: { lastInboundAt: OPEN_TIME - 1000 }, now: OPEN_TIME });
   assert.equal(ai.action, "ai");
   assert.deepEqual(ai.parts, []);
+});
+
+test("templates, english bridge fallback and faq escalation", () => {
+  assert.equal(render("Email {email} or call {phone}", { email: "a@b.c", phone: "123" }), "Email a@b.c or call 123");
+  assert.equal(render("Hi {company}", {}), "Hi ");
+  assert.equal(pick({ zh: "中", en: "EN" }, "ms", "zh"), "EN", "missing Malay falls back to English before default");
+  assert.equal(pick({ zh: "中" }, "ms", "zh"), "中");
+  const cfg = merge(base, {
+    business: { email: "help@example.com" },
+    texts: { escalate: { zh: "解决不了请发邮件到 {email}", en: "If this does not help, email {email}" } },
+  });
+  const faq = decide(cfg, { text: "do you have online class?", contact: { lastInboundAt: OPEN_TIME - 1000 }, now: OPEN_TIME });
+  assert.equal(faq.text, "We have online classes\n\nIf this does not help, email help@example.com");
+  const menu = decide(cfg, { text: "1", contact: { lastInboundAt: OPEN_TIME - 1000 }, now: OPEN_TIME });
+  assert.equal(menu.text, "价格表", "menu replies do not get the escalation footer");
+  const urgent = decide(merge(cfg, { menu: [{ keys: ["urgent"], urgent: true, reply: { en: "Marked urgent" } }] }), { text: "URGENT", contact: { lastInboundAt: OPEN_TIME - 1000 }, now: OPEN_TIME });
+  assert.deepEqual([urgent.reason, urgent.urgent], ["urgent", true]);
+  assert.equal(detectLanguage("projektor tiada gambar", ["zh", "en", "ms"], "zh"), "ms");
 });
 
 test("random delay stays within range", () => {

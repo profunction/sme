@@ -1,0 +1,778 @@
+[
+  {
+    "id": "core-projector-no-image",
+    "title": {
+      "zh": "投影机没画面",
+      "en": "Projector shows no image"
+    },
+    "match": [
+      "投影机没画面",
+      "投影没画面",
+      "投影机没有画面",
+      "投影机不亮",
+      "投影机黑屏",
+      "projector no image",
+      "projector no display",
+      "projector blank",
+      "projector black",
+      "no picture",
+      "projector not showing"
+    ],
+    "reply": {
+      "zh": "投影机没画面，按顺序做：\n1) 看投影机电源灯：没亮就按一次电源键，等 30 到 60 秒预热。\n2) 镜头盖打开了吗？有的机型有滑盖。\n3) 遥控器按 Source / Input，切到正确的 HDMI 口（HDMI 1 / HDMI 2）。\n4) HDMI 线两头拔掉重插，换一条线或换一个 HDMI 口试。\n5) 电脑按 Win+P 选「复制」（Mac：系统设置 → 显示器 → 镜像）。\n6) 有 AV 矩阵或切换器的，按墙上面板或切换器选到对应输入。",
+      "en": "Projector shows no image. In this order:\n1) Power light off? Press power once and wait 30–60 seconds to warm up.\n2) Lens cap or slide cover open?\n3) Press Source / Input on the remote and pick the right HDMI (HDMI 1 / HDMI 2).\n4) Reseat both ends of the HDMI cable; try another cable or port.\n5) On the laptop press Win+P and choose Duplicate (Mac: System Settings → Displays → Mirror).\n6) If there is a matrix or switcher, select the right input on the wall panel or switcher."
+    },
+    "explain": {
+      "zh": "投影机没画面最常见的三种情况：\n• 输入源选错或电脑没输出（占六成以上），不严重，按几下就好。\n• HDMI 线或转接器接触不良、线太长信号衰减，换线就好；经过延长器的要看延长器电源。\n• 灯泡寿命到、过热保护、主板故障：电源灯闪红或橙色、机器自动关机、画面越来越暗，这类需要技术员换灯或维修。\n判断方法：换一台电脑或换一条线还是黑的，而且投影机自己的菜单（按 Menu 键）也不显示，基本是机器问题。",
+      "en": "Three usual causes for a projector with no image:\n• Wrong input selected or the laptop is not outputting (over 60% of cases). Not serious, a few button presses.\n• Loose HDMI cable or adapter, or a long cable losing signal. A new cable fixes it; with an extender, check the extender's power.\n• Lamp end of life, overheating protection or a board fault: the power light blinks red or orange, the unit shuts itself off, the picture gets dimmer over time. These need a technician for a lamp or repair.\nHow to tell: if another laptop and another cable still give a black screen, and even the projector's own menu (Menu button) does not show, it is the projector itself."
+    }
+  },
+  {
+    "id": "core-projector-warning-light",
+    "title": {
+      "zh": "投影机闪灯或自动关机",
+      "en": "Projector warning light or shuts itself off"
+    },
+    "match": [
+      "灯闪",
+      "闪红",
+      "闪橙",
+      "红灯",
+      "橙灯",
+      "过热",
+      "自动关机",
+      "overheat",
+      "blinking red",
+      "blinking orange",
+      "orange light",
+      "red light",
+      "shuts off",
+      "turns off by itself"
+    ],
+    "reply": {
+      "zh": "投影机灯闪红色或橙色、自动关机：\n1) 不要反复按电源。断电后等 10 分钟让它冷却。\n2) 检查进风口和滤网有没有被灰尘堵住，有的话用软刷清一清（不要拆机）。\n3) 投影机周围留出 30 厘米散热空间，不要用布或箱子罩着。\n4) 冷却后再开机，如果几分钟内又闪灯或关机，停止使用。\n这种情况通常是灯泡寿命到或散热故障，需要技术员处理。",
+      "en": "Projector light blinking red or orange, or shutting itself off:\n1) Do not keep pressing power. Unplug and let it cool for 10 minutes.\n2) Check the air intake and filter for dust; brush gently if blocked (do not open the unit).\n3) Leave 30 cm of space around it, nothing covering it.\n4) Power on after cooling. If it blinks or shuts off again within minutes, stop using it.\nThis is usually a lamp at end of life or a cooling fault and needs a technician."
+    },
+    "explain": {
+      "zh": "闪灯是投影机的自我保护：\n• 橙色 / 琥珀色常闪：灯泡接近寿命（一般 2000 到 5000 小时）或灯泡没装到位。\n• 红色闪：温度过高或风扇故障，机器为了保护灯泡和主板主动关机。\n• 画面偏暗、偏黄也是灯泡老化的信号。\n灯泡属于消耗品，更换需要对应型号的原厂或兼容灯泡；风扇和滤网堵塞如果长期不处理会烧主板，维修费比换灯高很多。建议安排技术员检查。",
+      "en": "A blinking light is the projector protecting itself:\n• Orange / amber blinking: lamp near end of life (typically 2,000–5,000 hours) or lamp not seated.\n• Red blinking: over-temperature or fan failure; the unit shuts down to protect the lamp and board.\n• A dim or yellowish picture is another sign of an ageing lamp.\nThe lamp is a consumable and needs the correct original or compatible part. A blocked filter or failed fan left alone can burn the mainboard, which costs far more than a lamp. Best to have a technician check it."
+    }
+  },
+  {
+    "id": "core-picture-blurry-keystone",
+    "title": {
+      "zh": "画面模糊、梯形或偏色",
+      "en": "Blurry, keystone or colour tint"
+    },
+    "match": [
+      "模糊",
+      "不清楚",
+      "梯形",
+      "画面歪",
+      "歪了",
+      "偏色",
+      "发黄",
+      "变暗",
+      "blurry",
+      "blur",
+      "out of focus",
+      "keystone",
+      "trapezoid",
+      "tilted",
+      "colour tint",
+      "color tint",
+      "yellowish",
+      "pinkish",
+      "dim picture",
+      "too dark"
+    ],
+    "reply": {
+      "zh": "画面模糊、变形或偏色：\n1) 模糊：转动镜头上的对焦环，或遥控器 Focus 键；镜头有灰用镜头纸擦。\n2) 梯形变形：遥控器 Keystone / 梯形校正，上下调到方正；最好把投影机摆正对着幕布。\n3) 偏色或发黄：遥控器按 Menu → 图像模式，选「标准 / 演示」，不要选「电影 / 节能」；换一条 HDMI 线试。\n4) 整体变暗：灯泡老化或开了节能模式，Menu 里把灯泡模式改「正常 / 高亮」。\n5) 某种颜色完全消失（整片偏绿或偏粉）：多半是 HDMI 线或接口针脚问题，换线。",
+      "en": "Blurry, distorted or discoloured picture:\n1) Blurry: turn the focus ring on the lens or press Focus on the remote; clean the lens with lens tissue.\n2) Trapezoid shape: use Keystone on the remote; ideally place the projector square to the screen.\n3) Colour tint or yellowish: Menu → Picture mode, choose Standard / Presentation rather than Cinema / Eco; try another HDMI cable.\n4) Overall dim: ageing lamp or Eco mode; set lamp mode to Normal / Bright in the menu.\n5) One colour missing entirely (whole picture green or pink): usually the HDMI cable or connector pins; change the cable."
+    },
+    "explain": {
+      "zh": "• 模糊通常只是对焦或镜头脏，少数是镜头内部起雾或马达故障。\n• 梯形是因为投影机没有正对幕布，电子校正会损失一点清晰度，长期应调整安装角度。\n• 偏色分两种：图像模式设置（可自己改）和硬件老化（灯泡、色轮、LCD 面板发黄），后者需要换件。\n• 整片偏绿或偏粉几乎都是 HDMI 线路问题，不是投影机坏。\n画面问题一般不紧急，但灯泡老化会越来越暗，建议在活动前安排检查。",
+      "en": "• Blur is usually just focus or a dirty lens; rarely internal fogging or a focus motor fault.\n• Keystone happens when the projector is not square to the screen. Electronic correction costs some sharpness; the mount angle should be fixed long term.\n• Colour tint is either a picture-mode setting (you can change it) or ageing hardware (lamp, colour wheel, yellowing LCD panels), which needs parts.\n• A whole-picture green or pink tint is almost always the HDMI path, not a broken projector.\nPicture problems are rarely urgent, but an ageing lamp keeps getting dimmer, so schedule a check before an important event."
+    }
+  },
+  {
+    "id": "core-no-signal",
+    "title": {
+      "zh": "显示 No Signal 没信号",
+      "en": "No Signal on the screen"
+    },
+    "match": [
+      "没信号",
+      "无信号",
+      "no signal",
+      "hdmi",
+      "没有输入",
+      "no input",
+      "not detected",
+      "检测不到"
+    ],
+    "reply": {
+      "zh": "显示「No Signal」：\n1) 电脑是开机状态且没有休眠；合上盖子的笔记本要打开。\n2) 电脑按 Win+P 选「复制」；Mac 在系统设置 → 显示器里确认检测到外接显示器。\n3) HDMI 线两头拔掉重插，换一个 HDMI 口。\n4) 用了 USB-C 转 HDMI、分配器、延长器的，先全部拔掉，用一条短 HDMI 线直连测试。\n5) 换另一台电脑试：换电脑就好，是电脑问题；换电脑还是没信号，是线路或显示设备问题。\n6) 墙上有 HDMI 面板的，检查面板后面延长器的电源指示灯。",
+      "en": "No Signal on screen:\n1) Laptop is on and not asleep; open the lid if closed.\n2) Press Win+P and choose Duplicate; on Mac confirm the external display is detected in System Settings → Displays.\n3) Reseat both ends of the HDMI cable; try another HDMI port.\n4) If using a USB-C adapter, splitter or extender, remove them and test with one short HDMI cable direct.\n5) Try another laptop: if that works, it is the first laptop; if still no signal, it is the cabling or display.\n6) With a wall HDMI plate, check the power light on the extender behind it."
+    },
+    "explain": {
+      "zh": "「No Signal」意思是显示设备活着，但没收到图像：\n• 最常见是电脑没有向外输出（休眠、没按 Win+P、USB-C 口不支持视频）。\n• 其次是线材：HDMI 线超过 10 米不加放大器容易丢信号；便宜转接器兼容性差。\n• 再次是 HDCP 版权握手失败：播放 Netflix 或某些电脑经过分配器时会黑屏，换线路或换源。\n• 最后是延长器或矩阵断电、通道没切对。\n一般不是设备坏了，九成在电脑和线材这一段。",
+      "en": "No Signal means the display is alive but receiving no picture:\n• Most often the laptop is not outputting (asleep, Win+P not set, a USB-C port without video support).\n• Next, the cable: HDMI over 10 m without a booster drops signal; cheap adapters have poor compatibility.\n• Then HDCP copy-protection handshakes failing: Netflix or some laptops through a splitter go black; change the path or source.\n• Finally an extender or matrix without power, or the wrong channel selected.\nIt is rarely a broken device; nine times out of ten it is the laptop-to-cable section."
+    }
+  },
+  {
+    "id": "core-display-no-power",
+    "title": {
+      "zh": "电视或显示屏不亮",
+      "en": "TV or display will not turn on"
+    },
+    "match": [
+      "电视",
+      "显示器",
+      "屏幕不亮",
+      "屏幕黑",
+      "tv",
+      "display no power",
+      "screen off",
+      "monitor",
+      "待机",
+      "standby",
+      "红灯常亮",
+      "电视不亮",
+      "电视开不了",
+      "电视没反应",
+      "显示屏不亮",
+      "显示屏开不了",
+      "tv not turning on",
+      "tv won't turn on",
+      "tv wont turn on",
+      "tv no power",
+      "display not turning on",
+      "tv cannot on"
+    ],
+    "reply": {
+      "zh": "电视或显示屏不亮：\n1) 电源插座有电吗？换个插座或用手机充电器测一下。\n2) 屏幕电源灯：红色常亮是待机，用遥控器或机身按键开机；没灯检查电源线和背后的总开关。\n3) 开机后蓝屏或「无信号」：按遥控 Input / Source 切到接电脑的那个 HDMI 口。\n4) 遥控没反应：换电池，或走到机身侧面 / 底部按实体键。\n5) 商用显示屏有定时开关机功能，检查菜单里的「定时」是否把它关了。",
+      "en": "TV or display not turning on:\n1) Is the wall socket live? Try another socket or test it with a phone charger.\n2) Power light: solid red means standby, press power on the remote or the set; no light, check the power cord and the master switch at the back.\n3) After power-on, blue screen or No Signal: press Input / Source and select the HDMI the laptop is on.\n4) Remote not working: change batteries or use the physical buttons on the side or bottom.\n5) Commercial displays have scheduled on/off; check the timer setting in the menu."
+    },
+    "explain": {
+      "zh": "• 完全没灯：电源问题（插座、电源线、机内电源板）。电源板故障需要维修。\n• 红灯常亮不开机：待机状态或开机信号没收到（遥控、定时器），偶尔是主板。\n• 开机有背光没画面、画面闪一下就黑：背光或逻辑板故障，需要技术员。\n• 有菜单但没画面：只是输入源问题，自己能解决。\n超过 5 年的商用屏，电源板和背光老化是常见问题。",
+      "en": "• No light at all: power problem (socket, cord, internal power board). A power board fault needs repair.\n• Solid red, will not start: standby, or the power-on signal is not received (remote, timer), occasionally the mainboard.\n• Backlight on but no picture, or picture flashes then goes black: backlight or logic board fault, technician needed.\n• Menu shows but no picture: only an input problem, you can fix it.\nOn commercial displays over 5 years old, power boards and backlights are the common wear items."
+    }
+  },
+  {
+    "id": "core-wireless-presentation",
+    "title": {
+      "zh": "无线投屏连不上",
+      "en": "Wireless presentation not connecting"
+    },
+    "match": [
+      "无线投屏",
+      "投屏",
+      "clickshare",
+      "airtame",
+      "miracast",
+      "airplay",
+      "screen mirror",
+      "wireless presentation",
+      "barco",
+      "连不上投屏"
+    ],
+    "reply": {
+      "zh": "无线投屏连不上：\n1) 看屏幕上投屏主机的待机画面有没有显示，没有就先把投屏主机重启（断电 30 秒）。\n2) ClickShare 按钮：插电脑 USB 口等灯变白色常亮再按；第一次用要在电脑里运行 ClickShare 程序。\n3) Airtame / Miracast / AirPlay：电脑和投屏主机必须在同一个 Wi-Fi；访客网络通常被隔离，连公司内网试。\n4) 电脑的 VPN、防火墙先关掉再试。\n5) 投不了就用 HDMI 线先把会议开起来，之后再查。",
+      "en": "Wireless presentation will not connect:\n1) Is the receiver's standby screen showing on the display? If not, power-cycle the receiver (unplug 30 seconds).\n2) ClickShare button: plug into the laptop USB, wait for a solid white light, then press; first time, run the ClickShare app on the laptop.\n3) Airtame / Miracast / AirPlay: laptop and receiver must be on the same Wi-Fi; guest networks are usually isolated, try the office network.\n4) Turn off VPN and firewall on the laptop and retry.\n5) If it still fails, use an HDMI cable to start the meeting and troubleshoot later."
+    },
+    "explain": {
+      "zh": "无线投屏依赖网络和软件，所以比有线娇气：\n• 网络隔离是头号原因：IT 的访客 Wi-Fi 禁止设备互相发现，投屏主机就找不到。\n• 公司电脑的安全软件、VPN 会拦截投屏程序。\n• 投屏主机固件过旧、同时太多人连、Wi-Fi 信道拥挤会掉线。\n• ClickShare 按钮本身会坏（灯不亮、一直闪红），要重新配对或换按钮。\n长期稳定需要 IT 和 AV 一起配置网络，建议安排技术员到场。",
+      "en": "Wireless presentation depends on the network and software, so it is more fragile than a cable:\n• Network isolation is the top cause: guest Wi-Fi blocks device discovery, so the receiver cannot be found.\n• Corporate security software and VPNs block the presentation app.\n• Old receiver firmware, too many simultaneous users or crowded Wi-Fi channels cause drops.\n• ClickShare buttons do fail (no light, constant red) and need re-pairing or replacement.\nLong-term stability needs IT and AV to configure the network together; a site visit is advisable."
+    }
+  },
+  {
+    "id": "core-touch-not-working",
+    "title": {
+      "zh": "触控屏不响应或点不准",
+      "en": "Touch screen not responding or misaligned"
+    },
+    "match": [
+      "触控",
+      "触摸",
+      "白板",
+      "触屏",
+      "touch not working",
+      "touch screen",
+      "interactive",
+      "whiteboard",
+      "smartboard",
+      "点不准",
+      "misaligned",
+      "calibrat"
+    ],
+    "reply": {
+      "zh": "触控屏或互动白板不响应、点不准：\n1) 触控靠一条 USB 线连到电脑（触控线），确认这条线插好了，不只是 HDMI。\n2) 屏幕边框的红外感应条有没有被纸、磁贴、灰尘挡住，用干布擦一圈。\n3) 电脑换一个 USB 口，等 10 秒让系统重新识别。\n4) 点不准：在电脑「控制面板 → 平板电脑设置 → 校准」重新校准。\n5) 屏幕自带安卓系统的，按设置里的触控校准，或重启屏幕。",
+      "en": "Touch screen or interactive board not responding or misaligned:\n1) Touch travels over a USB cable to the laptop (touch cable), not the HDMI; make sure it is connected.\n2) Check the infrared sensor strip around the frame for paper, magnets or dust; wipe it with a dry cloth.\n3) Use another USB port on the laptop and wait 10 seconds for re-detection.\n4) Misaligned: recalibrate in Control Panel → Tablet PC Settings → Calibrate.\n5) Boards with built-in Android: run touch calibration in settings or restart the board."
+    },
+    "explain": {
+      "zh": "• 大多数触控屏用红外框：边框有遮挡或脏了就会乱点、点不准，清洁即可。\n• 触控 USB 线没接或 USB 延长太长，电脑就收不到触控，这是最常见原因。\n• 点不准多是分辨率或多屏设置变化后没有重新校准。\n• 整条边不响应、固定区域失灵：红外模块或框体损坏，需要更换配件。\n不影响显示，只影响触控的问题通常不急，但更换红外框需要订货。",
+      "en": "• Most touch screens use an infrared frame: anything blocking or dirtying the frame causes ghost touches or offset, cleaning fixes it.\n• No touch USB cable, or a USB extension that is too long, means the laptop never receives touch. This is the most common cause.\n• Offset touch usually follows a resolution or multi-display change without recalibration.\n• A whole edge or a fixed area dead: infrared module or frame damage, parts replacement needed.\nTouch-only faults are rarely urgent, but infrared frames have to be ordered."
+    }
+  },
+  {
+    "id": "core-led-wall-fault",
+    "title": {
+      "zh": "LED 屏花屏或局部不亮",
+      "en": "LED wall garbled or partly dark"
+    },
+    "match": [
+      "led",
+      "led屏",
+      "大屏",
+      "花屏",
+      "闪烁",
+      "一块不亮",
+      "局部不亮",
+      "flicker",
+      "garbled",
+      "dead pixel",
+      "led wall",
+      "video wall",
+      "part of the screen"
+    ],
+    "reply": {
+      "zh": "LED 屏花屏、闪烁或局部不亮：\n1) 重启发送卡 / 播放器（关电源等 1 分钟再开），再重启屏体电源。\n2) 检查播放器到屏体的信号线（HDMI / DVI / 网线）两头有没有松。\n3) 播放器输出分辨率要和屏体设置一致，改过电脑分辨率的改回去。\n4) 整屏闪或滚动条纹：多半是信号线或分辨率问题。\n5) 固定一块不亮、一块颜色不对：是单个模组或排线问题，需要技术员换模组。请拍一张整屏照片。",
+      "en": "LED wall garbled, flickering or partly dark:\n1) Restart the sending card / player (power off 1 minute), then the wall's power.\n2) Check the signal cable from player to wall (HDMI / DVI / network) at both ends.\n3) The player's output resolution must match the wall's setting; revert any laptop resolution change.\n4) Whole-wall flicker or rolling bars: usually signal cable or resolution.\n5) One block dark or wrong colour: a single module or ribbon cable, technician replacement needed. Please send a photo of the whole wall."
+    },
+    "explain": {
+      "zh": "LED 屏由很多模组拼成，每个模组靠接收卡和排线串联：\n• 整屏问题（全黑、全闪、滚动）在源头：播放器、发送卡、信号线、分辨率。\n• 局部问题（一块、一行、一列）在屏体内部：模组、排线、接收卡、电源。一块黑通常是电源或排线松，一行或一列是排线或接收卡。\n• 单个像素点坏是灯珠损坏，数量少可以不管，多了换模组。\n局部故障必须拆屏处理，需要技术员带备件到场。",
+      "en": "An LED wall is many modules chained through receiving cards and ribbon cables:\n• Whole-wall faults (all black, all flickering, rolling) are at the source: player, sending card, signal cable, resolution.\n• Local faults (one block, one row, one column) are inside the wall: module, ribbon cable, receiving card or power supply. One dark block is usually power or a loose ribbon; a row or column is a ribbon or receiving card.\n• Single dead pixels are failed LEDs; a few can be ignored, many means a module swap.\nLocal faults require opening the wall, so a technician with spares must attend."
+    }
+  },
+  {
+    "id": "core-picture-dropout",
+    "title": {
+      "zh": "画面偶尔黑、闪烁或偏色",
+      "en": "Picture drops out, flickers or has a colour cast"
+    },
+    "match": [
+      "画面闪",
+      "偶尔黑",
+      "一闪一闪",
+      "雪花",
+      "偏粉",
+      "偏绿",
+      "intermittent",
+      "picture drops",
+      "pink screen",
+      "green screen",
+      "sparkles",
+      "extender",
+      "matrix",
+      "切换器"
+    ],
+    "reply": {
+      "zh": "画面偶尔黑一下、闪烁、雪花点或整片偏粉偏绿：\n1) 这类基本是线路问题。HDMI 线两头重插，换一条短线直连测试。\n2) 经过延长器（墙上 HDMI 面板、网线传输）的，检查两端延长器电源，各断电 30 秒重启。\n3) 经过矩阵或切换器的，换一个输入口或输出口试，排除某个口坏了。\n4) 降低电脑输出分辨率到 1080p 再试，4K 对线材要求高。\n5) 以上都试过还闪，记下是哪条线路、哪个口，回复 3 安排检查。",
+      "en": "Picture dropping out, flickering, sparkles or a pink or green cast:\n1) Almost always the signal path. Reseat the HDMI cable; test with one short cable direct.\n2) Through an extender (wall HDMI plate, over network cable): check power at both ends; power-cycle each for 30 seconds.\n3) Through a matrix or switcher: try another input or output port to rule out a bad port.\n4) Lower the laptop output to 1080p and retry; 4K is demanding on cabling.\n5) If it still flickers, note which path and port, then reply 3 to arrange a check."
+    },
+    "explain": {
+      "zh": "• 闪烁、雪花、偏色是数字信号「勉强够用」的表现：线太长、线质量差、接头氧化、延长器供电不足。\n• 4K 和高刷新率需要更高带宽，旧线材跑 1080p 没事，跑 4K 就闪。\n• 延长器一端的电源适配器老化是常见隐患。\n• 矩阵某个口损坏会只影响一个房间或一个显示器。\n这类问题不会突然全坏，但会越来越频繁，建议安排一次线路检查并更换老化线材。",
+      "en": "• Flicker, sparkles and colour casts mean the digital signal is only just getting through: cable too long, poor quality, oxidised connectors or an under-powered extender.\n• 4K and high refresh rates need more bandwidth; old cables fine at 1080p flicker at 4K.\n• An ageing power adapter on one end of an extender is a common hidden cause.\n• A failed matrix port affects only one room or one display.\nThese faults do not fail suddenly but get more frequent; schedule a cabling check and replace ageing cables."
+    }
+  },
+  {
+    "id": "core-aspect-resolution",
+    "title": {
+      "zh": "画面被切边、黑边或拉伸",
+      "en": "Picture cut off, black bars or stretched"
+    },
+    "match": [
+      "分辨率",
+      "比例",
+      "被切掉",
+      "边缘",
+      "黑边",
+      "拉伸",
+      "resolution",
+      "aspect",
+      "cut off",
+      "black bars",
+      "stretched",
+      "overscan"
+    ],
+    "reply": {
+      "zh": "画面被切边、有黑边或拉伸变形：\n1) 电脑分辨率改成显示设备的原生分辨率（一般 1920×1080），缩放设为 100%。\n2) 显示设备遥控器按 Menu → 画面比例 / Aspect，选「原始 / Just Scan / 16:9」，不要选「缩放」。\n3) 电视类设备关掉「过扫描 Overscan」。\n4) 投影机按 Aspect 键切到 16:9 或 Auto。\n5) 黑边是比例不同（4:3 内容放在 16:9 屏）属正常，可在电脑端改成 16:9 输出。",
+      "en": "Edges cut off, black bars or a stretched picture:\n1) Set the laptop to the display's native resolution (usually 1920×1080) and scaling to 100%.\n2) On the display remote: Menu → Aspect / Picture size, choose Original / Just Scan / 16:9, not Zoom.\n3) On TVs, turn off Overscan.\n4) On projectors press Aspect and choose 16:9 or Auto.\n5) Black bars from a 4:3 source on a 16:9 screen are normal; set the laptop to output 16:9."
+    },
+    "explain": {
+      "zh": "这是设置问题，不是故障：电脑输出分辨率、显示设备的画面比例、电视的过扫描三者不一致就会切边或拉伸。会议室多台设备共用一个信号时，矩阵或缩放器也可能强制某个分辨率。一次设好以后一般不会变，除非有人换了电脑设置或遥控器乱按。",
+      "en": "This is a setting, not a fault: when the laptop resolution, the display's aspect mode and a TV's overscan disagree, you get cropping or stretching. In rooms where several displays share one signal, a matrix or scaler can also force a resolution. Once set correctly it stays, unless someone changes the laptop settings or presses the wrong remote button."
+    }
+  },
+  {
+    "id": "core-no-sound",
+    "title": {
+      "zh": "没声音",
+      "en": "No sound"
+    },
+    "match": [
+      "没声音",
+      "没有声音",
+      "无声",
+      "音响没声",
+      "喇叭没声",
+      "no sound",
+      "no audio",
+      "speakers not working",
+      "can't hear",
+      "cannot hear",
+      "silent",
+      "音响",
+      "没声",
+      "喇叭不响",
+      "音响不响",
+      "speaker no sound",
+      "no sound from speaker"
+    ],
+    "reply": {
+      "zh": "没声音，按顺序查：\n1) 功放 / 混音台 / 音响电源开了吗？主音量是不是最低或被静音（Mute 灯亮）？\n2) 电脑右下角喇叭图标 → 输出设备，选到会议室设备（例如 HDMI / Crestron / Yamaha），不是电脑内置喇叭；电脑音量调到 70% 以上。\n3) Zoom / Teams 里的扬声器也要选到会议室设备，点「测试扬声器」。\n4) 音频线（3.5mm / HDMI）两头重插，换一个输入通道。\n5) 用手机蓝牙或 AUX 接音响播放：有声音说明音响正常，问题在电脑；没声音说明问题在音响系统。\n6) 墙上有音量旋钮的会议室，旋钮调到一半以上。",
+      "en": "No sound, check in this order:\n1) Amplifier / mixer / speakers powered on? Master volume at minimum or muted (Mute light on)?\n2) Laptop speaker icon → output device, select the room system (e.g. HDMI / Crestron / Yamaha), not the built-in speakers; laptop volume above 70%.\n3) In Zoom / Teams also select the room device as speaker and click Test Speaker.\n4) Reseat the audio cable (3.5 mm / HDMI) at both ends; try another input channel.\n5) Play from a phone via Bluetooth or AUX: sound means the speakers are fine and the laptop is the issue; no sound means the audio system.\n6) Rooms with a wall volume knob: turn it past halfway."
+    },
+    "explain": {
+      "zh": "声音要经过：电脑输出设备 → 线或 HDMI → 处理器 / 混音台 → 功放 → 喇叭，任何一段断了都没声。\n• 八成是电脑输出设备选错或会议软件选错，不是硬件坏。\n• 功放被人关了、保护模式（红灯）、墙面音量控制器被调到零也常见。\n• 功放保护模式一直亮红灯，是喇叭线短路或功放故障，需要技术员。\n• 只有一边喇叭响、声音很小且沙哑：喇叭线或喇叭单元问题。\n判断方法就是手机直接接音响：手机能响，问题在前端；手机不能响，问题在功放和喇叭。",
+      "en": "Sound travels laptop output → cable or HDMI → processor / mixer → amplifier → speakers; a break anywhere means silence.\n• 80% of the time the laptop or meeting app has the wrong output device selected; nothing is broken.\n• An amplifier someone switched off, protection mode (red light) or a wall volume control turned to zero are also common.\n• An amplifier stuck in protection (red light) means a shorted speaker line or amp fault, technician needed.\n• Only one side playing, or very quiet and raspy: speaker wiring or a speaker driver.\nThe quick test is a phone straight into the system: if the phone plays, the fault is upstream; if not, it is the amp and speakers."
+    }
+  },
+  {
+    "id": "core-mic-feedback",
+    "title": {
+      "zh": "麦克风啸叫或回音",
+      "en": "Microphone feedback or echo"
+    },
+    "match": [
+      "啸叫",
+      "回音",
+      "尖叫",
+      "吱吱",
+      "feedback",
+      "howling",
+      "howl",
+      "screech",
+      "squeal",
+      "ringing"
+    ],
+    "reply": {
+      "zh": "麦克风啸叫或回音：\n1) 先把麦克风音量或主音量调低一点，啸叫会立刻停。\n2) 麦克风不要对着音箱，离音箱至少 2 到 3 米，站到音箱后方或侧面。\n3) 手持麦克风握在中段，不要握住网头。\n4) 同时开着几支麦克风的，不用的先关掉或静音。\n5) 视频会议回音：房间里只留一套麦克风和喇叭，其他电脑的麦克风和扬声器全部静音；远端听到回音通常是本地有两台设备同时入会。\n6) 混音台有「Feedback Suppressor / 反馈抑制」按钮的，按下。",
+      "en": "Microphone feedback or echo:\n1) Lower the mic or master volume a little; feedback stops immediately.\n2) Keep the mic pointing away from the speakers, at least 2–3 m away, behind or beside them.\n3) Hold handheld mics by the body, not around the grille.\n4) With several mics on, switch off or mute the ones not in use.\n5) Echo on video calls: keep one set of mic and speakers in the room; mute mics and speakers on every other laptop. Echo heard by the far end usually means two devices joined locally.\n6) If the mixer has a Feedback Suppressor button, press it."
+    },
+    "explain": {
+      "zh": "啸叫是麦克风收到喇叭的声音又放大，循环叠加：\n• 麦克风离喇叭太近、音量开太大、麦克风朝向喇叭是三大原因。\n• 房间混响大（玻璃墙、硬地面）更容易啸叫。\n• 视频会议回音是远端的声音从你的喇叭出来又被你的麦克风收进去送回去，会议系统有回声消除但多设备入会会失效。\n偶尔啸叫调音量就好；每次用都啸叫说明音量结构或喇叭位置设计有问题，需要技术员做均衡调试或加反馈抑制器。",
+      "en": "Feedback is the mic picking up the speakers and re-amplifying in a loop:\n• Mic too close to the speakers, volume too high, or the mic pointed at the speakers are the three main causes.\n• Reverberant rooms (glass walls, hard floors) feed back more easily.\n• Video-call echo is the far end's voice leaving your speakers, re-entering your mic and going back; room systems cancel echo, but multiple local devices defeat it.\nOccasional feedback just needs a volume tweak; feedback every session means the gain structure or speaker placement is wrong and a technician should tune the EQ or add a feedback suppressor."
+    }
+  },
+  {
+    "id": "core-wireless-mic-dropout",
+    "title": {
+      "zh": "无线麦断续或有杂音",
+      "en": "Wireless mic cutting out or crackling"
+    },
+    "match": [
+      "无线麦",
+      "无线麦克风",
+      "断断续续",
+      "掉线",
+      "沙沙",
+      "wireless mic",
+      "cutting out",
+      "dropout",
+      "drop out",
+      "crackling mic",
+      "interference",
+      "mic battery",
+      "无线麦杂音",
+      "无线麦有杂音"
+    ],
+    "reply": {
+      "zh": "无线麦克风断断续续、有杂音：\n1) 换新电池，这是最常见原因（电量显示剩一格就该换）。\n2) 接收机天线竖起来并打开成 V 形，不要塞在柜子里或被金属挡住。\n3) 麦克风和接收机距离控制在 30 米内，中间不要隔太多墙。\n4) 两支麦克风互相干扰：按接收机的 Sync / Scan 重新自动选频，再对着麦克风的红外窗口同步。\n5) 附近有 LED 屏、Wi-Fi 路由器、电源线的，把接收机挪远一点。\n6) 手持麦克风的头部网罩松了也会沙沙响，拧紧。",
+      "en": "Wireless microphone cutting out or crackling:\n1) Fresh batteries first; this is the most common cause (one bar left means change now).\n2) Receiver antennas upright in a V shape, not inside a cabinet or behind metal.\n3) Keep mic and receiver within 30 m with few walls in between.\n4) Two mics interfering: press Sync / Scan on the receiver to pick a clean frequency, then sync to the mic's infrared window.\n5) Move the receiver away from LED walls, Wi-Fi routers and power cables.\n6) A loose grille on a handheld mic also crackles; tighten it."
+    },
+    "explain": {
+      "zh": "无线麦克风靠无线电传输，受三样东西影响：电量、距离遮挡、频率干扰。\n• 电池快没电时发射功率下降，先出现断续再没声。\n• 接收机天线位置差、放在金属柜里，信号被挡。\n• 同频干扰：新加坡和马来西亚的部分频段已经分配给手机网络，老款麦克风在这些频段会被干扰，长期解决要换合规频段的设备。\n• 多支麦克风没有做频率规划会互相打架。\n偶尔断续换电池即可；经常断续需要技术员做频率扫描和天线布置。",
+      "en": "Wireless mics are radio links affected by three things: battery, distance and obstruction, and frequency interference.\n• Low batteries reduce transmit power; you get dropouts before silence.\n• Poor antenna placement or a receiver in a metal cabinet blocks the signal.\n• Co-channel interference: parts of the band in Singapore and Malaysia are now allocated to mobile networks; older mics on those bands get interference, and the long-term fix is equipment on a compliant band.\n• Several mics without frequency planning fight each other.\nOccasional dropouts just need batteries; frequent ones need a technician to scan frequencies and position antennas."
+    }
+  },
+  {
+    "id": "core-mic-silent",
+    "title": {
+      "zh": "麦克风没声或声音小",
+      "en": "Microphone silent or too quiet"
+    },
+    "match": [
+      "麦克风没声",
+      "麦没声",
+      "话筒没声",
+      "麦克风声音小",
+      "mic no sound",
+      "mic not working",
+      "microphone not working",
+      "mic too soft",
+      "mic low",
+      "麦克风"
+    ],
+    "reply": {
+      "zh": "麦克风没声音或声音很小：\n1) 麦克风上的开关是不是在 OFF 或 Mute；无线麦换电池。\n2) 混音台对应通道：推子推到 0 刻度、Gain 增益调到中间、Mute 没亮、通道没被切到别的输出。\n3) 电容麦（会议桌上的鹅颈麦、吊麦）需要 48V 幻象电源，混音台上的 +48V 按钮要按下。\n4) 麦克风线两头重插，换一个通道试，能分辨是麦还是通道坏。\n5) 视频会议：电脑或会议软件里的麦克风要选到会议室设备，不是电脑内置麦。\n6) 嘴离麦克风 10 到 15 厘米，鹅颈麦对着嘴。",
+      "en": "Microphone silent or very quiet:\n1) Mic switch on OFF or Mute? Wireless mic: fresh batteries.\n2) On the mixer channel: fader at 0 dB, Gain around the middle, Mute off, channel routed to the main output.\n3) Condenser mics (gooseneck table mics, ceiling mics) need 48 V phantom power; press +48V on the mixer.\n4) Reseat the mic cable; try another channel to tell a bad mic from a bad channel.\n5) Video calls: the laptop or meeting app must use the room mic, not the built-in one.\n6) Speak 10–15 cm from the mic; aim gooseneck mics at the mouth."
+    },
+    "explain": {
+      "zh": "• 开关、静音、电池、幻象电源这四项占了绝大多数麦克风没声的情况，都是操作问题。\n• 线材接头松动或断线是第二常见，XLR 线被踩、被椅子压久了会断。\n• 麦克风头被摔过、进水后会没声或很小声，需要更换。\n• 鹅颈麦和吊麦安装后不响，通常是幻象电源没开或处理器里被静音。\n声音小但有声，多半是增益设置；完全没声且换通道也没，多半是麦克风或线。",
+      "en": "• Switch, mute, battery and phantom power cover the great majority of silent-mic cases; all are operator issues.\n• Loose connectors or broken cables are next; XLR cables trodden on or crushed by chairs break internally.\n• A dropped or water-damaged mic capsule goes silent or very quiet and must be replaced.\n• Gooseneck and ceiling mics that never work after install usually lack phantom power or are muted in the processor.\nQuiet but audible is usually gain; totally silent even on another channel is usually the mic or cable."
+    }
+  },
+  {
+    "id": "core-distortion-hum",
+    "title": {
+      "zh": "声音失真或有电流声",
+      "en": "Distortion, crackle or hum"
+    },
+    "match": [
+      "失真",
+      "破音",
+      "嗡嗡",
+      "电流声",
+      "滋滋",
+      "噼啪",
+      "distort",
+      "crackle",
+      "crackling",
+      "buzz",
+      "humming",
+      "hum",
+      "ground loop",
+      "杂音很大",
+      "杂音",
+      "有杂音",
+      "喇叭有杂音",
+      "音响有杂音",
+      "speaker noise",
+      "noisy speaker"
+    ],
+    "reply": {
+      "zh": "声音失真、破音、有嗡嗡电流声：\n1) 破音：电脑音量调到 70%，不要 100%；混音台输入增益调低，用主音量补。\n2) 嗡嗡声（低频 50Hz）：电脑插着充电器时才有的话，拔掉充电器或换一个插座，和音响用同一个插排。\n3) 滋滋 / 噼啪：音频线接头松或氧化，拔插几次，换线。\n4) 手机靠近音响线会有「哒哒哒」干扰声，把手机拿开。\n5) 一个喇叭沙哑：先调小音量，可能喇叭单元损坏，避免继续大音量使用。",
+      "en": "Distorted sound, crackle or a humming buzz:\n1) Distortion: laptop volume at 70%, not 100%; lower the mixer input gain and use the master to compensate.\n2) Low hum (50 Hz): if it appears only with the laptop charger plugged in, unplug the charger or use the same power strip as the audio system.\n3) Crackle / pops: loose or oxidised audio connector; reseat a few times, change the cable.\n4) A phone near audio cables causes a ticking interference; move the phone away.\n5) One speaker raspy: lower the volume; the driver may be damaged, avoid loud use."
+    },
+    "explain": {
+      "zh": "• 破音是某一级信号过大（电脑输出太大、增益太高、功放超负荷），长期会烧喇叭。\n• 嗡嗡声多是地环路：电脑和音响接在不同插座、不同相位，地线之间有电位差；加隔离器或统一供电可解决。\n• 滋滋噼啪是接触不良，线材问题。\n• 喇叭沙哑是单元损坏或分频器故障，需要更换。\n偶发杂音先查线和电源；持续有电流声建议技术员加隔离器处理。",
+      "en": "• Distortion means a stage is overdriven (laptop output too hot, gain too high, amp overloaded) and will eventually damage speakers.\n• Hum is usually a ground loop: laptop and audio on different sockets or phases with a voltage difference between grounds; an isolator or common power fixes it.\n• Crackle and pops are poor contact, a cable issue.\n• A raspy speaker is a damaged driver or crossover and needs replacement.\nIntermittent noise: check cables and power first; constant hum: have a technician fit an isolator."
+    }
+  },
+  {
+    "id": "core-lip-sync",
+    "title": {
+      "zh": "声音和画面不同步",
+      "en": "Audio out of sync with the picture"
+    },
+    "match": [
+      "延迟",
+      "不同步",
+      "口型",
+      "声音慢",
+      "lip sync",
+      "lipsync",
+      "out of sync",
+      "audio lag",
+      "latency"
+    ],
+    "reply": {
+      "zh": "声音和画面不同步、声音有延迟：\n1) 电视或显示屏菜单里关掉「动态补偿 / 运动平滑 / 画质增强」，或把画面模式改成「游戏 / PC」模式。\n2) 声音走蓝牙的改成有线，蓝牙本身有 0.2 秒左右延迟。\n3) 视频会议里的延迟是网络造成的，换有线网络。\n4) 音频处理器或功放有「Delay / Lip Sync」设置的，调整到画面和声音一致。\n5) 直播、录播系统的延迟需要在软件里设置音频偏移。",
+      "en": "Audio out of sync with the picture, or delayed:\n1) In the TV or display menu turn off motion smoothing / picture enhancement, or switch to Game / PC mode.\n2) If audio goes over Bluetooth, use a cable; Bluetooth itself adds about 0.2 s.\n3) Delay inside a video call is network related; use a wired connection.\n4) If the audio processor or amplifier has a Delay / Lip Sync setting, adjust until picture and sound match.\n5) Streaming and recording systems need an audio offset set in the software."
+    },
+    "explain": {
+      "zh": "延迟来自画面和声音走了不同的路：显示屏的画质处理会让画面慢几十毫秒，蓝牙会让声音慢两百毫秒，网络会让两者都慢。本质是设置和线路选择问题，很少是硬件坏。固定安装的会议室如果一直不同步，技术员可以在处理器里加固定延迟补偿一次解决。",
+      "en": "Delay comes from picture and sound taking different paths: display picture processing delays video by tens of milliseconds, Bluetooth delays audio by around 200 ms, and the network delays both. It is a settings and routing matter, rarely broken hardware. For a fixed meeting room that is always out of sync, a technician can add a fixed delay in the processor once and for all."
+    }
+  },
+  {
+    "id": "core-zone-paging",
+    "title": {
+      "zh": "天花喇叭或广播某区没声",
+      "en": "Ceiling speaker zone or paging silent"
+    },
+    "match": [
+      "天花喇叭",
+      "吸顶",
+      "一个区域",
+      "某个房间没声",
+      "音量旋钮",
+      "ceiling speaker",
+      "one zone",
+      "volume control",
+      "wall knob",
+      "background music",
+      "背景音乐",
+      "广播",
+      "pa system",
+      "paging"
+    ],
+    "reply": {
+      "zh": "天花喇叭某个区域没声、背景音乐或广播不响：\n1) 墙上的音量旋钮 / 区域选择器有没有被转到 OFF 或最小。\n2) 功放或分区器电源开了吗？对应区域的音量和「Zone」指示灯是否正常。\n3) 音源（背景音乐播放器、电脑、广播麦克风）是否在播放，换一个音源试。\n4) 广播麦克风要按住说话键（PTT）并对准话筒，有的要先选区域再按键。\n5) 整个区域都没声但别的区域有：多半是那个区域的功放通道或喇叭线。",
+      "en": "A ceiling speaker zone silent, background music or paging not working:\n1) Wall volume knob / zone selector turned to OFF or minimum?\n2) Amplifier or zone mixer powered on? Zone volume and Zone light normal?\n3) Is the source (BGM player, laptop, paging mic) actually playing? Try another source.\n4) Paging mics need the push-to-talk button held while speaking; some require selecting a zone first.\n5) One whole zone silent while others work: usually that zone's amplifier channel or speaker line."
+    },
+    "explain": {
+      "zh": "商用广播系统是「音源 → 分区功放 → 各区喇叭线 → 天花喇叭」：\n• 单个喇叭不响：喇叭变压器或接线松。\n• 整个区域不响：那一路功放保护、保险丝断、或喇叭线短路导致功放保护。\n• 全部不响：音源或主功放。\n• 墙面旋钮是衰减器，转到底等于关掉，很多「坏了」其实是被转到零。\n喇叭线在天花里，排查短路需要技术员带仪表。",
+      "en": "Commercial PA systems run source → zone amplifier → zone speaker line → ceiling speakers:\n• One speaker silent: its transformer or a loose connection.\n• A whole zone silent: that amp channel in protection, a blown fuse, or a shorted speaker line putting the amp in protection.\n• Everything silent: source or main amplifier.\n• Wall knobs are attenuators; fully down equals off, and many 'faults' are a knob turned to zero.\nSpeaker lines run in the ceiling, so tracing a short needs a technician with a meter."
+    }
+  },
+  {
+    "id": "core-bluetooth",
+    "title": {
+      "zh": "蓝牙连不上",
+      "en": "Bluetooth will not connect"
+    },
+    "match": [
+      "蓝牙",
+      "bluetooth",
+      "配对",
+      "连不上蓝牙"
+    ],
+    "reply": {
+      "zh": "蓝牙连不上音响或会议设备：\n1) 音响按住蓝牙键 3 秒进入配对模式（灯快闪）。\n2) 手机 / 电脑先「忽略 / 删除」这个设备，再重新搜索配对。\n3) 蓝牙一次只连一台，让之前连着的人先断开。\n4) 音响重启一次（断电 10 秒）。\n5) 会议室正式用途建议用线连，蓝牙有延迟而且容易被别人占用。",
+      "en": "Bluetooth will not connect to the speaker or room system:\n1) Hold the speaker's Bluetooth button 3 seconds for pairing mode (fast blinking light).\n2) On the phone / laptop, Forget / Remove the device first, then search and pair again.\n3) Bluetooth connects one device at a time; have the previous user disconnect.\n4) Restart the speaker (unplug 10 seconds).\n5) For real meetings use a cable; Bluetooth adds delay and is easily taken by someone else."
+    },
+    "explain": {
+      "zh": "蓝牙问题几乎都是「上一个设备还占着」或「配对信息冲突」，重新配对就好，很少硬件坏。商用场景里蓝牙不稳定是正常现象，不建议作为主要连接方式。",
+      "en": "Bluetooth problems are almost always a previous device still holding the connection or conflicting pairing records; re-pairing fixes it and hardware is rarely at fault. In commercial rooms Bluetooth is inherently unstable and should not be the primary connection."
+    }
+  },
+  {
+    "id": "core-vc-not-connecting",
+    "title": {
+      "zh": "视频会议连不上或没摄像头",
+      "en": "Video conferencing not connecting or no camera"
+    },
+    "match": [
+      "zoom",
+      "teams",
+      "webex",
+      "google meet",
+      "视频会议",
+      "会议系统",
+      "会议室连不上",
+      "codec",
+      "摄像头没画面",
+      "camera no image",
+      "camera not working",
+      "没有摄像头",
+      "no camera",
+      "入会",
+      "join meeting"
+    ],
+    "reply": {
+      "zh": "视频会议系统连不上、没摄像头画面：\n1) 会议室触控屏 / 平板有没有显示正常主界面；黑屏或转圈就把会议主机断电 30 秒重启，等 3 分钟。\n2) 自带电脑入会（BYOD）：USB 线接到会议室的 USB 口后，在 Zoom / Teams 设置里把摄像头、麦克风、扬声器都选成会议室设备（名字通常是 Logitech / Poly / Yealink / Crestron）。\n3) 摄像头有隐私盖或镜头被转到墙壁的，打开 / 转回来；摄像头指示灯应该亮。\n4) 网线有没有插好，主机旁的网络指示灯是否闪烁；Wi-Fi 的改用网线。\n5) 触控屏提示「登录 / 账号 / 许可证」错误：这是账号问题，回复 0 联系技术员。\n6) 实在不行，用笔记本电脑直接入会先把会开起来。",
+      "en": "Video conferencing not connecting or no camera image:\n1) Does the room touch panel / tablet show its normal home screen? Black or spinning: unplug the codec 30 seconds, restart, wait 3 minutes.\n2) Joining from your own laptop (BYOD): after plugging the room USB cable, set camera, microphone and speaker to the room devices in Zoom / Teams settings (usually named Logitech / Poly / Yealink / Crestron).\n3) Camera privacy shutter closed or lens turned to the wall? Open it; the camera light should be on.\n4) Network cable seated, link light blinking by the codec? Move Wi-Fi codecs to a cable.\n5) Touch panel showing a sign-in / account / licence error: that is an account issue, reply 0 for a technician.\n6) Worst case, join from a laptop directly so the meeting can start."
+    },
+    "explain": {
+      "zh": "会议室系统有三部分：会议主机（跑 Zoom Rooms / Teams Rooms 软件）、摄像头麦克风喇叭、网络和账号。\n• 主机死机、软件更新卡住：重启能解决，是最常见的。\n• 设备没被识别（USB 线松、集线器断电）：画面或声音缺一样。\n• 网络被 IT 改动（换路由、VLAN、防火墙）：显示离线或入会失败。\n• 账号过期、许可证到期、密码改了：显示登录错误，需要 IT 或我们处理账号。\n前两种自己能处理，后两种需要技术员或 IT。",
+      "en": "A room system has three parts: the codec (running Zoom Rooms / Teams Rooms), the camera-mic-speaker peripherals, and network plus account.\n• Codec hang or a stuck software update: a restart fixes it, the most common case.\n• Peripheral not detected (loose USB, hub lost power): picture or sound missing.\n• Network changed by IT (new router, VLAN, firewall): shows offline or fails to join.\n• Expired account, lapsed licence, changed password: sign-in error, needs IT or us to fix the account.\nThe first two you can handle; the last two need a technician or IT."
+    }
+  },
+  {
+    "id": "core-vc-one-way-audio",
+    "title": {
+      "zh": "对方听不到或我们听不到",
+      "en": "One side of the call cannot hear the other"
+    },
+    "match": [
+      "对方听不到",
+      "远端听不到",
+      "听不到我们",
+      "我们听不到",
+      "对方没声音",
+      "会议电话",
+      "八爪鱼",
+      "speakerphone",
+      "far end",
+      "they can't hear",
+      "cannot hear us",
+      "we can't hear them",
+      "conference phone",
+      "polycom",
+      "jabra"
+    ],
+    "reply": {
+      "zh": "对方听不到我们，或我们听不到对方：\n1) 对方听不到我们：会议室麦克风是不是静音（设备上的红灯 / 会议软件里的麦克风图标）；软件里麦克风要选会议室设备。\n2) 我们听不到对方：软件里扬声器选会议室设备，音量调高；会议设备本身的音量键按几下。\n3) 电脑入会的，确认电脑没有同时用内置麦和内置喇叭，会导致一边听不到。\n4) 会议电话（八爪鱼）：拔掉重插 USB 或网线，重启一次。\n5) 让对方也检查他们的麦克风和扬声器，一半以上是对方的问题。",
+      "en": "The far end cannot hear us, or we cannot hear them:\n1) They cannot hear us: room mic muted (red light on the device / mic icon in the app)? The app must use the room mic.\n2) We cannot hear them: app speaker set to the room device, volume up; press the volume keys on the device itself.\n3) Joining from a laptop: make sure it is not using the built-in mic and speaker at the same time, which breaks one direction.\n4) Conference phone (speakerphone): reseat the USB or network cable and restart it once.\n5) Ask the far end to check their mic and speaker too; over half the time it is their side."
+    },
+    "explain": {
+      "zh": "单向没声音（只有一边听不到）几乎都是设备选择或静音问题，不是硬件：发送方向用的是麦克风，接收方向用的是喇叭，两条路独立。双向都没声通常是会议设备没被电脑识别（USB 掉了）。会议电话用了多年后麦克风灵敏度下降、按键失灵属于老化，需要更换。",
+      "en": "One-way audio (only one side cannot hear) is almost always device selection or mute, not hardware: sending uses the mic path, receiving uses the speaker path, and they are independent. No audio both ways usually means the laptop lost the USB device. Conference phones that are years old lose mic sensitivity and buttons fail, which is wear and needs replacement."
+    }
+  },
+  {
+    "id": "core-usbc-no-video",
+    "title": {
+      "zh": "USB-C 只充电没画面",
+      "en": "USB-C charges but gives no picture"
+    },
+    "match": [
+      "usb-c",
+      "usb c",
+      "type-c",
+      "type c",
+      "一根线",
+      "one cable",
+      "充电但没画面",
+      "charging but",
+      "扩展坞"
+    ],
+    "reply": {
+      "zh": "会议室的 USB-C 一线通只充电、没画面或没有摄像头：\n1) 确认接的是电脑上支持视频输出的 USB-C 口（有闪电或显示器标志），很多电脑只有一个口支持。\n2) 拔掉等 5 秒再插，插到底。\n3) 电脑按 Win+P 选「复制」；Mac 在显示器设置里看有没有检测到。\n4) 有的电脑 USB-C 只支持充电不支持视频，换用 HDMI 线加 USB 线。\n5) 扩展坞 / 一线通主机断电重启。",
+      "en": "The room's single USB-C cable charges but gives no picture or camera:\n1) Use a USB-C port on the laptop that supports video (lightning or monitor symbol); many laptops have only one.\n2) Unplug, wait 5 seconds, plug fully in.\n3) Press Win+P and choose Duplicate; on Mac check Displays for detection.\n4) Some laptops' USB-C ports are charge-only with no video; use HDMI plus USB instead.\n5) Power-cycle the dock / USB-C hub."
+    },
+    "explain": {
+      "zh": "USB-C 一根线同时传视频、USB 和电力，但不是所有电脑的 USB-C 口都支持视频（需要 DP Alt Mode），这是最常见的「插上只充电」原因。其次是线材过长或质量差导致视频带宽不够。扩展坞固件老旧对新电脑兼容性差。会议室应常备一条 HDMI 线作为后备。",
+      "en": "One USB-C cable carries video, USB and power, but not every laptop USB-C port supports video (DP Alt Mode); that is the usual reason it only charges. Next come cables too long or of poor quality for video bandwidth. Old dock firmware has poor compatibility with new laptops. Every room should keep an HDMI cable as a fallback."
+    }
+  },
+  {
+    "id": "core-control-not-responding",
+    "title": {
+      "zh": "遥控或中控面板没反应",
+      "en": "Remote or control panel not responding"
+    },
+    "match": [
+      "遥控",
+      "遥控器",
+      "中控",
+      "触控面板",
+      "面板",
+      "没反应",
+      "remote",
+      "touch panel",
+      "control panel",
+      "not responding",
+      "crestron",
+      "extron",
+      "amx",
+      "panel black"
+    ],
+    "reply": {
+      "zh": "遥控器或中控面板没反应：\n1) 遥控器：换电池，对着设备的接收窗按，中间不要有遮挡。\n2) 触控面板黑屏：面板靠网线（PoE）供电，检查网线有没有松；拔掉等 30 秒再插。\n3) 面板有画面但按了设备不动：中控主机死机，找到机柜里的中控主机断电 30 秒重启，等 2 到 3 分钟。\n4) 面板显示「连接中 / Connecting」一直不消失：中控主机或网络问题。\n5) 应急：直接用各设备自己的遥控器或机身按键操作。",
+      "en": "Remote or control panel not responding:\n1) Remote: fresh batteries, point at the device's receiver window with nothing in between.\n2) Touch panel black: it is powered over the network cable (PoE); reseat the cable, unplug 30 seconds.\n3) Panel works but equipment does not react: the control processor has hung; find it in the rack, unplug 30 seconds, wait 2–3 minutes.\n4) Panel stuck on Connecting: control processor or network issue.\n5) Workaround: use each device's own remote or front buttons."
+    },
+    "explain": {
+      "zh": "中控系统是一台小电脑（中控主机）通过网线、串口或红外去指挥投影机、屏幕、音量：\n• 面板黑屏多是 PoE 供电问题（交换机端口、网线）。\n• 面板正常但设备不动，是主机死机、程序卡住或某条控制线松了。\n• 只有某一个功能不动（比如只有投影机不听话），是那条控制线路或设备侧的控制口。\n中控程序和线路需要专业工具排查，建议技术员处理；重启能解决的一般是偶发。",
+      "en": "A control system is a small computer (the processor) driving projectors, screens and volume over network, serial or infrared:\n• A black panel is usually PoE power (switch port, cable).\n• Panel fine but equipment ignoring it: processor hang, a stuck program or a loose control cable.\n• Only one function dead (say, only the projector ignores commands): that control line or the device's control port.\nControl programming and wiring need specialist tools, so a technician should handle it; anything a restart fixes was a one-off."
+    }
+  },
+  {
+    "id": "core-screen-lift-scene",
+    "title": {
+      "zh": "电动幕、升降或场景不动",
+      "en": "Motorized screen, lift or scene not working"
+    },
+    "match": [
+      "电动幕",
+      "幕布",
+      "升降",
+      "投影机升降",
+      "不下来",
+      "不上去",
+      "卡住",
+      "灯光场景",
+      "场景",
+      "motorized screen",
+      "screen stuck",
+      "projector lift",
+      "lights not",
+      "preset"
+    ],
+    "reply": {
+      "zh": "电动幕布 / 投影机升降不动、场景按了没反应：\n1) 幕布和升降架自己的墙面开关或遥控器试一下，能动说明中控线路问题，不能动是电机或电源。\n2) 听听有没有电机声：有声音不动可能卡住，马上停止操作，不要反复按。\n3) 检查幕布电源插头或空开有没有跳闸。\n4) 场景按钮没反应：中控主机断电 30 秒重启，等 3 分钟。\n5) 卡住、异响、停在半空，不要自己爬上去处理，回复 3 安排技术员。",
+      "en": "Motorized screen / projector lift not moving, or a scene button doing nothing:\n1) Try the screen's own wall switch or remote: if it moves, the control wiring is at fault; if not, the motor or its power.\n2) Listen for the motor: sound but no movement may mean a jam; stop pressing immediately.\n3) Check the screen's power plug or breaker has not tripped.\n4) Scene buttons dead: unplug the control processor 30 seconds, wait 3 minutes.\n5) Jammed, grinding or stopped halfway: do not climb up to fix it; reply 3 for a technician."
+    },
+    "explain": {
+      "zh": "电动幕和升降架是电机加限位开关：\n• 完全不动、没声音：电源、保险、继电器或电机烧了。\n• 有声不动或走到一半停：机械卡住、限位错位、幕布卷偏。\n• 自己开关能动但中控不能：中控到继电器的线路或程序。\n这些设备在天花板上，涉及重物和电，必须由技术员处理，不要自己爬梯子。",
+      "en": "Motorized screens and lifts are a motor plus limit switches:\n• No movement, no sound: power, fuse, relay or a burnt motor.\n• Sound but no movement, or stopping halfway: mechanical jam, shifted limit or a skewed roll.\n• Own switch works but control system does not: wiring or programming between processor and relay.\nThese are ceiling-mounted, heavy and mains-powered, so a technician must handle them; please do not climb a ladder."
+    }
+  },
+  {
+    "id": "core-device-offline",
+    "title": {
+      "zh": "设备离线或换路由后不能用",
+      "en": "Device offline or broken after a router change"
+    },
+    "match": [
+      "离线",
+      "offline",
+      "换了路由",
+      "连不上网",
+      "no network",
+      "换了wifi",
+      "isp",
+      "device not found",
+      "找不到设备"
+    ],
+    "reply": {
+      "zh": "设备显示离线、找不到设备、换了路由器后不能用：\n1) 设备的网线两头重插，看网口指示灯有没有亮或闪。\n2) 设备和机柜里的交换机都断电 30 秒重启。\n3) 最近 IT 有没有换路由器、改 Wi-Fi 密码或密码策略？有的话 AV 设备需要重新配置网络，这一步需要技术员配合 IT。\n4) Wi-Fi 的设备尽量改成网线。\n5) 临时应急：用 HDMI 线直连，不走网络功能。",
+      "en": "Device offline, not found, or not working after a router change:\n1) Reseat the device's network cable at both ends; check the port light is on or blinking.\n2) Power-cycle the device and the rack switch for 30 seconds.\n3) Did IT recently change the router, Wi-Fi password or policy? AV devices then need network reconfiguration, which a technician does together with IT.\n4) Move Wi-Fi devices to a cable where possible.\n5) Temporary workaround: connect by HDMI and skip the network features."
+    },
+    "explain": {
+      "zh": "AV 设备很多是固定 IP 或绑定了旧 Wi-Fi：\n• 换路由器后网段变了，固定 IP 的设备就「离线」，需要逐台改 IP。\n• 改 Wi-Fi 密码后无线设备全部掉线，需要逐台重新输入。\n• 交换机端口坏、网线被老鼠咬、PoE 供电不足也会导致单台离线。\n这是配置工作不是故障，但需要人到场逐台设置，建议换网络前先通知我们。",
+      "en": "Many AV devices use fixed IPs or are bound to the old Wi-Fi:\n• After a router change the subnet changes and fixed-IP devices go 'offline'; each needs its IP changed.\n• After a Wi-Fi password change every wireless device drops and needs the new password entered one by one.\n• A bad switch port, a chewed cable or insufficient PoE also takes single devices offline.\nThis is configuration, not a fault, but someone must attend and set each device; tell us before changing the network."
+    }
+  },
+  {
+    "id": "core-after-power-cut",
+    "title": {
+      "zh": "停电后整套系统不能用",
+      "en": "Whole system down after a power cut"
+    },
+    "match": [
+      "停电",
+      "跳闸",
+      "全部不能用",
+      "全部没反应",
+      "都没反应",
+      "power outage",
+      "power trip",
+      "nothing works",
+      "everything dead",
+      "after blackout",
+      "顺序",
+      "sequencer"
+    ],
+    "reply": {
+      "zh": "停电或跳闸之后整套系统不能用：\n1) 先看机柜的电源排插 / 时序电源有没有开，有总开关的先打开。\n2) 开机顺序：先开中控主机和交换机，等 3 分钟；再开处理器、矩阵；再开功放；最后开投影机 / 屏幕。功放一定最后开、最先关。\n3) 有的设备停电后不会自动开机，需要手动按一下电源。\n4) 检查配电箱的空开有没有跳，跳了合上；再次跳闸就不要再合，可能有短路，回复 3。\n5) 等 5 分钟再测试，很多设备需要时间启动和互相重新连接。",
+      "en": "After a power cut or trip the whole system is down:\n1) Check the rack power strip / power sequencer is on; turn on the master switch first.\n2) Power-up order: control processor and switch first, wait 3 minutes; then processors and matrix; then amplifiers; finally projectors / displays. Amplifiers always last on, first off.\n3) Some devices do not auto-start after a cut and need their power button pressed.\n4) Check breakers in the distribution board; reset a tripped one. If it trips again, leave it off, there may be a short; reply 3.\n5) Wait 5 minutes before testing; devices need time to boot and reconnect to each other."
+    },
+    "explain": {
+      "zh": "停电后「全不能用」多数是开机顺序和设备没自动开机造成的，不是坏了：中控没启动完就按场景，设备收不到指令；功放先于处理器开机会发出爆音并进保护。少数情况是电压冲击烧了电源，表现为某台设备完全不亮。反复跳闸是短路或漏电，必须停用待查。建议机柜加装时序电源和 UPS，停电后自动按顺序恢复。",
+      "en": "After a power cut, 'nothing works' is mostly power-up order and devices not auto-starting, not damage: pressing a scene before the processor has booted sends commands nowhere; amplifiers powered before processors pop and go into protection. Occasionally a surge kills a power supply, seen as one device totally dead. Repeated tripping is a short or earth leakage and the system must stay off until checked. A power sequencer and UPS in the rack lets everything recover in order automatically."
+    }
+  },
+  {
+    "id": "core-recording-streaming",
+    "title": {
+      "zh": "录播或直播没画面没声音",
+      "en": "Recording or streaming has no picture or sound"
+    },
+    "match": [
+      "录像",
+      "录音",
+      "录制",
+      "直播",
+      "推流",
+      "采集卡",
+      "obs",
+      "recording",
+      "streaming",
+      "capture card",
+      "no input in obs",
+      "录不到"
+    ],
+    "reply": {
+      "zh": "录播或直播没有画面 / 声音：\n1) 采集卡 USB 拔掉重插，换 USB 3.0 口（蓝色）。\n2) OBS / 录播软件里把视频源和音频源重新选一遍，选到采集卡或会议设备。\n3) 采集卡的 HDMI 输入有画面吗？来源设备先确认在输出。\n4) 录像机硬盘 / SD 卡满了或没格式化，换卡或清空。\n5) 直播卡顿：网络上传带宽不够，关掉其他占网的设备，或降低码率到 2500 kbps 以下。",
+      "en": "Recording or streaming with no picture / sound:\n1) Reseat the capture card USB; use a USB 3.0 (blue) port.\n2) In OBS / the recorder software reselect the video and audio sources to the capture card or room device.\n3) Is there a picture on the capture card's HDMI input? Confirm the source is outputting first.\n4) Recorder disk / SD card full or unformatted: swap or clear it.\n5) Stream stuttering: not enough upload bandwidth; disconnect other heavy devices or drop the bitrate below 2500 kbps."
+    },
+    "explain": {
+      "zh": "录播链路是「来源 → 采集卡 → 软件 → 硬盘或网络」，每一段都要选对：\n• 采集卡掉线或 USB 带宽不足（插在 USB 2.0 或集线器上）是最常见的「没画面」。\n• 软件里的源选错，比如选了摄像头而不是采集卡。\n• HDCP 保护的内容（播放器、电视盒）采集卡会黑屏，这是版权限制不是故障。\n• 直播质量取决于上传带宽，这是网络问题。\n活动直播建议提前一天彩排，并由技术员到场值守。",
+      "en": "The recording chain is source → capture card → software → disk or network, and each link must be selected correctly:\n• A dropped capture card or insufficient USB bandwidth (USB 2.0 or a hub) is the most common 'no picture'.\n• Wrong source in the software, e.g. the webcam instead of the capture card.\n• HDCP-protected content (players, TV boxes) shows black on capture cards; that is copy protection, not a fault.\n• Stream quality depends on upload bandwidth, a network matter.\nFor live events rehearse a day ahead and have a technician on site."
+    }
+  }
+]

@@ -1,0 +1,748 @@
+[
+  {
+    "id": "sig-auto-switch-wrong-laptop",
+    "title": {
+      "zh": "桌面接口自动切换选错电脑",
+      "en": "Table input auto-switch picks the wrong laptop"
+    },
+    "match": [
+      "自动切换",
+      "切错电脑",
+      "显示别人的电脑",
+      "切不过来",
+      "抢画面",
+      "换不到我的电脑",
+      "桌面盒",
+      "auto switch",
+      "auto switching",
+      "wrong laptop showing",
+      "shows other laptop",
+      "cannot switch laptop",
+      "table box input",
+      "floor box input"
+    ],
+    "reply": {
+      "zh": "桌面接口自动切换选错电脑或切不过来：\n1) 把不演示的电脑线全部拔掉，只留要演示的那台。多数自动切换器会跟着最后插入、有信号的那台。\n2) 把自己的线拔掉，等 5 秒再插回，让它变成「最新」的信号。\n3) 确认电脑没有睡眠、盖子打开，按 Win+P（Mac：系统设置 > 显示器）选「复制」或「扩展」。\n4) 桌面或触控屏有输入键（HDMI 1 / HDMI 2 / USB-C）的，手动按自己那个接口。\n5) 还是不对，换桌上另一个接口或另一条线。\n6) 应急：用一条 HDMI 线把电脑直接接到显示屏。",
+      "en": "Table or floor box picks the wrong laptop, or will not switch:\n1) Unplug every laptop that is not presenting and leave only yours. Most auto-switchers follow the last source plugged in that has a live signal.\n2) Unplug your own cable, wait 5 seconds and plug it back so it becomes the newest signal.\n3) Make sure your laptop is awake with the lid open, then press Win+P (Mac: System Settings > Displays) and choose Duplicate or Extend.\n4) If the table or touch screen has input buttons (HDMI 1 / HDMI 2 / USB-C), press the one for your port.\n5) Still wrong? Try another port or another cable on the table.\n6) Workaround: connect your laptop straight to the display with one HDMI cable."
+    },
+    "explain": {
+      "zh": "这通常是自动切换的规则在起作用，不是设备坏了：\n• 自动切换器按「最后插入」或「固定优先顺序」选信号，别人的电脑一直插着就会抢走画面。\n• 睡眠中的电脑有时仍被当成有信号，所以要拔掉闲置的线。\n• 某个接口永远切不到，可能是那条线或接口坏了，需要技术员检查。\n• 想改成手动选择或调整优先顺序，属于设备设置，由技术员调整。\n自己拔插线、按输入键是安全的；不要拆桌面盒。",
+      "en": "This is usually the auto-switch rule at work, not a broken device:\n• An auto-switcher picks the signal by last plugged in or by a fixed priority order, so another laptop left connected can take over the screen.\n• A sleeping laptop is sometimes still seen as a live signal, which is why idle cables should be unplugged.\n• If one port can never be selected, that cable or port may be faulty and needs a technician to check.\n• Changing to manual selection or a different priority order is a device setting that a technician adjusts.\nUnplugging cables and pressing input buttons is safe; do not open the table box."
+    }
+  },
+  {
+    "id": "sig-matrix-wrong-display",
+    "title": {
+      "zh": "画面出现在错误的屏幕或房间",
+      "en": "Content shows on the wrong display or room"
+    },
+    "match": [
+      "显示到别的屏幕",
+      "跑到隔壁房",
+      "画面跑错",
+      "投到别的房间",
+      "屏幕显示错",
+      "路由错了",
+      "跑去别的屏",
+      "wrong display",
+      "wrong screen",
+      "shows in other room",
+      "wrong room screen",
+      "routing wrong",
+      "matrix routing",
+      "content on wrong tv"
+    ],
+    "reply": {
+      "zh": "画面出现在错误的屏幕或别的房间：\n1) 在触控屏上先选「目的地」（例如 左屏、B 房），再选信号源；很多系统两样都要选。\n2) 有「合并 / 分开房间」（Room Combine）按钮的，确认它和活动隔墙的实际状态一致。\n3) 按「系统关闭」，等 30 秒再开，路由一般会回到默认。\n4) 确认电脑插的是本房间标签的接口，不是隔壁房的。\n5) 如果机密内容出现在别的房间，马上拔掉电脑的线。\n6) 应急：用一条 HDMI 线把电脑直接接到本房间的显示屏。",
+      "en": "Content shows on the wrong display or in another room:\n1) On the touch screen choose the destination first (for example Left Screen or Room B), then the source. Many systems need both.\n2) If there is a Room Combine / Separate button, make sure it matches the real state of the folding wall.\n3) Press System Off, wait 30 seconds and turn it on again; routing normally returns to the default.\n4) Check your laptop is plugged into the port labelled for this room, not the room next door.\n5) If confidential content is showing in another room, unplug your laptop at once.\n6) Workaround: connect the laptop straight to this room's display with one HDMI cable."
+    },
+    "explain": {
+      "zh": "矩阵里有一张「谁看哪个信号」的路由表，画面跑错通常是路由被改了：\n• 上一场会议手动改了路由，或合并房间模式没有恢复。\n• 触控屏上选错了目的地屏幕。\n• 重启后每次都错，说明程序或预设需要技术员修改。\n• 机柜后面的线如果被人换过位置，也会跑错；不要自己调换矩阵后面的线，标签位置很重要。\n这不伤设备，但可能泄露内容，机密会议前请先确认画面去向。",
+      "en": "A matrix keeps a routing table of which display sees which source; content in the wrong place usually means that routing was changed:\n• The previous meeting changed the routing by hand, or combined-room mode was never switched back.\n• The wrong destination display was chosen on the touch screen.\n• If it is wrong again after every restart, the programming or preset needs a technician to correct it.\n• Cables moved at the back of the rack also cause this; do not swap cables behind the matrix yourself, the labelled positions matter.\nIt does not harm the equipment but it can leak content, so check where your picture goes before a confidential meeting."
+    }
+  },
+  {
+    "id": "sig-splitter-one-output-black",
+    "title": {
+      "zh": "分配器一个屏有画面一个黑屏",
+      "en": "HDMI splitter: one screen works, the other is black"
+    },
+    "match": [
+      "分配器",
+      "一分二",
+      "一个有一个没有",
+      "一边有一边没",
+      "第二个屏幕黑",
+      "另一个屏黑",
+      "hdmi splitter",
+      "splitter output",
+      "one screen black",
+      "second screen black",
+      "one tv no picture",
+      "only one screen works",
+      "dual screen one blank"
+    ],
+    "reply": {
+      "zh": "HDMI 分配器一个屏有画面、另一个黑屏：\n1) 确认黑屏的那台已开机，输入选对（HDMI 1 / 2）。\n2) 关掉两台屏幕，把分配器的小电源适配器从插座拔掉 10 秒；再按顺序开：屏幕 > 分配器 > 电脑。\n3) 把电脑分辨率调到 1920x1080、60Hz；如果两台都亮了，就是两台屏幕规格不同。\n4) 伸手够得到的话，把黑屏那端和分配器输出端的 HDMI 线拔出再插紧。\n5) 播 Netflix 等受保护影片才黑屏的，属于 HDCP 限制，换成普通内容测试。\n6) 应急：先用有画面的那台，或把电脑直接接到屏幕。",
+      "en": "HDMI splitter: one screen works, the other is black:\n1) Check the black screen is switched on and on the right input (HDMI 1 / 2).\n2) Turn off both screens and unplug the splitter's small power adapter from the socket for 10 seconds. Then power on in this order: screens > splitter > laptop.\n3) Set the laptop to 1920x1080 at 60Hz. If both screens now work, the two screens have different capabilities.\n4) If you can reach them, reseat the HDMI cable at the black screen and at the splitter output.\n5) If it only goes black with protected video such as Netflix, that is an HDCP limit; test with normal content.\n6) Workaround: use the working screen, or connect the laptop straight to a screen."
+    },
+    "explain": {
+      "zh": "分配器把一路信号复制给两台屏幕，一黑一亮通常是「握手」问题：\n• 分配器只按其中一台屏幕的能力（EDID）告诉电脑输出什么；一台 4K、一台 1080p 时，较弱的那台就黑屏。\n• 去第二台屏幕的线太长或质量不够，高分辨率过不去。\n• 分配器的电源适配器松了，或开机顺序不对。\n• 受版权保护的内容要求两台屏幕都通过 HDCP。\n重启和调低分辨率用户可以自己做；分配器上的 EDID 拨码或换线由技术员处理。",
+      "en": "A splitter copies one signal to two screens; one black and one working is usually a handshake problem:\n• The splitter tells the laptop what to send based on only one screen's capability (EDID). With one 4K screen and one 1080p screen, the weaker one goes black.\n• The cable to the second screen is too long or not good enough for high resolution.\n• The splitter's power adapter is loose, or the power-on order was wrong.\n• Copy-protected content needs both screens to pass HDCP.\nRestarting and lowering the resolution are safe for users; EDID switches on the splitter or replacing cables are for a technician."
+    }
+  },
+  {
+    "id": "sig-edid-4k-black",
+    "title": {
+      "zh": "4K 黑屏，调低分辨率才有画面",
+      "en": "4K source shows black; works only at low resolution"
+    },
+    "match": [
+      "edid",
+      "调低分辨率才有",
+      "4k黑屏",
+      "4k没画面",
+      "4k不显示",
+      "分辨率不支持",
+      "超出范围",
+      "4k black screen",
+      "4k no picture",
+      "only works at 1080p",
+      "out of range",
+      "resolution not supported",
+      "low resolution only"
+    ],
+    "reply": {
+      "zh": "4K 黑屏、调低分辨率才有画面：\n1) Windows：桌面右键 > 显示设置 > 显示分辨率，选 1920x1080。Mac：系统设置 > 显示器，选 1080p。\n2) 刷新率选 60Hz（Windows：高级显示；Mac：刷新率），不要 120 / 144Hz。\n3) 把这台外接屏幕的 HDR 关掉。\n4) 线拔掉等 5 秒再插回，让电脑重新读取屏幕信息。\n5) 一定要 4K 的：在显示屏菜单里把该 HDMI 口的「UHD / 增强格式 / HDMI 2.0」打开；画面更差就改回去。\n6) 应急：这场会议先用 1080p，投影片和表格完全够用。",
+      "en": "4K source shows black; picture only works at low resolution:\n1) Windows: right-click the desktop > Display settings > Display resolution, choose 1920x1080. Mac: System Settings > Displays, choose 1080p.\n2) Set the refresh rate to 60Hz (Windows: Advanced display; Mac: Refresh Rate), not 120 / 144Hz.\n3) Turn HDR off for this external display.\n4) Unplug the cable, wait 5 seconds and plug it back so the laptop reads the display information again.\n5) If you really need 4K: in the display menu turn on UHD / Enhanced format / HDMI 2.0 for that HDMI port. If the picture gets worse, switch it back.\n6) Workaround: use 1080p for this meeting; it is fully enough for slides and spreadsheets."
+    },
+    "explain": {
+      "zh": "屏幕会用 EDID 告诉电脑「我支持哪些分辨率」，整条链路里最弱的一环决定能过多少：\n• 4K 60Hz 的数据量很大，较旧的延长器、切换器或长线只支持 4K 30Hz 或 1080p。\n• 电脑自动选了系统过不去的 4K、HDR 或高刷新率，于是黑屏。\n• 设备里保存的 EDID 设置和现在的屏幕不匹配，例如换过新电视。\n不严重，1080p 可以正常开会。需要真正的 4K 时，由技术员检查 EDID 设置和线材、延长器的规格；不要自己拨设备上的小开关。",
+      "en": "A display uses EDID to tell the laptop which resolutions it supports, and the weakest link in the chain decides what gets through:\n• 4K at 60Hz carries a lot of data; older extenders, switchers or long cables only support 4K at 30Hz or 1080p.\n• The laptop automatically picks 4K, HDR or a high refresh rate that the system cannot pass, so the screen goes black.\n• The EDID setting stored in the equipment no longer matches the display, for example after a new TV was installed.\nIt is not serious; meetings run fine at 1080p. If true 4K is needed, a technician checks the EDID settings and the grade of the cables and extenders. Do not change the small switches on the equipment yourself."
+    }
+  },
+  {
+    "id": "sig-hdcp-streaming-box",
+    "title": {
+      "zh": "机顶盒或电视棒 HDCP 错误",
+      "en": "HDCP error with Apple TV, set-top box or streaming stick"
+    },
+    "match": [
+      "hdcp",
+      "版权保护",
+      "不支持hdcp",
+      "hdcp错误",
+      "机顶盒黑屏",
+      "电视棒黑屏",
+      "内容受保护",
+      "hdcp error",
+      "hdcp unauthorized",
+      "apple tv black screen",
+      "netflix black screen",
+      "content protected",
+      "streaming stick black",
+      "set-top box black"
+    ],
+    "reply": {
+      "zh": "Apple TV、机顶盒或电视棒出现 HDCP 错误或黑屏：\n1) 关掉显示屏，把盒子的电源拔掉 10 秒；先开显示屏，再给盒子通电，让它们重新握手。\n2) 在触控屏上重新选一次这个信号源。\n3) 够得到的 HDMI 线两端都拔出再插紧。\n4) 在盒子的设置里把输出改成 1080p 60Hz，关掉 HDR / Dolby Vision。\n5) 受保护的节目不能送去录影、直播或视频会议的内容共享，这是设计如此，不是故障。\n6) 应急：把盒子直接插到电视或显示屏的空 HDMI 口。",
+      "en": "HDCP error or black screen with Apple TV, set-top box or streaming stick:\n1) Turn off the display and unplug the box's power for 10 seconds. Turn the display on first, then power the box, so they handshake again.\n2) Select that source again on the touch screen.\n3) Reseat both ends of the HDMI cable where you can reach them.\n4) In the box settings change the output to 1080p 60Hz and turn off HDR / Dolby Vision.\n5) Protected programmes cannot be sent to recording, live streaming or video-conference content sharing. That is by design, not a fault.\n6) Workaround: plug the box straight into a spare HDMI port on the TV or display."
+    },
+    "explain": {
+      "zh": "HDCP 是影片的版权保护，Netflix、Disney+、付费电视机顶盒和 Apple TV 都会用：\n• 从盒子到屏幕，链路上每一台设备都要通过认证，一台不通过就黑屏或出现错误信息。\n• 4K 串流通常要求 HDCP 2.2，较旧的切换器或延长器只支持 1.4。\n• 录影机、采集卡和视频会议主机按规定不接受 HDCP 内容。\n• 电脑放投影片一般不受影响。\n直连正常、经过系统就不行的，需要技术员调整设置或升级设备。不要使用所谓的「HDCP 解除器」。",
+      "en": "HDCP is copy protection for video, used by Netflix, Disney+, pay-TV set-top boxes and Apple TV:\n• Every device in the chain from the box to the screen must pass the check; if one fails you get a black screen or an error message.\n• 4K streaming usually needs HDCP 2.2, while older switchers or extenders only support 1.4.\n• Recorders, capture cards and video-conference units are not allowed to accept HDCP content.\n• Slides from a laptop are normally not affected.\nIf it works when plugged in directly but not through the system, a technician needs to adjust settings or upgrade equipment. Do not use so-called HDCP remover gadgets."
+    }
+  },
+  {
+    "id": "sig-mac-no-display",
+    "title": {
+      "zh": "Mac 不显示，Windows 正常",
+      "en": "Mac laptop will not display but Windows laptops do"
+    },
+    "match": [
+      "mac不显示",
+      "mac没画面",
+      "mac投不出",
+      "苹果电脑不显示",
+      "苹果电脑投不了",
+      "mac接不上",
+      "mac no display",
+      "macbook no display",
+      "macbook not showing",
+      "mac cannot project",
+      "mac not detected",
+      "only windows works",
+      "macbook black screen"
+    ],
+    "reply": {
+      "zh": "Mac 接上不显示，Windows 电脑却正常：\n1) 换一个 USB-C 转 HDMI 转接头（最好是原厂或确定好用的）；先把转接头插上 Mac，再插 HDMI 线。\n2) 系统设置 > 显示器：看有没有出现外接屏幕；多数版本按住 Option 键会出现「检测显示器」。\n3) 选外接屏幕，分辨率选 1080p、60 赫兹，关掉 HDR。\n4) 换 Mac 上另一个 USB-C 口；插着线重启 Mac。\n5) 房间用的是扩展坞的，Mac 可能要先安装驱动（如 DisplayLink）并允许「屏幕录制」权限，请找 IT。\n6) 应急：有无线投屏（AirPlay）就先用，或借一台 Windows 电脑。",
+      "en": "Mac laptop will not display but Windows laptops work:\n1) Try a different USB-C to HDMI adapter (ideally an original or one known to work). Plug the adapter into the Mac first, then the HDMI cable.\n2) System Settings > Displays: check whether the external display appears. On most versions, holding the Option key shows Detect Displays.\n3) Select the external display, choose 1080p and 60 Hertz, and turn off HDR.\n4) Try another USB-C port on the Mac, then restart the Mac with the cable connected.\n5) If the room uses a docking station, the Mac may need a driver (such as DisplayLink) and Screen Recording permission; ask IT.\n6) Workaround: use wireless sharing (AirPlay) if the room has it, or borrow a Windows laptop."
+    },
+    "explain": {
+      "zh": "Mac 对转接头和信号的要求比较严格，所以同一条线 Windows 行、Mac 不行：\n• 最常见是转接头或扩展坞不兼容，或用久了接触不良。\n• Mac 会按屏幕回报的信息自动选 4K 或特殊刷新率，系统的延长器或切换器过不去。\n• Mac 的版权保护（HDCP）握手较严，旧设备容易失败。\n• 部分 MacBook 型号只支持一台外接屏幕，经扩展坞接第二台就不亮。\n不严重，多数换转接头或调分辨率就好。只有 Mac 在这间房一直不行的，请技术员检查系统的 EDID 设置。",
+      "en": "A Mac is stricter about adapters and signals, which is why the same cable works for Windows but not for a Mac:\n• Most often the adapter or dock is not compatible, or is worn and making poor contact.\n• The Mac picks 4K or an unusual refresh rate from what the display reports, and the room's extender or switcher cannot pass it.\n• The Mac's copy-protection (HDCP) handshake is stricter, so older equipment fails more easily.\n• Some MacBook models support only one external display, so a second screen through a dock stays dark.\nIt is not serious; a different adapter or a lower resolution fixes most cases. If only Macs keep failing in this room, a technician should check the system's EDID settings."
+    }
+  },
+  {
+    "id": "sig-hdbaset-link-light",
+    "title": {
+      "zh": "延长器 Link 灯不亮或一直闪",
+      "en": "HDBaseT / HDMI-over-Cat extender link light off or blinking"
+    },
+    "match": [
+      "hdbaset",
+      "hdbt",
+      "link灯不亮",
+      "link灯闪",
+      "延长器灯",
+      "网线延长器",
+      "接收器灯",
+      "发射器灯",
+      "link light off",
+      "link light blinking",
+      "hdbaset link",
+      "tx rx light",
+      "extender light blinking",
+      "receiver box light"
+    ],
+    "reply": {
+      "zh": "网线延长器（HDBaseT）的 Link 灯不亮或一直闪：\n1) 找到两个小盒子：发射器（TX）在电脑、桌面或机柜一端，接收器（RX）在屏幕后面。只检查不用爬高就够得到的。\n2) 看电源灯：不亮就把电源适配器插紧，确认插座有开。有些型号由对端经网线供电，本身没有适配器。\n3) 把够得到的那端网线（水晶头）按到「咔」一声。这条线不是电脑网络，不要插到墙上的网络口或交换机。\n4) 两个盒子都断电 10 秒再通电，等 30 秒看 Link 灯。\n5) Link 灯常亮后，再把 HDMI 线插紧、重选信号源。\n6) 应急：用一条 HDMI 线把电脑直接接到屏幕。",
+      "en": "HDBaseT / HDMI-over-Cat extender link light off or blinking:\n1) Find the two small boxes: the transmitter (TX) near the laptop, table or rack, and the receiver (RX) behind the screen. Only check what you can reach without climbing.\n2) Power light off? Push the power adapter in firmly and check the socket is on. Some models are powered from the other end through the cable and have no adapter.\n3) Push the network-style (RJ45) plug in until it clicks. This cable is not computer network; never plug it into a wall data point or a switch.\n4) Unplug power from both boxes for 10 seconds, plug back and wait 30 seconds for the Link light.\n5) Once Link is steady, reseat the HDMI cable and select the source again.\n6) Workaround: connect the laptop straight to the screen with one HDMI cable."
+    },
+    "explain": {
+      "zh": "Link 灯表示两个盒子通过中间那条网线互相「看得到」。各品牌灯号略有不同，多数型号是这样：\n• 灯不亮：一端没电、线脱落、线被椅子压坏，或插错了口（LAN 口和 HDBaseT 口外形一样）。\n• 一直闪：通常是线或水晶头接触不良，或线太长、受干扰。\n• Link 亮但没画面：问题在 HDMI 线或信号源，不在长线。\n断电重启后仍不亮，多半是线或设备故障，需要技术员用仪器测试。不要自己重做水晶头，也不要用普通交换机代替。",
+      "en": "The Link light shows that the two boxes can see each other over the cable between them. Meanings vary a little by brand, but on most models:\n• Light off: one end has no power, the cable came out, the cable was crushed by a chair, or it is in the wrong port (LAN and HDBaseT ports look the same).\n• Blinking: usually a poor cable or connector contact, a run that is too long, or interference.\n• Link on but no picture: the problem is the HDMI cable or the source, not the long cable.\nIf it stays off after a power restart, the cable or a unit is probably faulty and a technician needs to test it with instruments. Do not re-make the connector yourself, and do not put an ordinary network switch in between."
+    }
+  },
+  {
+    "id": "sig-avoip-no-stream",
+    "title": {
+      "zh": "屏幕显示 No Stream",
+      "en": "AV-over-IP screen shows No Stream or only a splash logo"
+    },
+    "match": [
+      "no stream",
+      "没有串流",
+      "串流断了",
+      "只有logo",
+      "编码器",
+      "解码器",
+      "av over ip",
+      "splash screen",
+      "decoder no picture",
+      "encoder offline",
+      "nvx",
+      "sdvoe",
+      "zyper",
+      "stream not found"
+    ],
+    "reply": {
+      "zh": "屏幕显示 No Stream 或只有厂牌 Logo（网络传输的 AV 系统）：\n1) 先看信号源：电脑要开着、没睡眠、线插好。编码器收不到输入时，屏幕通常就显示 Logo 或 No Stream。\n2) 在触控屏上换去别的信号源，再选回来。\n3) 按「系统关闭」，等 30 秒再开。\n4) 桌面高度够得到的编码器小盒子：看电源灯和网口灯有没有亮，线有没有插紧。不要把它的网线换到别的口。\n5) 多个屏幕或多间房同时这样，可能是 AV 交换机关了或在重启：通知 IT，不要自己重启交换机。\n6) 应急：屏幕有空的 HDMI 口，就用一条线把电脑直接接上。",
+      "en": "Screen shows No Stream or only a brand logo (AV-over-IP system):\n1) Check the source first: the laptop must be on, awake and plugged in. When the encoder gets no input, the screen usually shows a logo or No Stream.\n2) On the touch screen, change to another source and then back.\n3) Press System Off, wait 30 seconds and turn it on again.\n4) For an encoder box you can reach at desk height: check its power and network lights are on and the cables are firm. Do not move its network cable to another port.\n5) If several screens or rooms show this together, the AV network switch may be off or restarting: tell IT, do not restart the switch yourself.\n6) Workaround: if the screen has a spare HDMI port, connect the laptop straight to it."
+    },
+    "explain": {
+      "zh": "这类系统把画面变成网络串流：信号源旁的编码器发送，屏幕后的解码器接收。Crestron NVX、ZeeVee Zyper、SDVoE、Kramer KDS 等原理相近，只是屏幕上的字样不同：\n• 显示 No Stream 或 Logo，表示解码器正常，但没有收到串流。\n• 常见原因：电脑睡眠、编码器没电、路由指令没发出、交换机重启。\n• IT 改过 VLAN、组播或防火墙设置后也会这样。\n只有一台屏幕出问题，多半是那一端的盒子或线；很多台一起，多半是网络或控制。网络设置由 IT 配合我们的技术员处理。",
+      "en": "These systems turn video into a network stream: an encoder beside the source sends it and a decoder behind the screen receives it. Crestron NVX, ZeeVee Zyper, SDVoE and Kramer KDS work in a similar way; only the on-screen wording differs:\n• No Stream or a logo means the decoder is alive but is not receiving a stream.\n• Usual causes: the laptop is asleep, the encoder has no power, the routing command was not sent, or the switch restarted.\n• It also happens after IT changes VLAN, multicast or firewall settings.\nIf only one screen is affected, it is usually the box or cable at that end; if many are affected together, it is usually the network or the control system. Network settings are handled by IT together with our technician."
+    }
+  },
+  {
+    "id": "sig-usb-extender-kvm",
+    "title": {
+      "zh": "键盘鼠标触控或摄像头传不到电脑",
+      "en": "Keyboard, mouse, touch or webcam not reaching the PC"
+    },
+    "match": [
+      "kvm",
+      "usb延长",
+      "触控回传",
+      "键鼠没反应",
+      "键盘鼠标不动",
+      "usb传不到",
+      "usb认不到",
+      "usb extender",
+      "usb not passing",
+      "kvm not working",
+      "keyboard mouse not working",
+      "usb not recognised",
+      "usb not recognized",
+      "touch not passing"
+    ],
+    "reply": {
+      "zh": "键盘、鼠标、触控或摄像头传不到电脑：\n1) 先确认选中的是哪台电脑：经过 KVM 或切换器时，USB 会跟着选中的信号源走，在面板或 KVM 按键上重选一次。\n2) 用手提电脑的：HDMI 只传画面，还要把桌上标着 USB / Touch / Camera 的那条线插到电脑。\n3) 把这条 USB 线从电脑拔出，等 10 秒，换电脑上另一个 USB 口（不要经过没有电源的小集线器）。\n4) 够得到的 USB 延长器小盒子，把电源拔掉 10 秒再插回。\n5) 重启电脑；触控屏要先开屏幕再开电脑。\n6) 应急：把键盘、鼠标或摄像头用它自己的短线直接插到电脑。",
+      "en": "Keyboard, mouse, touch or webcam not reaching the PC:\n1) Check which computer is selected: with a KVM or switcher, USB follows the selected source. Select it again on the panel or the KVM button.\n2) Laptop users: HDMI carries the picture only. Also plug the table cable labelled USB / Touch / Camera into the laptop.\n3) Unplug that USB cable from the computer, wait 10 seconds and use a different USB port (not through a small unpowered hub).\n4) If you can reach the USB extender box, unplug its power for 10 seconds and plug it back.\n5) Restart the computer. For a touch display, turn the display on before the computer.\n6) Workaround: plug the keyboard, mouse or webcam straight into the computer with its own short cable."
+    },
+    "explain": {
+      "zh": "USB 线本身只能走几米，所以长距离要靠一对延长器，或经过切换器跟着信号源走：\n• 电压波动、电脑睡眠或 Windows 的 USB 省电功能，会让延长器掉线，重插一次通常就恢复。\n• 摄像头需要高速 USB，有些延长器只支持 USB 2.0，会认不到或画质变差。\n• 触控需要画面和 USB 同时来自同一台电脑。\n• 公司电脑的安全策略有时会封锁外接 USB 设备，这要找 IT。\n设备直插电脑正常、经过延长器就不行的，是延长器或线的问题，需要技术员。",
+      "en": "A USB cable only works over a few metres, so long runs use a pair of extenders, or USB passes through the switcher and follows the selected source:\n• Power dips, a sleeping computer or Windows USB power saving can drop the extender link; replugging usually brings it back.\n• Webcams need high-speed USB. Some extenders only support USB 2.0, so the camera is not detected or the quality drops.\n• Touch needs the picture and the USB to come from the same computer.\n• Company laptops sometimes block external USB devices by security policy; that is for IT.\nIf a device works when plugged straight into the computer but not through the extender, the extender or its cable is at fault and a technician is needed."
+    }
+  },
+  {
+    "id": "sig-cables-unplugged-under-table",
+    "title": {
+      "zh": "桌下的线被拔过后全部不能用",
+      "en": "Cables under the table were unplugged, now nothing works"
+    },
+    "match": [
+      "线被拔了",
+      "线被拔掉",
+      "桌下的线",
+      "插错线",
+      "清洁工动了线",
+      "线乱了",
+      "不知道插哪里",
+      "cables unplugged",
+      "someone unplugged",
+      "cable pulled out",
+      "wires messed up",
+      "which cable goes where",
+      "cleaner unplugged",
+      "plugged wrong port"
+    ],
+    "reply": {
+      "zh": "桌下的线被拔过，现在全部不能用：\n1) 先不要乱插。拍一张桌下现状的照片发给我们。\n2) 先看电源：排插的开关和墙上插座有没有开？有没有电源适配器从排插掉出来？插回并打开。\n3) 对标签：线头和接口上通常有相同的标签（如 HDMI IN 1、USB、LAN），两边一样才插。\n4) 接头只会吻合一种接口，插不进就不要硬插。外形像网线的口可能有几种（LAN、HDBT、PoE），没有标签就不要猜，先留着。\n5) 接好后按「系统关闭」，等 30 秒再开。\n6) 应急：用一条 HDMI 线把电脑直接接到显示屏。",
+      "en": "Cables under the table were unplugged and now nothing works:\n1) Do not plug things in at random. Take a photo of how it looks under the table now and send it to us.\n2) Check power first: are the power strip switch and the wall socket on? Has a power adapter fallen out of the strip? Plug it back and switch on.\n3) Match the labels: cable ends and ports usually carry the same label (such as HDMI IN 1, USB, LAN). Plug in only where both match.\n4) A plug fits only one type of port; if it does not go in, do not force it. Network-style ports can be of several kinds (LAN, HDBT, PoE): with no label, do not guess, leave it.\n5) When done, press System Off, wait 30 seconds and turn it on again.\n6) Workaround: connect the laptop straight to the display with one HDMI cable."
+    },
+    "explain": {
+      "zh": "桌下通常藏着切换器、延长器和它们的电源适配器，被动过之后最常见的情况是：\n• 清洁时或有人给手机充电，拔掉了某个电源适配器，这种只要插回就好。\n• 脚踢到，线半松不松。\n• 有人借走了 HDMI 线或转接头。\n• 外形像网线的线插错口：有些口带供电（PoE、HDBaseT），插错会让设备不工作，少数情况会损坏设备，所以不确定就不要插。\n标签掉了或对不上，发照片给我们，技术员可以指导或上门重新整理并贴标签。建议不要用 AV 的排插给手机充电。",
+      "en": "Switchers, extenders and their power adapters are usually hidden under the table. After someone touches them, the usual situations are:\n• A power adapter was unplugged during cleaning or to charge a phone; this only needs plugging back.\n• A cable was kicked and is half loose.\n• Someone borrowed the HDMI cable or an adapter.\n• A network-style cable went into the wrong port: some ports carry power (PoE, HDBaseT), so a wrong port stops devices working and in rare cases damages them. If unsure, do not plug it in.\nIf labels are missing or do not match, send us photos; a technician can guide you or come to tidy and relabel. We suggest not using the AV power strip for phone chargers."
+    }
+  },
+  {
+    "id": "sig-connector-damaged",
+    "title": {
+      "zh": "墙插或桌面线接头松动、弯了或断了",
+      "en": "Wall plate or table cable connector loose, bent or broken"
+    },
+    "match": [
+      "接头松",
+      "接头弯了",
+      "接头断了",
+      "插头坏了",
+      "墙插松",
+      "线头坏了",
+      "针脚弯",
+      "connector loose",
+      "connector bent",
+      "connector broken",
+      "bent pin",
+      "wall plate loose",
+      "hdmi head broken",
+      "port damaged"
+    ],
+    "reply": {
+      "zh": "墙插或桌面线的接头松动、弯了或断了：\n1) 停止使用这个接头，不要硬插，也不要自己掰直。\n2) 有金属片断在电脑接口或墙插里的，不要用工具去挖。\n3) 墙插位置有焦味、发烫或火花：关掉墙上电源开关，停止使用，必须由技术员处理。\n4) 在这条线或接口上贴一张「请勿使用」，免得下一位弄坏电脑。\n5) 给接头和接口各拍一张清楚的近照发给我们。\n6) 先改用桌上另一个接口（HDMI 2 / USB-C）或另一条线。\n7) 应急：用一条备用 HDMI 线把电脑直接接到显示屏。",
+      "en": "Wall plate or table cable connector is loose, bent or broken:\n1) Stop using that connector. Do not force it in and do not bend it straight yourself.\n2) If a metal piece has broken off inside the laptop port or the wall plate, do not dig it out with tools.\n3) Burning smell, heat or sparks at the wall plate: switch off at the wall, stop using it; a technician is required.\n4) Stick a Do Not Use note on that cable or port so the next person does not damage a laptop.\n5) Take a clear close-up photo of the connector and of the port and send them to us.\n6) Meanwhile use another port on the table (HDMI 2 / USB-C) or another cable.\n7) Workaround: connect the laptop straight to the display with a spare HDMI cable."
+    },
+    "explain": {
+      "zh": "桌面线每天被拔插、侧拉、被椅子压到，HDMI 和 USB-C 的接头又薄，是最容易坏的地方：\n• 弯掉的接头硬插进去，会连电脑自己的接口一起弄坏。\n• 墙插或桌面插座松动，表示后面的接口只靠焊点或线吊着，越推越容易断。\n• 画面时有时无、要扶着线才有，通常就是接头快坏了。\n换线、修墙插由技术员处理；不要自己拆墙插面板，后面有线路。\n只要还有别的接口可用就不算紧急，但坏的接头请立即停用。",
+      "en": "Table cables are plugged, pulled sideways and rolled over by chairs every day, and HDMI and USB-C tips are thin, so this is where damage happens most:\n• Forcing in a bent connector can also damage the laptop's own port.\n• A loose wall plate or table socket means the connector behind is hanging only on its solder joints or cable; pushing harder makes it break.\n• A picture that comes and goes, or only works while you hold the cable, usually means the connector is about to fail.\nReplacing cables and repairing wall plates is technician work. Do not unscrew the wall plate yourself; there is wiring behind it.\nIt is not urgent while another port still works, but stop using the damaged connector straight away."
+    }
+  },
+  {
+    "id": "sig-panel-wrong-room-page",
+    "title": {
+      "zh": "触控屏显示错房间或某设备按键无效",
+      "en": "Control screen shows wrong room or one device ignores it"
+    },
+    "match": [
+      "显示错房间",
+      "控制到隔壁",
+      "控到别间",
+      "页面不对",
+      "跳错页",
+      "只有投影不听",
+      "单一设备没反应",
+      "wrong room name",
+      "controls other room",
+      "wrong page",
+      "stuck on wrong page",
+      "one device not responding",
+      "one button not working",
+      "controlling next room"
+    ],
+    "reply": {
+      "zh": "触控屏显示错房间，或只有某一台设备按了没反应：\n1) 看屏幕上方的房间名。不是这间房的，找「选择房间 / Home / 返回」选回本房间（iPad 在控制 App 里选）。\n2) 按 Home 或 X 关掉弹出窗口或子页面，再试一次。\n3) 只有一台设备不听（例如只有投影机或电视）：看它有没有电、待机灯有没有亮，有没有被人从插座关掉。\n4) 用那台设备自己的遥控器或电源键开一次，再用触控屏试。\n5) 按「系统关闭」，等 30 秒再开，让状态重新同步。\n6) 记下哪一页、哪个按键没作用，拍照发给我们。",
+      "en": "Control screen shows the wrong room, or only one device does not respond:\n1) Read the room name at the top of the screen. If it is not this room, find Room Select / Home / Back and choose this room (on an iPad, choose it in the control app).\n2) Press Home or X to close any pop-up or sub-page, then try again.\n3) If only one device ignores the buttons (for example only the projector or the TV): check it has power, its standby light is on and nobody switched it off at the socket.\n4) Turn that device on once with its own remote or power button, then try the control screen again.\n5) Press System Off, wait 30 seconds and turn it on again so the status resyncs.\n6) Note which page and which button does nothing, and send us a photo."
+    },
+    "explain": {
+      "zh": "触控屏只是遥控，真正发指令的是控制主机，每台设备各有一条控制线路（网络、RS-232 或红外）：\n• 只有一台不听，问题在那台设备的电源或它的那条线路，其他设备不受影响。\n• 设备换了不同型号，控制指令对不上，需要技术员更新程序。\n• 设备的网络地址变了，或控制线松了。\n• 显示错房间：可合并的房间或可携带的 iPad，可能正连着隔壁房，你按的键其实在控制别人的会议室。\n重启后还是一样，或刚换过设备的，需要技术员处理。",
+      "en": "The control screen is only a remote; the control processor sends the real commands, and each device has its own control link (network, RS-232 or infrared):\n• If only one device ignores commands, the problem is that device's power or its own link; the other devices are not affected.\n• If the device was replaced with a different model, the commands no longer match and a technician must update the programming.\n• The device's network address changed, or its control cable is loose.\n• Wrong room shown: in combinable rooms, or with a portable iPad, the screen may be connected to the room next door, so your buttons are really controlling someone else's meeting room.\nIf it is the same after a restart, or a device was just replaced, a technician is needed."
+    }
+  },
+  {
+    "id": "sig-panel-volume-stuck",
+    "title": {
+      "zh": "触控屏音量键没作用或音量条卡住",
+      "en": "Panel volume buttons do nothing or volume bar is stuck"
+    },
+    "match": [
+      "音量键没用",
+      "音量调不了",
+      "音量条不动",
+      "音量卡住",
+      "声音调不大",
+      "按音量没反应",
+      "volume bar stuck",
+      "volume buttons not working",
+      "cannot adjust volume",
+      "volume not changing",
+      "volume slider stuck",
+      "volume cant adjust",
+      "volume no response"
+    ],
+    "reply": {
+      "zh": "触控屏的音量键没作用，或音量条卡住：\n1) 先看静音：按一下静音图标。很多系统在静音时音量条是锁住的。\n2) 确认调的是对的那一条：节目音量、麦克风音量、通话音量在很多面板上是分开的。\n3) 把信号源自己的音量调高：电脑音量、Zoom / Teams 的扬声器音量、影片播放器的音量。\n4) 声音是从电视自己的喇叭出来的，触控屏可能管不到：用电视遥控器调，并确认电视没有静音。\n5) 按「系统关闭」，等 30 秒再开，音量会回到默认值。\n6) 音量条会动、声音大小却不变：记下来告诉我们。",
+      "en": "Volume buttons on the control screen do nothing, or the volume bar is stuck:\n1) Check Mute first: tap the mute icon once. Many systems lock the volume bar while muted.\n2) Make sure you are adjusting the right bar: programme volume, microphone volume and call volume are separate on many panels.\n3) Raise the volume on the source itself: laptop volume, the speaker volume inside Zoom / Teams, the video player's own slider.\n4) If the sound comes from the TV's own speakers, the control screen may not control it: use the TV remote and check the TV is not muted.\n5) Press System Off, wait 30 seconds and turn it on again; volume returns to the default level.\n6) If the bar moves but loudness does not change, note it and tell us."
+    },
+    "explain": {
+      "zh": "触控屏的音量键是发指令给音频处理器（DSP）、功放或显示屏，由它们真正调音量：\n• 音量条卡住或调了没变化，通常是控制主机和音频设备之间的连线断了（设备重启过、地址变了或线松了）。\n• 声音改由别的设备输出，例如有人把电视切到内置喇叭。\n• 有些系统设了最大音量上限，用来保护喇叭、防止啸叫，到顶就不再增加。\n不要去转机柜里功放的旋钮，那些是调校好的，乱动可能啸叫或损坏喇叭。重启后仍不恢复，需要技术员检查。",
+      "en": "The volume buttons send commands to the audio processor (DSP), amplifier or display, which actually changes the level:\n• A stuck bar, or a bar that changes nothing, usually means the link between the control processor and the audio device dropped (the device restarted, its address changed or a cable is loose).\n• The sound is now coming out of a different device, for example someone switched the TV to its built-in speakers.\n• Some systems have a maximum volume limit to protect the speakers and prevent feedback; at the top it will not go higher.\nDo not turn the amplifier knobs in the rack; they are calibrated, and changing them can cause feedback or damage speakers. If a restart does not restore it, a technician needs to check."
+    }
+  },
+  {
+    "id": "sig-display-power-mismatch",
+    "title": {
+      "zh": "系统开了屏幕不亮，或关了还亮着",
+      "en": "System is on but display stays off, or stays on after Off"
+    },
+    "match": [
+      "屏幕不会自己开",
+      "电视不会自动开",
+      "投影不会自动开",
+      "关了还亮着",
+      "屏幕关不掉",
+      "电视不跟着关",
+      "display not turning on",
+      "tv stays on",
+      "display stays off",
+      "tv wont turn off",
+      "projector stays on",
+      "screen never turns off",
+      "tv not auto on"
+    ],
+    "reply": {
+      "zh": "系统开了但屏幕不亮，或按了关闭屏幕还亮着：\n1) 先等一下：投影机开机要 30 到 60 秒，关机散热要 1 到 2 分钟，散热时不接受开机指令。等 2 分钟再按一次。\n2) 看屏幕有没有电：待机灯亮吗？完全没灯的，检查伸手够得到的插座开关。\n3) 用它自己的遥控器或电源键开（或关）一次，之后再用触控屏。\n4) 电视菜单里如果有「网络待机 / 外部控制 / HDMI-CEC」被关掉，把它打开；节能或深度待机模式会让电视收不到开机指令。\n5) 按「系统关闭」，等 30 秒再开，重新同步。\n6) 关不掉的：今天先用遥控器关，并告诉我们。",
+      "en": "System is on but the display stays off, or it stays on after System Off:\n1) Wait first: a projector needs 30 to 60 seconds to start and 1 to 2 minutes to cool down, and it ignores On commands while cooling. Wait 2 minutes and press again.\n2) Check the display has power: is the standby light on? If there is no light at all, check the socket switch if it is within reach.\n3) Turn it on (or off) once with its own remote or power button, then go back to the control screen.\n4) In the TV menu, if Network Standby / External Control / HDMI-CEC is off, turn it on. Eco or deep standby modes stop the TV from hearing the On command.\n5) Press System Off, wait 30 seconds and turn it on again to resync.\n6) If it will not turn off: use its remote for today and let us know."
+    },
+    "explain": {
+      "zh": "控制主机通过网络、RS-232、红外或 HDMI-CEC 发开关指令，而且常常假设屏幕已经照做，所以两边会不同步：\n• 有人用屏幕自己的遥控器开关过。\n• 电视进入深度节能待机，网络口也睡着了；电视固件更新后这些设置常被重置。\n• 换了不同型号的电视或投影机，指令对不上。\n• 红外发射头脱落，或控制线松了。\n投影机整晚没关会缩短光源寿命；屏幕长期显示静止画面可能留下残影。偶尔一次不要紧，每天都这样就需要技术员检查控制线路和设置。",
+      "en": "The control processor sends on and off commands over the network, RS-232, infrared or HDMI-CEC, and often assumes the display obeyed, so the two can go out of sync:\n• Someone used the display's own remote to switch it on or off.\n• The TV went into deep eco standby and its network port is asleep too; a TV firmware update often resets these settings.\n• The TV or projector was replaced with a different model, so the commands do not match.\n• The infrared emitter fell off, or a control cable is loose.\nA projector left on all night loses light-source life, and a static picture left on a screen for long periods can leave image retention. Once in a while is fine; if it happens every day, a technician should check the control link and settings."
+    }
+  },
+  {
+    "id": "sig-panel-pin-locked",
+    "title": {
+      "zh": "控制屏要求输入密码或被锁住",
+      "en": "Control panel asks for a PIN or is locked"
+    },
+    "match": [
+      "要输入pin",
+      "pin码",
+      "控制屏锁",
+      "屏锁住了",
+      "技术员密码",
+      "设置页密码",
+      "管理密码",
+      "asks for pin",
+      "enter passcode",
+      "panel locked",
+      "forgot pin",
+      "pin code",
+      "asks for passcode",
+      "passcode screen",
+      "面板要密码",
+      "要密码",
+      "要输入密码",
+      "面板锁了",
+      "面板被锁",
+      "asks for password",
+      "panel asks for password",
+      "panel password"
+    ],
+    "reply": {
+      "zh": "控制屏要求输入 PIN / 密码，或被锁住：\n1) 先看是不是误入了设置页：按了齿轮、Settings 或 Tech 图标才出现密码的，按「返回 / Home / 取消」就好，日常使用不需要它。\n2) 一开始就要密码的：问公司的行政或设施负责人，有些公司特意为房间设了 PIN。\n3) 不要一直乱试，有些面板连续输错后会锁更久。\n4) 用 iPad 当控制屏的：可能是 iPad 自己的锁屏密码或「引导式访问」，请找 IT。不要抹掉或重置 iPad，里面的控制设置会丢失。\n5) 有些面板有清洁模式，大约 30 秒后会自动解锁，等一下再试。\n6) 这段时间：有墙上按键面板就先用，或用屏幕遥控器加一条 HDMI 线直连。",
+      "en": "Control panel asks for a PIN / passcode, or is locked:\n1) Check whether you opened a settings page by mistake: if the passcode appeared after pressing a gear, Settings or Tech icon, press Back / Home / Cancel. Daily use does not need it.\n2) If it asks for a PIN right at the start, ask your office admin or facilities person; some companies set a room PIN on purpose.\n3) Do not keep guessing. Some panels lock for longer after several wrong tries.\n4) If the panel is an iPad, it may be the iPad's own passcode or Guided Access; ask IT. Do not erase or reset the iPad, the control settings inside would be lost.\n5) Some panels have a cleaning mode that unlocks by itself after about 30 seconds; wait and try again.\n6) Meanwhile: use the wall keypad if there is one, or the display remote plus a direct HDMI cable."
+    },
+    "explain": {
+      "zh": "密码通常不是故障，而是保护措施：\n• 技术员页面用 PIN 保护，里面是网络地址、音量上限等设置，改错了整间房会失灵。\n• 有些公司为了限制使用（例如董事会议室）设了房间 PIN。\n• iPad 的锁屏密码或引导式访问由贵公司 IT 管理。\n• 屏幕显示锁头而没有键盘，可能是清洁模式或程序设定的锁定时段。\n技术员页面的 PIN 一般只提供给贵公司指定的负责人。忘记日常用的房间 PIN，可由技术员重设。不要尝试恢复出厂设置，程序会被清除。",
+      "en": "A passcode is usually not a fault but a protection:\n• The technician page is PIN-protected because it holds settings such as network addresses and volume limits; a wrong change there can stop the whole room working.\n• Some companies set a room PIN to restrict use, for example in a boardroom.\n• An iPad's lock-screen passcode or Guided Access is managed by your company's IT.\n• A padlock on screen with no keypad may be cleaning mode or a lock period set in the programming.\nThe technician-page PIN is normally given only to your company's appointed contact person. If the everyday room PIN is forgotten, a technician can reset it. Do not try a factory reset; it erases the programming."
+    }
+  },
+  {
+    "id": "sig-booking-panel",
+    "title": {
+      "zh": "门口预约屏黑屏、离线或会议不对",
+      "en": "Room booking panel blank, offline or showing wrong meetings"
+    },
+    "match": [
+      "预约屏",
+      "订房屏",
+      "门口的屏",
+      "会议室预约",
+      "显示的会议不对",
+      "门口面板",
+      "booking panel",
+      "scheduling panel",
+      "room booking screen",
+      "door panel",
+      "wrong meeting showing",
+      "room shows booked",
+      "room scheduler",
+      "booking display"
+    ],
+    "reply": {
+      "zh": "门口的会议室预约屏黑屏、离线或会议显示不对：\n1) 黑屏：先点一下屏幕唤醒。这类屏多数由网线供电（PoE），没有电源键。\n2) 好几个门口同时黑屏或离线：多半是交换机、PoE 或预约服务器的问题，请通知 IT。\n3) 会议不对：在 Outlook / Google 日历里检查，会议室是不是以「会议室 / 资源」加入并已接受，而不是只写在地点栏；再核对屏上的日期、时间和时区。\n4) 等 2 到 5 分钟：屏幕是定时同步的，新预约要过一会才出现。\n5) 显示「离线 / 无法连接 / 请登录」：会议室账号的密码或授权可能过期，要由 IT 重新登录。不要输入自己的账号。\n6) 这段时间用日历 App 查房间；房内的 AV 设备不受影响。",
+      "en": "Room booking panel outside the room is blank, offline or shows the wrong meetings:\n1) Blank: tap the screen to wake it. Most of these panels are powered through the network cable (PoE) and have no power button.\n2) Several door panels blank or offline together: likely the switch, PoE or the booking server; tell IT.\n3) Wrong meetings: in Outlook / Google Calendar check the room was added as a room / resource and accepted, not just typed in the location. Check the panel's date, time and time zone.\n4) Wait 2 to 5 minutes: the panel syncs on a timer, so new bookings take a while to appear.\n5) Offline / Cannot connect / Sign in: the room account password or licence may have expired and IT must sign in again. Do not enter your own account.\n6) Meanwhile check the room in your calendar app; the AV inside the room is not affected."
+    },
+    "explain": {
+      "zh": "预约屏是一块小型的联网屏幕，用一个「会议室账号」读取日历（Microsoft 365、Google Workspace 或专用预约系统）：\n• 黑屏：PoE 没有供电、网线松了，或屏幕本身故障。\n• 离线：IT 改过网络、VLAN 或防火墙，或账号密码、双重验证政策、授权到期。\n• 会议不对：时间或时区错了，循环会议被会议室拒绝，或预约时没有选会议室资源。\n单独一块黑屏，需要技术员检查线路和设备；账号和网络问题由 IT 处理。它只是显示预约，不影响房内开会。",
+      "en": "A booking panel is a small networked screen that reads the calendar (Microsoft 365, Google Workspace or a dedicated booking system) through a room account:\n• Blank: no PoE power, a loose network cable, or the panel itself has failed.\n• Offline: IT changed the network, VLAN or firewall, or the account password, two-step sign-in policy or licence expired.\n• Wrong meetings: wrong time or time zone, a recurring meeting declined by the room, or the booking was made without selecting the room resource.\nA single blank panel needs a technician to check the cable and the unit; account and network issues belong to IT. The panel only displays bookings and does not affect meetings inside the room."
+    }
+  },
+  {
+    "id": "sig-occupancy-sensor",
+    "title": {
+      "zh": "开会时系统自动关机或没人也不关",
+      "en": "Room powers off during a meeting, or never powers off"
+    },
+    "match": [
+      "系统自己关",
+      "开会中自动关",
+      "会议中途关",
+      "没人也不关",
+      "感应器",
+      "人体感应",
+      "坐着不动就关",
+      "occupancy sensor",
+      "motion sensor",
+      "room shuts down",
+      "system shuts down itself",
+      "powers off mid meeting",
+      "auto shutdown",
+      "never powers off"
+    ],
+    "reply": {
+      "zh": "开会时系统自己关机，或没人了也不关：\n1) 偶尔一次：再按「系统开启」。感应器靠动作判断，长时间坐着不动看视频，会被当成没人。\n2) 看触控屏有没有「系统将在 X 分钟后关闭」的提示，点一下取消。\n3) 看感应器（天花板或墙上的白色小圆罩）有没有被挡住：横幅、高的盆栽、新隔板。只移开地面上的东西，不要爬高。\n4) 问行政有没有设定时关机（例如每晚 7 点），或会议预约结束就自动关。会议跨过这个时间，再开一次就好。\n5) 一直不关：看有没有风扇、飘动的窗帘，或玻璃门外有人走动在触发它；离开时手动按「系统关闭」。\n6) 把发生的时间、当时坐了多久告诉我们。",
+      "en": "Room powers off during a meeting, or never powers off when empty:\n1) If it happened once: press System On again. The sensor looks for movement, so people sitting still through a long video can look like an empty room.\n2) Watch the control screen for a message such as System will shut down in X minutes, and tap to cancel.\n3) Check nothing blocks the sensor (a small white dome on the ceiling or wall): banners, tall plants, new partitions. Only move things at floor level; do not climb.\n4) Ask your admin about a timed shutdown (for example 7pm daily) or shutdown when the booking ends. If your meeting runs past it, just turn on again.\n5) Never powers off: look for a fan, a moving curtain or people walking past a glass door triggering it. Press System Off when you leave.\n6) Tell us the time it happened and how long people had been seated."
+    },
+    "explain": {
+      "zh": "感应器加定时器是为了省电和保护投影机光源，本身不是故障：\n• 等待时间设得太短（例如 15 分钟），或感应器没有对着座位。\n• 红外感应型看不到打字这类小动作。\n• 另有定时关机，或预约系统在会议结束时释放房间并关机。\n• 一直不关：感应器透过玻璃看到走廊，被空调风吹动的东西触发，或感应功能被停用。\n没有危险。延长等待时间、调整灵敏度或关闭自动关机属于程序设置，由技术员修改。",
+      "en": "A sensor with a timer is there to save power and protect the projector light source; it is not a fault in itself:\n• The timeout is set too short (for example 15 minutes), or the sensor is not aimed at the seats.\n• Infrared-type sensors cannot see small movements such as typing.\n• There is also a timed shutdown, or the booking system releases the room and shuts down when the meeting ends.\n• Never powers off: the sensor sees the corridor through glass, is triggered by things moving in the air-con draught, or the sensing function is disabled.\nNothing here is dangerous. A longer timeout, different sensitivity or disabling auto-off are programming settings that a technician changes."
+    }
+  },
+  {
+    "id": "sig-ir-emitter-fell-off",
+    "title": {
+      "zh": "设备不听指令，红外发射头掉了",
+      "en": "Device ignores commands: IR emitter fell off"
+    },
+    "match": [
+      "红外头掉了",
+      "红外发射",
+      "小黑头掉了",
+      "贴在电视的线",
+      "ir头",
+      "红外线掉",
+      "红外贴",
+      "ir emitter",
+      "ir bud",
+      "ir blaster",
+      "ir sensor sticker",
+      "small wire fell off",
+      "ir eye",
+      "emitter fell off"
+    ],
+    "reply": {
+      "zh": "设备不听指令，可能是红外发射头掉了：\n1) 看不听话的那台设备（电视、机顶盒、播放机）正面：应该有一个连着细线的小黑头，贴在遥控接收窗上。\n2) 小黑头垂下来了，而设备在桌面高度：把它贴回接收窗，平贴、对着设备。\n3) 找接收窗：用手机电筒照设备正面，那是一小块深色透光的位置，常在待机灯旁边；也可以看旧的胶印。\n4) 胶不粘了，先用透明胶带固定。\n5) 用触控屏按电源或换台测试。\n6) 设备在天花板或墙上高处：不要爬高，由技术员处理。这段时间先用设备自己的遥控器。",
+      "en": "Device ignores commands; the IR emitter may have fallen off:\n1) Look at the front of the device that is not obeying (TV, set-top box, player): there should be a small black bud on a thin wire, stuck over the remote sensor window.\n2) If the bud is hanging loose and the device is at desk height: stick it back over the sensor window, flat and facing the device.\n3) To find the window: shine a phone torch on the front. It is a small dark see-through area, often next to the standby light. You can also look for the old glue mark.\n4) If the glue no longer holds, fix it with clear tape for now.\n5) Test with Power or a channel button on the control screen.\n6) If the device is on the ceiling or high on a wall: do not climb, this is for a technician. Meanwhile use the device's own remote."
+    },
+    "explain": {
+      "zh": "有些设备只能用红外线控制，和手持遥控器一样。控制主机靠一个贴在接收窗上的小发射头发指令：\n• 胶因为发热、清洁擦拭或时间久了而失效，发射头偏开几厘米设备就收不到。\n• 红外是单向的，控制主机不知道指令有没有成功，所以触控屏看起来正常。\n• 发射头还在原位却不听：可能设备换了型号或品牌，指令码不同，需要技术员更新程序。\n• 强烈阳光直射接收窗也会干扰。\n这是小问题，贴回去是安全的；够不到的不要勉强。",
+      "en": "Some devices can only be controlled by infrared, just like a handheld remote. The control processor sends commands through a small emitter stuck on the sensor window:\n• The glue fails with heat, cleaning or age, and once the emitter shifts a few centimetres the device stops receiving.\n• Infrared is one-way: the control processor cannot tell whether a command worked, so the control screen still looks normal.\n• Emitter still in place but no response: the device may have been replaced with another model or brand that uses different codes, and a technician must update the programming.\n• Strong direct sunlight on the sensor window can also interfere.\nThis is a minor issue and sticking the emitter back is safe; do not strain to reach one that is out of reach."
+    }
+  },
+  {
+    "id": "sig-rack-hot",
+    "title": {
+      "zh": "机柜很烫、风扇很吵或温度报警",
+      "en": "AV rack hot, fans loud or temperature alarm"
+    },
+    "match": [
+      "机柜很热",
+      "机柜很烫",
+      "机柜过热",
+      "机柜风扇",
+      "机柜好热",
+      "机房很热",
+      "机柜报警",
+      "rack hot",
+      "rack very hot",
+      "rack overheating",
+      "rack fan",
+      "rack alarm",
+      "av rack hot",
+      "equipment room hot"
+    ],
+    "reply": {
+      "zh": "AV 机柜很烫、风扇很吵或温度报警：\n1) 有焦味、冒烟或烫到不能碰：关掉机柜的墙上电源开关，停止使用，必须由技术员处理。不要打开任何设备。\n2) 确认机柜所在房间或柜子的冷气有开，没有在下班后被关掉。\n3) 清开通风口：把堆在机柜上面、前后和四周的纸箱、袋子、文件拿走。\n4) 机柜装在密闭木柜里的，先把木柜门打开通风。\n5) 没有会议时按「系统关闭」减少发热（除非是第 1 点的情况，否则机柜总电源保持开着）。\n6) 给机柜正面拍照，尤其是亮红灯或显示报警的那台，发给我们。",
+      "en": "AV rack is hot, fans are loud or there is a temperature alarm:\n1) Burning smell, smoke or too hot to touch: switch the rack off at the wall, stop using it; a technician is required. Do not open any equipment.\n2) Check the air-conditioning for the rack room or cupboard is on and was not turned off after office hours.\n3) Clear the vents: remove boxes, bags and files stacked on top of, in front of, behind or around the rack.\n4) If the rack sits inside a closed wooden cupboard, open the cupboard door for airflow for now.\n5) When there is no meeting, press System Off to reduce heat (leave the rack mains on unless step 1 applies).\n6) Take a photo of the rack front, especially any unit with a red light or an alarm message, and send it to us."
+    },
+    "explain": {
+      "zh": "功放、交换机和处理器都会发热，温度一高风扇就加速，所以变吵：\n• 最常见是下班后或周末中央冷气停了，机柜房变成闷热的小房间。\n• 通风口被杂物挡住，或机柜被装进不透气的木柜。\n• 滤网积尘，或某个风扇坏了。\n长期过热会缩短设备寿命，并引起随机死机、重启或声音中断（功放过热保护）。\n改善通风用户可以自己做；清理内部灰尘、换风扇、加装散热由技术员处理。出现报警请尽快告诉我们，不要拖。",
+      "en": "Amplifiers, switches and processors all produce heat, and the fans speed up as it gets hotter, which is why it is noisy:\n• Most often the central air-conditioning stops after hours or at weekends, and the rack room turns into a small hot box.\n• Vents are blocked by stored items, or the rack was built into a cupboard with no airflow.\n• Filters are clogged with dust, or a fan has failed.\nLong-term overheating shortens equipment life and causes random hangs, restarts or sound cutting out (amplifier thermal protection).\nImproving airflow is something users can do; cleaning dust inside, replacing fans or adding cooling is technician work. If there is an alarm, tell us soon rather than leaving it."
+    }
+  },
+  {
+    "id": "sig-ups-beeping",
+    "title": {
+      "zh": "UPS 一直哔哔响或显示换电池",
+      "en": "UPS beeping, on battery or showing replace battery"
+    },
+    "match": [
+      "ups",
+      "不间断电源",
+      "哔哔响",
+      "一直哔",
+      "ups换电池",
+      "ups电池",
+      "后备电源",
+      "ups beeping",
+      "ups alarm",
+      "ups on battery",
+      "ups battery",
+      "ups red light",
+      "battery backup beeping",
+      "rack beeping"
+    ],
+    "reply": {
+      "zh": "UPS 一直哔哔响、显示用电池供电或换电池：\n1) 外壳鼓起、发烫、有焦味或漏液：关掉墙上电源开关，停止使用，不要碰电池，必须由技术员处理。\n2) 每隔几秒哔一声并显示 On Battery：表示市电没进来。检查墙上插座开关和 UPS 的插头；看电箱有没有跳闸。复位后再跳就不要再推，找技术员或电工。\n3) 大楼停电时 UPS 只能撑几分钟：趁还有电，按「系统关闭」让设备正常关机。\n4) 多数型号短按静音键可以停止哔声（只是静音，没有解决原因）。不要长按电源键，那会让整个机柜断电。\n5) 市电正常却亮「更换电池」灯：电池老化了，系统照常运作，但下次停电没有保护。把 UPS 正面和型号标签拍照发给我们。\n6) 不要把热水壶、暖风机、激光打印机或吸尘器插到 UPS。",
+      "en": "UPS is beeping, running on battery or showing replace battery:\n1) Bulging case, heat, burning smell or leaking: switch off at the wall, stop using it, do not touch the battery; a technician is required.\n2) A beep every few seconds with On Battery means no mains power. Check the wall socket switch, the UPS plug and the breaker. If the breaker trips again after one reset, leave it off; a technician or electrician is needed.\n3) In a building power cut the UPS lasts only minutes: press System Off while there is still power.\n4) On most models a short press of the mute button only silences the beep. Do not hold the power button; that cuts off the rack.\n5) Replace Battery light with mains normal: the battery is old and gives no protection at the next power cut. Send us a photo of the UPS front and model label.\n6) Never plug kettles, heaters, laser printers or vacuum cleaners into the UPS."
+    },
+    "explain": {
+      "zh": "UPS（不间断电源）让机柜撑过短暂的电压波动和停电，避免控制主机和处理器突然断电而损坏资料：\n• 哔声加 On Battery：正在用电池，电池用完设备就会断电。\n• 「更换电池」：电池一般用 3 到 5 年，机柜房越热老化越快。\n• 过载灯（Overload）：插了太多或太耗电的设备。\n各品牌的灯号和哔声略有不同。更换电池由技术员处理，旧电池不要自己拆。\n除了鼓起、发烫、有焦味要立刻断电之外，其他情况不算紧急，但请尽早安排，否则下次停电机柜会直接断电。",
+      "en": "A UPS (uninterruptible power supply) carries the rack through short dips and power cuts, so the control processor and other units do not lose power suddenly and corrupt their data:\n• Beeping with On Battery: it is running on battery, and when the battery is empty the equipment loses power.\n• Replace Battery: batteries typically last 3 to 5 years, and age faster in a hot rack room.\n• Overload light: too many or too power-hungry devices are plugged in.\nLights and beep patterns vary a little by brand. Battery replacement is technician work; do not take out the old battery yourself.\nApart from a bulging, hot or burning-smell unit, which must be switched off at once, this is not an emergency, but arrange it early or the rack will simply lose power at the next cut."
+    }
+  },
+  {
+    "id": "sig-poe-switch",
+    "title": {
+      "zh": "交换机没灯或PoE设备重启",
+      "en": "AV switch has no lights or PoE devices keep rebooting"
+    },
+    "match": [
+      "poe",
+      "交换机没灯",
+      "交换机不亮",
+      "交换机灯",
+      "供电不足",
+      "poe供电",
+      "网口灯不亮",
+      "poe switch",
+      "switch no lights",
+      "switch lights off",
+      "poe not working",
+      "poe power",
+      "poe budget",
+      "network switch dead"
+    ],
+    "reply": {
+      "zh": "AV 交换机没有灯，或 PoE 供电的设备一直重启：\n1) 交换机完全没灯：检查够得到的电源线有没有插紧，排插或插座有没有开；接在 UPS 上的，看 UPS 有没有开。\n2) 有焦味或很烫：关掉墙上电源开关，停止使用，由技术员处理。\n3) PoE 设备（触控屏、摄像机、天花麦克风、预约屏）轮流重启：最近有没有人往交换机上加新设备？先拔掉新加的那台，看其他设备是否稳定。\n4) 只有一台有问题：把它设备端的网线按到「咔」一声；确认交换机那端还在原来贴标签的口。\n5) 不要按交换机上的 Reset 小孔，也不要把线换到别的口，每个口的设置不同。\n6) 把哪些设备、从什么时候开始、加过什么，连同交换机正面灯号的照片，告诉 IT 和我们。",
+      "en": "AV network switch has no lights, or PoE-powered devices keep rebooting:\n1) Switch completely dark: check its power cord is firmly in where you can reach it and the power strip or socket is on. If it runs from a UPS, check the UPS is on.\n2) Burning smell or very hot: switch off at the wall, stop using it; a technician is required.\n3) PoE devices (touch panels, cameras, ceiling microphones, booking panels) rebooting in turn: was a new device added to the switch recently? Unplug the new one and see if the others settle.\n4) Only one device affected: push its network cable in at the device end until it clicks, and check the switch end is still in its labelled port.\n5) Do not press the Reset pinhole on the switch or move cables to other ports; each port is set differently.\n6) Tell IT and us which devices, since when and what was added, with a photo of the switch's front lights."
+    },
+    "explain": {
+      "zh": "PoE 是用网线同时供电。交换机能供出的总功率有上限（PoE 预算）：\n• 加了新设备，或换成更耗电的型号（如大尺寸触控屏、云台摄像机），总功率超过预算，交换机就会切掉部分口的供电，设备于是轮流重启。\n• 交换机的电源老化或过热，供电不稳。\n• 网线受损，或插到不带 PoE 的口。\n• 完全没灯：没有电，或交换机故障。\nPoE 预算、优先级和端口设置都在交换机里面，由 IT 配合我们的技术员处理。不要随手拿一台家用交换机顶替，AV 交换机有专门的设置。",
+      "en": "PoE sends power along the network cable. A switch has a limit on the total power it can supply (the PoE budget):\n• After a new device is added, or one is replaced with a hungrier model (such as a large touch panel or a PTZ camera), the total goes over budget, the switch cuts power to some ports and devices reboot in turn.\n• The switch's power supply is ageing or overheating, so power is unstable.\n• A network cable is damaged, or is plugged into a port without PoE.\n• No lights at all: no power, or the switch has failed.\nPoE budget, priority and port settings live inside the switch and are handled by IT together with our technician. Do not swap in a home switch as a quick fix; AV switches are specially configured."
+    }
+  },
+  {
+    "id": "sig-multicast-flooding",
+    "title": {
+      "zh": "人多时 AV 断线、Wi-Fi 变慢",
+      "en": "AV drops or Wi-Fi slows when many people join the network"
+    },
+    "match": [
+      "igmp",
+      "multicast",
+      "组播",
+      "多播",
+      "人多就断",
+      "拖慢网络",
+      "网络风暴",
+      "multicast flooding",
+      "igmp snooping",
+      "network flooding",
+      "av slows wifi",
+      "av dropping out",
+      "stream keeps freezing",
+      "dante dropping"
+    ],
+    "reply": {
+      "zh": "人一多 AV 就卡顿断线，或 AV 一开全公司 Wi-Fi 变慢：\n1) 先记下规律：是繁忙时段、某间房的 AV 一开，还是全员大会直播时才发生？记下时间和房间。\n2) 暂时缓解：把没在用的会议室按「系统关闭」，它们的视频串流就会停止。\n3) 不要自己把 AV 小盒子（编码器、Dante 音频设备）插到普通办公室的墙上网络口或桌面小交换机；被人移过的线请插回原来贴标签的口。\n4) 不要自己重启交换机。\n5) 把这句话转给 IT：「请检查 AV-over-IP / Dante 所在 VLAN 的 IGMP snooping 和 IGMP querier，并确认 AV 的组播没有流到办公室或 Wi-Fi 的 VLAN。」\n6) 应急：紧急会议用一条 HDMI 线把电脑直接接到显示屏。",
+      "en": "AV stutters or drops when many people are online, or office Wi-Fi slows when AV is on:\n1) Note the pattern: busy hours, when one room's AV is turned on, or during a town-hall stream? Write down times and rooms.\n2) Quick relief: press System Off in rooms that are not in use; their video streams stop.\n3) Do not plug AV boxes (encoders, Dante audio devices) into ordinary office wall data points or small desk switches. Put any moved cable back in its labelled port.\n4) Do not restart network switches yourself.\n5) Pass this to IT: \"Please check IGMP snooping and the IGMP querier on the VLAN used by AV-over-IP / Dante, and confirm AV multicast is not leaking into the office or Wi-Fi VLAN.\"\n6) Workaround: for an urgent meeting, connect the laptop straight to the display with one HDMI cable."
+    },
+    "explain": {
+      "zh": "网络传输的视频（AV-over-IP）和音频（Dante / AES67）使用组播（multicast）：一台发送，多台接收。\n• 交换机没有开启 IGMP snooping 时，会把每一路串流发给所有端口，包括 Wi-Fi 接入点，结果 Wi-Fi 被塞满，AV 自己也卡顿。\n• 常在这些情况后出现：IT 更换或重置了交换机（很多型号默认关闭这项功能）、AV 和办公网络并到同一个 VLAN、加了新的 AV 设备、网络里没有 querier。\n这会拖累整个办公室网络，但设备本身没有坏。用户只能减少负载；真正解决要 IT 和我们的技术员一起调整网络设置。",
+      "en": "Networked video (AV-over-IP) and audio (Dante / AES67) use multicast: one device sends and many receive.\n• If IGMP snooping is not enabled, the switch sends every stream to every port, including Wi-Fi access points. Wi-Fi gets flooded and the AV itself stutters.\n• It often appears after IT replaces or resets a switch (many models have this feature off by default), after AV and office networks are merged into one VLAN, after new AV devices are added, or when the network has no querier.\nThis can drag down the whole office network, but no equipment is broken. Users can only reduce the load; the real fix is IT and our technician adjusting the network settings together."
+    }
+  },
+  {
+    "id": "sig-control-app-offline",
+    "title": {
+      "zh": "平板控制 App 离线或找不到房间",
+      "en": "Tablet control app offline or cannot find the room"
+    },
+    "match": [
+      "ipad控制",
+      "平板控制",
+      "控制app",
+      "app找不到房",
+      "改了vlan",
+      "改了防火墙",
+      "控制软件",
+      "control app",
+      "ipad control",
+      "cannot find room",
+      "tablet control",
+      "firewall change",
+      "vlan change"
+    ],
+    "reply": {
+      "zh": "平板 / iPad 的控制 App 显示离线、一直断线或找不到房间：\n1) 看平板的 Wi-Fi：有没有连到指定的那个网络（不是访客 Guest，也不是别层楼的）？连回正确的。\n2) 关掉平板上的 VPN。\n3) 把 App 完全关掉（上滑清除）再打开，等 20 秒让它重连。\n4) iPad：设置 > 隐私与安全性 > 本地网络，把这个 App 打开；没有这个权限它找不到系统。\n5) 重启平板，并保持充电。在房间远端信号弱会一直断线，靠近门口或接入点再试。\n6) 如果是 IT 改了防火墙、VLAN 或 Wi-Fi 之后才这样：请 IT 确认平板所在的网络能连到 AV 控制主机，细节由 IT 和我们的技术员核对。\n7) 这段时间先用墙上的触控屏或按键面板。",
+      "en": "Tablet / iPad control app shows offline, keeps disconnecting or cannot find the room:\n1) Check the tablet's Wi-Fi: is it on the assigned network (not Guest, not another floor's)? Join the correct one again.\n2) Turn off any VPN on the tablet.\n3) Close the app fully (swipe it away), open it again and wait 20 seconds for it to reconnect.\n4) iPad: Settings > Privacy & Security > Local Network, switch this app on. Without this permission it cannot find the system.\n5) Restart the tablet and keep it charged. Weak signal at the far end of the room causes drops; try nearer the door or access point.\n6) If it started after IT changed the firewall, VLAN or Wi-Fi: ask IT to confirm the tablet's network can reach the AV control processor; IT and our technician check the details.\n7) Meanwhile use the wall touch screen or keypad."
+    },
+    "explain": {
+      "zh": "控制 App 只是通过 Wi-Fi 和控制主机通话的遥控器，显示离线通常是两边「说不上话」：\n• 平板连到了和控制主机不同的网络。\n• Wi-Fi 开了客户端隔离（访客网络常见），设备之间互相看不到。\n• 防火墙挡住了 Wi-Fi 的 VLAN 和 AV 的 VLAN 之间的通讯，或控制主机的地址变了。\n• 系统更新后本地网络权限被重置，或平板休眠、在接入点之间漫游。\n房间的 AV 本身一般没事。不要删除重装 App，里面的房间配置可能丢失，要技术员重新导入。网络规则由 IT 配合技术员修改。",
+      "en": "The control app is only a remote that talks to the control processor over Wi-Fi; offline usually means the two cannot reach each other:\n• The tablet joined a different network from the control processor.\n• The Wi-Fi has client isolation switched on (common on guest networks), so devices cannot see each other.\n• A firewall blocks traffic between the Wi-Fi VLAN and the AV VLAN, or the control processor's address changed.\n• A system update reset the Local Network permission, or the tablet sleeps or roams between access points.\nThe room AV itself is normally fine. Do not delete and reinstall the app; the room configuration inside may be lost and a technician would have to load it again. Network rules are changed by IT together with our technician."
+    }
+  },
+  {
+    "id": "sig-firmware-update-prompt",
+    "title": {
+      "zh": "AV 设备弹出固件更新，要不要按",
+      "en": "Firmware update prompt on AV devices: press Update or not?"
+    },
+    "match": [
+      "固件更新",
+      "要不要更新",
+      "弹出更新",
+      "系统更新提示",
+      "固件升级",
+      "可以更新吗",
+      "更新到一半",
+      "firmware update",
+      "update prompt",
+      "should i update",
+      "update available",
+      "software update popup",
+      "press update",
+      "update stuck"
+    ],
+    "reply": {
+      "zh": "AV 设备弹出固件 / 软件更新提示，要不要按：\n1) 会议快开始或进行中：选「稍后 / 以后提醒 / 取消」。开会前绝对不要更新。\n2) 这些设备不要自己按更新：控制主机、触控屏、矩阵或切换器、音频处理器（DSP）、网络传输的编解码盒、视频会议主机。它们的版本要互相配合，由技术员安排。\n3) 电脑上的 Zoom / Teams 等软件，可以在非会议时间照常更新。电视的系统更新，请先问 IT 或我们。\n4) 更新已经开始了：千万不要关电或拔线。可能要 10 到 30 分钟并重启几次，在门上贴张纸提醒别人。\n5) 更新后有功能失灵：按「系统关闭」，等 30 秒再开；再记下哪里不正常。\n6) 把提示画面（设备名称、版本号）拍照发给我们。",
+      "en": "Firmware / software update prompt on AV devices, press Update or not:\n1) Meeting about to start or in progress: choose Later / Remind me / Cancel. Never update just before a meeting.\n2) Do not press Update yourself on: control processor, touch panels, matrix or switcher, audio processor (DSP), AV-over-IP boxes, video-conference unit. Their versions must match each other, so a technician plans these.\n3) Apps on a laptop such as Zoom / Teams can be updated as usual outside meeting time. For a TV system update, ask IT or us first.\n4) Update already started: do NOT switch off power or unplug. It may take 10 to 30 minutes with several restarts; put a note on the door.\n5) Something stopped working afterwards: press System Off, wait 30 seconds, turn on again, then note what is wrong.\n6) Take a photo of the prompt (device name, version number) and send it to us."
+    },
+    "explain": {
+      "zh": "固件是设备内部的软件。更新可以修正错误和安全漏洞，但在整合好的会议室里也有风险：\n• 新固件可能改变控制指令，更新后触控屏就控制不了那台设备。\n• 可能把设置恢复默认，例如电视的节能待机、HDMI 模式或网络地址。\n• 设备之间的版本不配合，会出现没画面、没声音。\n• 更新中途断电，设备可能无法开机，要送修。\n所以 AV 设备的更新要有计划：先备份，用确认过的版本，在非办公时间做。安全更新也不能永远不做，可以请技术员统一安排。",
+      "en": "Firmware is the software inside a device. Updates fix bugs and security holes, but in an integrated meeting room they also carry risk:\n• New firmware can change the control commands, so the control screen can no longer operate that device.\n• It can reset settings to default, such as a TV's eco standby, HDMI mode or network address.\n• Versions that do not match between devices can cause no picture or no sound.\n• Power loss in the middle of an update can leave a device unable to start, needing repair.\nSo AV updates should be planned: back up first, use a confirmed version and do it outside office hours. Security updates should not be skipped forever either; a technician can schedule them together."
+    }
+  }
+]

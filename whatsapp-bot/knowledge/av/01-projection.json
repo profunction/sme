@@ -1,0 +1,749 @@
+[
+  {
+    "id": "proj-image-upside-down-mirrored",
+    "title": {
+      "zh": "投影画面上下颠倒或左右相反",
+      "en": "Projector image upside down or mirrored"
+    },
+    "match": [
+      "画面倒了",
+      "上下颠倒",
+      "画面反了",
+      "左右相反",
+      "倒过来",
+      "字是反的",
+      "画面颠倒",
+      "image upside down",
+      "upside down",
+      "mirrored image",
+      "image flipped",
+      "picture inverted",
+      "text is backwards"
+    ],
+    "reply": {
+      "zh": "投影画面上下颠倒或左右相反：\n1) 用遥控器按 Menu，进入「安装 / 设置 / Installation / Setup」。\n2) 找到「投影方式 / 投影模式 / Projection」。\n3) 放在桌上选「正面 / Front」；吊在天花板选「正面吊顶 / Front Ceiling」；只有从幕布后面投才选「背面 / Rear」。\n4) 按 Enter 确认，画面马上翻回来。\n5) 有些机型有「自动吊顶 / Auto Ceiling」，机器被搬动后会自己翻转，可以把它关掉再手动选。\n6) 找不到这个菜单的话，拍下遥控器和菜单画面给我们看。",
+      "en": "Projector image upside down or mirrored:\n1) Press Menu on the remote and open Installation / Setup / Settings.\n2) Find Projection (also called Projection Mode or Projector Position).\n3) Projector on a table: choose Front. Hanging from the ceiling: choose Front Ceiling. Choose Rear only if it projects from behind the screen.\n4) Press Enter to confirm; the image flips straight away.\n5) Some models have Auto Ceiling, which flips the image by itself when the unit is moved. Turn it off and choose the mode by hand.\n6) If you cannot find this menu, send us a photo of the remote and the menu screen."
+    },
+    "explain": {
+      "zh": "这是设置问题，不是故障：\n• 吊装的投影机是倒挂的，所以要用「吊顶」模式把画面翻正；模式被改成「正面」，画面就倒过来。\n• 字是反的（左右相反），是选成了「背面 / Rear」模式。\n• 通常发生在恢复出厂设置、遥控器按错键、或换了一台机器之后。\n• 在菜单里改一次就好，一分钟内可以自己解决，不需要技术员。\n• 不要去转动或碰吊架上的投影机。",
+      "en": "This is a setting, not a fault:\n• A ceiling projector hangs upside down, so Ceiling mode turns the picture the right way up. If the mode is changed to Front, the picture is upside down.\n• Text reading backwards (mirrored) means a Rear mode was chosen.\n• It usually happens after a factory reset, a wrong button on the remote, or when a unit is replaced.\n• One change in the menu fixes it. You can do it yourself in a minute; no technician is needed.\n• Do not turn or touch the projector on its mount."
+    }
+  },
+  {
+    "id": "proj-auto-power-off-idle",
+    "title": {
+      "zh": "投影机没信号几分钟后自己关机",
+      "en": "Projector switches off by itself after a few idle minutes"
+    },
+    "match": [
+      "没信号就关",
+      "没用就关机",
+      "几分钟就关",
+      "闲置关机",
+      "睡眠定时",
+      "自动待机",
+      "自己关掉",
+      "auto power off",
+      "sleep timer",
+      "auto standby",
+      "turns off when idle",
+      "off after few minutes",
+      "power saving mode",
+      "keeps switching off"
+    ],
+    "reply": {
+      "zh": "投影机没信号时几分钟后自己关机：\n1) 先确认真的有画面送过来：电脑没睡眠、线插好、Source 选对。没有信号时机器会倒数然后关机。\n2) 按 Menu，进入「设置 / 电源 / ECO / Power」。\n3) 找到「自动关机 / 无信号关机 / Auto Power Off / Sleep Mode」，改成「关」，或延长到 30 分钟以上。\n4) 顺便看「睡眠定时 / Sleep Timer」有没有开着，有就关掉。\n5) 把电脑的屏幕保护和睡眠时间调长，避免开会中途电脑黑屏。\n6) 如果有画面时也会关机，而且指示灯在闪，那是过热或故障，不是这个设置。",
+      "en": "Projector switches itself off after a few minutes with no signal:\n1) Check it is really getting a picture: laptop awake, cable plugged in, correct Source. With no signal the projector counts down and switches off.\n2) Press Menu and open Settings / Power / ECO.\n3) Find Auto Power Off (also No Signal Power Off or Sleep Mode). Set it to Off, or to 30 minutes or longer.\n4) Check Sleep Timer as well, and turn it off if it is on.\n5) Make the laptop's screen saver and sleep time longer, so the laptop does not go dark in the middle of a meeting.\n6) If it switches off while a picture is showing and a light is blinking, that is overheating or a fault, not this setting."
+    },
+    "explain": {
+      "zh": "这是省电功能，不是故障：\n• 投影机在一段时间收不到信号后会自动关机，出厂设定常见是 5 到 30 分钟。\n• 电脑进入睡眠、出现屏幕保护、或拔线换人讲的时候，投影机就当作没信号，开始倒数。\n• 「睡眠定时」不一样：不管有没有画面，时间到了就关。\n• 在菜单里自己改就可以，不需要技术员。\n• 有画面时也突然关机并且指示灯闪，是过热或灯泡 / 光源的问题，属于另一类故障，需要检查。",
+      "en": "This is a power-saving feature, not a fault:\n• The projector switches off when it gets no signal for a set time, commonly 5 to 30 minutes from the factory.\n• When the laptop sleeps, shows a screen saver, or the cable is unplugged to change presenter, the projector sees no signal and starts counting down.\n• Sleep Timer is different: it switches off after a set time even when a picture is showing.\n• You can change this in the menu yourself; no technician is needed.\n• Switching off while a picture is showing, with a blinking light, is overheating or a lamp / light source problem. That is a different fault and needs checking."
+    }
+  },
+  {
+    "id": "proj-replace-lamp-message",
+    "title": {
+      "zh": "提示更换灯泡或灯泡时数已到",
+      "en": "Replace Lamp message or lamp hours warning"
+    },
+    "match": [
+      "更换灯泡",
+      "换灯泡",
+      "灯泡寿命",
+      "灯泡时数",
+      "灯泡时间",
+      "灯泡快坏",
+      "灯泡计时",
+      "replace lamp",
+      "lamp hours",
+      "lamp life",
+      "lamp warning",
+      "reset lamp timer",
+      "change the bulb",
+      "lamp timer"
+    ],
+    "reply": {
+      "zh": "投影机提示「更换灯泡 / Replace Lamp」或灯泡时数警告：\n1) 按 Menu，进入「信息 / Information」，看「灯泡时数 / Lamp Hours」，拍照记下来。\n2) 提示出现后灯泡通常还能用一阵子，重要会议可以先开完，但画面会越来越暗。\n3) 把「灯泡模式 / Lamp Mode」改成 ECO，可以减慢损耗。\n4) 不要自己拆灯泡：灯泡很烫、易碎、带高压，必须由技术员更换。\n5) 把机型（机身标签上）和灯泡时数发给我们，方便准备对的灯泡。\n6) 已经换了新灯泡还出现提示：是灯泡计时没清零。在「重置 / Reset」菜单选「灯泡时数重置 / Reset Lamp Hours」并确认。只有真的换了新灯泡才做这一步。",
+      "en": "Projector shows Replace Lamp or a lamp hours warning:\n1) Press Menu, open Information and note the Lamp Hours. Take a photo.\n2) After the message appears the lamp usually still works for a while. You can finish an important meeting, but the picture keeps getting dimmer.\n3) Change Lamp Mode to ECO to slow the wear.\n4) Do not remove the lamp yourself. It is very hot, fragile and runs on high voltage; a technician must replace it.\n5) Send us the model (on the label on the body) and the lamp hours, so the right lamp can be prepared.\n6) Message still there after a new lamp was fitted: the lamp timer was not cleared. In the Reset menu choose Reset Lamp Hours (or Lamp Timer Reset) and confirm. Only do this after a new lamp is really fitted."
+    },
+    "explain": {
+      "zh": "灯泡是消耗品，到了设定的时数机器就会提醒：\n• 传统灯泡寿命一般是几千小时，快到的时候画面明显变暗、偏黄，开机也变慢。\n• 提示刚出现时通常还能用，但不要拖太久：超时使用的灯泡可能突然不亮，极少数会在机内爆裂。\n• 换灯泡要打开灯仓，灯泡高温、易碎、含汞，必须由技术员来做。\n• 换新灯后要重置灯泡计时，否则提示不会消失；没换灯就重置，只是把提醒关掉，灯泡还是旧的。\n• 激光 / LED 光源的机型没有灯泡可换，出现类似提示请看光源警告。",
+      "en": "The lamp is a consumable, and the projector reminds you when it reaches its set hours:\n• A normal lamp lasts a few thousand hours. Near the end the picture is clearly dimmer and more yellow, and start-up is slower.\n• It usually still works when the message first appears, but do not leave it too long: an overdue lamp can suddenly fail, and in rare cases it bursts inside the unit.\n• Replacing it means opening the lamp cover. The lamp is hot, fragile and contains mercury, so a technician must do it.\n• After a new lamp the timer must be reset or the message stays. Resetting without a new lamp only hides the reminder; the lamp is still old.\n• Laser and LED models have no lamp to replace; for a similar message on those, see the light source warning."
+    }
+  },
+  {
+    "id": "proj-clean-filter-warning",
+    "title": {
+      "zh": "提示清洁滤网或滤网警告",
+      "en": "Clean Filter message or filter warning"
+    },
+    "match": [
+      "清洁滤网",
+      "滤网",
+      "过滤网",
+      "清洁过滤器",
+      "滤网警告",
+      "防尘网",
+      "clean filter",
+      "filter warning",
+      "air filter",
+      "filter message",
+      "dust filter",
+      "replace filter",
+      "filter needs cleaning"
+    ],
+    "reply": {
+      "zh": "投影机提示「清洁滤网 / Clean Filter」或滤网警告：\n1) 先看投影机在哪里。吊在天花板的不要爬高，交给技术员清洁。\n2) 放在桌上或柜子上、伸手就够得到的：先关机，等风扇停，再拔掉电源。\n3) 在机身侧面或底部找到进风口的滤网盖，多数机型用手就能扣开；需要螺丝刀的就不要拆。\n4) 把滤网抽出来，在室外轻轻拍掉灰尘，或用吸尘器小风力从外面吸。不要水洗，不要用湿布。\n5) 装回去，开机，在「重置 / Reset」菜单选「滤网时数重置 / Reset Filter Hours」，提示才会消失。\n6) 滤网破了或脏到清不干净，需要换新的。",
+      "en": "Projector shows Clean Filter or a filter warning:\n1) First look where the projector is. If it is on the ceiling, do not climb; leave the cleaning to a technician.\n2) If it is on a table or shelf within easy reach: switch it off, wait for the fan to stop, then unplug it.\n3) Find the air filter cover on the side or bottom. On most models it unclips by hand. If it needs a screwdriver, leave it.\n4) Slide the filter out. Tap the dust off gently outdoors, or vacuum it on low power from the outside. Do not wash it or use a wet cloth.\n5) Put it back, switch on, and in the Reset menu choose Reset Filter Hours (or Filter Timer Reset) to clear the message.\n6) A torn filter, or one too dirty to clean, must be replaced."
+    },
+    "explain": {
+      "zh": "滤网负责挡灰尘，脏了就要清：\n• 机器按使用时数提醒，或感应到进风不足时提醒。\n• 不处理的话机内温度升高，风扇变吵，画面变暗，最后会过热自动关机，灯泡和面板的寿命也会缩短。\n• 放在桌上、柜上的机器，滤网多数不用工具就能取出，用户可以自己清。\n• 吊装的机器要登高作业，请交给技术员，通常在定期保养时一起做。\n• 清完要重置滤网计时，提示才会消失。有些 DLP 机型没有滤网，就不会有这个提示。",
+      "en": "The filter keeps dust out and needs cleaning when it gets dirty:\n• The projector reminds you after a set number of hours, or when it senses weak airflow.\n• If ignored, the inside gets hotter, the fan gets louder, the picture gets dimmer, and in the end it overheats and shuts down. Lamp and panel life also get shorter.\n• On table or shelf units the filter usually comes out without tools, so users can clean it.\n• Ceiling units mean working at height; leave them to a technician, normally as part of regular servicing.\n• Reset the filter timer after cleaning or the message stays. Some DLP models have no filter and never show this message."
+    }
+  },
+  {
+    "id": "proj-laser-dim-or-warning",
+    "title": {
+      "zh": "激光投影机变暗或出现激光警告",
+      "en": "Laser projector getting dim or showing a laser warning"
+    },
+    "match": [
+      "激光警告",
+      "激光变暗",
+      "激光灯闪",
+      "光源警告",
+      "光源错误",
+      "激光故障",
+      "激光亮度",
+      "laser warning",
+      "laser error",
+      "light source error",
+      "light source warning",
+      "laser light blinking",
+      "laser brightness",
+      "laser projector dim"
+    ],
+    "reply": {
+      "zh": "激光投影机变暗或出现激光 / 光源警告：\n1) 看机身指示灯。多数机型有「Laser / Light / 光源」灯，闪烁或变成红色、橙色通常表示光源有问题，拍照发给我们。\n2) 按 Menu →「光源模式 / Light Source Mode / 亮度模式」，如果是 ECO 或 Quiet，改回「标准 / Normal」。\n3) 把「恒定亮度 / Constant Brightness」「自动亮度」「Dynamic」这类选项关掉试试。\n4) 检查通风口有没有被挡住或积了很多灰。房间太热时，激光机会自动降低亮度保护自己。\n5) 用遥控器关机，等风扇停，在墙上开关断电 1 分钟，再开机。\n6) 警告还在，或开机几分钟后就变暗、关机：停止使用，需要技术员检查。激光光源不能自己更换，也不要直视镜头。",
+      "en": "Laser projector has become dim or shows a laser / light source warning:\n1) Look at the lights on the body. Most models have a Laser / Light indicator; blinking, red or orange usually means a light source problem. Send us a photo.\n2) Menu, then Light Source Mode (or Light Mode / Brightness Mode). If it is on ECO or Quiet, change it back to Normal.\n3) Try turning off options such as Constant Brightness, Auto Brightness or Dynamic.\n4) Check the air vents are not blocked or thick with dust. In a hot room a laser projector lowers its brightness to protect itself.\n5) Switch off with the remote, wait for the fan to stop, switch off at the wall for 1 minute, then switch on again.\n6) If the warning stays, or it dims or shuts down a few minutes after starting: stop using it; a technician must check it. Users cannot replace the laser light source. Never look into the lens."
+    },
+    "explain": {
+      "zh": "激光光源寿命长，但不是不会坏：\n• 多数机型标称约两万小时，亮度是慢慢下降的；突然明显变暗，多半是设置（ECO、恒定亮度）或温度保护。\n• 通风不良、灰尘多、房间热，机器会自己降低亮度，再严重就报警、关机。\n• 光源警告灯一直亮着，表示激光模组、驱动电路或散热有故障，用户没办法自己修。\n• 激光光源是密封的，不能像灯泡那样更换，要由技术员或原厂处理。\n• 检查设置和通风可以自己做；警告反复出现，就不要再硬开。",
+      "en": "A laser light source lasts long, but it can still fail:\n• Most models are rated for about 20,000 hours and fade slowly. A sudden clear drop is usually a setting (ECO, constant brightness) or heat protection.\n• With poor airflow, dust or a hot room, the unit lowers its brightness by itself; if it gets worse it shows a warning and shuts down.\n• A light source warning that stays on means a fault in the laser module, its driver circuit or the cooling. Users cannot fix this.\n• The laser unit is sealed and cannot be swapped like a lamp; a technician or the manufacturer handles it.\n• Checking settings and airflow is fine to do yourself. If the warning keeps coming back, do not keep forcing it on."
+    }
+  },
+  {
+    "id": "proj-loud-fan-noise",
+    "title": {
+      "zh": "投影机风扇声音很大",
+      "en": "Projector fan is very loud"
+    },
+    "match": [
+      "风扇很吵",
+      "风扇声",
+      "风扇大声",
+      "投影机很吵",
+      "风扇噪音",
+      "机器很吵",
+      "风扇很响",
+      "fan noise",
+      "fan is loud",
+      "loud fan",
+      "noisy projector",
+      "fan very noisy",
+      "fan so loud",
+      "projector very loud"
+    ],
+    "reply": {
+      "zh": "投影机风扇声音很大：\n1) 按 Menu →「灯泡模式 / 光源模式」，选 ECO 或 Quiet。风扇会慢下来，这一步最有效。\n2) 看「高海拔模式 / High Altitude Mode」有没有被打开。新加坡、马来西亚用不到，关掉。\n3) 进风口和出风口周围留大约 30 cm 的空间，不要放在关着门的柜子里用。\n4) 冷气有没有开？房间热，风扇就会全速转。\n5) 机器伸手够得到、滤网盖不用工具就能开的：关机、拔电后清一清滤网上的灰。\n6) 如果是咔咔声、摩擦声或很尖的啸声，或者温度警告灯亮了：风扇可能快坏了，停止使用，需要技术员。",
+      "en": "Projector fan is very loud:\n1) Menu, then Lamp Mode / Light Source Mode: choose ECO or Quiet. The fan slows down; this helps the most.\n2) Check whether High Altitude Mode is on. It is not needed in Singapore or Malaysia; turn it off.\n3) Keep about 30 cm clear around the air inlet and outlet. Do not run it inside a closed cabinet.\n4) Is the air-con on? In a warm room the fan runs at full speed.\n5) If the unit is within easy reach and has a tool-free filter cover: switch it off, unplug it and clean the dust off the filter.\n6) Clicking, grinding or a high-pitched whine, or a temperature warning light: the fan may be failing. Stop using it; a technician is needed."
+    },
+    "explain": {
+      "zh": "风扇声大，多数是散热需要，少数是风扇本身坏了：\n• 亮度越高、室温越高、灰尘越多，风扇转得越快、越吵。\n• 高海拔模式会让风扇一直全速转，在新马用不到。\n• 滤网或通风口被灰尘堵住是最常见的原因，清洁后通常明显改善。\n• 咔咔声、摩擦声、忽大忽小的尖声，是风扇轴承磨损，要由技术员更换。\n• 只是吵、没有警告灯，可以先继续用；出现过热警告或自动关机，就要停用检查。",
+      "en": "A loud fan is mostly about cooling, and sometimes a failing fan:\n• The brighter the mode, the warmer the room and the more dust inside, the faster and louder the fan runs.\n• High Altitude Mode keeps the fan at full speed all the time; it is not needed in this region.\n• A filter or vent blocked with dust is the most common cause, and cleaning usually makes a clear difference.\n• Clicking, grinding or a whine that rises and falls means worn fan bearings; a technician must replace the fan.\n• Loud but no warning light: you can keep using it for now. With an overheating warning or automatic shutdown, stop using it and have it checked."
+    }
+  },
+  {
+    "id": "proj-burning-smell-smoke",
+    "title": {
+      "zh": "投影机有烧焦味或冒烟",
+      "en": "Burning smell or smoke from the projector"
+    },
+    "match": [
+      "烧焦",
+      "冒烟",
+      "焦味",
+      "有火花",
+      "臭火烧",
+      "出烟",
+      "烧起来",
+      "burning smell",
+      "burnt smell",
+      "smells burnt",
+      "smoke coming out",
+      "got smoke",
+      "projector smoking",
+      "chao ta"
+    ],
+    "reply": {
+      "zh": "投影机有烧焦味或冒烟：\n1) 马上停止使用。在墙上的开关把投影机的电源关掉；插头在安全够得到的地方才去拔。\n2) 不要等它正常冷却关机，也不要再开机试试看。\n3) 不要碰机身（很烫），不要爬上去看，不要拆开。\n4) 让大家离开投影机下方，打开门窗通风。\n5) 看到明火，或烟越来越多：按大楼的火警程序处理，离开房间，拨 995（新加坡）或 999（马来西亚）。\n6) 在安全距离拍下机器和插座的照片，告诉我们机型。必须由技术员检查后才能再用。\n7) 如果电闸跳了，不要反复把它推上去。",
+      "en": "Burning smell or smoke from the projector:\n1) Stop using it now. Switch the projector off at the wall switch; pull the plug only if you can reach it safely.\n2) Do not wait for the normal cooling shutdown, and do not switch it on again to test.\n3) Do not touch the body (it is very hot), do not climb up to look, and do not open it.\n4) Move people away from under the projector and open the doors or windows.\n5) If you see flames or the smoke gets worse: follow your building's fire procedure, leave the room, and call 995 (Singapore) or 999 (Malaysia).\n6) From a safe distance, take photos of the unit and the power socket, and tell us the model. A technician must check it before it is used again.\n7) If the breaker has tripped, do not keep switching it back on."
+    },
+    "explain": {
+      "zh": "烧焦味或冒烟属于紧急情况，不要自己排查：\n• 可能是电源板、灯泡、风扇马达烧坏，或灰尘、昆虫、异物在机内被烤焦。\n• 也可能是插座、排插或电源线过热，同样危险。\n• 继续通电有起火的风险，所以第一步永远是在墙上关电。\n• 新机器或刚换新灯泡的头几个小时，有一点轻微的塑料味是常见的，会自己散掉；但有烟、焦味很重或越来越浓，就不是正常现象。\n• 必须由技术员检查、确认安全之后才能再使用。",
+      "en": "A burning smell or smoke is an emergency; do not try to find the cause yourself:\n• It may be a burnt power board, lamp or fan motor, or dust, insects or a foreign object scorching inside the unit.\n• It may also be an overheating wall socket, extension strip or power cable, which is just as dangerous.\n• Leaving the power on risks a fire, so the first step is always to switch off at the wall.\n• A slight plastic smell in the first few hours of a new unit or a new lamp is common and fades by itself. Smoke, or a strong or growing burnt smell, is not normal.\n• A technician must check it and confirm it is safe before it is used again."
+    }
+  },
+  {
+    "id": "proj-dots-spots-dead-pixels",
+    "title": {
+      "zh": "画面上有白点、黑点或坏点",
+      "en": "White dots, black spots or dead pixels on the image"
+    },
+    "match": [
+      "白点",
+      "黑点",
+      "亮点",
+      "坏点",
+      "很多点点",
+      "有斑点",
+      "小点点",
+      "white dots",
+      "dead pixels",
+      "black spots",
+      "spots on image",
+      "stuck pixels",
+      "dots on screen",
+      "white spots"
+    ],
+    "reply": {
+      "zh": "投影画面上有白点、黑点或坏点：\n1) 按 Menu。投影机自己的菜单上也盖着同样的点，就是投影机的问题；菜单上没有，换一台电脑或一条线试。\n2) 换一个 Source 或拔掉信号线，看纯蓝或纯黑的画面。点还在同一个位置，就是投影机本身。\n3) 看清楚：是模糊的一团（灰尘），还是清楚的小方点（像素）？在全白和全黑的画面各拍一张照片。\n4) 检查幕布：画面变大变小或换了内容，点还留在幕布同一处，那是幕布上的污渍。\n5) 镜头前面有灰：只有伸手够得到才做，关机冷却后用镜头布轻轻擦，不要用纸巾或酒精。\n6) 白点、黑点越来越多（DLP 机型常见），要技术员更换芯片；这段时间可以先继续用。",
+      "en": "White dots, black spots or dead pixels on the image:\n1) Press Menu. If the same dots sit on top of the projector's own menu, the projector is the cause. If not, try another laptop or cable.\n2) Change Source or unplug the cable to get a plain blue or black screen. Dots still in the same place mean it is the projector itself.\n3) Look closely: a fuzzy blob (dust) or a sharp tiny square (pixel)? Take one photo on an all-white picture and one on an all-black picture.\n4) Check the screen: if the dot stays on the same spot of the fabric when the picture changes size or content, it is a stain on the screen.\n5) Dust on the front of the lens: only if within easy reach, switch off, let it cool and wipe gently with a lens cloth. No tissue, no alcohol.\n6) White or black dots that keep increasing (common on DLP models) need a chip replacement by a technician. You can keep using it meanwhile."
+    },
+    "explain": {
+      "zh": "从点的样子可以判断原因：\n• DLP 机型：芯片上有极小的镜片，个别卡住就变成固定的白点或黑点，而且通常会越来越多。\n• LCD 机型：灰尘进到光路里，会出现模糊的一团色斑或暗斑，深色画面最明显；也可能是个别像素坏了。\n• 镜头外面的灰一般只让画面稍微朦，不会变成清楚的点。\n• 幕布上的污渍、电脑屏幕本身的坏点也会被误认，所以先用菜单画面来区分。\n• 这类问题不危险，机器可以暂时照用；但内部清洁或换芯片要技术员做，不要自己拆机。",
+      "en": "The look of the dots tells you the cause:\n• DLP models: the chip has tiny mirrors. When some get stuck they show as fixed white or black dots, and the number usually keeps growing.\n• LCD models: dust inside the light path shows as a fuzzy coloured or dark blob, clearest on dark pictures. A single dead pixel is also possible.\n• Dust on the outside of the lens only makes the picture slightly hazy; it does not make sharp dots.\n• Stains on the screen, or dead pixels on the laptop's own display, can be mistaken for this, so use the projector menu to tell them apart.\n• It is not dangerous and the projector can be used for now. Internal cleaning or a chip replacement is a technician's job; do not open the unit."
+    }
+  },
+  {
+    "id": "proj-lines-on-image",
+    "title": {
+      "zh": "画面出现竖线或横线",
+      "en": "Vertical or horizontal lines on the image"
+    },
+    "match": [
+      "竖线",
+      "横线",
+      "有条纹",
+      "一条线",
+      "彩色线",
+      "线条",
+      "几条线",
+      "vertical line",
+      "vertical lines",
+      "horizontal line",
+      "horizontal lines",
+      "lines on image",
+      "stripes on screen",
+      "line across picture",
+      "投影有竖线",
+      "投影竖线",
+      "投影横线",
+      "投影有线条",
+      "projector lines",
+      "lines on projector"
+    ],
+    "reply": {
+      "zh": "投影画面出现竖线或横线：\n1) 按 Menu。线也穿过投影机的菜单，是投影机内部的问题；菜单干净、线只在电脑画面上，是信号、线或电脑的问题。\n2) 信号问题：把 HDMI 线两头重新插紧，换一条线，或换投影机上另一个 HDMI 口。\n3) 换一台电脑，或换一个 Source 试。\n4) 电脑分辨率设成 1920x1080，刷新率 60Hz。\n5) 用 VGA 线的：按遥控器上的「Auto / Auto Adjust / 自动调整」。\n6) 用遥控器关机，等风扇停，在墙上断电 1 分钟，再开机。\n7) 菜单上也有线，而且位置固定不变：是面板或芯片故障，需要技术员。",
+      "en": "Vertical or horizontal lines on the image:\n1) Press Menu. If the line also runs through the projector's own menu, the fault is inside the projector. If the menu is clean and the line is only on the laptop picture, it is the signal, cable or laptop.\n2) Signal problem: push both ends of the HDMI cable in firmly, try another cable, or use another HDMI port on the projector.\n3) Try another laptop or another Source.\n4) Set the laptop resolution to 1920x1080 and the refresh rate to 60Hz.\n5) With a VGA cable: press Auto (Auto Adjust) on the remote.\n6) Switch off with the remote, wait for the fan to stop, switch off at the wall for 1 minute, then switch on again.\n7) Lines on the menu too, always in the same place: a panel or chip fault. A technician is needed."
+    },
+    "explain": {
+      "zh": "先分清线是信号带来的，还是机器本身的：\n• 菜单画面干净，换线或换电脑后线就消失：是线材、转接头、电脑显卡或分辨率的问题，自己可以解决。\n• 菜单上也有、位置固定的细线（常见是一条彩色竖线）：是 LCD 面板、DLP 芯片或内部排线故障。\n• 一大片粗条纹，或半个画面颜色不对：多是内部主板或面板的问题。\n• VGA 的滚动条纹、水波纹，多是干扰或接地问题，换一条好一点的线会改善。\n• 机内故障没有安全风险，可以暂时用，但线不会自己消失，需要技术员维修。",
+      "en": "First work out whether the lines come with the signal or from the projector itself:\n• Menu is clean, and the lines go away with another cable or laptop: it is the cable, adapter, laptop graphics or resolution. You can solve this yourself.\n• A thin line in a fixed place that also shows on the menu (often one coloured vertical line): a fault in the LCD panel, DLP chip or an internal ribbon cable.\n• Wide bands, or half the picture in the wrong colour: usually the internal main board or panel.\n• Rolling bars or a ripple pattern on VGA are usually interference or grounding; a better cable helps.\n• An internal fault is not a safety risk and the unit can be used for now, but the lines will not go away by themselves. It needs a technician repair."
+    }
+  },
+  {
+    "id": "proj-rainbow-effect",
+    "title": {
+      "zh": "画面有彩虹纹或闪红绿蓝",
+      "en": "Rainbow effect or colour flashes on the image"
+    },
+    "match": [
+      "彩虹",
+      "闪彩色",
+      "红绿蓝",
+      "彩色闪",
+      "彩色残影",
+      "颜色一闪",
+      "rainbow effect",
+      "rainbow",
+      "colour flashes",
+      "color flashes",
+      "rgb flashes",
+      "colour breakup",
+      "rainbow artifacts"
+    ],
+    "reply": {
+      "zh": "投影画面有彩虹纹或闪红绿蓝：\n1) 先确认情况。只在眼睛扫过画面，或看黑底白字时，闪一下红绿蓝：这是单片 DLP 投影机的「彩虹效应」，机器没有坏。\n2) 把幻灯片改成浅色背景、深色字。黑底白字这种高对比的画面最容易看到。\n3) 按 Menu →「灯泡模式 / 光源模式」选 ECO，降低亮度；房间留一点灯光。\n4) 画面菜单里有「BrilliantColor」的机型，把它调低或关掉试试。\n5) 用手机拍投影时出现滚动的彩条是正常的，肉眼看不到就不用理。\n6) 如果整个画面一直在闪彩色、颜色乱跳，或同时听到刺耳的转动声：色轮可能坏了，停止使用，需要技术员。",
+      "en": "Rainbow effect or colour flashes on the image:\n1) Check what you see. Brief red, green and blue flashes only when your eyes sweep across the picture, or on white text over black: this is the rainbow effect of a single-chip DLP projector. The unit is not faulty.\n2) Change the slides to a light background with dark text. High-contrast white on black shows it the most.\n3) Menu, then Lamp Mode / Light Source Mode: choose ECO to lower the brightness. Keep some room lights on.\n4) If the Picture menu has BrilliantColor, turn it down or off and try again.\n5) Rolling colour bands when you film the projection with a phone are normal. If you cannot see them by eye, ignore them.\n6) If the whole picture keeps flashing colours, the colours jump around, or you hear a harsh spinning noise: the colour wheel may be failing. Stop using it; a technician is needed."
+    },
+    "explain": {
+      "zh": "彩虹效应是单片 DLP 投影机的特性：\n• 这类机器用高速旋转的色轮轮流投出红、绿、蓝，眼睛快速移动时，有些人会看到颜色分开、闪一下。\n• 每个人的敏感度不同：有的人完全看不到，有的人会觉得眼累或头晕。\n• 黑底白字、高亮度、房间很暗的时候最明显。\n• 这不是故障。调整设置和幻灯片配色可以减轻，但不能完全消除；非常在意的话，只能换成 3LCD 这类不用色轮的机型。\n• 如果所有人都看到画面一直闪彩色，或机器有异响，那是色轮故障，要技术员维修。",
+      "en": "The rainbow effect is a characteristic of single-chip DLP projectors:\n• These units use a fast-spinning colour wheel to show red, green and blue one after another. When the eyes move quickly, some people see the colours split apart for a moment.\n• People differ a lot: some never see it, others get tired eyes or feel dizzy.\n• It is strongest with white text on black, high brightness and a dark room.\n• It is not a fault. Settings and slide colours reduce it but cannot remove it. If it really bothers people, the only cure is a model without a colour wheel, such as 3LCD.\n• If everyone sees constant colour flashing, or the unit makes an unusual noise, that is a colour wheel fault and needs a technician repair."
+    }
+  },
+  {
+    "id": "proj-image-shaking",
+    "title": {
+      "zh": "投影画面抖动或晃动",
+      "en": "Projected image shaking or vibrating"
+    },
+    "match": [
+      "画面抖",
+      "画面晃",
+      "一直抖",
+      "画面震动",
+      "会震",
+      "摇来摇去",
+      "抖来抖去",
+      "image shaking",
+      "picture vibrating",
+      "image wobbling",
+      "shaky image",
+      "image vibrates",
+      "picture shaking",
+      "image jitter"
+    ],
+    "reply": {
+      "zh": "投影画面抖动或晃动：\n1) 按 Menu 看一看。菜单和整个画面边框一起晃，是机身或幕布在动；菜单很稳、只有内容在抖，是信号问题。\n2) 机身在震：看冷气出风口是不是直吹投影机，调一调风向叶片或把风速调小。\n3) 幕布在飘：关掉对着幕布吹的冷气或风扇，关上门窗。\n4) 只在楼上有人走动、关门、或音箱低音大的时候才抖：是建筑结构在震，记下发生的时间告诉我们。\n5) 放在桌上的机器：放稳，不要放在会晃的推车上，或压在有风扇的设备上面。\n6) 内容在抖（信号）：换一条线，电脑刷新率设 60Hz；用 VGA 的按「Auto」。\n7) 怀疑吊架松了：不要自己上去拧，不要让人坐在机器正下方，需要技术员加固。",
+      "en": "Projected image shaking or vibrating:\n1) Press Menu and watch. Menu and whole picture frame shake together: the projector body or the screen is moving. Menu steady and only the content jitters: it is the signal.\n2) Body vibrating: check if an air-con outlet blows straight at the projector. Turn the louvres away or lower the fan speed.\n3) Screen swaying: turn off any air-con or fan blowing on the screen, and close doors and windows.\n4) Shakes only when people walk upstairs, a door slams or the speakers play heavy bass: the building is vibrating. Note when it happens and tell us.\n5) Unit on a table: make it steady. Not on a wobbly trolley or on top of equipment with fans.\n6) Content jittering (signal): try another cable and set the laptop to 60Hz; with VGA press Auto.\n7) Mount seems loose: do not go up to tighten it, and keep people from sitting below it. A technician must secure it."
+    },
+    "explain": {
+      "zh": "画面抖，通常是机身或幕布在动，很少是机器坏了：\n• 投影距离远，机身只动一点点，画面就晃得很明显。\n• 常见原因：冷气直吹机身或幕布；天花板跟着冷气机或楼上的脚步震动；吊杆太长或螺丝松了。\n• 只有内容抖而菜单不抖，是信号不稳（线材、刷新率、VGA 干扰）。\n• 调冷气风向、换线这些，自己可以做。\n• 吊架松动有掉落的风险，不要自己上去处理，也不要让人坐在正下方，需要技术员加固。",
+      "en": "A shaking picture usually means the projector body or the screen is moving; the projector itself is rarely faulty:\n• Over a long throw distance, a tiny movement of the body becomes a big movement on the screen.\n• Common causes: air-con blowing on the unit or the screen; the ceiling vibrating with the air-con unit or footsteps upstairs; a mount pole that is too long or has loose screws.\n• If only the content jitters and the menu is steady, the signal is unstable (cable, refresh rate, VGA interference).\n• Turning the air-con louvres and changing a cable are things you can do yourself.\n• A loose mount could fall. Do not go up to fix it and do not let anyone sit directly below; a technician must secure it."
+    }
+  },
+  {
+    "id": "proj-image-shifted-off-screen",
+    "title": {
+      "zh": "画面移位、跑出幕布或只见一部分",
+      "en": "Image shifted off the screen or only part showing"
+    },
+    "match": [
+      "画面跑位",
+      "画面偏了",
+      "跑出幕布",
+      "照到墙上",
+      "画面移位",
+      "被撞到",
+      "偏一边",
+      "image off screen",
+      "image shifted",
+      "picture off centre",
+      "image moved",
+      "lens shift",
+      "image not centred",
+      "bumped the projector"
+    ],
+    "reply": {
+      "zh": "投影画面移位、跑出幕布或只看到一部分：\n1) 先不要爬上去搬机器或拧吊架。\n2) 有电动镜头位移的机型：按遥控器上的「Lens Shift / Lens / 镜头」，用方向键把画面移回幕布。\n3) 在菜单里看「数码移位 / Image Shift / Digital Shift / H-V Position」有没有被改过，调回 0。\n4) 看「数码变焦 / Digital Zoom / D.Zoom」有没有被放大，调回 1.0 或 0。放大了就只看到画面的一部分。\n5) 有「镜头记忆 / Lens Memory」的机型，调出保存的位置 1。\n6) 机器放在桌上的：直接把机身摆正，对准幕布中间，再用 Zoom 环调大小。\n7) 吊装的机器被撞歪了，或镜头位移是机身上够不到的手动旋钮：需要技术员重新校正。",
+      "en": "Image has shifted off the screen or only part of it shows:\n1) Do not climb up to move the projector or adjust the mount.\n2) Models with motorised lens shift: press Lens Shift (or Lens) on the remote and use the arrow keys to move the image back onto the screen.\n3) In the menu, check Image Shift / Digital Shift / H-V Position and set it back to 0.\n4) Check Digital Zoom (D.Zoom) and set it back to 1.0 or 0. When zoomed in you only see part of the picture.\n5) If the model has Lens Memory, load saved position 1.\n6) Projector on a table: simply turn the body to face the centre of the screen, then set the size with the Zoom ring.\n7) A ceiling unit that was knocked out of line, or one with manual lens shift dials on the body that you cannot reach, needs a technician to re-align it."
+    },
+    "explain": {
+      "zh": "画面移位，多数是机器位置或设置被动过：\n• 清洁、修天花板、换灯管时碰到机身或吊杆，画面就会偏。\n• 遥控器按错键，也会改到镜头位移、数码移位或数码变焦，画面就偏到一边或只显示一部分。\n• 电脑设成「扩展」时，投影只显示另一半桌面，看起来也像少了一半；按 Windows 键 + P 改成「复制」即可。\n• 用遥控器和菜单能调回来的，可以自己做。\n• 不建议用梯形校正硬拉回来，画面会变小、变糊。\n• 机身被撞歪，要动吊架或机身上的旋钮的，需要技术员重新对位。",
+      "en": "A shifted picture usually means the projector position or a setting was disturbed:\n• Cleaning, ceiling repairs or changing light tubes can knock the body or the mount pole, and the picture moves.\n• A wrong button on the remote can change lens shift, digital shift or digital zoom, so the picture sits to one side or shows only a part.\n• A laptop in Extend mode sends only the other half of the desktop, which also looks like half is missing. Press Windows key + P and choose Duplicate.\n• Anything you can correct with the remote and menu is fine to do yourself.\n• Do not force it back with keystone correction; the picture gets smaller and softer.\n• If the body was knocked out of line and the mount or dials on the body must be adjusted, a technician needs to re-align it."
+    }
+  },
+  {
+    "id": "proj-remote-wrong-projector",
+    "title": {
+      "zh": "遥控器控制错投影机或两台一起动",
+      "en": "Remote controls the wrong projector or two at once"
+    },
+    "match": [
+      "两台一起",
+      "控制错",
+      "隔壁也开",
+      "两台都关",
+      "遥控id",
+      "另一台也",
+      "两台都有反应",
+      "remote id",
+      "both projectors",
+      "wrong projector",
+      "two projectors react",
+      "projector id",
+      "next room projector",
+      "other projector also"
+    ],
+    "reply": {
+      "zh": "遥控器控制错投影机，或两台投影机一起有反应：\n1) 最快的办法：走近你要控制的那台，对准它前面或后面的接收窗，用手或一张纸挡住另一台的方向。\n2) 机身按键伸手够得到的，直接按机身按键。\n3) 设定 ID：在那台机器上按 Menu →「设置 / 安装」→「投影机 ID / Projector ID / Remote ID」，每台给不同的号码，例如 1 和 2。\n4) 遥控器要选同一个 ID。多数机型是按住遥控器上的「ID」键再按数字，可以看遥控器背面或说明书。\n5) 改 ID 的时候，先把另一台关掉或挡住，免得两台一起被改。\n6) 改完后遥控器完全没反应，就是 ID 对不上：把遥控器的 ID 设成 0 或 All，通常可以控制所有 ID。",
+      "en": "Remote controls the wrong projector, or two projectors react together:\n1) Quick fix: stand close to the projector you want, aim at its front or rear sensor window, and shield the remote from the other unit with your hand or a sheet of paper.\n2) If the buttons on the body are within easy reach, use those instead.\n3) Set an ID: on that unit press Menu, then Settings / Installation, then Projector ID (or Remote ID). Give each projector a different number, for example 1 and 2.\n4) The remote must use the same ID. On most models you hold the ID button on the remote and press the number; check the back of the remote or the manual.\n5) While changing an ID, switch the other projector off or cover it, so both are not changed together.\n6) If the remote then stops working completely, the IDs do not match. Set the remote ID to 0 or All, which usually controls every ID."
+    },
+    "explain": {
+      "zh": "同一个牌子的投影机用的是同一套红外线遥控码：\n• 两台同牌子的机器装在同一间房，或相邻的玻璃房，遥控信号会反射，两台都收得到。\n• 多数商用机型可以给每台设一个 ID，遥控器选哪个 ID，就只控制那一台。\n• 设定只在菜单和遥控器上操作，自己可以做；各品牌的按键组合不一样，不确定就拍遥控器的照片给我们。\n• 部分入门机型没有 ID 功能，只能靠遮挡、在菜单里关掉其中一台的遥控接收（Remote Receiver 前 / 后），或改用墙上的控制面板。\n• 这不是故障，不会影响机器。",
+      "en": "Projectors of the same brand use the same infrared remote codes:\n• With two units of one brand in the same room, or in glass-walled rooms next to each other, the remote signal bounces around and both receive it.\n• Most business models let you give each unit an ID; the remote then controls only the unit with the ID it is set to.\n• The setup is done in the menu and on the remote, so you can do it yourself. The button combination differs by brand; if unsure, send us a photo of the remote.\n• Some entry-level models have no ID function. Then the options are shielding, turning off one unit's remote receiver in the menu (Remote Receiver front / rear), or using the wall control panel.\n• This is not a fault and does not harm the projectors."
+    }
+  },
+  {
+    "id": "proj-password-key-lock",
+    "title": {
+      "zh": "投影机要密码或机身按键被锁",
+      "en": "Projector asks for a password or buttons are locked"
+    },
+    "match": [
+      "投影机密码",
+      "开机密码",
+      "按键锁",
+      "面板锁",
+      "密码保护",
+      "安全锁",
+      "pin码",
+      "key lock",
+      "panel lock",
+      "security lock",
+      "power on password",
+      "projector password",
+      "buttons locked",
+      "enter pin code"
+    ],
+    "reply": {
+      "zh": "投影机要求输入密码，或机身按键被锁：\n1) 先分清两种情况。A：画面显示「按键锁定 / Key Lock / Control Panel Lock」，是机身按键被锁。B：一开机就要求输入密码或 PIN。\n2) A：遥控器通常还能用。按 Menu →「设置 / 安全 / Security」→「按键锁 / Control Panel Lock」→ 关。\n3) A 而且没有遥控器：很多机型长按机身的 Enter 或 Menu 键大约 7 到 10 秒可以解锁（各品牌不同）。\n4) B：问公司行政或 IT 有没有记录密码。不要乱猜，多数机型输错几次就会锁死。\n5) B：画面出现「请求代码 / Request Code」时拍照，连同机型和序列号发给我们。\n6) 不要用拔电、拆机或恢复出厂设置来绕过，密码不会因此消失。\n7) 忘了密码，要由技术员或原厂凭这个代码解锁。",
+      "en": "Projector asks for a password, or the buttons are locked:\n1) Two different cases. A: the screen shows Key Lock / Control Panel Lock, so the buttons on the body are locked. B: at power-on it asks for a password or PIN.\n2) Case A: the remote usually still works. Menu, then Settings / Security, then Control Panel Lock (Key Lock): Off.\n3) Case A with no remote: on many models, holding Enter or Menu on the body for about 7 to 10 seconds unlocks it (this differs by brand).\n4) Case B: ask your admin or IT team whether the password is on record. Do not guess; most models lock up after a few wrong tries.\n5) Case B: if a Request Code appears, take a photo and send it to us with the model and serial number.\n6) Do not unplug it, open it or factory-reset it to get around the lock; the password stays.\n7) A forgotten password needs a technician or the manufacturer to unlock it with that code."
+    },
+    "explain": {
+      "zh": "这两种锁都是防误触、防盗的功能，不是故障：\n• 按键锁只锁机身上的按键，防止被人乱按；遥控器照常可用，自己就能解除。\n• 开机密码是防盗设计：机器断过电再通电，就要输入密码。所以常常是搬机器、停电或关过总电闸之后才第一次出现，这时才发现没人记得密码。\n• 密码存在机器里，恢复出厂设置或拔电都清不掉。\n• 忘记密码时，机器会给出一个请求代码，技术员或原厂凭它和序列号取得解锁码。\n• 解开之后，建议把密码交给行政或 IT 保管，或请我们帮你关闭这个功能。",
+      "en": "Both locks are anti-tamper and anti-theft features, not faults:\n• Key lock only locks the buttons on the body so nobody presses them by accident. The remote still works and you can release it yourself.\n• A power-on password is an anti-theft design: after the unit loses mains power and gets it back, it asks for the password. So it often appears for the first time after the unit is moved, a power cut or a main switch-off, and then nobody remembers the password.\n• The password is stored in the unit; a factory reset or unplugging does not clear it.\n• For a forgotten password the unit shows a request code. A technician or the manufacturer uses it with the serial number to get an unlock code.\n• Once unlocked, give the password to your admin or IT team to keep, or ask us to turn the feature off."
+    }
+  },
+  {
+    "id": "proj-will-not-turn-off",
+    "title": {
+      "zh": "投影机关不掉或电源键没反应",
+      "en": "Projector will not turn off or power button unresponsive"
+    },
+    "match": [
+      "投影机关不",
+      "关不了机",
+      "不能关机",
+      "电源键没反应",
+      "风扇不停",
+      "关机没反应",
+      "自己开机",
+      "won't turn off",
+      "wont turn off",
+      "cannot turn off",
+      "cannot switch off",
+      "power button not working",
+      "fan still running",
+      "cannot off"
+    ],
+    "reply": {
+      "zh": "投影机关不掉，或电源键没反应：\n1) 多数机型按一次电源键后会要你确认。要按两次，中间隔大约一秒。\n2) 灯已经灭了，但风扇还在转、指示灯在闪：这是冷却过程，通常 1 到 2 分钟。这段时间按键没反应是正常的，等它停。\n3) 遥控器没反应：换电池，对准投影机；或用墙上的控制面板、机身按键。\n4) 看是不是开了「按键锁」。也看「通电开机 / Direct Power On / Auto Power On」：开着的话一通电就自己开机，要在菜单里关掉。\n5) 真的死机，所有按键超过 5 分钟都没用：在墙上开关断电，等 1 分钟再开。只在死机时这样做，平时直接断电会缩短灯泡寿命。\n6) 关了又自己开机：可能是房间的控制系统、HDMI CEC 或信号唤醒在开它，告诉我们房间里有什么控制面板。",
+      "en": "Projector will not turn off, or the power button does nothing:\n1) Most models ask you to confirm. Press the power button twice, about one second apart.\n2) Light off but the fan still runs and the indicator blinks: this is the cooling cycle, usually 1 to 2 minutes. Buttons do nothing meanwhile; just wait.\n3) Remote not responding: change the batteries and aim at the projector, or use the wall panel or the buttons on the body.\n4) Check whether Key Lock is on. Also check Direct Power On (Auto Power On): with it on, the unit starts whenever it gets power; turn it off in the menu.\n5) Truly frozen, nothing works for more than 5 minutes: switch off at the wall, wait 1 minute, switch on. Only do this for a freeze; cutting power daily shortens lamp life.\n6) Turns back on by itself: a room control system, HDMI CEC or signal wake-up may be switching it on. Tell us what control panel the room has."
+    },
+    "explain": {
+      "zh": "多数情况是正常的设计：\n• 为了防止误关，很多机型要按两次电源键才会关机。\n• 灯泡机关机后要吹风冷却，这段时间不接受任何按键；激光机一般几秒钟就关好。\n• 冷却的时候直接断电，会让灯泡过热、缩短寿命，所以平时不要拔电。\n• 关了又自己开，通常是「通电自动开机」、信号自动开机、HDMI CEC，或房间的控制系统 / 定时器在控制它。\n• 真正死机（按键和遥控都没反应，风扇转了很久不停）比较少见，断电重启一次可以；如果常常发生，是主板或固件问题，需要技术员。",
+      "en": "In most cases this is normal design:\n• To prevent accidental shutdown, many models need two presses of the power button.\n• Lamp projectors blow air to cool down after switch-off and accept no buttons during that time. Laser units normally finish in a few seconds.\n• Cutting the power during cooling overheats the lamp and shortens its life, so do not pull the plug in normal use.\n• If it turns itself back on, the usual cause is direct power on, signal auto power on, HDMI CEC, or the room's control system or timer.\n• A real freeze (no response to buttons or remote, fan running for a long time) is less common. One power cycle at the wall is fine. If it happens often, it is a main board or firmware problem and needs a technician."
+    }
+  },
+  {
+    "id": "proj-double-image-ghosting-3d",
+    "title": {
+      "zh": "画面重影或误开 3D 模式",
+      "en": "Double image, ghosting or 3D mode switched on"
+    },
+    "match": [
+      "重影",
+      "双影",
+      "叠影",
+      "画面重叠",
+      "3d模式",
+      "字有影子",
+      "鬼影",
+      "double image",
+      "ghosting",
+      "ghost image",
+      "3d mode",
+      "double vision",
+      "shadow on text",
+      "images overlap"
+    ],
+    "reply": {
+      "zh": "投影画面重影，或像两个画面叠在一起：\n1) 按 Menu，找到「3D」设置，改成「关 / Off」（是 Auto 的也改成 Off）。3D 被误开时，画面像两层叠在一起，或左右各一个。\n2) 看有没有开「画中画 / PIP」或「分屏 / Split Screen」，有就关掉。\n3) 文字右边拖着淡淡的影子，多数是线的问题：两头插紧，或换一条短一点、好一点的线。用 VGA 的按遥控器「Auto」。\n4) 电脑分辨率设成投影机的原生分辨率（常见 1920x1080 或 1280x800），60Hz。\n5) 重新对焦：伸手够得到就转 Focus 环，或用遥控器上的 Focus。\n6) 玻璃白板的正面和背面都会反光，形成两个影像，改投在幕布上。\n7) 连投影机菜单的字也有重影，以上都没用：是镜头或内部光学的问题，需要技术员。",
+      "en": "Double image, ghosting, or 3D mode switched on by mistake:\n1) Press Menu, find the 3D setting and set it to Off (change Auto to Off too). With 3D on by mistake, the picture looks like two layers, or two pictures side by side.\n2) Check that Picture in Picture (PIP) or Split Screen is off.\n3) A faint shadow to the right of text is usually the cable. Push both ends in firmly, or try a shorter, better cable. With VGA, press Auto on the remote.\n4) Set the laptop to the projector's native resolution (often 1920x1080 or 1280x800) at 60Hz.\n5) Refocus with the Focus ring if within reach, or Focus on the remote.\n6) A glass whiteboard reflects from both its front and back, giving two images. Project onto a proper screen instead.\n7) If even the projector's menu text is doubled and nothing above helps, it is a lens or internal optics problem; a technician is needed."
+    },
+    "explain": {
+      "zh": "重影有几种来源：\n• 3D 模式误开：机器把一个画面当成左眼、右眼两个画面来显示，看起来就是两层，关掉 3D 就好。\n• 线材问题：线太长、质量差或接头松，文字右边会拖一条淡影，VGA 线最常见。\n• 分辨率不对：电脑输出和投影机的原生分辨率不一致，字会发虚，像有重影。\n• 表面反射：玻璃白板前后两层都反光，形成两个错开的影像。\n• 以上几种都可以自己排除。\n• 连菜单的字都有重影，是镜头移位或内部光学元件的问题，需要技术员。",
+      "en": "Ghosting has a few possible sources:\n• 3D mode on by mistake: the projector treats one picture as separate left-eye and right-eye pictures, so you see two layers. Turning 3D off fixes it.\n• Cable: a long, poor or loose cable leaves a faint trail to the right of text. VGA cables are the most common case.\n• Wrong resolution: when the laptop output does not match the projector's native resolution, text goes soft and looks doubled.\n• Surface reflection: a glass whiteboard reflects from its front and back layers, giving two offset images.\n• You can rule out all of the above yourself.\n• If even the menu text is doubled, the lens has shifted or an internal optical part is at fault, and a technician is needed."
+    }
+  },
+  {
+    "id": "proj-freeze-av-mute-blank",
+    "title": {
+      "zh": "画面定格不动或被误按变黑",
+      "en": "Image frozen or blanked by Freeze / AV Mute button"
+    },
+    "match": [
+      "画面定格",
+      "画面不动",
+      "画面卡住",
+      "画面冻结",
+      "画面静止",
+      "按错键",
+      "av静音",
+      "av mute",
+      "image frozen",
+      "picture stuck",
+      "freeze button",
+      "blank button",
+      "screen frozen",
+      "picture not moving"
+    ],
+    "reply": {
+      "zh": "投影画面定格不动，或按错键后变黑：\n1) 画面停住不动，但电脑其实还在动：再按一次遥控器上的「Freeze / 定格 / 静止」。\n2) 画面全黑或全蓝，但机器还开着、风扇在转：再按一次「AV Mute」（也叫 Blank、Hide、Shutter、Pic Mute、Eco Blank）。\n3) 有些机型镜头前有滑盖（A/V Mute 滑盖），伸手够得到的话把它推开。\n4) 墙上控制面板有「Blank / Picture Mute」键的，也按一次。\n5) 还是不动：换一个 Source，再换回来。\n6) 检查电脑。PowerPoint 放映时按到 B 键（黑屏）或 W 键（白屏），再按一次就恢复；电脑是「扩展」模式的，按 Windows 键 + P 选「复制」。\n7) 还是卡住：用遥控器关机，等冷却完再开机。",
+      "en": "Image frozen, or screen blank after a wrong button press:\n1) Picture stuck while the laptop is still moving: press Freeze on the remote once more.\n2) Screen all black or blue but the projector is still on with the fan running: press AV Mute again (also called Blank, Hide, Shutter, Pic Mute or Eco Blank).\n3) Some models have a sliding lens cover (A/V Mute slide). If it is within easy reach, slide it open.\n4) If the wall control panel has a Blank or Picture Mute button, press it once.\n5) Still stuck: change Source and then change back.\n6) Check the laptop. In a PowerPoint slide show the B key (black) or W key (white) blanks the slide; press it again. If the laptop is in Extend mode, press Windows key + P and choose Duplicate.\n7) Still frozen: switch off with the remote, wait for cooling to finish, and switch on again."
+    },
+    "explain": {
+      "zh": "这是遥控器上的功能键被误按，不是故障：\n• Freeze（定格）把当前的画面停住，方便讲者在电脑上准备下一页，观众看到的画面就不会动。\n• AV Mute / Blank / Shutter 是暂时关掉画面（有的连声音一起关），机器其实还开着。\n• 这些键常在翻页键、音量键旁边，很容易按错；有的机型 AV Mute 开着一段时间后还会自动关机。\n• 再按一次同一个键就恢复，不需要技术员。\n• PowerPoint 的 B / W 键、电脑的扩展显示模式，也会造成类似的现象。",
+      "en": "A function button on the remote was pressed by mistake; this is not a fault:\n• Freeze holds the current picture so the presenter can prepare the next page on the laptop; the audience sees a picture that does not move.\n• AV Mute / Blank / Shutter hides the picture for a while (on some models the sound too). The projector is actually still on.\n• These buttons often sit next to the page and volume buttons, so they are easy to hit. On some models the unit also switches itself off after AV Mute has been on for some time.\n• Pressing the same button again brings the picture back. No technician is needed.\n• The B / W keys in PowerPoint and the laptop's Extend display mode can look very similar."
+    }
+  },
+  {
+    "id": "proj-not-supported-out-of-range",
+    "title": {
+      "zh": "显示「不支持」或「超出范围」",
+      "en": "Not Supported or Out of Range message"
+    },
+    "match": [
+      "信号不支持",
+      "显示不支持",
+      "超出范围",
+      "不支援",
+      "格式不支持",
+      "超出频率",
+      "频率超出",
+      "not supported",
+      "out of range",
+      "unsupported signal",
+      "unsupported format",
+      "format not supported",
+      "invalid format",
+      "mode not supported"
+    ],
+    "reply": {
+      "zh": "投影机显示「不支持 / Not Supported」或「超出范围 / Out of Range」：\n1) 电脑送出的分辨率或刷新率，投影机接不了。Windows：桌面按右键 →「显示设置」→ 选投影机那个屏幕 → 分辨率选 1920x1080（旧机器选 1280x720 或 1024x768）。\n2) 「高级显示设置」→ 刷新率选 60Hz，不要 120 / 144Hz，也不要 24 / 30Hz。\n3) Mac：系统设置 → 显示器 → 选投影机 → 选 1080p、60 Hz。\n4) 看不到画面没办法设：按 Windows 键 + P 选「复制」，或先在笔电自己的屏幕上改。\n5) 4K 的电脑或播放器接旧投影机：把输出改成 1080p，关掉 HDR。\n6) 换一条线或换一个转接头再试，坏的转接头也会出现这个提示。\n7) 重启电脑，再重新插线。",
+      "en": "Projector shows Not Supported or Out of Range:\n1) The laptop is sending a resolution or refresh rate the projector cannot take. Windows: right-click the desktop, Display settings, select the projector display, set Resolution to 1920x1080 (older units: 1280x720 or 1024x768).\n2) Advanced display settings: set Refresh rate to 60Hz, not 120 / 144Hz and not 24 / 30Hz.\n3) Mac: System Settings, Displays, select the projector, choose 1080p and 60 Hz.\n4) If you cannot see a picture to change it: press Windows key + P and choose Duplicate, or change it on the laptop's own screen first.\n5) 4K laptop or media player on an older projector: set the output to 1080p and turn off HDR.\n6) Try another cable or adapter; a faulty adapter can cause this message too.\n7) Restart the laptop and plug the cable in again."
+    },
+    "explain": {
+      "zh": "意思是投影机收到了信号，但是看不懂：\n• 最常见是刷新率太高（游戏笔电的 120 / 144Hz），或分辨率超过机器能接受的范围（4K 接到旧机器）。\n• 也有太低的情况，例如 24Hz 或 30Hz 的视频输出。\n• 信号经过 HDMI 延长器、切换器或转接头时，电脑可能读不到投影机的资料，就乱送一个格式。\n• HDR 和某些特殊的色彩格式，旧机器也不支持。\n• 在电脑上改成 1080p、60Hz，几乎都能解决，自己可以做。\n• 如果所有电脑在这间房都这样，是房间的切换器或延长器设置问题，需要技术员。",
+      "en": "It means the projector receives a signal but cannot understand it:\n• Most often the refresh rate is too high (120 / 144Hz from a gaming laptop) or the resolution is beyond what the unit accepts (4K into an older projector).\n• It can also be too low, such as a 24Hz or 30Hz video output.\n• When the signal passes through an HDMI extender, switcher or adapter, the laptop may fail to read the projector's details and send a random format.\n• Older units also do not support HDR and some special colour formats.\n• Setting the laptop to 1080p at 60Hz solves almost every case, and you can do it yourself.\n• If every laptop shows this in the same room, the room's switcher or extender settings are the cause and a technician is needed."
+    }
+  },
+  {
+    "id": "proj-built-in-wireless-not-found",
+    "title": {
+      "zh": "找不到投影机自带的无线投屏",
+      "en": "Cannot find the projector's built-in wireless projection"
+    },
+    "match": [
+      "投影机无线",
+      "无线投影功能",
+      "网络投影",
+      "投影机连网",
+      "搜不到投影机",
+      "内置投屏",
+      "自带投屏",
+      "projector wifi",
+      "network projection",
+      "built-in wireless",
+      "wireless projector",
+      "projector miracast",
+      "lan projection",
+      "cannot find projector"
+    ],
+    "reply": {
+      "zh": "找不到投影机自带的无线 / 网络投影功能：\n1) 先确认这台机器有没有。按 Source / Input，看有没有「LAN / Network / Wireless / Screen Mirroring / Miracast」。都没有，就是不支持，或要另外加无线模块 / 接收器。\n2) 有的话选它，画面会显示投影机名称、IP 地址或连接码（PIN / 关键字）。\n3) 按 Menu →「网络 / Network」，确认「无线 LAN / Wireless LAN」是「开」。有些机型要插原厂的 USB 无线模块，看机身 USB 口有没有插着。\n4) 电脑或手机要和投影机在同一个网络（或连上画面显示的那个 Wi-Fi 名称）。访客 Wi-Fi 通常搜不到。\n5) Windows 按 Windows 键 + K，选投影机名称。画面上写了品牌 App 的，装那个 App 照步骤做。\n6) 赶时间：先插 HDMI 线用。\n7) 要设定公司网络的，把待机画面拍照发给我们和你们的 IT。",
+      "en": "Projector's own wireless / network projection not found:\n1) Check the unit has it. Press Source / Input and look for LAN, Network, Wireless, Screen Mirroring or Miracast. If none is listed, it is not supported or needs an extra wireless module or receiver.\n2) If it is there, select it. The screen shows the projector name, IP address or connection code (PIN / keyword).\n3) Menu, then Network: check Wireless LAN is On. Some models need the maker's USB wireless module; check one is plugged in.\n4) Your laptop or phone must be on the same network as the projector (or join the Wi-Fi name shown on screen). Guest Wi-Fi usually cannot find it.\n5) Windows: press Windows key + K and choose the projector. If the screen names an app, install it and follow the steps.\n6) In a hurry: use an HDMI cable first.\n7) For office network setup, send a photo of the standby screen to us and your IT team."
+    },
+    "explain": {
+      "zh": "不是每台投影机都有无线投屏：\n• 很多商用机型只有有线网络口（用来集中控制），无线要另外加模块，或者根本没有。\n• 有的机型支持 Miracast 屏幕镜像，有的只支持自家的软件，有的只能投照片和文件，播放视频不顺，也没有声音。\n• 公司网络常把访客网络和内部网络隔开，电脑搜不到投影机多半是这个原因，需要 IT 配合。\n• 自己能做的是：确认有没有这个 Source、打开无线、连对网络。\n• 机器没有这个功能，或想要稳定、多人轮流投屏的，通常要加装无线投屏器，需要我们评估。",
+      "en": "Not every projector has wireless projection:\n• Many business models only have a wired network port (for central control). Wireless needs an add-on module, or is not available at all.\n• Some models support Miracast screen mirroring, some only work with the maker's own software, and some only show photos and documents: video is not smooth and there is no sound.\n• Office networks often separate guest and internal networks. This is the usual reason a laptop cannot find the projector, and it needs your IT team's help.\n• What you can do yourself: check the Source exists, turn wireless on, and join the right network.\n• If the unit lacks the feature, or you want stable sharing where several people take turns, a separate wireless presentation device is usually added. That needs our assessment."
+    }
+  },
+  {
+    "id": "proj-short-throw-wavy-image",
+    "title": {
+      "zh": "短焦投影画面边缘波浪弯曲",
+      "en": "Short-throw image wavy or curved at the edges"
+    },
+    "match": [
+      "波浪",
+      "边缘弯",
+      "短焦",
+      "超短焦",
+      "边不直",
+      "幕布不平",
+      "画面弯弯",
+      "wavy image",
+      "wavy edges",
+      "short throw",
+      "ultra short throw",
+      "curved edges",
+      "ust projector",
+      "image not straight"
+    ],
+    "reply": {
+      "zh": "短焦 / 超短焦投影画面边缘呈波浪或弯曲：\n1) 先看表面。从侧面顺着幕布看，有没有皱、鼓起或波浪？这类投影机的光打上去的角度很斜，一点点不平都会被放大。\n2) 卷帘幕：先收上去，再完全放到底，让它垂直拉平。把吹着幕布的冷气调开。\n3) 投在墙上或白板上的：看白板有没有鼓起、松脱，墙面有没有凹凸。\n4) 没人改过设置，就不要去调梯形校正。有人改过的：按 Menu →「梯形校正 / Keystone / Geometry / 曲面校正」→ 重置为 0。\n5) 机器放在桌上或柜子上的：确认它没被移动，四个脚放平，和墙面平行。\n6) 超短焦要配平整的硬幕或张力幕，普通卷帘幕一定会有波浪，这种情况需要我们评估换幕。\n7) 壁挂的机器被撞歪了，不要自己去扳。",
+      "en": "Short-throw / ultra-short-throw image wavy or curved at the edges:\n1) Check the surface first. Look along the screen from the side: any wrinkles, bulges or waves? These projectors shine at a steep angle, so small bumps are magnified.\n2) Roll-up screen: roll it up, then bring it fully down again so it hangs flat. Turn away any air-con blowing on it.\n3) On a wall or whiteboard: check the board is not bulging or loose and the wall is not uneven.\n4) Leave keystone alone if nobody changed it. If someone did: Menu, Keystone / Geometry / Curved Correction, reset to 0.\n5) Unit on a table or cabinet: check it has not been moved, sits level on all feet and is parallel to the wall.\n6) Ultra-short-throw needs a flat rigid or tensioned screen; an ordinary roll-up screen always shows waves. Changing the screen needs our assessment.\n7) If a wall-mounted unit was knocked, do not bend it back yourself."
+    },
+    "explain": {
+      "zh": "短焦和超短焦对表面的平整度非常敏感：\n• 光线是以很斜的角度打到幕布上的，表面只起伏一两毫米，画面边缘就可能弯几厘米。\n• 普通卷帘幕、软幕、不平的墙、鼓起的白板都会造成波浪边。这是物理原因，不是机器坏了。\n• 冷气吹动幕布时，波浪还会跟着动。\n• 梯形 / 几何校正只能勉强把四个角拉正，中间的波浪修不了，还会让字变糊。\n• 让幕布垂直拉平、调开冷气，自己可以做。\n• 根本的解决是换成硬幕、张力幕或投影专用白板，或重新调整机器的安装位置，需要技术员。",
+      "en": "Short-throw and ultra-short-throw projectors are very sensitive to how flat the surface is:\n• The light hits the screen at a very steep angle, so a rise of one or two millimetres can bend the picture edge by several centimetres.\n• Ordinary roll-up screens, soft fabric screens, uneven walls and bulging whiteboards all give wavy edges. This is physics, not a faulty projector.\n• When the air-con moves the screen, the waves move with it.\n• Keystone or geometry correction can only roughly square the four corners. It cannot fix waves in the middle, and it makes text softer.\n• Letting the screen hang flat and turning the air-con away are things you can do yourself.\n• The real fix is a rigid screen, a tensioned screen or a projection whiteboard, or re-adjusting how the unit is installed. That needs a technician."
+    }
+  },
+  {
+    "id": "proj-washed-out-bright-room",
+    "title": {
+      "zh": "房间太亮画面发白看不清",
+      "en": "Image washed out in a bright room"
+    },
+    "match": [
+      "画面发白",
+      "太亮看不清",
+      "泛白",
+      "画面很淡",
+      "白蒙蒙",
+      "开灯看不",
+      "阳光太大",
+      "washed out",
+      "bright room",
+      "ambient light",
+      "picture faded",
+      "sunlight on screen",
+      "too much light",
+      "lights on cannot see"
+    ],
+    "reply": {
+      "zh": "房间太亮，投影画面发白、看不清：\n1) 关掉幕布正上方和前排的灯，只留后排的灯。\n2) 拉上窗帘或百叶帘，尤其是阳光会照到幕布的那一边。\n3) 按 Menu →「画面模式 / Picture Mode」，选「动态 / 明亮 / Dynamic / Bright / Presentation」。\n4) 把「灯泡模式 / 光源模式」从 ECO 改成「标准 / Normal」或「高 / High」。\n5) 幻灯片用白底、深色字，不要用深色背景和浅灰色的字。\n6) 把画面缩小一点（遥控器的 Zoom，或伸手够得到的 Zoom 环），同样的光集中在小一点的面积，看起来更亮。\n7) 还是不行，就是亮度不够，或幕布不适合这个房间，需要评估换抗光幕（ALR）、更亮的投影机或显示屏。",
+      "en": "Image looks washed out in a bright room:\n1) Switch off the lights directly above and in front of the screen. Keep only the back-row lights on.\n2) Close the curtains or blinds, especially on the side where sunlight falls on the screen.\n3) Menu, then Picture Mode: choose Dynamic / Bright / Presentation.\n4) Change Lamp Mode / Light Source Mode from ECO to Normal or High.\n5) Use slides with a white background and dark text. Avoid dark backgrounds and light grey text.\n6) Make the picture a little smaller (Zoom on the remote, or the Zoom ring if within reach). The same light on a smaller area looks brighter.\n7) If it is still poor, the brightness is not enough or the screen does not suit the room. It needs an assessment for an ambient light rejecting (ALR) screen, a brighter projector or a display panel."
+    },
+    "explain": {
+      "zh": "投影机投不出「黑色」，画面里黑的地方，其实就是幕布本来的颜色：\n• 房间越亮，幕布看起来越白，画面的黑色和深色就越淡，整体灰蒙蒙。\n• 所以先控制光线，比调机器有效得多；直接照到幕布上的光影响最大。\n• 动态 / 明亮模式和标准光源模式可以再多一点亮度，代价是颜色没那么准，风扇也比较吵。\n• 这些都可以自己调。\n• 灯泡用了很多小时的话，亮度会比新的时候低很多。\n• 落地窗多、不能关灯的房间，普通白幕配普通投影机本来就不合适，要考虑抗光幕、更高亮度的机型或大尺寸显示屏。",
+      "en": "A projector cannot project black; the black parts of the picture are simply the colour of the screen itself:\n• The brighter the room, the whiter the screen looks, so blacks and dark colours fade and the whole picture turns grey.\n• Controlling the light therefore works far better than adjusting the projector. Light that falls directly on the screen matters the most.\n• Dynamic / Bright mode and the normal light source mode give a bit more brightness, at the cost of less accurate colour and a louder fan.\n• All of this is fine to adjust yourself.\n• A lamp with many hours on it is much dimmer than when it was new.\n• In a room with large windows where the lights must stay on, a plain white screen with a normal projector is the wrong match. Consider an ALR screen, a brighter model or a large display panel."
+    }
+  },
+  {
+    "id": "proj-screen-wrinkles-stains",
+    "title": {
+      "zh": "幕布有皱褶、污渍或收卷不齐",
+      "en": "Screen wrinkled, stained or not rolling up evenly"
+    },
+    "match": [
+      "幕布皱",
+      "幕布脏",
+      "幕布发霉",
+      "幕布歪",
+      "收不整齐",
+      "幕布有折痕",
+      "幕布污渍",
+      "screen wrinkles",
+      "wrinkled screen",
+      "screen stain",
+      "screen mouldy",
+      "screen rolls unevenly",
+      "crease on screen",
+      "dirty projector screen"
+    ],
+    "reply": {
+      "zh": "投影幕布有皱褶、污渍，或收卷不整齐：\n1) 皱褶或波浪：把幕布完全放下，挂 1 到 2 天不要收，轻微的皱会自己变平。把吹着幕布的冷气调开。\n2) 不要用熨斗、吹风机，不要用力拉扯，也不要在幕面上贴胶纸。\n3) 灰尘或轻微污渍：用干净的软布或微纤维布，蘸一点清水加一小滴温和的洗洁精，从中间向外轻轻擦，再用干布吸干。先在角落试，只擦站在地上够得到的地方。\n4) 不要用酒精、漂白水、玻璃清洁剂或白板清洁剂，会伤到涂层。白板笔的痕迹不要硬擦，会越擦越大。\n5) 幕布完全干了才收，潮湿时收卷容易发霉。\n6) 收卷歪斜、一边卷得比较紧：放下来，再慢慢收一次。不要用手推幕布，不要爬上去或打开幕箱。\n7) 发霉、破洞、一直卷歪或卡住：需要技术员调整或更换。",
+      "en": "Projection screen wrinkled, stained or rolling up unevenly:\n1) Wrinkles or waves: leave the screen fully down for 1 to 2 days; light wrinkles flatten out. Turn away air-con blowing on it.\n2) No iron, no hair dryer, no hard pulling, no tape on the surface.\n3) Dust or light stains: a clean soft or microfibre cloth, a little water and a drop of mild dish soap. Wipe gently from the centre outwards, then dab dry. Test on a corner first; clean only what you reach from the floor.\n4) No alcohol, bleach, glass cleaner or whiteboard cleaner; they damage the coating. Do not scrub marker ink; it spreads.\n5) Let it dry fully before rolling up; a damp screen grows mould.\n6) Rolls up crooked or tight on one side: lower it and raise it slowly once. Do not push the fabric by hand, climb up or open the casing.\n7) Mould, holes, jams or still rolling crooked: a technician must adjust or replace it."
+    },
+    "explain": {
+      "zh": "幕布是软的，用久了会变形、变脏：\n• 长期收卷、冷气直吹、潮湿，会让卷帘幕两边起波浪，或出现 V 形的皱。\n• 轻微的皱，放下来挂着会改善；很深的折痕和永久变形恢复不了。\n• 幕面有光学涂层，用错清洁剂或用力擦会留下永久的亮斑，所以只用清水和软布轻轻擦。\n• 新马气候潮湿，幕布长期收着不用容易长霉点，霉斑基本擦不掉。\n• 收卷歪斜是幕布在卷轴上跑偏了，继续用会刮伤边缘，甚至卡死。\n• 清洁和放下来晾平，自己可以做；卷轴校正、张力调整、换幕面要技术员来做。",
+      "en": "Screen fabric is soft, and over time it deforms and gets dirty:\n• Staying rolled up for long periods, air-con blowing on it and humidity make roll-up screens wavy at the sides or give them V-shaped wrinkles.\n• Light wrinkles improve when the screen hangs down. Deep creases and permanent stretching do not recover.\n• The surface has an optical coating. The wrong cleaner or hard rubbing leaves permanent shiny patches, so use only water and a soft cloth, gently.\n• In our humid climate, a screen kept rolled up and unused easily grows mould spots, and mould stains almost never come off.\n• Crooked rolling means the fabric has drifted along the roller. Carrying on can scrape the edges or jam the screen.\n• Cleaning and leaving it down to flatten are fine to do yourself. Roller alignment, tension adjustment and a new surface are technician work."
+    }
+  },
+  {
+    "id": "proj-built-in-speaker-audio-out",
+    "title": {
+      "zh": "投影机内置喇叭太小声或音频输出没用",
+      "en": "Projector speaker too quiet or Audio Out not working"
+    },
+    "match": [
+      "内置喇叭",
+      "投影机喇叭",
+      "投影机声音小",
+      "自带喇叭",
+      "音频输出",
+      "投影机没声",
+      "投影机太小声",
+      "built-in speaker",
+      "projector speaker",
+      "audio out",
+      "projector volume low",
+      "projector too soft",
+      "internal speaker",
+      "projector no volume"
+    ],
+    "reply": {
+      "zh": "投影机内置喇叭太小声，或 Audio Out 没有声音：\n1) 按投影机遥控器的 Vol +，并确认没有按到 Mute 或 AV Mute。\n2) 电脑：点喇叭图标，输出设备选投影机（HDMI），音量调到 80% 以上；播放软件本身也不要静音。\n3) VGA 线不带声音，要另外接一条 3.5mm 音频线到投影机的 Audio In，或改用 HDMI。\n4) 按 Menu →「音频 / Audio」，确认「内置扬声器 / Internal Speaker」是开，音频输入对应现在用的 Source。\n5) Audio Out 接了外接音箱：多数机型一插上，内置喇叭就自动静音。检查那条线、音箱的电源和音量。菜单有 Audio Out「固定 / 可变」的，选「可变」才能用投影机遥控器调音量。\n6) 待机时 Audio Out 没声音：在菜单打开「待机音频输出 / Standby Audio Out」（有的机型要先关 ECO 待机）。\n7) 内置喇叭只有几瓦，中大型的房间要另外加音箱。",
+      "en": "Projector built-in speaker too quiet, or no sound from Audio Out:\n1) Press Vol + on the projector remote and check Mute / AV Mute is not on.\n2) Laptop: click the speaker icon, choose the projector (HDMI) as output and set volume above 80%. Also unmute the player app.\n3) A VGA cable carries no sound. Add a 3.5mm audio cable to the projector's Audio In, or use HDMI.\n4) Menu, then Audio: check Internal Speaker is On and the audio input matches the Source used.\n5) External speakers on Audio Out: on most models a plug there mutes the built-in speaker. Check that cable and the speakers' power and volume. With an Audio Out Fixed / Variable setting, choose Variable to use the projector remote for volume.\n6) No Audio Out in standby: turn on Standby Audio Out in the menu (some models need ECO standby off).\n7) The built-in speaker is only a few watts; larger rooms need separate speakers."
+    },
+    "explain": {
+      "zh": "投影机的内置喇叭只是应急用的：\n• 一般只有几瓦到十几瓦，小房间勉强够用，大一点的会议室后排就听不清。\n• 声音小或没声音，最常见是电脑的输出设备没选到投影机，或用了不带声音的 VGA 线。\n• Audio Out 插了线之后，内置喇叭通常会自动关闭；所以线插着但音箱没开，就完全没有声音。\n• 有的机型待机时不输出音频，或者要在菜单里另外打开。\n• 以上设置都可以自己检查。\n• 想让整间房都听得清楚，需要加装天花或壁挂音箱和功放，由我们评估。",
+      "en": "The built-in speaker of a projector is only for basic or emergency use:\n• It is normally a few watts up to about ten or so. That is just enough for a small room; in a larger meeting room the back row cannot hear clearly.\n• Low or no sound is most often the laptop not sending sound to the projector, or a VGA cable, which carries no audio.\n• Once a cable is plugged into Audio Out, the built-in speaker usually switches off. So a cable plugged in with the external speakers switched off gives no sound at all.\n• Some models give no audio output in standby, or need it turned on separately in the menu.\n• You can check all of these settings yourself.\n• For clear sound across the whole room, ceiling or wall speakers with an amplifier need to be added, which needs our assessment."
+    }
+  },
+  {
+    "id": "proj-whiteboard-glare-spot",
+    "title": {
+      "zh": "投在白板上有刺眼光斑",
+      "en": "Bright glare spot when projecting on a whiteboard"
+    },
+    "match": [
+      "光斑",
+      "白板反光",
+      "反光很厉害",
+      "亮斑",
+      "刺眼",
+      "一团亮光",
+      "反光看不到",
+      "whiteboard glare",
+      "glare on whiteboard",
+      "bright spot",
+      "shiny spot",
+      "reflection on whiteboard",
+      "too much glare",
+      "projector glare"
+    ],
+    "reply": {
+      "zh": "投影投在白板上，有一团刺眼的光斑：\n1) 光斑是投影机的光被光滑的白板直接反射到眼睛里。它会跟着座位移动，所以先请被照到的人换个位置。\n2) 按 Menu →「灯泡模式 / 光源模式」选 ECO。「画面模式」试试「白板 / Whiteboard」（部分机型有）或「标准」。\n3) 幻灯片用浅灰色或米色背景，不要大面积纯白。\n4) 关掉白板正前方的灯，减少其他反光。\n5) 房间有投影幕布的话，放下幕布投在幕上，白板只用来写字。\n6) 长期的解决办法：换成哑光的投影专用白板或贴投影膜，或改用超短焦投影机（光从很斜的角度打下来，反光不会射向观众），需要我们评估。",
+      "en": "Bright glare spot when projecting on a whiteboard:\n1) The spot is the projector's light bouncing off the glossy board straight into the eyes. It moves when you change seats, so first let the affected people shift seats.\n2) Menu, then Lamp Mode / Light Source Mode: choose ECO. In Picture Mode, try Whiteboard (some models have it) or Standard.\n3) Use a light grey or cream slide background instead of large areas of pure white.\n4) Switch off the lights right in front of the board to cut other reflections.\n5) If the room has a projection screen, lower it and project on that; keep the whiteboard for writing.\n6) Long-term fix: a matt projection whiteboard or projection film, or an ultra-short-throw projector (its light comes in at a steep angle, so the reflection does not go towards the audience). This needs our assessment."
+    },
+    "explain": {
+      "zh": "光斑是镜面反射，不是投影机故障：\n• 普通白板的表面很光滑，会像镜子一样把镜头的强光反射出来，某些座位就会看到一团很亮的光。\n• 光斑的位置会跟着你的座位移动，这是判断的方法。\n• 投影机越亮、白板越光滑，光斑就越明显。\n• 降低亮度、换幻灯片底色、换座位可以减轻，自己都能做，但不能完全消除。\n• 真正的解决办法是改变表面（哑光投影白板、投影膜、幕布），或改变光的角度（超短焦机型），都需要技术员评估和安装。",
+      "en": "The spot is a mirror-like reflection, not a projector fault:\n• An ordinary whiteboard has a smooth, glossy surface. It reflects the strong light of the lens like a mirror, so some seats see a very bright patch.\n• The spot moves as you change seats; that is how you can tell.\n• The brighter the projector and the glossier the board, the stronger the spot.\n• Lower brightness, a different slide background and changing seats reduce it and are all things you can do yourself, but they cannot remove it completely.\n• The real fix is to change the surface (matt projection whiteboard, projection film, a screen) or the angle of the light (an ultra-short-throw model). Both need a technician to assess and install."
+    }
+  }
+]

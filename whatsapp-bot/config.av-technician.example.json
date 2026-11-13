@@ -1,0 +1,297 @@
+{
+  "phone_number": "6512345678",
+  "business": {
+    "company": "Your AV Company",
+    "email": "support@example.com",
+    "phone": "+65 0000 0000",
+    "address": "Your address"
+  },
+  "default_language": "zh",
+  "languages": [
+    "zh",
+    "en"
+  ],
+  "timezone": "Asia/Singapore",
+  "hours": {
+    "open": "09:00",
+    "close": "18:00",
+    "days": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "greeting_cooldown_hours": 6,
+  "handoff_minutes": 60,
+  "reply_delay_ms": {
+    "min": 1500,
+    "max": 4000
+  },
+  "max_replies_per_minute": 20,
+  "min_seconds_between_replies_per_contact": 3,
+  "mark_read": false,
+  "dashboard_port": 8787,
+  "knowledge": [
+    "knowledge/av"
+  ],
+  "texts": {
+    "greeting": {
+      "zh": "您好，这里是 {company} AV 技术支持。",
+      "en": "Hello, this is {company} AV technical support."
+    },
+    "menu": {
+      "zh": "请回复数字：\n1 来不及了，我要现在自己解决\n2 我想知道这是什么情况、什么原因\n3 我需要技术员上门处理\n0 直接联系技术员",
+      "en": "Reply with a number:\n1 No time, I need to fix it myself now\n2 I want to understand what is going on\n3 I need a technician on site\n0 Contact a technician directly"
+    },
+    "after_hours": {
+      "zh": "现在是非办公时间。如果活动正在进行、会议室完全不能用，请回复「紧急」，值班技术员会尽快联系您。",
+      "en": "We are outside office hours. If an event is in progress or the room is completely down, reply URGENT and the on-call technician will contact you."
+    },
+    "fallback": {
+      "zh": "收到。为了帮您更快处理，请告诉我：\n1) 设备品牌和型号\n2) 具体现象（什么时候开始、什么操作后出现）\n3) 最近有没有改动接线或设置\n也欢迎 email 我们（{email}）或在群组里留言，我们会马上回复您。需要技术员上门请回复 3。",
+      "en": "Got it. To help faster, please tell me:\n1) Equipment brand and model\n2) Exactly what happens (since when, after what action)\n3) Whether cabling or settings changed recently\nYou are also welcome to email us at {email} or post in the group, and we will reply right away. Reply 3 if you need a technician on site."
+    },
+    "handoff": {
+      "zh": "好的，已通知技术员，请稍候。方便的话先发一张设备和接线的照片，可以加快处理。",
+      "en": "Sure, a technician has been notified. If you can, send a photo of the equipment and cabling to speed things up."
+    },
+    "escalate": {
+      "zh": "如果还是不行，欢迎 email 我们（{email}），或在群组里留言，我们会马上回复您。需要技术员上门请回复 3。",
+      "en": "If this still does not work, you are welcome to email us at {email} or post in the group, and we will reply right away. Reply 3 if you need a technician on site."
+    },
+    "visit_received": {
+      "zh": "已收到，技术员会尽快联系您确认上门时间。如还有补充资料或照片，直接发过来即可。",
+      "en": "Received. A technician will contact you shortly to confirm the visit. Send any extra details or photos here."
+    }
+  },
+  "menu": [
+    {
+      "keys": [
+        "1",
+        "fix",
+        "自己解决",
+        "快速",
+        "急"
+      ],
+      "mode": "fix",
+      "reply": {
+        "zh": "好，直接告诉我设备和现象，例如：\n• 投影机没画面\n• HDMI 没信号\n• 麦克风啸叫\n• 音响没声音\n• Zoom / Teams 连不上\n• 无线麦克风断断续续\n• LED 屏花屏\n我马上给您最快的处理步骤。",
+        "en": "OK. Tell me the equipment and symptom, for example:\n• Projector no image\n• HDMI no signal\n• Microphone feedback\n• Speakers no sound\n• Zoom / Teams not connecting\n• Wireless mic cutting out\n• LED wall garbled\nI will give you the fastest steps right away."
+      }
+    },
+    {
+      "keys": [
+        "2",
+        "explain",
+        "什么情况",
+        "原因",
+        "为什么"
+      ],
+      "mode": "explain",
+      "reply": {
+        "zh": "好，告诉我设备和现象（例如「投影机灯闪橙色」「会议室没声音」），我解释通常是什么原因、严不严重、能不能自己处理。",
+        "en": "OK. Tell me the equipment and symptom (e.g. projector light blinking orange, no sound in the meeting room) and I will explain the usual cause, how serious it is and whether you can handle it yourself."
+      }
+    },
+    {
+      "keys": [
+        "3",
+        "visit",
+        "上门",
+        "技术员上门",
+        "派人",
+        "下来"
+      ],
+      "mode": "visit",
+      "reply": {
+        "zh": "好的，我们安排技术员上门。请发给我：\n1) 公司名称和地址\n2) 联系人和电话\n3) 设备和故障简述\n4) 方便的日期和时间段\n5) 现场照片（设备、接线、报错画面）\n收到后技术员会联系您确认时间。工作日上门服务费由技术员确认。",
+        "en": "Sure, we will arrange a technician. Please send:\n1) Company name and address\n2) Contact person and phone number\n3) Equipment and a short fault description\n4) Preferred date and time slot\n5) Photos (equipment, cabling, error screen)\nA technician will contact you to confirm. Weekday call-out fees are confirmed by the technician."
+      }
+    },
+    {
+      "keys": [
+        "紧急",
+        "urgent",
+        "emergency",
+        "活动进行中"
+      ],
+      "urgent": true,
+      "mode": "visit",
+      "reply": {
+        "zh": "已标记为紧急。请立即发送：公司名、地址、联系电话、现场情况和照片。值班技术员会尽快致电。等待期间可回复 1，我先给您应急步骤。",
+        "en": "Marked as URGENT. Please send now: company name, address, contact number, what is happening and photos. The on-call technician will call you shortly. While waiting, reply 1 for emergency steps."
+      }
+    },
+    {
+      "keys": [
+        "quote",
+        "quotation",
+        "询价",
+        "报价",
+        "新项目",
+        "new project"
+      ],
+      "reply": {
+        "zh": "询价请告诉我们：\n1) 场地类型和大小（会议室 / 礼堂 / 课室 / 店面）\n2) 需要的功能（投影、LED 屏、音响、视频会议、中控）\n3) 预算范围和时间\n我们会安排免费现场勘察后报价。",
+        "en": "For a quotation please tell us:\n1) Venue type and size (meeting room / hall / classroom / shop)\n2) What you need (projection, LED wall, audio, video conferencing, control)\n3) Budget range and timeline\nWe arrange a free site survey before quoting."
+      }
+    },
+    {
+      "keys": [
+        "services",
+        "contact",
+        "address",
+        "hours",
+        "服务",
+        "地址",
+        "联系",
+        "营业时间",
+        "电话"
+      ],
+      "reply": {
+        "zh": "{company}\n服务范围：会议室 AV 安装与维护、投影与 LED 显示、音响系统、视频会议（Zoom / Teams Rooms）、中控与自动化、活动租赁支援。\n办公时间：周一至周六 9:00–18:00\n地址：{address}\n电话：{phone}\n邮箱：{email}",
+        "en": "{company}\nServices: meeting room AV installation and maintenance, projection and LED displays, audio systems, video conferencing (Zoom / Teams Rooms), control and automation, event rental support.\nHours: Mon–Sat 9:00–18:00\nAddress: {address}\nPhone: {phone}\nEmail: {email}"
+      }
+    },
+    {
+      "keys": [
+        "warranty",
+        "保修",
+        "保固"
+      ],
+      "reply": {
+        "zh": "保修查询请提供：公司名、设备型号、安装或购买日期（或发票号）。技术员核对后回复保修状态。",
+        "en": "For warranty please send: company name, equipment model, installation or purchase date (or invoice number). A technician will check and confirm."
+      }
+    }
+  ],
+  "tiers": {
+    "vip": {
+      "label": {
+        "zh": "VIP 客户",
+        "en": "VIP"
+      },
+      "priority": true,
+      "ignore_hours": true,
+      "bot": "on",
+      "texts": {
+        "greeting": {
+          "zh": "{name} 您好，这里是 {company} AV 技术支持。您是我们的重点客户，技术员已同步收到您的信息。",
+          "en": "Hello {name}, this is {company} AV technical support. You are a priority customer and our technicians have been alerted to your message."
+        },
+        "escalate": {
+          "zh": "如果还是不行，请直接回复 0，值班技术员会优先联系您；也可以 email {email} 或在群组里留言。",
+          "en": "If this still does not work, reply 0 and the on-call technician will contact you first. You can also email {email} or post in the group."
+        }
+      }
+    },
+    "human_only": {
+      "label": {
+        "zh": "只由人工回复",
+        "en": "Human only"
+      },
+      "priority": true,
+      "bot": "off"
+    }
+  },
+  "customers": [],
+  "faq": [
+    {
+      "match": [
+        "多少钱",
+        "价格",
+        "报价",
+        "费用",
+        "收费",
+        "how much",
+        "price",
+        "pricing",
+        "quotation",
+        "quote",
+        "cost"
+      ],
+      "escalate": false,
+      "reply": {
+        "zh": "价格需要技术员了解情况后确认，这里无法直接报价。请告诉我们：\n1) 设备品牌和型号，或需要的功能\n2) 场地类型和大小\n3) 希望的时间\n也可以 email 我们（{email}）或在群组里留言，我们会尽快回复报价。",
+        "en": "Prices are confirmed by a technician once we understand the job, so I cannot quote here. Please tell us:\n1) Equipment brand and model, or what you need\n2) Venue type and size\n3) Your preferred timing\nYou can also email us at {email} or post in the group and we will reply with a quotation."
+      }
+    },
+    {
+      "keys": [
+        "谢谢",
+        "谢谢你",
+        "感谢",
+        "多谢",
+        "好的谢谢",
+        "ok谢谢",
+        "thank you",
+        "thanks",
+        "ok thanks",
+        "okay thanks",
+        "thx",
+        "tq",
+        "ty",
+        "terima kasih"
+      ],
+      "escalate": false,
+      "reply": {
+        "zh": "不客气！还有其他问题随时发给我们。",
+        "en": "You're welcome! Message us any time if anything else comes up."
+      }
+    },
+    {
+      "keys": [
+        "ok",
+        "okay",
+        "ok ok",
+        "k",
+        "好",
+        "好的",
+        "好的好的",
+        "noted",
+        "收到",
+        "知道了",
+        "明白"
+      ],
+      "escalate": false,
+      "reply": {
+        "zh": "好的。还有需要随时发消息给我们。",
+        "en": "OK. Message us any time you need anything."
+      }
+    },
+    {
+      "match": [
+        "好了",
+        "可以了",
+        "解决了",
+        "搞定",
+        "修好了",
+        "it works now",
+        "working now",
+        "fixed already",
+        "solved",
+        "ok already",
+        "ok liao"
+      ],
+      "escalate": false,
+      "reply": {
+        "zh": "太好了，问题解决了就好。之后再有状况随时找我们。",
+        "en": "Great, glad it is sorted. Reach out any time if it happens again."
+      }
+    }
+  ],
+  "ai": {
+    "enabled": false,
+    "provider": "ollama",
+    "model": "qwen3:4b",
+    "base_url": "http://127.0.0.1:11434",
+    "api_key_env": "",
+    "system_prompt": "You are the first-line technical support assistant of an audio-visual (AV) installation and maintenance company. Reply in the customer's language (Chinese or English), briefly, in numbered steps. Only give safe checks a non-technical office user can do: power, cables, input source, volume, settings, restarting devices. Never tell the customer to open equipment, touch internal wiring, climb to ceiling mounts or do electrical work; for those, say a technician must attend. Never quote prices, discounts, warranty decisions or arrival times; say a technician will confirm. Use only the business facts provided; if something is not covered, ask for brand, model, exact symptom and a photo. End with: reply 3 to arrange a technician visit.",
+    "facts": "{company} AV technician company. Services: meeting room AV installation and maintenance, projectors and LED walls, audio systems and microphones, video conferencing rooms (Zoom Rooms, Microsoft Teams Rooms), control systems and automation, event rental support. Brands commonly supported: Epson, Sony, Panasonic, BenQ projectors; Shure, Sennheiser microphones; Yamaha, Bose, JBL audio; Logitech, Poly, Yealink, Crestron, Extron conferencing and control. Office hours Mon-Sat 9:00-18:00. Emergency on-call for events in progress. Call-out and repair costs are confirmed by a technician; a free site survey is offered for new projects.",
+    "max_history": 10,
+    "max_output_tokens": 350
+  }
+}

@@ -1,0 +1,744 @@
+[
+  {
+    "id": "use-ppt-presenter-view-wrong-screen",
+    "title": {
+      "zh": "大屏幕显示演讲者备注",
+      "en": "Presenter view / notes showing on the big screen"
+    },
+    "match": [
+      "演讲者视图",
+      "演示者视图",
+      "演讲者模式",
+      "备注跑到大屏",
+      "看到我的备注",
+      "大屏显示备注",
+      "备注在大屏",
+      "presenter view",
+      "presenter mode",
+      "notes on big screen",
+      "speaker notes showing",
+      "swap displays",
+      "slides on wrong screen",
+      "notes showing on tv"
+    ],
+    "reply": {
+      "zh": "大屏幕显示的是演示者视图（备注），不是幻灯片：\n1) 放映中，在演示者视图上方点「显示设置 / Display Settings」>「交换演示者视图和幻灯片放映」，两个画面马上对调（Mac 版叫 Swap Displays）。\n2) 或在幻灯片上按右键，选「隐藏演示者视图」，就只显示幻灯片。\n3) 开始前先设好：「幻灯片放映」选项卡 >「监视器」，选会议室的显示器（不是手提电脑），再勾选或取消「使用演示者视图」。\n4) 两边画面一样、但你想看备注：按 Windows + P 选「扩展 / Extend」（Mac：系统设置 > 显示器，关闭镜像）。\n5) Keynote 放映时按 X 键对调；Google Slides 的备注是另一个窗口，把幻灯片窗口拖到大屏幕再全屏。",
+      "en": "Presenter view (notes) showing on the big screen instead of the slides:\n1) During the slide show, look at the top of the presenter view and click Display Settings > Swap Presenter View and Slide Show. The two screens swap at once (on Mac the button is Swap Displays).\n2) Or right-click the slide and choose Hide Presenter View to show only the slides.\n3) To set it before you start: Slide Show tab > Monitor, choose the room display (not your laptop), then tick or untick Use Presenter View.\n4) Both screens show the same and you want notes: press Windows + P and choose Extend (Mac: System Settings > Displays, turn off mirroring).\n5) Keynote: press X during the show to swap. Google Slides: the notes open in a separate window; drag the slides window to the big screen and make it full screen."
+    },
+    "explain": {
+      "zh": "这是设置问题，不是设备故障：\n• 「扩展」模式下电脑有两个屏幕，PowerPoint 要猜哪一个是给观众看的；换了会议室或转接头时常常猜错。\n• 不严重，点一下就能对调，会议室的设备完全不用动。\n• 不需要看备注的话，最稳的是用「复制 / Duplicate」（镜像），两边永远都是幻灯片。\n• 预防：提早 10 分钟接上电脑，先放映一次，看大屏幕对不对，不对就对调。同一间会议室，电脑下次通常会记住。",
+      "en": "This is a settings mix-up, not an equipment fault:\n• In Extend mode the laptop sees two screens, and PowerPoint has to guess which one is for the audience. It often guesses wrong in a new room or with a new adapter.\n• It is not serious. One click swaps it, and nothing in the room needs changing.\n• If you do not need notes, the safest choice is Duplicate (mirror), so both screens always show the slides.\n• To avoid it: connect the laptop 10 minutes early, start the slide show once, check the big screen and swap if needed. The laptop usually remembers this for the same room next time."
+    }
+  },
+  {
+    "id": "use-ppt-fonts-layout-broken",
+    "title": {
+      "zh": "换电脑后字体排版乱了",
+      "en": "Fonts or layout broken on the room PC"
+    },
+    "match": [
+      "字体变了",
+      "字体跑掉",
+      "字体乱了",
+      "排版乱了",
+      "排版跑位",
+      "格式跑掉",
+      "字体不一样",
+      "fonts changed",
+      "font changed",
+      "layout broken",
+      "fonts look different",
+      "formatting messed up",
+      "slides look different",
+      "font missing"
+    ],
+    "reply": {
+      "zh": "自己电脑上正常，换到会议室电脑字体或排版就乱了：\n1) 最快：如果带了自己的手提电脑，直接用它来演示，不用会议室电脑。\n2) 没带电脑：在自己电脑上另存一份 PDF（文件 > 另存为 / 导出 > PDF），全屏播放 PDF。排版完全一样，但动画和视频会没有。\n3) 要保留动画：Windows 版 PowerPoint 到「文件 > 选项 > 保存」，勾选「将字体嵌入文件」，重新保存再拷贝过去（Mac 版通常在 PowerPoint > 偏好设置 > 保存）。\n4) 检查幻灯片比例：「设计 > 幻灯片大小」，大多数会议室屏幕用宽屏 16:9。\n5) 用 PowerPoint 桌面版打开，不要用浏览器或其他软件开；活动前把每一页都翻一遍。",
+      "en": "Slides look fine on your laptop but fonts or layout are wrong on the room PC:\n1) Fastest fix: if you have your own laptop with you, present from it instead of the room PC.\n2) No laptop? On your own computer save a PDF copy (File > Save As / Export > PDF) and present the PDF in full screen. The layout will be exact, but animations and videos are lost.\n3) To keep animations: in PowerPoint for Windows go to File > Options > Save, tick Embed fonts in the file, save again and copy the file over. (On Mac it is usually under PowerPoint > Preferences > Save.)\n4) Check the slide shape: Design > Slide Size should be Widescreen 16:9 for most room screens.\n5) Open the file in the PowerPoint desktop app, not in a browser or another program, and click through every slide once before the event."
+    },
+    "explain": {
+      "zh": "这是文件和软件的问题，不是会议室设备坏了：\n• 会议室电脑没有安装你用的字体，系统自动换成别的字体，字宽不同，文字就换行、跑位。\n• PowerPoint 版本不同，或用 Google Slides、Keynote、WPS 打开，样子也会变。\n• 4:3 的旧模板放在 16:9 屏幕上，两边会有黑边或被拉伸。\n• 有些字体有授权限制，不能嵌入，这时只能用 PDF 或换字体。\n• 预防：尽量用常见字体（Arial、Calibri、微软雅黑），随身带一份 PDF 备份和 USB 拷贝，活动前在现场电脑上试播一次。",
+      "en": "This is a file and software issue, not a fault in the room equipment:\n• The room PC does not have the fonts you used, so it substitutes another font. The letters have a different width, so text wraps and moves.\n• A different PowerPoint version, or opening the file in Google Slides, Keynote or WPS, also changes the look.\n• An old 4:3 template on a 16:9 screen shows black bars at the sides or looks stretched.\n• Some fonts are licence-restricted and cannot be embedded; then use a PDF or change the font.\n• To avoid it: use common fonts (Arial, Calibri, Microsoft YaHei), carry a PDF backup and a USB copy, and test on the room PC before the event."
+    }
+  },
+  {
+    "id": "use-ppt-video-not-playing",
+    "title": {
+      "zh": "PPT 里的视频播不出或没声",
+      "en": "Video in PowerPoint will not play or has no sound"
+    },
+    "match": [
+      "视频播不出",
+      "视频放不了",
+      "视频播不了",
+      "影片播不出",
+      "ppt视频",
+      "视频没声",
+      "影片没声",
+      "embedded video",
+      "video in powerpoint",
+      "video cannot play",
+      "video not playing",
+      "video won't play",
+      "ppt video",
+      "video no audio"
+    ],
+    "reply": {
+      "zh": "PowerPoint 里的视频在会议室播不出，或有画面没声音：\n1) 先看视频是不是「链接」而不是「嵌入」：只拷贝了 .pptx，视频文件还留在你自己的电脑。把视频放进同一个文件夹，或用「插入 > 视频 > 此设备」重新插入。\n2) 在线视频（YouTube）需要演示电脑能上网。先测会议室 Wi-Fi，或预先下载一份你有权使用的拷贝。\n3) 没声音：点任务栏的喇叭图标，输出选会议室的设备（HDMI / 显示器或会议室音频），不要选手提电脑喇叭。再看 PowerPoint「播放 > 音量」有没有静音。\n4) 视频黑画面或卡顿：转成 MP4（H.264）格式再重新插入。\n5) 后备方案：把视频文件放在桌面，用 VLC 等播放器全屏播放，播完按 Alt + Tab 回到幻灯片。",
+      "en": "Video inside PowerPoint will not play, or plays without sound, on the room system:\n1) Check whether the video is linked, not embedded: if you copied only the .pptx file, the video stayed behind on your own computer. Copy the video into the same folder, or re-insert it with Insert > Video > This Device.\n2) An online (YouTube) video needs internet on the presenting computer. Test the room Wi-Fi, or download a copy that you are allowed to use.\n3) No sound: click the speaker icon on the taskbar and choose the room output (the HDMI / display or room audio device), not the laptop speakers. Check the video is not muted in PowerPoint (Playback > Volume).\n4) Video shows black or stutters: convert it to MP4 (H.264) and insert it again.\n5) Backup plan: keep the video file on the desktop and play it full screen in a media player such as VLC, then press Alt + Tab to return to the slides."
+    },
+    "explain": {
+      "zh": "通常是文件或电脑设置的问题，不是会议室系统故障：\n• 链接视频：旧文件和大视频常常是「链接」，视频不会跟着 .pptx 走。\n• 格式：手机或 Mac 拍的视频（MOV、HEVC），在没有相应解码器的 Windows 电脑上可能播不了。\n• 声音走错：电脑还是用自己的小喇叭播放，或会议室用独立的音频线而没插上。\n• 在线视频：没有网络，或访客网络封锁了该网站。\n• 以上都可以自己解决。只有当别的电脑在这间会议室也没声音时，才需要技术员。\n• 预防：在 PowerPoint 用「文件 > 信息 > 优化兼容性」（或压缩媒体），活动前用实际的线在现场把每段视频播一次。",
+      "en": "Usually a file or laptop setting, not a fault in the room system:\n• Linked video: older files and large videos are often linked, so the video does not travel with the .pptx.\n• Format: a video from a phone or a Mac (MOV, HEVC) may not play on a Windows room PC that lacks the right codec.\n• Sound route: the laptop keeps playing through its own small speakers, or the room uses a separate audio cable that was not plugged in.\n• Online video: no internet, or the site is blocked on the guest network.\n• You can fix all of these yourself. A technician is needed only if other laptops also give no sound in that room.\n• To avoid it: in PowerPoint use File > Info > Optimize Compatibility (or Compress Media), then play every video once in the room with the real cable before the event."
+    }
+  },
+  {
+    "id": "use-clicker-not-working",
+    "title": {
+      "zh": "翻页笔没反应或激光看不见",
+      "en": "Clicker not working or laser dot not visible"
+    },
+    "match": [
+      "翻页笔",
+      "简报笔",
+      "翻页器",
+      "激光笔",
+      "镭射笔",
+      "遥控笔",
+      "clicker",
+      "slide advancer",
+      "presentation remote",
+      "presenter remote",
+      "wireless presenter",
+      "laser pointer",
+      "cannot change slide",
+      "slides cannot advance"
+    ],
+    "reply": {
+      "zh": "翻页笔没反应（或激光点看不见）：\n1) 把小小的 USB 接收器插到正在放幻灯片的那台电脑。接收器通常收在翻页笔的电池盖里或底部。只有 USB-C 的电脑要加转接头或 hub。\n2) 打开翻页笔开关，换新电池（或充电）。电量低会距离变短、跳页。\n3) 用鼠标在放映画面上点一下。PowerPoint 必须是当前窗口，翻页笔才有效；有弹窗或其他软件挡在前面就没反应。\n4) 把接收器换到电脑前面的 USB 口，或接一条短的 USB 延长线，不要被挡住；人离电脑大约 10 米以内。\n5) 还是不行：换另一个 USB 口，先用键盘方向键顶着。\n6) 激光点在电视或 LED 屏上看不见是正常的。改用屏幕指针：PowerPoint 放映时按住 Ctrl 拖动鼠标（或按 Ctrl + L）。",
+      "en": "Presentation clicker not working (or the laser dot cannot be seen):\n1) Plug the small USB receiver into the computer that is running the slides. It is usually stored inside the clicker's battery cover or base. On a USB-C only laptop, use a USB adapter or hub.\n2) Switch the clicker on and fit fresh batteries (or charge it). A weak battery gives short range or skipped slides.\n3) Click once on the slide show with the mouse. The clicker only works when PowerPoint is the active window, not behind a pop-up or another app.\n4) Move the receiver to a front USB port or a short USB extension cable so nothing blocks it, and stay within about 10 metres.\n5) Still dead? Try another USB port; use the keyboard arrow keys meanwhile.\n6) Laser dot invisible on a TV or LED wall: this is normal. Use the on-screen pointer: in a PowerPoint slide show hold Ctrl and drag the mouse (or press Ctrl + L)."
+    },
+    "explain": {
+      "zh": "几乎都是可以自己解决的小问题：\n• 翻页笔其实是一个无线键盘，通过自己的 USB 接收器发出「下一页 / 上一页」按键。没插接收器、没电、或当前窗口不对，就没反应。\n• 接收器和翻页笔是配对的，拿别的翻页笔或鼠标的接收器通常不能用；接收器丢了一般要换整支。\n• 金属讲台、距离太远、接收器藏在电脑后面，都会缩短距离。\n• 激光点在投影幕上看得见是因为幕布反光；电视和 LED 屏自己发光，表面又暗或反光，光点就不见了。线上观众和录影也看不到激光点。\n• 激光不要照人或摄像机。\n• 预防：用完把接收器收回翻页笔里，会议室放备用电池，开场前站在讲者的位置试一次。",
+      "en": "Almost always a small thing you can fix yourself:\n• A clicker is a wireless keyboard that sends Next / Previous keys through its own USB receiver. No receiver, a flat battery or the wrong active window means nothing happens.\n• The receiver is paired to its own clicker. A receiver from another clicker or mouse usually will not work, so a lost receiver normally means a new clicker.\n• Metal lecterns, long distances and a receiver hidden behind a PC shorten the range.\n• A laser dot shows on a projection screen because the screen reflects light. TVs and LED walls give out their own light and have dark or glossy surfaces, so the dot disappears. Online viewers and recordings never see it either.\n• Never point a laser at people or cameras.\n• To avoid problems: keep the receiver inside the clicker after use, keep spare batteries in the room, and test from where the speaker will stand."
+    }
+  },
+  {
+    "id": "use-mac-presenting",
+    "title": {
+      "zh": "用 MacBook 接大屏幕演示",
+      "en": "Presenting from a Mac / MacBook"
+    },
+    "match": [
+      "苹果电脑",
+      "苹果笔电",
+      "mac电脑",
+      "mac镜像",
+      "mac转接",
+      "mac投影",
+      "macbook",
+      "mac mirroring",
+      "mirror display mac",
+      "mac to hdmi",
+      "mac adapter",
+      "from my mac",
+      "mac cannot project",
+      "mac cannot display"
+    ],
+    "reply": {
+      "zh": "用 Mac / MacBook 接大屏幕演示：\n1) 用 USB-C 转 HDMI 转接头（或带 HDMI 的 USB-C hub）。插到底；先把 HDMI 线接上转接头，再把转接头插进 Mac。\n2) 打开苹果菜单 > 系统设置 > 显示器，应该看到会议室的显示器出现在内建显示器旁边。\n3) 要两边画面一样：选会议室显示器，「用作」设为「镜像内建显示器」。要看演讲者备注，就选「扩展显示器」。\n4) 扩展模式下点「排列」，把两个屏幕拖成和现场一样的位置，就知道鼠标从哪一边过去。旧版 macOS 是「排列」页里的「镜像显示器」勾选框。\n5) 声音：系统设置 > 声音 > 输出，选会议室显示器 / HDMI 设备。\n6) 检测不到显示器：拔掉转接头等 10 秒，换另一个 USB-C 口；多数版本可在「显示器」里按住 Option 键，点「检测显示器」。",
+      "en": "Presenting from a Mac / MacBook:\n1) Use a USB-C to HDMI adapter (or a USB-C hub with HDMI). Push it in fully; plug the HDMI cable into the adapter first, then the adapter into the Mac.\n2) Open the Apple menu > System Settings > Displays. The room display should appear next to the built-in display.\n3) To show the same picture on both: select the room display and set Use as > Mirror for Built-in Display. For presenter notes, choose Extended Display instead.\n4) In extended mode click Arrange and drag the screens to match the room, so you know which side the mouse crosses. Older macOS: the Arrangement tab, with a Mirror Displays tick box.\n5) Sound: System Settings > Sound > Output, choose the room display / HDMI device.\n6) Display not detected: unplug the adapter, wait 10 seconds and try another USB-C port. On most versions, hold the Option key in Displays and click Detect Displays."
+    },
+    "explain": {
+      "zh": "Mac 和会议室系统配合没问题，出问题的几乎都是转接头：\n• 多数 MacBook 只有 USB-C 口，必须用转接头。便宜、老旧或松动的转接头会造成闪烁、没画面或没声音。\n• 不是每条 USB-C 线都能传画面，手机充电线不能当显示线用。\n• 「镜像」两边画面一样，最简单；「扩展」可以看备注，但比较容易搞混。\n• 用 Zoom / Teams 共享屏幕，macOS 要先授权一次：系统设置 > 隐私与安全性 > 屏幕录制。活动前先允许并重开软件，不要等到现场才弄。\n• 串流软件的电影在大屏幕上可能是黑的，这是版权保护（HDCP）；幻灯片不受影响。\n• 预防：自备测试过的转接头，一直插着充电器，打开「勿扰模式」。",
+      "en": "Macs work well with room systems; the weak point is nearly always the adapter:\n• Most MacBooks have only USB-C ports, so they need an adapter. Cheap, worn or loose adapters cause flicker, no picture or no sound.\n• Not every USB-C cable carries video. A phone charging cable will not work as a display cable.\n• Mirror shows the same on both screens and is simplest. Extended gives presenter notes but is easier to get confused with.\n• For Zoom / Teams screen sharing, macOS asks for permission once: System Settings > Privacy & Security > Screen Recording. Allow it and restart the app before the event, not during it.\n• Movies from streaming apps may show black on the room display because of copy protection (HDCP); slides are not affected.\n• To avoid problems: bring your own tested adapter, keep the charger connected and turn on Do Not Disturb."
+    }
+  },
+  {
+    "id": "use-phone-tablet-presenting",
+    "title": {
+      "zh": "用 iPad 或手机投到大屏幕",
+      "en": "Presenting from an iPad, iPhone or Android phone"
+    },
+    "match": [
+      "ipad投屏",
+      "手机投屏",
+      "手机投到",
+      "iphone投",
+      "平板投屏",
+      "安卓投屏",
+      "手机接大屏",
+      "from my ipad",
+      "ipad to tv",
+      "ipad to projector",
+      "iphone to tv",
+      "phone to tv",
+      "cast my phone",
+      "mirror my phone"
+    ],
+    "reply": {
+      "zh": "用 iPad、iPhone 或 Android 手机投到大屏幕：\n1) 用线最稳。Lightning 接口的 iPhone / iPad：Apple Lightning 数字影音转接器 + HDMI 线。USB-C 接口的 iPad 或 iPhone：USB-C 转 HDMI 转接头。\n2) Android：只有部分手机的 USB-C 能输出画面（不少 Samsung Galaxy S 系列和平板可以，很多入门机不行）。接了转接头没画面，多半是手机不支持。\n3) Apple 无线：连上和会议室显示器同一个 Wi-Fi，打开控制中心 >「屏幕镜像」，选会议室的设备，输入屏幕上显示的代码。\n4) Android 无线：会议室显示器支持的话，从快捷设置用「投屏 / Cast / Smart View」。\n5) 开始前打开「勿扰模式」，并把屏幕方向锁定为横向。\n6) 幻灯片正常，但电影或串流 app 变黑：这是版权保护（HDCP），不是故障。",
+      "en": "Presenting from an iPad, iPhone or Android phone:\n1) A cable is the most reliable. iPhone / iPad with a Lightning port: Apple Lightning Digital AV Adapter + HDMI cable. iPad or iPhone with USB-C: a USB-C to HDMI adapter.\n2) Android: only some phones send video through USB-C (many Samsung Galaxy S phones and tablets do; many budget phones do not). If nothing shows with an adapter, the phone probably does not support it.\n3) Wireless on Apple: join the same Wi-Fi as the room display, open Control Centre > Screen Mirroring, choose the room device and enter the code shown on the screen.\n4) Wireless on Android: use Cast / Smart View from the quick settings panel, if the room display supports it.\n5) Turn on Do Not Disturb and lock the screen rotation to landscape before you start.\n6) Slides show but a movie or streaming app turns black: that is copy protection (HDCP), not a fault."
+    },
+    "explain": {
+      "zh": "手机和平板可以演示，但比手提电脑难预料：\n• 转接器：Apple Lightning 转接器上有充电口，长时间使用要插着充电器。非原厂转接器常在 iOS 更新后失效。\n• 无线：公司的访客 Wi-Fi 常常不让设备互相看见，所以列表里找不到会议室显示器。这要 IT 或技术员改设置，不是当天能解决的。\n• iPad 的画面两边有黑边，是因为屏幕比例和电视不同，属正常。\n• 没开「勿扰模式」的话，来电和信息会直接出现在大屏幕上。\n• 很多串流 app 被版权保护（HDCP）刻意挡住。\n• 预防：前一天用实际的设备试一次，转接器留在会议室，另外带一台手提电脑或 USB 里的 PDF 做后备。",
+      "en": "Phones and tablets can present, but they are less predictable than a laptop:\n• Adapters: the Apple Lightning adapter has a charging port; plug in the charger for long sessions. Non-original adapters often stop working after an iOS update.\n• Wireless: office guest Wi-Fi often stops devices from seeing each other, so the room display never appears in the list. Changing that is a job for your IT team or a technician, not something to fix on the day.\n• An iPad picture has black bars at the sides because its screen shape differs from the TV. This is normal.\n• A phone call or message during the session will show on the big screen unless Do Not Disturb is on.\n• Copy protection (HDCP) blocks many streaming apps on purpose.\n• To avoid problems: test with the actual device the day before, keep the adapter in the room, and bring a laptop or a PDF on a USB drive as backup."
+    }
+  },
+  {
+    "id": "use-laptop-sleep-notifications",
+    "title": {
+      "zh": "演示中电脑休眠或弹出通知",
+      "en": "Laptop sleeps, dims or shows pop-ups while presenting"
+    },
+    "match": [
+      "自动休眠",
+      "电脑休眠",
+      "屏保跳出",
+      "屏幕保护",
+      "弹出通知",
+      "通知弹出",
+      "画面变暗",
+      "一直睡眠",
+      "goes to sleep",
+      "screensaver",
+      "screen saver",
+      "notifications pop up",
+      "do not disturb",
+      "screen dims"
+    ],
+    "reply": {
+      "zh": "演示中电脑休眠、变暗或弹出通知：\n1) 插上充电器。用电池时，多数电脑会调暗屏幕、更快休眠，播视频也会变慢。\n2) Windows：设置 > 系统 > 电源和电池 > 屏幕和睡眠，把「接通电源时」的选项设为「从不」。\n3) Windows 屏保：搜索「屏幕保护程序」，设为「无」。\n4) Mac：系统设置 > 锁定屏幕，把「启动屏幕保护程序」和「使用电源适配器时关闭显示器」都设为「永不」（旧版在 电池 / 节能）。\n5) 关掉弹窗：Windows 11 点右下角时钟，打开「请勿打扰」；Mac：控制中心 > 专注模式 > 勿扰模式。再关掉 WhatsApp、电邮和 Teams 聊天。\n6) 视频卡顿：保持插电，把 Windows 电源模式调到「最佳性能」。\n7) 演示时不要合上电脑盖，除非确定已设成合盖不休眠。",
+      "en": "Laptop goes to sleep, dims, or notifications pop up during the presentation:\n1) Plug in the charger. On battery, most laptops dim the screen, sleep sooner and slow down video playback.\n2) Windows: Settings > System > Power & battery > Screen and sleep; set the \"When plugged in\" options to Never.\n3) Windows screen saver: search \"screen saver\" and set it to None.\n4) Mac: System Settings > Lock Screen; set \"Start Screen Saver when inactive\" and \"Turn display off on power adapter\" to Never (older versions: Battery / Energy Saver).\n5) Silence pop-ups: on Windows 11 click the clock and turn on Do not disturb; on Mac use Control Centre > Focus > Do Not Disturb. Also close WhatsApp, email and Teams chat.\n6) Videos stutter: stay on the charger and set the Windows power mode to Best performance.\n7) Do not close the laptop lid while presenting unless you know it is set to stay awake."
+    },
+    "explain": {
+      "zh": "这是电脑的电源和通知设置，不是会议室系统故障：\n• 电脑为了省电会调暗、休眠、降低处理器速度，用电池时更明显，于是视频卡顿或大屏幕突然变黑。\n• PowerPoint 放映模式通常会保持屏幕不休眠，但 PDF、浏览器或暂停的视频不会。\n• 公司电脑可能被 IT 政策设定几分钟就锁屏，自己改不了；活动前先问 IT，或让电脑保持有操作。\n• 弹窗也是隐私风险：全场、线上观众和看录影的人都能看到你的私人信息。\n• Windows 更新可能在活动中途重启电脑。开场前一小时自己先重启一次，并暂停当天的更新。\n• 预防：把「插电、勿扰、关软件」变成每次活动前的固定动作。",
+      "en": "These are laptop power and notification settings, not a fault in the room system:\n• Laptops save power by dimming, sleeping and slowing the processor, especially on battery. Video then stutters or the big screen goes black.\n• PowerPoint's slide show mode normally keeps the screen awake, but a PDF, a browser or a paused video does not.\n• Company laptops may lock after a few minutes by IT policy. You cannot change that yourself; ask your IT team before the event, or keep the laptop active.\n• Pop-ups are also a privacy risk: the whole hall, and anyone online or watching the recording, can read a private message.\n• Windows updates can restart a laptop in the middle of an event. Restart it yourself an hour before, and pause updates for the day.\n• To avoid it: make charger, Do Not Disturb and closing apps part of your routine before every event."
+    }
+  },
+  {
+    "id": "use-confidence-monitor",
+    "title": {
+      "zh": "讲者返看屏黑屏或显示不对",
+      "en": "Confidence monitor blank or showing the wrong thing"
+    },
+    "match": [
+      "返看屏",
+      "返看显示器",
+      "返送屏",
+      "提词屏",
+      "讲者屏",
+      "舞台前的屏",
+      "confidence monitor",
+      "foldback screen",
+      "stage monitor screen",
+      "comfort monitor",
+      "downstage monitor",
+      "stage screen blank",
+      "screen facing speaker"
+    ],
+    "reply": {
+      "zh": "返看屏（舞台上面向讲者的屏幕）黑屏或显示不对：\n1) 先看有没有开机：看电源灯；用它的遥控器开机，或在站在地面就够得着的情况下按屏幕上的电源键。\n2) 检查输入源：按遥控器的 Input / Source，选线所接的那个输入（通常是 HDMI 1）。\n3) 检查线的两头有没有插到底。舞台附近的地面线最常被踢松。\n4) 会议室有触控面板或切换器的话，找名为 Stage、Confidence 或「返看」的页面或按钮，选它要显示的内容（跟主屏幕一样，或备注）。\n5) 显示了幻灯片但你要备注（或相反）：在 PowerPoint 用「显示设置 > 交换演示者视图和幻灯片放映」，或在「幻灯片放映 > 监视器」设定。\n6) 修不好要及早告诉讲者，并在讲台上放一台手提电脑做后备。",
+      "en": "Confidence monitor (the stage screen facing the speaker) is blank or shows the wrong thing:\n1) Check it is on: look for the power light; use its remote, or the power button on the monitor if you can reach it from the floor.\n2) Check its input: press Input / Source on the remote and choose the input the cable is plugged into (usually HDMI 1).\n3) Check the cable is pushed in fully at both ends. Floor cables near a stage are often kicked loose.\n4) If the room has a touch panel or switcher, look for a page or button named Stage, Confidence or Foldback, and choose what it should show (same as the main screen, or notes).\n5) Showing slides but you want notes (or the opposite): in PowerPoint use Display Settings > Swap Presenter View and Slide Show, or set it under Slide Show > Monitor.\n6) If it cannot be fixed, tell the speaker early and put a laptop on the lectern as a backup."
+    },
+    "explain": {
+      "zh": "返看屏其实就是多一台显示器，信号来自会议室的切换器或分配器：\n• 常见三种用法：复制主屏幕、显示演讲者备注（电脑要有第二路输出）、或显示计时器。\n• 常见原因：它放在地上没人记得开、输入源不对、线被踢松、触控面板上没选好信号。\n• 如果电脑只送一路画面到会议室，它就显示不了备注，只能复制主屏幕。\n• 严重程度：观众看不到它，活动可以照常进行，主要影响讲者。\n• 需要改信号分配或地面线损坏时，要技术员处理。不要自己去动机柜后面的线。\n• 预防：把它列入活动前检查，并在活动前告诉我们讲者想在上面看什么。",
+      "en": "A confidence monitor is simply one more display, fed from the room switcher or a splitter:\n• There are three common setups: a copy of the main screen, the presenter's notes (this needs a second output from the laptop), or a timer.\n• Usual causes: nobody switched it on because it sits on the floor, wrong input, a kicked cable, or the routing was not selected on the touch panel.\n• It cannot show notes if the laptop sends only one picture to the room; then it can only copy the main screen.\n• Seriousness: the audience never sees it, so the event can go on. It mainly affects the speaker's comfort.\n• A technician is needed if the routing must be changed or a floor cable is damaged. Do not re-plug cables behind the equipment rack.\n• To avoid it: include it in your pre-check, and tell us before the event what the speaker wants to see on it."
+    }
+  },
+  {
+    "id": "use-switch-presenter-laptops",
+    "title": {
+      "zh": "两位讲者的电脑怎么切换",
+      "en": "Switching smoothly between two presenters' laptops"
+    },
+    "match": [
+      "切换电脑",
+      "两台电脑切换",
+      "换讲者",
+      "切换讲者",
+      "下一位讲者",
+      "换电脑演示",
+      "switch between laptops",
+      "switching laptops",
+      "two laptops",
+      "switching presenters",
+      "next speaker laptop",
+      "swap laptops",
+      "second laptop",
+      "change presenter"
+    ],
+    "reply": {
+      "zh": "两位讲者的电脑要顺畅切换：\n1) 最好的做法：活动前把所有幻灯片放进同一台电脑，每个文件先打开并最小化，就不用切换。\n2) 一定要用两台：开场前两台都先接好，各接一个输入（例如 HDMI 1 和 HDMI 2，或桌面和讲台的接口），并贴上标签。\n3) 两台都唤醒、插上充电器；第二台先进入放映模式，停在第一页。\n4) 换人时按触控面板、切换器或遥控器上的输入键。黑屏 2 到 5 秒是正常的。\n5) 只有一条线：从 A 电脑拔下插到 B 电脑，最多等 10 秒；没画面就按 Windows + P 选「复制」。这段空档请司仪说话填补。\n6) 声音：新接的电脑也要能把声音送到会议室，活动前先播一小段测试。",
+      "en": "Switching between two presenters' laptops smoothly:\n1) Best option: put all the slides on ONE laptop before the event, each file opened and minimised. Then there is nothing to switch.\n2) If you must use two laptops, connect both before the event starts, one on each input (for example HDMI 1 and HDMI 2, or the table and lectern inputs). Label them.\n3) Wake both laptops and plug in their chargers. Put the second one into slide show mode already, on its first slide.\n4) At the changeover, press the input button on the touch panel, switcher or remote. A black screen for 2 to 5 seconds is normal.\n5) Only one cable: unplug it from laptop A, plug it into laptop B and wait up to 10 seconds. If nothing appears, press Windows + P > Duplicate. Have the MC talk during the gap.\n6) Sound: the new laptop must also send its sound to the room, so play a short test before the event."
+    },
+    "explain": {
+      "zh": "换讲者是活动中最容易出状况的时刻，但准备好就不会有意外：\n• 每次接上或选到一台电脑，电脑和显示器都要「握手」，商量分辨率和版权保护，需要几秒钟；有些电脑和转接头的组合第一次会失败。\n• 电脑如果在休眠，或设成「扩展」，大屏幕可能只看到桌面背景。\n• 外来讲者的电脑最难预料：接口不同、没带转接头、设置被锁。\n• 想要没有黑屏的瞬间切换，需要「无缝切换器」，这是要技术员规划和安装的设备；有需要请在活动前告诉我们。\n• 预防：提前收齐幻灯片，用真正要用的电脑彩排一次切换，决定谁负责按键，并准备一张等候画面或 logo。",
+      "en": "Changeovers are the riskiest moment of any event, but preparation makes them uneventful:\n• Each time a laptop is connected or selected, it and the display \"handshake\" to agree on resolution and copy protection. That takes a few seconds, and some laptop and adapter combinations fail on the first try.\n• A laptop that was asleep, or is set to Extend, may show only a desktop background on the big screen.\n• Guest speakers' laptops are the unknown: different ports, missing adapters, locked settings.\n• Instant, clean cuts with no black gap need a seamless switcher. That is equipment a technician plans and sets up, so tell us before the event if it matters.\n• To avoid trouble: collect slides in advance, rehearse the changeover once with the real laptops, decide who presses the button, and keep a holding slide or logo ready."
+    }
+  },
+  {
+    "id": "use-walk-in-video-music-loop",
+    "title": {
+      "zh": "开场前循环播放视频或音乐",
+      "en": "Looping a walk-in video or background music"
+    },
+    "match": [
+      "循环播放",
+      "暖场视频",
+      "暖场音乐",
+      "背景音乐",
+      "入场音乐",
+      "开场前播放",
+      "walk in video",
+      "walk-in video",
+      "background music",
+      "loop video",
+      "video loop",
+      "play on repeat",
+      "holding slide",
+      "bgm"
+    ],
+    "reply": {
+      "zh": "开场前循环播放暖场视频或背景音乐：\n1) 用存在电脑里的文件（MP4 或 MP3），不要用在线串流。串流会卡、跳广告，Wi-Fi 一断就停。\n2) 用 VLC 循环视频：打开文件，点循环按钮直到显示「循环单个」（或全部），再双击画面全屏。Windows Media Player 用「重复」按钮。\n3) 循环幻灯片：PowerPoint「幻灯片放映 > 设置幻灯片放映」，勾选「循环放映，按 Esc 键终止」，并在「切换 > 设置自动换片时间」让每页自动换页。\n4) 只播音乐：做一个比入场时间更长的播放列表，并打开重复播放。\n5) 电脑音量调到约 80%，大小声用会议室音量控制。先小声开始；坐满人的场地比空场需要更大声。\n6) 插上充电器，打开「勿扰模式」，避免弹窗或休眠。",
+      "en": "Looping a walk-in video or background music before the event:\n1) Use a file saved on the laptop (MP4 or MP3), not an online stream. Streaming can buffer, play adverts or stop when the Wi-Fi drops.\n2) Video loop in VLC: open the file, click the loop button until it shows \"loop one\" (or all), then double-click the picture for full screen. In Windows Media Player use the Repeat button.\n3) Looping slides: in PowerPoint go to Slide Show > Set Up Slide Show, tick \"Loop continuously until Esc\", and make each slide advance by itself under Transitions > After.\n4) Music only: build a playlist longer than the walk-in time and turn on repeat.\n5) Set the laptop volume to about 80% and control loudness from the room volume. Start low; a full room needs more volume than an empty one.\n6) Plug in the charger and turn on Do Not Disturb so nothing pops up or goes to sleep."
+    },
+    "explain": {
+      "zh": "暖场内容是没人看着、自己播的，所以小问题就会让它停下：\n• 在线串流是头号原因：广告、缓冲、帐号被登出、或跳出「你还在看吗？」。\n• 没人碰电脑，电脑休眠或跳出屏保。\n• 单个文件播完，观众就看到桌面或播放器的按钮。\n• 电脑音量太小，会议室音量开大时会有杂音；太大又会破音。80% 左右是稳妥的起点。\n• 在公开或公司活动播放音乐可能需要音乐版权许可，个人串流帐号一般不是给公开播放用的。请向场地或主办方确认。\n• 这些都可以自己处理；只要电脑声音平时在会议室正常，就不需要技术员。\n• 预防：布置时让它至少循环两遍，司仪开口前先把音乐慢慢收小。",
+      "en": "Walk-in content runs unattended, so small things stop it:\n• Streaming is the top cause: adverts, buffering, an account logging out, or an \"Are you still watching?\" prompt.\n• The laptop goes to sleep or the screen saver starts because nobody touches it.\n• A single file ends and the audience sees the desktop or the player controls.\n• Laptop volume set too low makes the room noisy when turned up; too high distorts. About 80% is a safe starting point.\n• Playing music at a public or company event may need a music licence, and personal streaming accounts are generally not meant for public use. Check with your venue or organiser.\n• You can handle all of this yourself; no technician is needed if normal laptop sound already works in the room.\n• To avoid it: let the loop run through at least twice during setup, and fade the music down before the MC speaks."
+    }
+  },
+  {
+    "id": "use-anthem-audio-cue",
+    "title": {
+      "zh": "国歌或音效要准时播放",
+      "en": "National anthem or audio cue must start on time"
+    },
+    "match": [
+      "国歌",
+      "校歌",
+      "音效播放",
+      "开场音乐",
+      "颁奖音乐",
+      "音乐cue",
+      "national anthem",
+      "play the anthem",
+      "majulah singapura",
+      "negaraku",
+      "audio cue",
+      "music cue",
+      "sound cue",
+      "fanfare"
+    ],
+    "reply": {
+      "zh": "国歌或音效要一按就播，事前检查：\n1) 文件要存在电脑本机（MP3、WAV 或 MP4）。国歌绝对不要靠 YouTube 或串流：会有广告、缓冲、版本不对。\n2) 来宾到场前，在现场用会议室喇叭把整首完整播一次，确认是正确的官方版本和长度。\n3) 留意声音从哪里开始。文件开头如果有几秒空白，记下来，让司仪的口令配合。\n4) 用播放器打开文件，暂停在最开头，窗口放在最前面，按一下空格键就能开始。\n5) 打开「勿扰模式」，关掉其他软件，插上充电器，关闭休眠。\n6) 测试时把音量定好，之后不要再动。和司仪约好清楚的口令，指定一个人专门负责。\n7) 在手机或第二台电脑准备一份备份，随时可以接上。",
+      "en": "National anthem or an audio cue must start instantly, pre-check list:\n1) Save the file on the laptop itself (MP3, WAV or MP4). Never rely on YouTube or streaming for an anthem: adverts, buffering and wrong versions happen.\n2) Before guests arrive, play the whole track once in the room through the room speakers. Check it is the correct official version and length.\n3) Notice where the sound starts. If the file begins with a few seconds of silence, note it so the MC's cue matches.\n4) Open the file in the player, paused at the very start, window in front. One press of the Space bar should start it.\n5) Turn on Do Not Disturb, close other apps, plug in the charger and switch off sleep.\n6) Set the volume during the test, then leave it. Agree a clear cue word with the MC and give the job to one person.\n7) Keep a backup copy on a phone or second laptop, ready to plug in."
+    },
+    "explain": {
+      "zh": "国歌迟播或播不出是活动上最尴尬的事，而几乎都是准备不足，不是设备问题：\n• 在线来源总在最糟的时候出错：先播广告、缓冲、或不是官方版本。\n• 文件没有在实际的电脑上通过会议室喇叭测试过，声音跑到电脑自己的喇叭。\n• 口令到的时候，电脑正在休眠或跳出弹窗。\n• 操作的人和司仪没约好口令，来宾就站着干等。\n• 国歌如果是带歌词的视频，画面和声音都要测，也要看播放前后大屏幕显示什么。\n• 一般活动可以自己操作。有贵宾或很多播放环节的活动，由技术员在现场操作比较稳妥，请在活动日之前和我们商量。\n• 预防：至少在现场和司仪彩排一次口令。",
+      "en": "A late or failed anthem is the most embarrassing moment at an event, and it is almost always preparation, not equipment:\n• Online sources fail at the worst time: an advert plays first, the video buffers, or it is an unofficial version.\n• The file was never tested on the actual laptop through the room speakers, so the sound comes from the laptop's own speakers.\n• The laptop was asleep or showing a pop-up when the cue came.\n• The operator and the MC did not agree on the cue, so guests stand in silence.\n• If the anthem is a video with lyrics, test both picture and sound, and check what the screen shows before and after.\n• You can operate this yourself for normal events. For events with VIPs or many cues, a technician operating playback on site is safer; discuss it with us before the event day.\n• To avoid it: rehearse the cue with the MC at least once, in the room."
+    }
+  },
+  {
+    "id": "use-event-day-precheck",
+    "title": {
+      "zh": "活动前 30 分钟检查清单",
+      "en": "Event day pre-check list (30 minutes before)"
+    },
+    "match": [
+      "活动前检查",
+      "开场前检查",
+      "事前检查",
+      "检查清单",
+      "明天有活动",
+      "活动准备",
+      "彩排",
+      "event checklist",
+      "pre-event check",
+      "before the event",
+      "event tomorrow",
+      "pre check",
+      "sound check",
+      "rehearsal checklist"
+    ],
+    "reply": {
+      "zh": "活动开始前 30 分钟检查清单：\n1) 电源：按平时的顺序开机，等每个屏幕和投影机都出画面。所有手提电脑都插上充电器。\n2) 画面：接上真正要用的那台电脑，开始放映，然后走到最后一排，看最小的字看不看得清。\n3) 声音：用那台电脑播 20 秒有声音的视频，音量调到实际要用的大小。\n4) 话筒：每一支要用的都开机，站在讲者的位置逐支试讲；换上新电池或充满电的电池，桌上放备用电池。\n5) 翻页笔、视频、国歌或音乐：每样都从台上试一次。\n6) 混合或要录影的活动：用第二台设备进入线上会议，确认线上听得到现场、现场也听得到线上。\n7) 电脑：打开勿扰模式、关闭休眠、关掉不需要的软件。记下出问题时要联络谁。",
+      "en": "Event pre-check list, 30 minutes before the start:\n1) Power: switch on the system in the usual order and wait until every screen and projector shows a picture. Plug in all laptop chargers.\n2) Picture: connect the actual presenting laptop, start the slide show and walk to the back row. Can you read the smallest text?\n3) Sound: play 20 seconds of a video with sound from that laptop, at the volume you expect to use.\n4) Microphones: switch on every mic to be used and speak into each from where the speaker will stand. Fit fresh or fully charged batteries; keep spares on the table.\n5) Clicker, videos, anthem or music: test each one once, from the stage.\n6) Hybrid or recorded event: join the online meeting from a second device and confirm that both sides can hear each other.\n7) Laptop: Do Not Disturb on, sleep off, unneeded apps closed. Note who to call if something fails."
+    },
+    "explain": {
+      "zh": "活动当天的故障，大多数只要事前测试十分钟就能发现：\n• 常见的发现：话筒电池没电、电脑没有合适的转接头、视频没声音、线上听不到、翻页笔少了接收器。\n• 一定要用「真正要用」的电脑和文件来测。别的电脑没问题，说明不了什么。\n• 30 分钟是最低要求。大型或重要活动，前一天做一次完整彩排，万一真的有东西坏了，还来得及安排技术员。\n• 检查时发现故障，马上告诉我们，附上照片和已经试过的方法，不要等到活动开始了才说。\n• 不要为了「试试看」去移动或重插机柜里的线，这常常把一个故障变成两个。\n• 养成习惯：在会议室放一张打印好的清单，每次活动指定一个人负责。",
+      "en": "Most event-day failures would have shown up in a ten-minute test:\n• Typical finds: flat mic batteries, a laptop without the right adapter, a video with no sound, the online side unable to hear, a clicker without its receiver.\n• Test with the REAL laptop and the REAL files. A different laptop working proves very little.\n• 30 minutes is the minimum. For a large or important event, do a full rehearsal the day before, so there is still time for a technician if something is truly broken.\n• If you find a fault during the pre-check, tell us straight away with a photo and what you have tried. Do not wait until the event has started.\n• Do not move or re-plug cables in the equipment rack to \"try something\"; that often turns one fault into two.\n• To make it routine: keep a printed checklist in the room and give the job to one named person at every event."
+    }
+  },
+  {
+    "id": "use-hybrid-remote-speaker-audio",
+    "title": {
+      "zh": "混合活动线上线下听不到",
+      "en": "Hybrid event: hall and online cannot hear each other"
+    },
+    "match": [
+      "混合活动",
+      "混合会议",
+      "线上听不到",
+      "线上嘉宾",
+      "远程讲者",
+      "线上讲者",
+      "zoom听不到",
+      "hybrid event",
+      "hybrid meeting",
+      "remote speaker",
+      "online cannot hear",
+      "zoom cannot hear",
+      "teams cannot hear",
+      "hall cannot hear"
+    ],
+    "reply": {
+      "zh": "混合活动：现场听不到线上讲者，或线上听不到现场：\n1) 在 Zoom / Teams 打开音频设置（静音键旁边的箭头，或 设置 > 音频 / 设备）。\n2) 现场听不到线上：「扬声器」选会议室的音频设备（名称常是会议室系统、HDMI 显示器或「USB audio」），不要选电脑喇叭。按「测试扬声器」。再检查会议室音量和所选的信号源。\n3) 线上听不到现场：「麦克风」选会议室的音频设备，不要选电脑内置麦克风。对着现场话筒讲话，看音量条有没有动。\n4) 确认没有被静音：会议软件的静音键，还有现场话筒本身的开关。\n5) 现场只能有「一台」设备开着会议音频。其他在场的电脑和手机都要退出音频，或把麦克风和喇叭都静音，否则会有回音和啸叫。\n6) 请一位线上的人用聊天室确认听得到。",
+      "en": "Hybrid event: the hall cannot hear the remote speaker, or people online cannot hear the hall:\n1) In Zoom / Teams open the audio settings (the arrow next to the Mute button, or Settings > Audio / Devices).\n2) Hall cannot hear remote: set Speaker to the room audio device (often named after the room system, an HDMI display or \"USB audio\"), not the laptop speakers. Press Test Speaker, then check the room volume and source.\n3) Online cannot hear the hall: set Microphone to the room audio device, not the laptop's built-in mic. Speak into a hall mic and watch the level bar move.\n4) Check nobody is muted: the meeting Mute button, and the switch on the hall mics.\n5) Only ONE device in the hall may have meeting audio on. Every other laptop or phone must leave audio or mute both mic and speaker, or you get echo and howling.\n6) Ask someone online to confirm by chat that they can hear."
+    },
+    "explain": {
+      "zh": "混合活动多了两条声音路线，而每一条都靠会议软件选对设备：\n• 路线一，线上讲者到现场：会议电脑 > 会议室音响系统 > 现场喇叭。\n• 路线二，现场到线上：现场话筒 > 会议室音响系统 > 会议电脑。\n• 一重插线或连上耳机，Zoom 和 Teams 就会悄悄切回电脑自己的麦克风和喇叭，这是最常见的原因。\n• 如果会议室本来就没有把现场话筒接到会议电脑，线上的人只能靠电脑内置麦克风收音，又远又有回音。这需要技术员加装正式的音频连接，不要自己乱接线。\n• 线上听到回音，通常是现场有第二台设备开着音频。\n• 预防：开场前 30 分钟和一位在会议室外的同事试通话，并请线上讲者戴耳机。",
+      "en": "A hybrid event adds two extra sound paths, and each depends on the meeting app choosing the right device:\n• Path 1, remote speaker to the hall: meeting laptop > room sound system > hall speakers.\n• Path 2, hall to online: hall microphones > room sound system > meeting laptop.\n• Zoom and Teams quietly switch back to the laptop's own mic and speakers when a cable is re-plugged or a headset connects. This is the most common cause.\n• If the room has no audio link from the hall microphones to the meeting computer, online people hear only the laptop's built-in mic: distant and echoey. A technician must add a proper link; do not patch cables yourself.\n• Echo heard by online people usually comes from a second device in the hall with its audio on.\n• To avoid it: make a test call with a colleague outside the room 30 minutes before, and ask remote speakers to use a headset."
+    }
+  },
+  {
+    "id": "use-live-stream-stops-key",
+    "title": {
+      "zh": "脸书/YouTube 直播中断",
+      "en": "Live stream to Facebook / YouTube stops or buffers"
+    },
+    "match": [
+      "直播断了",
+      "直播卡顿",
+      "直播中断",
+      "串流密钥",
+      "直播密钥",
+      "推流失败",
+      "脸书直播",
+      "stream key",
+      "facebook live",
+      "youtube live",
+      "live stream buffering",
+      "stream keeps dropping",
+      "stream disconnected",
+      "dropped frames"
+    ],
+    "reply": {
+      "zh": "直播到 Facebook / YouTube 中断、卡顿，或显示串流密钥无效：\n1) 密钥无效：打开 Facebook Live Producer 或 YouTube Studio 的「直播」页面，重新复制串流密钥（stream key），贴到直播软件或编码器（OBS：设置 > 直播 / Stream）。每场新排定的直播，密钥常常会换。\n2) 确认推送到正确的专页或频道，而且平台那边的活动已经建立、还没结束。\n3) 卡顿或断线：有网线就用网线，不要用 Wi-Fi。同一条线路上停止其他大流量的使用。\n4) 测一次网速。上传速度至少要有直播码率的两倍；不够就把输出降到 720p、约 2500 到 4000 kbps。\n5) 直播断了：按「停止直播」再「开始直播」，观众可能要刷新页面。\n6) 一定要同时在本机录影，事后可以上传一份完整的。",
+      "en": "Live stream to Facebook / YouTube stops, buffers, or says the stream key is invalid:\n1) Stream key invalid: open Facebook Live Producer or the YouTube Studio Go Live page, copy the stream key again and paste it into the streaming software or encoder (OBS: Settings > Stream). Keys often change with each newly scheduled event.\n2) Check you are streaming to the right page or channel, and that the event on the platform is created and not ended.\n3) Buffering or dropping: use a network cable instead of Wi-Fi if there is one. Stop other heavy internet use on the same line.\n4) Run a speed test. Upload speed should be at least double your stream bitrate. If not, lower the output to 720p and about 2500 to 4000 kbps.\n5) Stream stopped: press Stop Streaming, then Start Streaming. Viewers may need to refresh.\n6) Always record locally as well, so you have a clean copy to upload later."
+    },
+    "explain": {
+      "zh": "直播是一条不间断的上传，上传一中断，所有观众都会受影响：\n• 网络：办公室、酒店或活动场地的共用 Wi-Fi 是最常见的原因。场内人一多，大家的手机都连上同一个网络，速度就掉。\n• 电脑：直播电脑负荷太重会丢帧，把其他程序关掉。\n• 密钥：复制的是另一场活动的密钥、密钥被重设，或排定的活动已过期。\n• 平台规定：YouTube 频道要先启用直播功能，最长可能要等 24 小时。有版权的音乐可能令直播被静音或中断。\n• 密钥、码率和重新开始都可以自己处理；要改场地的网络，得找场地或 IT。\n• 重要的直播，请要求一条专用的有线网络，并在活动日之前和我们商量。\n• 预防：前一天在同一个场地、同一个网络，做一次私人或不公开的测试直播。",
+      "en": "A live stream is one continuous upload, so anything that interrupts the upload interrupts every viewer:\n• Network: shared office, hotel or event Wi-Fi is the usual cause. It slows when the room fills and every phone joins the same network.\n• Computer: an overloaded streaming PC drops frames; close other programs.\n• Key: the key was copied from a different event, has been reset, or the scheduled event has expired.\n• Platform rules: a YouTube channel must have live streaming enabled first, which can take up to 24 hours. Copyrighted music can get a stream muted or cut off.\n• You can handle the key, bitrate and a restart; venue network changes need the venue or your IT team.\n• For an important stream, ask for a dedicated wired internet line and talk to us before the event day.\n• To avoid it: run a private or unlisted test stream from the same room on the same network the day before."
+    }
+  },
+  {
+    "id": "use-lecture-capture-missing",
+    "title": {
+      "zh": "课堂录播没录到或找不到",
+      "en": "Lecture capture did not record or recording missing"
+    },
+    "match": [
+      "录播",
+      "没录到",
+      "录不到",
+      "录课",
+      "课堂录制",
+      "录影不见",
+      "找不到录影",
+      "lecture capture",
+      "lecture recording",
+      "classroom recorder",
+      "recording missing",
+      "did not record",
+      "recording not found",
+      "cannot find recording"
+    ],
+    "reply": {
+      "zh": "课堂录播没录到，或找不到录影：\n1) 看录制指示灯，或触控面板 / 录播机上的状态。红灯或「REC」加上计时在走，就是在录；计时不动就是没在录。\n2) 排程录制：检查预约的教室、日期和时间对不对。换了教室或拖堂的课不会被录到。\n3) 刚下课？先等一等。录影通常要 30 分钟到几个小时处理和上传，才会出现在视频平台或 LMS。\n4) 找对地方：平台里该课程或该教室的文件夹；如果是本机录制，看录播机的 USB 盘 / SD 卡，确认有插好、没有满。\n5) 如果是用电脑录（Zoom / Teams），先确认当时选的是云端还是本地录制，再到「文档 > Zoom」或会议聊天记录里找。\n6) 录播机可能还在上传时，不要关机或重启。",
+      "en": "Lecture capture did not record, or the recording is missing:\n1) Check the recording light, or the status on the touch panel or recorder. Red or \"REC\" with a running timer means recording; a timer standing still means not recording.\n2) Scheduled recording: check the booking has the right room, date and time. A class that moved rooms or ran late is not captured.\n3) Just finished? Wait. Recordings often take 30 minutes to a few hours to process and upload before they appear in the portal or LMS.\n4) Look in the right place: the portal folder for that course or room, or the recorder's USB drive / SD card if it records locally. Check the drive is plugged in and not full.\n5) Recorded on a laptop (Zoom / Teams)? Check whether you chose cloud or local recording, then look in Documents > Zoom or the meeting chat.\n6) Do not switch off or restart the recorder while it may still be uploading."
+    },
+    "explain": {
+      "zh": "大部分「不见了」的录影，其实是根本没开始录，或还没处理完：\n• 没开始：没按录制键，或排程和实际的教室、时间对不上。\n• 还在处理：文件有了，但还没上传完，常见原因是网络断了或太慢。\n• 存储满了：USB 盘、SD 卡或硬盘满了，录制会悄悄停止。\n• 地方或权限不对：发布到了别的文件夹，或你还没有观看权限。\n• 有画面没人声：录播机只录话筒收到的声音，话筒没开或静音，录出来就是无声的。\n• 没录到的课无法补救。卡在录播机里的录影，技术员或系统管理员通常救得回，所以要尽早报告，不要删除或格式化任何东西。\n• 预防：每堂课开始时看一眼 REC 灯，说几句话，看音量表有没有动。",
+      "en": "Most \"missing\" recordings were never started or are still processing:\n• Never started: Record was not pressed, or the schedule did not match the real room or time.\n• Still processing: the file exists but is still uploading, often because the network was slow or down.\n• Storage full: a full USB drive, SD card or disk stops the recording with little warning.\n• Wrong place or permission: it went to another folder, or you do not have viewing rights yet.\n• Picture but no voice: the recorder only captures what the microphone picks up, so a mic that was off or muted gives silence.\n• A lesson never recorded cannot be recovered. One stuck inside the recorder often can be, by a technician or your system administrator, so report early and do not delete or format anything.\n• To avoid it: at the start of every class check the REC light and say a few words to see the audio meter move."
+    }
+  },
+  {
+    "id": "use-visualizer-black-blurry",
+    "title": {
+      "zh": "实物展台黑屏模糊或定格",
+      "en": "Document camera / visualizer black, blurry or frozen"
+    },
+    "match": [
+      "实物投影",
+      "实物展台",
+      "视频展台",
+      "展示台",
+      "文件摄影机",
+      "展台模糊",
+      "visualizer",
+      "visualiser",
+      "document camera",
+      "doc cam",
+      "doc camera",
+      "visualizer blurry",
+      "visualizer frozen"
+    ],
+    "reply": {
+      "zh": "实物投影仪 / 展台画面全黑、模糊或定格：\n1) 全黑：取下镜头盖，看电源灯有没有亮，并在会议室触控面板、切换器或显示器上选展台的输入（常标为 Doc Cam 或 Visualizer）。\n2) 看展台本身的信号源键。很多机型有 Camera / PC 键，按在 PC 时输出的是电脑画面而不是镜头。按回 Camera。\n3) 定格：再按一次 Freeze（冻结）键解除。\n4) 模糊：把纸放平，按一次 AF / 自动对焦。稍微缩小画面，物件不要离镜头太近。\n5) 太暗或太白：打开内置的灯，按 Auto 或 亮度 +/-；避免在强光下用反光的纸。\n6) USB 型接电脑的：关掉其他正在用摄像头的软件，在相机或会议软件里选这台展台。\n7) 镜头有污迹：用干的超细纤维布轻轻擦。",
+      "en": "Document camera / visualizer shows a black, blurry or frozen image:\n1) Black: take off the lens cap, check the power light is on, and select its input on the room touch panel, switcher or display (often labelled Doc Cam or Visualizer).\n2) Check the source button on the visualizer itself. Many have a Camera / PC button; on PC it passes the laptop through instead of the camera. Press Camera.\n3) Frozen: press the Freeze button again to release the picture.\n4) Blurry: lay the paper flat and press AF / Auto Focus once. Zoom out a little and do not put the object too close to the lens.\n5) Too dark or washed out: turn on the built-in lamp and press Auto or Brightness +/-. Avoid glossy paper under strong light.\n6) USB model on a laptop: close other apps using the camera, and pick the visualizer in the camera or meeting app.\n7) Smudged lens: wipe gently with a dry microfibre cloth."
+    },
+    "explain": {
+      "zh": "展台的「故障」几乎都是按键或设置的问题，可以自己解决：\n• Freeze 是故意把画面定住，所以看起来像卡住。\n• Camera / PC 键是在镜头和经过展台的电脑画面之间切换。\n• 厚的书、反光的表面或放得太近的物件，都容易让自动对焦失准。\n• 镜头盖没拿、支臂没打开、灯没开，是黑画面或太暗最常见的原因。\n• 不严重，也不需要拆开任何东西。\n• 插着变压器却没有电源灯、每个信号源都有线条或怪颜色、或支臂和镜头松动破裂，就需要技术员。\n• 预防：照原来的设计轻轻折叠支臂，不要提着支臂搬动，下课后盖回镜头盖并关灯。",
+      "en": "Nearly every visualizer \"fault\" is a button or setting, and you can fix it yourself:\n• Freeze holds a still picture on purpose, so it looks stuck.\n• The Camera / PC button switches between the camera and a laptop passed through the unit.\n• Auto focus is easily fooled by thick books, shiny surfaces or objects placed too close.\n• A lens cap, a folded arm or a lamp left off explains most black or dark pictures.\n• It is not serious, and nothing needs opening.\n• A technician is needed if there is no power light with the adapter plugged in, if lines or strange colours appear on every source, or if the arm or head is loose or cracked.\n• To avoid problems: fold the arm gently the way it was designed, never carry the unit by its arm, and put the lens cap back and switch the lamp off after class."
+    }
+  },
+  {
+    "id": "use-whiteboard-touch-offset",
+    "title": {
+      "zh": "互动白板触控不准或没反应",
+      "en": "Interactive whiteboard: touch is off or not working"
+    },
+    "match": [
+      "触控不准",
+      "触摸不准",
+      "触控偏移",
+      "触控没反应",
+      "触屏没反应",
+      "互动白板",
+      "电子白板",
+      "interactive whiteboard",
+      "smart board",
+      "smartboard",
+      "touch not accurate",
+      "touch not working",
+      "touch wrong place",
+      "interactive flat panel"
+    ],
+    "reply": {
+      "zh": "互动白板 / 触控屏：电脑画面有了，但触控位置不对或没反应：\n1) 触控要多接一条线。除了 HDMI，还要接 USB 触控线（屏幕那端通常是 USB-B，标着 Touch），而且要和 HDMI 同一组，例如 HDMI 1 配 Touch 1。支持的机型用一条 USB-C 线就两样都有。\n2) 一摸屏幕，光标却在另一个屏幕动：你在「扩展」模式。按 Windows + P 选「复制」，这是最快的办法。\n3) 想留在扩展模式（Windows）：搜索「平板电脑设置 / Tablet PC Settings」> 设置，按提示点一下白板，让 Windows 知道哪个才是触控屏。\n4) 触控偏了几公分：把电脑分辨率设成屏幕的原生分辨率，画面设为满屏（不要缩放）。旧款配投影机的白板，要在白板软件里做「校准 / Calibrate」。\n5) 用干布擦屏幕四边的边框；灰尘或贴纸会挡住触控感应。\n6) 无线投屏通常只有画面，没有触控。",
+      "en": "Interactive whiteboard: laptop picture shows, but touch is in the wrong place or dead:\n1) Touch needs a second cable. Besides HDMI, connect the USB touch cable (usually USB-B, marked Touch) from the SAME input group, e.g. HDMI 1 with Touch 1. Where supported, one USB-C cable does both.\n2) Touch moves the cursor on the other screen: you are in Extend mode. Press Windows + P and choose Duplicate (the quickest fix).\n3) To stay in Extend on Windows: search \"Tablet PC Settings\" > Setup and tap the board when asked, so Windows knows which screen has touch.\n4) Touch a few centimetres off: use the panel's native resolution with the picture filling the screen (no zoom). Older projector-type boards need Calibrate / Orient in the board software.\n5) Wipe the frame edges with a dry cloth; dust or a sticker there blocks the touch sensors.\n6) Wireless casting usually gives picture only, no touch."
+    },
+    "explain": {
+      "zh": "画面和触控是分开走的，这解释了大部分的情况：\n• HDMI 把画面从电脑送到白板；USB 线把你的触控从白板送回电脑。没接 USB，或 USB 接在别组输入，就没有触控。\n• 在「扩展」模式下，Windows 可能以为触控属于电脑自己的屏幕，所以光标在错的屏幕上动。\n• 画面没有刚好填满整个屏幕，触控点就会和手指差一点。\n• Mac 电脑常常只有基本触控，或要安装白板厂商的驱动程序。\n• 以上都可以自己解决，不严重。\n• 如果在白板内置的白板 app 里触控也不行，或某一条、某个角落永远没反应，那是触控感应器的问题，需要技术员。\n• 预防：HDMI 和 USB 这一对线一直接着并贴上同一组标签，上课用「复制」模式。",
+      "en": "Picture and touch travel separately, which explains most of these cases:\n• HDMI carries the picture from the laptop to the board. A USB cable carries your touches from the board back to the laptop. No USB, or USB on the wrong input group, means no touch.\n• In Extend mode Windows may assume the touch belongs to the laptop's own screen, so the cursor moves on the wrong display.\n• A picture that does not fill the panel exactly makes touch land a little away from your finger.\n• Mac laptops often get only basic touch, or need a driver from the board's maker.\n• You can fix all of the above yourself. It is not serious.\n• A technician is needed if touch also fails in the board's own built-in whiteboard app, or if one strip or corner never responds. That points to the touch sensors.\n• To avoid it: leave the HDMI and USB pair connected and labelled together, and use Duplicate mode for teaching."
+    }
+  },
+  {
+    "id": "use-interpretation-receivers",
+    "title": {
+      "zh": "同声传译接收机没声音",
+      "en": "Interpretation receivers silent or on the wrong channel"
+    },
+    "match": [
+      "同声传译",
+      "同传",
+      "传译耳机",
+      "翻译耳机",
+      "传译接收",
+      "翻译频道",
+      "传译间",
+      "interpretation receiver",
+      "simultaneous interpretation",
+      "interpreter cannot hear",
+      "translation headset",
+      "interpretation channel",
+      "interpreter booth",
+      "translation receiver"
+    ],
+    "reply": {
+      "zh": "同声传译系统：接收机没声音、语言不对，或传译员听不到会场：\n1) 单一接收机没声音：开机、把音量轮转大、耳机插到底，再换一副耳机试。还不行就换一台备用接收机，可能是电池没电。\n2) 语言不对：按频道键，直到显示正确的频道。在门口贴告示，例如「Ch 1 English，Ch 2 中文」。\n3) 红外线接收机要「看得见」会场里的发射板。不要放在口袋或外套里，挂在胸前，感应窗不要遮住。\n4) 某个频道所有接收机都没声音：请传译员检查控制台上的话筒有没有开（灯亮），输出频道有没有选对。\n5) 传译员听不到会场：检查耳机有没有插在控制台、把耳机音量调大，并确认讲者有用话筒。讲者不用话筒，传译间就没有声音。\n6) 所有频道都没声音，或每台接收机都有杂音：需要技术员。",
+      "en": "Interpretation receivers silent, wrong language, or interpreter cannot hear the floor:\n1) One receiver silent: switch it on, turn up the volume, push the earphone plug in fully, or try another earphone. Still silent: swap to a spare (flat battery).\n2) Wrong language: press the channel button until the right channel shows. Put a sign at the door, e.g. \"Ch 1 English, Ch 2 中文\".\n3) Infrared receivers must \"see\" the radiator panels: wear them on the chest, sensor uncovered, not in a pocket or under a jacket.\n4) One channel silent on all receivers: ask the interpreter to check the console mic is on (light lit) and on the right channel.\n5) Interpreter cannot hear the floor: plug the headset into the console, raise its volume, and check whoever is speaking uses a microphone. No mic, no sound in the booth.\n6) All channels dead, or noise on every receiver: this needs a technician."
+    },
+    "explain": {
+      "zh": "声音是一条链：会场话筒 > 传译员控制台 > 发射主机 > 红外线发射板或无线电 > 接收机：\n• 大部分问题出在链的两头：接收机没电、频道不对、红外线感应窗被遮住、或讲者没用话筒。\n• 红外线穿不过墙壁和人体，强烈的直射阳光也会干扰；无线电式的系统则可能受到其他信号干扰。\n• 传译员只能翻译传到耳机里的声音。每个人都必须用话筒，包括台下提问的时候。\n• 接收机、耳机、频道，以及提醒讲者用话筒，这些都可以自己处理。\n• 链中间的故障（发射主机、发射板、控制台接线）需要技术员。不要移动发射板，也不要重插控制台的线。\n• 预防：前一晚把所有接收机充满电，开场前 30 分钟和传译员逐个频道测试，接收机编号，方便全数收回。",
+      "en": "The sound travels in a chain: floor mics > interpreter console > transmitter > infrared radiators or radio > receivers:\n• Most problems are at the two ends: flat receiver batteries, wrong channel, a covered sensor, or a speaker not using a microphone.\n• Infrared does not pass through walls or bodies, and strong sunlight can disturb it; radio systems can pick up interference.\n• Interpreters can only translate what reaches their headsets, so everyone must use a microphone, questions from the floor included.\n• You can handle receivers, earphones, channels and reminding speakers to use the mic.\n• Faults in the middle (transmitter, radiators, console wiring) need a technician. Do not move radiator panels or re-plug consoles.\n• To avoid problems: charge all receivers the night before, test every channel with the interpreters 30 minutes before, and number the receivers so all come back."
+    }
+  },
+  {
+    "id": "use-delegate-mic-units",
+    "title": {
+      "zh": "会议代表话筒单元开不了",
+      "en": "Delegate / chairman mic unit dead or will not open"
+    },
+    "match": [
+      "代表单元",
+      "主席单元",
+      "发言单元",
+      "话筒单元",
+      "手拉手",
+      "红圈一直亮",
+      "会议话筒开不了",
+      "delegate unit",
+      "chairman unit",
+      "delegate mic",
+      "discussion system",
+      "push to talk",
+      "conference unit",
+      "mic cannot open"
+    ],
+    "reply": {
+      "zh": "会议讨论话筒系统（代表单元 / 主席单元）：单元没电、红圈一直亮、或开不了话筒：\n1) 按了键话筒不开：多半是已经达到同时开启话筒的上限（通常 1 到 4 支）。请另一位代表先关掉，再按一次。\n2) 灯在闪或亮绿灯，通常表示你在排队等候，要等主席或操作员批准发言。\n3) 主席单元：按下「优先 / Priority」键会把所有代表话筒静音或关掉。检查它有没有卡住，或被东西压着。\n4) 红圈一直亮：那支话筒还开着，按一下它的键关掉。关不掉的话，系统可能设在由操作员控制话筒的模式。\n5) 单一单元完全没反应（没有灯）：有线单元是一台接一台串联的，检查进这台的线两头有没有扣紧。无线单元：换上充好电的电池。\n6) 从某一台起整排都没电：串联在最后一台正常的单元那里断了，把那个接头重新插好。不要硬拉或硬插接头。",
+      "en": "Delegate / discussion mic units: unit dead, red ring stays on, or mic will not open:\n1) Mic will not open when pressed: the system has probably hit its limit of open mics (often 1 to 4). Ask another delegate to switch off, then press again.\n2) A flashing or green light usually means you are queued, waiting for the chairman or operator.\n3) Chairman unit: the Priority button mutes or cuts all delegate mics. Check it is not stuck or leaned on.\n4) Red ring stays on: that mic is still open; press its button once to close it. If it will not close, the system may be in operator-controlled mode.\n5) One unit dead (no lights): wired units are chained one to the next, so check its cable clicks in firmly at both ends. Wireless unit: fit a charged battery.\n6) Whole row dead from one unit onward: the chain broke at the last working unit; reseat that connector. Never pull or force connectors."
+    },
+    "explain": {
+      "zh": "所有单元共用一台中央主机，由它决定谁可以发言。很多「话筒坏了」其实是它的规则在起作用：\n• 开启上限：同时只能开一定数量的话筒，这样声音才清楚，也不容易啸叫。\n• 模式：自由讨论、申请发言（排队）、先进先出、或由主席 / 操作员控制。同一个按键在不同模式下反应不同。\n• 有线单元是串联的，一个接头松了，后面的单元全部断电。\n• 按键操作、重插桌面上看得见的接头、换无线电池，都可以自己处理。\n• 更改开启上限或模式，要在中央主机或软件上设定，那是技术员为会议室调好的。告诉我们会议方式有什么改变，我们可以指导或调整。\n• 重插后还是没反应的单元，或针脚弯了的接头，需要技术员。\n• 预防：提醒代表「按一下发言，讲完再按一下」，不要把单元在座位之间搬来搬去。",
+      "en": "All units share one central controller that decides who may speak. Many \"faulty mic\" reports are just its rules at work:\n• Open mic limit: only a set number of mics can be on at once, keeping sound clear and preventing howling.\n• Modes: free discussion, request-to-speak (queue), first-in-first-out, or chairman / operator control. One button behaves differently in each.\n• Wired units are daisy-chained: one loose connector cuts off every unit after it.\n• You can handle buttons, reseating a visible table connector and wireless batteries.\n• Mic limit and mode are set on the central unit or its software by a technician. Tell us if your meeting style has changed and we can guide you or adjust it.\n• A unit still dead after reseating, or bent connector pins, need a technician.\n• To avoid problems: tell delegates to press once to talk and again when done, and do not move units between seats."
+    }
+  },
+  {
+    "id": "use-portable-pa-outdoor",
+    "title": {
+      "zh": "户外活动用便携拉杆音响",
+      "en": "Portable PA / trolley speaker for an outdoor event"
+    },
+    "match": [
+      "便携音响",
+      "拉杆音响",
+      "拉杆音箱",
+      "移动音响",
+      "户外音响",
+      "手拉音箱",
+      "户外活动",
+      "portable pa",
+      "trolley speaker",
+      "portable speaker",
+      "outdoor event",
+      "outdoor pa",
+      "battery speaker",
+      "portable sound system"
+    ],
+    "reply": {
+      "zh": "户外活动用便携 / 拉杆音响：\n1) 前一晚充满电（通常要 6 到 8 小时），出发前看电量表。电源线也带着。\n2) 音响放在话筒位置的「前面」，面向观众，放在原配支架或稳固的桌子上，大约到头的高度。绝对不要放在讲话的人后面，会啸叫。\n3) 先开音响上的无线接收，再开手持话筒，话筒用新电池。没声音多半是话筒和接收不同频道：把两边显示的频道调成一样（或照机身标签的方法重新配对）。\n4) 音量从最小开始，有人讲话时慢慢加大。户外讲话时话筒要靠近，离嘴 2 到 3 指宽。\n5) 播音乐：用蓝牙或 AUX 线连接，手机音量调到约 80%。\n6) 放在阴凉处，远离雨水、积水和洒水器。弄湿了就关机，停止使用。",
+      "en": "Portable PA / trolley speaker for an outdoor event:\n1) Charge it fully the night before (often 6 to 8 hours) and check the battery meter before leaving. Bring the power cable anyway.\n2) Put the speaker in FRONT of the microphone position, facing the audience, on its stand or a stable table at about head height. Never behind the person speaking; that causes howling.\n3) Switch on the speaker's wireless receiver, then the handheld mic with fresh batteries. No sound usually means they are on different channels: match the channel shown on both (or re-pair as the unit's label describes).\n4) Start at minimum volume and raise it slowly while someone speaks. Outdoors, hold the mic 2 to 3 fingers from the mouth.\n5) Music: connect by Bluetooth or AUX cable, phone volume at about 80%.\n6) Keep it shaded and away from rain, puddles and sprinklers. If it gets wet, switch off and stop using it."
+    },
+    "explain": {
+      "zh": "户外比室内难做声音得多，所以要把效果估得保守一点：\n• 户外没有墙壁反射声音，同一台音响听起来小声很多，距离一远或有风，人声很快就散掉。\n• 一台便携音响适合站得近的小群人。大草场或一长排帐篷，需要技术员架设正式的音响系统。\n• 音量开得大、电池旧了，使用时间都会变短。空电放了几个月的机器，可能完全充不进电。\n• 话筒和音响之间站了人，无线话筒的距离就变短，要保持中间没有阻挡。\n• 热带的太阳和雨是最大的杀手：过热会令功放自动关机，进水就报废。\n• 户外要用市电的话，只能用场地安排的正规户外电源。绝对不要把拖线板拉过潮湿的地面。\n• 预防：事前到实际位置试一次；就算不用，也每隔几个月充一次电。",
+      "en": "Sound is much harder outdoors than in a room, so plan for less than you expect:\n• No walls reflect the sound, so the same speaker sounds far quieter and voices fade quickly with distance and wind.\n• One portable speaker suits a small crowd standing close. A large field or long row of tents needs a proper PA set up by a technician.\n• Battery time is shorter at high volume and as the battery ages. A unit stored empty for months may not charge at all.\n• Wireless mics lose range when people stand between mic and speaker; keep the path clear.\n• Tropical sun and rain are the main killers: heat shuts the amplifier down and water ruins it.\n• For mains power outdoors, use only a proper outdoor power point arranged by the venue. Never run extension cords across wet ground.\n• To avoid problems: test at the actual spot beforehand, and charge the unit every few months even if unused."
+    }
+  },
+  {
+    "id": "use-cleaning-screens-lenses",
+    "title": {
+      "zh": "清洁屏幕镜头和触控面板",
+      "en": "Cleaning screens, lenses and touch panels safely"
+    },
+    "match": [
+      "清洁屏幕",
+      "擦屏幕",
+      "清洁镜头",
+      "擦镜头",
+      "屏幕脏了",
+      "怎么清洁",
+      "用酒精擦",
+      "clean the screen",
+      "cleaning the screen",
+      "clean the lens",
+      "clean touch panel",
+      "fingerprints on screen",
+      "screen cleaner",
+      "wipe the screen"
+    ],
+    "reply": {
+      "zh": "安全地清洁屏幕、镜头和触控面板：\n1) 先关机并让它冷却。黑屏时比较容易看到污迹，触控面板也不会因为你擦而乱跳。\n2) 用干净的干超细纤维布，顺着一个方向轻轻擦，不要用力压屏幕。\n3) 顽固污迹：把「布」用清水（或显示器专用清洁液）稍微沾湿，擦过后用另一块布擦干。绝对不要直接往设备上喷任何液体。\n4) 不要用玻璃清洁剂、漂白水、天拿水、高浓度酒精、纸巾或厨房纸，会磨掉防眩涂层或刮花。\n5) 投影机镜头：只有站在地面上轻松够得着的才清洁。关机冷却后，用吹气球或干的镜头布很轻地擦。吊在天花板的投影机绝对不要自己清洁。\n6) 话筒：用稍微沾湿的布擦机身和网罩，完全干透后才使用。\n7) 布质投影幕：不要擦，只可以很轻地掸灰尘。",
+      "en": "Cleaning screens, lenses and touch panels safely:\n1) Switch the equipment off and let it cool. Dirt shows better on a dark screen, and a touch panel will not react to wiping.\n2) Use a clean, dry microfibre cloth. Wipe gently in one direction; do not press hard.\n3) Stubborn marks: dampen the CLOTH slightly with clean water (or display cleaner), wipe, then dry with a second cloth. Never spray anything onto the equipment.\n4) No window cleaner, bleach, thinner, strong alcohol, tissue or kitchen paper: they strip or scratch the anti-glare coating.\n5) Projector lens: only if within easy reach from the floor, with the projector off and cool. Use a lens blower or dry lens cloth, very lightly. Never clean a ceiling projector yourself.\n6) Microphones: wipe body and grille with a slightly damp cloth; dry fully before use.\n7) Fabric projection screens: never wipe; only dust very lightly."
+    },
+    "explain": {
+      "zh": "影音设备的表面看起来很耐用，其实涂层很娇嫩，而真正危险的是液体：\n• 喷上去的液体会沿着屏幕流进下边框里面，造成永久的线条或暗斑，所以只能把布沾湿。\n• 家用清洁剂会腐蚀防眩涂层和镜头镀膜，纸类会刮花。\n• LED 大屏幕（拼接墙）绝对不要擦或按，细小的灯珠很容易脱落，交给技术员处理。\n• 要消毒公用的触控面板，请照该型号厂商的指引；不确定时，用清水稍微沾湿的布最安全。\n• 通风口和滤网里面的灰尘、以及任何装在高处的设备，是技术员的工作。不要爬梯子。\n• 参考频率：触控面板和桌面话筒每周一次；显示屏每月一次或有污迹时；镜头只在画面出现斑点或雾状时才清洁。\n• 每间会议室放一块超细纤维布，就不会有人随手拿纸巾和玻璃水来擦。",
+      "en": "AV surfaces look tough but their coatings are delicate, and liquid is the real danger:\n• Sprayed liquid runs down behind the bottom edge of a screen and causes permanent lines or dark patches, so only the cloth is dampened.\n• Anti-glare and lens coatings are stripped by household cleaners and scratched by paper products.\n• Never wipe or press an LED video wall. The tiny LEDs break off easily; leave it to a technician.\n• To disinfect a shared touch panel, follow the maker's guide for that model. If unsure, a water-dampened cloth is the safe choice.\n• Dust inside vents and filters, and anything mounted overhead, is technician work. Do not use a ladder.\n• As a guide: touch panels and table mics weekly, display screens monthly or when marked, lenses only when the picture shows spots or haze.\n• Keep a microfibre cloth in each room so nobody reaches for tissue and window cleaner."
+    }
+  },
+  {
+    "id": "use-liquid-spill",
+    "title": {
+      "zh": "水或饮料泼到设备上",
+      "en": "Liquid spilled on a mic, touch panel or floor box"
+    },
+    "match": [
+      "泼到水",
+      "进水了",
+      "水倒在",
+      "咖啡倒",
+      "饮料泼",
+      "弄湿了",
+      "打翻水",
+      "spilled water",
+      "spilled coffee",
+      "water spilled",
+      "liquid spill",
+      "spilt water",
+      "got wet",
+      "water went into"
+    ],
+    "reply": {
+      "zh": "水或饮料泼到桌面话筒、触控面板、桌面接线盒或地插：\n1) 马上停止使用，不要按它的按键来「试试看」。\n2) 开关是干的、又轻松够得着的话，把那台设备的墙壁电源开关关掉。如果开关或插座本身也湿了，不要碰，让人远离，并通知大厦管理处。\n3) 用电池的（无线话筒、翻页笔）：关机并取出电池。\n4) 用干布把设备外表和周围桌面、地面的液体擦干。不要甩、不要用吹风机吹、不要拆开。\n5) 保持关机，贴上「请勿使用」。就算看起来干了也不要开机；甜饮料和咖啡会在里面继续腐蚀。\n6) 告诉我们泼了什么、大概多少、泼在哪台设备上，并拍照发来。必须由技术员检查后才能再用。\n7) 有烧焦味、冒烟或火花：关掉墙壁电源，整套系统停止使用。",
+      "en": "Liquid spilled on a table mic, touch panel, table connection box or floor box:\n1) Stop using it now. Do not press its buttons to \"test\" it.\n2) Switch off its power at the wall socket, if the switch is dry and within easy reach. If the switch or socket is wet, do not touch it; keep people away and tell building management.\n3) Battery items (wireless mic, clicker): switch off and remove the batteries.\n4) Wipe the liquid off the outside and the table or floor around it with a dry cloth. Never shake it, blow-dry it or open it.\n5) Leave it off and mark it \"Do not use\". Do not switch it on even if it looks dry; sweet drinks and coffee keep corroding inside.\n6) Tell us what was spilled, roughly how much and on which equipment, with a photo. A technician must check it before it is used again.\n7) Burning smell, smoke or sparks: switch off at the wall and stop using the whole system."
+    },
+    "explain": {
+      "zh": "液体碰上通电的设备，是真正的安全问题，不只是维修问题：\n• 液体会让内部带电的部分连通，造成短路、有触电的危险，少数情况下会起火。\n• 损坏往往是延迟出现的。今天还能用，过几天残留物腐蚀了电路板才坏。所以检查之前一定要保持关机。\n• 地插和桌面接线盒里除了信号线，还有市电插座，风险最高；湿了绝对不要把手伸进去。\n• 清水的伤害比咖啡、茶或汽水小，后者的糖分和酸性干了以后还留在里面。\n• 这种情况一定要技术员处理。请不要拆开设备，也不要自己去弄干内部。\n• 预防：用有盖的杯子，饮料不要放在讲台上或桌面接线盒旁边，地插的盖子平时盖好，并请清洁人员不要在地插上面湿拖。",
+      "en": "Liquid on powered equipment is a real safety matter, not only a repair matter:\n• Liquid can bridge live parts inside, causing a short circuit, a risk of electric shock or, rarely, fire.\n• Damage is often delayed. The unit may work today and fail days later as the residue corrodes the circuit board. That is why it must stay off until it has been checked.\n• Floor boxes and table connection boxes hold mains sockets as well as signal cables. They are the highest risk; never reach inside a wet one.\n• Plain water does less harm than coffee, tea or soft drinks, whose sugar and acid stay behind after drying.\n• This always needs a technician. Please do not open the unit or try to dry the inside yourself.\n• To avoid it: use cups with lids, keep drinks off the lectern and away from table boxes, keep floor box lids closed, and ask the cleaners not to wet-mop over floor boxes."
+    }
+  },
+  {
+    "id": "use-maintenance-batteries-storage",
+    "title": {
+      "zh": "滤网灯泡电池多久检查",
+      "en": "How often to check filters, lamps and batteries"
+    },
+    "match": [
+      "保养",
+      "定期维护",
+      "滤网",
+      "灯泡寿命",
+      "电池存放",
+      "充电电池",
+      "多久检查",
+      "preventive maintenance",
+      "filter cleaning",
+      "lamp hours",
+      "lamp life",
+      "battery storage",
+      "store wireless mics",
+      "servicing schedule"
+    ],
+    "reply": {
+      "zh": "预防保养：滤网、灯泡和电池多久检查一次：\n1) 每次用完：关掉无线话筒。超过一个星期不用，就把 AA 电池取出来；电池漏液会毁掉话筒。\n2) 每周：把充电式话筒和电池放回充电座，看充电灯正不正常；顺便擦一擦触控面板和桌面。\n3) 每月：在投影机菜单（通常在「信息 / 状态」）看灯泡或光源的使用小时数，留意有没有「更换灯泡」或「清洁滤网」的提示。看画面有没有变暗或出现色斑。\n4) 每月：看看桌面和地面的线，有没有插头弯了、割破或接头松了，损坏的就停用。\n5) 每 3 到 6 个月：投影机滤网、通风口和机柜要清理灰尘，灰尘多或铺地毯的房间要更勤。这是技术员的工作。\n6) 备用电池和话筒放在阴凉干燥的柜子里，不要放在闷热的储藏室或车里。充电电池长期存放前先充到大约一半。",
+      "en": "Preventive care: how often to check filters, lamps and batteries:\n1) After every use: switch off wireless mics. Take out AA batteries if a mic will be unused for over a week; leaked batteries ruin mics.\n2) Weekly: return rechargeable mics and batteries to their charger, check the charge lights, wipe touch panels and tables.\n3) Monthly: read the projector's lamp or light source hours in its menu (usually Information / Status); note any \"replace lamp\" or \"clean filter\" message, dim picture or colour patches.\n4) Monthly: check table and floor cables for bent plugs, cuts or loose connectors; stop using damaged ones.\n5) Every 3 to 6 months: projector filters, vents and racks need dust cleaning, sooner in dusty or carpeted rooms. Technician work.\n6) Store spare batteries and mics in a cool, dry cabinet, not a hot store room or car. Half-charge rechargeable packs before long storage."
+    },
+    "explain": {
+      "zh": "影音设备的故障多半来自高温和灰尘，而这两样都是在没人注意的地方慢慢累积的：\n• 滤网堵塞会让投影机过热，开会开到一半自动关机，也老化得更快。\n• 灯泡式投影机是慢慢变暗的，大家不知不觉就习惯了。灯泡寿命通常是几千小时，激光光源长得多，确实数字要看型号。\n• 充电电池用几年后容量会下降。比其他电池明显不耐用的就该换；鼓胀的电池不可以再充电或使用。\n• 碱性电池留在话筒里几个月会漏液，腐蚀接触点。\n• 电池的日常管理、目视检查和记录灯泡小时数，都可以自己做。\n• 吊装设备的滤网、机柜内部、换灯泡和固件更新，是技术员的工作。不要打开盖子，也不要爬梯子。\n• 每间会议室放一张简单的记录表（日期、灯泡小时数、异常情况），就能赶在重要活动之前发现问题。",
+      "en": "Heat and dust cause most AV breakdowns, and both build up slowly where nobody looks:\n• A clogged filter makes a projector run hot, shut down mid-meeting and age faster.\n• Lamp projectors dim gradually, so people get used to a weak picture. Lamp life is often a few thousand hours; laser light sources last much longer. It depends on the model.\n• Rechargeable batteries lose capacity over a few years. Replace one that runs far shorter than the others. Never charge or use a swollen battery.\n• Alkaline batteries left in a mic for months leak and corrode the contacts.\n• You can do the battery routine, visual checks and lamp hour notes.\n• Ceiling unit filters, rack interiors, lamp replacement and firmware are technician work. Do not open covers or use a ladder.\n• A simple log sheet in each room (date, lamp hours, anything odd) helps spot problems before an important event."
+    }
+  },
+  {
+    "id": "use-report-fault-info",
+    "title": {
+      "zh": "报修时要提供什么资料",
+      "en": "What to tell us when reporting a fault"
+    },
+    "match": [
+      "报修",
+      "怎么报修",
+      "报故障",
+      "要提供什么",
+      "需要什么资料",
+      "叫技术员",
+      "报告故障",
+      "report a fault",
+      "report fault",
+      "log a fault",
+      "what info needed",
+      "service request",
+      "request a technician",
+      "spoil already"
+    ],
+    "reply": {
+      "zh": "报修时请发这些资料，我们可以更快帮到你：\n1) 地点：公司名称、地址、楼层和房间名称。\n2) 设备：种类、品牌和型号。最简单是拍一张背面或底部标签的照片；只拍站在地面上够得着的。\n3) 现象：用一句话说看到或听到什么，有没有错误信息或指示灯在闪（颜色和闪法）。照片或短视频最有帮助。\n4) 时间：什么时候开始的，是每次都这样还是偶尔。\n5) 之前改变过什么：换了电脑、换了线、搬动过房间、跳电、装修、清洁，或刚做过软件更新。\n6) 你已经试过什么，例如重启或换线。\n7) 紧急程度和进出安排：下一场活动的日期时间、现场联络人，以及大厦的进出或保安规定。",
+      "en": "Reporting a fault, what to send us so we can help faster:\n1) Where: company name, address, floor and room name.\n2) What: the equipment type, brand and model. A photo of the label on the back or underside is the easiest way; only photograph what you can reach from the floor.\n3) Symptom: in one line, what you see or hear, plus any error message or blinking light (colour and pattern). A photo or short video helps the most.\n4) When: when it started, and whether it happens every time or only sometimes.\n5) What changed just before: a new laptop, a new cable, the room rearranged, a power trip, renovation, cleaning, or a software update.\n6) What you have already tried, such as restarting or swapping the cable.\n7) Urgency and access: the date and time of your next event, the contact person on site, and any building access or security rules."
+    },
+    "explain": {
+      "zh": "资料齐全，常常可以省掉一次上门，或一次上门就解决：\n• 有了品牌、型号和照片，很多故障可以远程判断，再一步一步教你处理。\n• 需要技术员的话，知道型号就能带对零件和线材。\n• 「之前改变过什么」是最有用的线索。大多数故障都是在某个改变之后开始的，哪怕看起来毫不相关。\n• 时好时坏的故障，请记下每次发生的时间和当时在用什么，有规律就容易找到原因。\n• 不要为了找型号去拆开、拧螺丝或把设备拿下来。标签够不着就直接告诉我们，说明设备装在哪里。\n• 安全第一：冒烟、有烧焦味、火花、泼到液体、或高处有东西松动，在安全够得着的情况下关掉墙壁电源，让人远离，并马上告诉我们，不要继续测试。\n• 建议每间会议室备一份简单的设备清单，并指定一位影音事务的联络人。",
+      "en": "Good information often saves a visit, or makes one visit enough:\n• With the brand, model and a photo, many faults can be identified remotely and fixed by guiding you.\n• If a technician is needed, knowing the model means the right parts and cables come along.\n• \"What changed\" is the most useful clue. Most faults begin right after a change, even one that seems unrelated.\n• For faults that come and go, note the time and what was in use each time. A pattern points to the cause.\n• Do not open, unscrew or take down equipment to find a model number. If the label is out of reach, just tell us where the unit is.\n• Safety first: for smoke, a burning smell, sparks, spilled liquid or anything loose overhead, switch off at the wall if safe to reach, keep people away and tell us at once. Do not keep testing.\n• Keep a simple equipment list per room and one contact person for AV matters."
+    }
+  }
+]

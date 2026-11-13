@@ -4,6 +4,7 @@ import { Store } from "../src/store.js";
 import { buildMessages } from "../src/ai.js";
 import { DEFAULTS, merge, validate } from "../src/config.js";
 import { extractText, formatPairingCode, isCustomerChat, phoneNumberOf } from "../src/whatsapp.js";
+import { createHandler } from "../src/handler.js";
 
 test("store tracks contacts, replies, handoff and waiting list", () => {
   const store = new Store(":memory:");
@@ -88,4 +89,37 @@ test("whatsapp helpers", () => {
   assert.equal(phoneNumberOf({ remoteJid: "84121917329565@lid", senderPn: "6591234567:3@s.whatsapp.net" }), "6591234567");
   assert.equal(phoneNumberOf({ remoteJid: "60111@s.whatsapp.net" }), "60111");
   assert.equal(phoneNumberOf({ remoteJid: "84121917329565@lid" }), null);
+});
+
+
+test("handler remembers the menu mode and answers with the explain variant", async () => {
+  const store = new Store(":memory:");
+  const sent = [];
+  const config = merge(DEFAULTS, {
+    phone_number: "60123456789",
+    min_seconds_between_replies_per_contact: 0,
+    menu: [
+      { keys: ["1"], mode: "fix", reply: { en: "Tell me the symptom" } },
+      { keys: ["2"], mode: "explain", reply: { en: "Tell me the symptom and I will explain" } },
+      { keys: ["3"], mode: "visit", reply: { en: "Send address and photos" } },
+    ],
+    faq: [{ match: ["no image"], reply: { en: "Steps: check cable" }, explain: { en: "Cause: usually input source" } }],
+  });
+  const handler = createHandler({ config, store, instant: true, log: () => {}, send: async (jid, text) => (sent.push(text), "id" + sent.length) });
+  const jid = "1@s.whatsapp.net";
+  const earlier = Date.now() - 3600_000;
+  store.recordInbound(jid, "hi", "A", earlier);
+  await handler({ jid, text: "2", id: "a", fromMe: false });
+  assert.equal(store.contact(jid).mode, "explain");
+  await handler({ jid, text: "projector no image", id: "b", fromMe: false });
+  assert.equal(sent.at(-1), "Cause: usually input source");
+  await handler({ jid, text: "1", id: "c", fromMe: false });
+  await handler({ jid, text: "projector no image", id: "d", fromMe: false });
+  assert.equal(sent.at(-1), "Steps: check cable");
+  await handler({ jid, text: "3", id: "e", fromMe: false });
+  const r = await handler({ jid, text: "12 Jalan Example, photos attached", id: "f", fromMe: false });
+  assert.equal(r.decision.reason, "visit_details");
+  assert.equal(sent.at(-1), config.texts.visit_received.en);
+  assert.equal(store.waitingForHuman()[0].mode, "visit");
+  store.close();
 });

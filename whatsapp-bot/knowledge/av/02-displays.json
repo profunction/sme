@@ -1,0 +1,752 @@
+[
+  {
+    "id": "disp-turns-off-by-itself",
+    "title": {
+      "zh": "显示屏自己关机或自己开机",
+      "en": "Display turns off or on by itself"
+    },
+    "match": [
+      "自己关机",
+      "自己关掉",
+      "自动关掉",
+      "自己开机",
+      "自己熄掉",
+      "半夜自己开",
+      "off by itself",
+      "on by itself",
+      "keeps turning off",
+      "auto power off",
+      "sleep timer",
+      "auto off itself",
+      "shuts off randomly"
+    ],
+    "reply": {
+      "zh": "显示屏自己关机或自己开机：\n1) 遥控器按 Menu，进入「设置 / 常规 / 时间」，把「睡眠定时 Sleep Timer」和「定时关机 Off Timer」关掉。\n2) 在「节能 / Eco / Power」里关掉「无操作自动关机 Auto Power Off」，很多机型默认几小时没按遥控器就关机。\n3) 找到「无信号关机 No Signal Power Off」，会议室可关闭或把时间调长。\n4) 自己开机的：关掉「定时开机 On Timer」，再把 HDMI-CEC 关掉（名称因品牌而异，如 Anynet+、SimpLink、Bravia Sync）。\n5) 把遥控器电池取出一天，排除按键卡住。\n6) 机身很烫、有焦味或关机时啪一声的，关掉墙上电源停止使用，需要技术员检查。",
+      "en": "Display turns off or on by itself:\n1) Press Menu on the remote, open Settings / General / Time and switch off Sleep Timer and Off Timer.\n2) Under Eco / Energy Saving / Power, switch off Auto Power Off. Many models switch off after a few hours with no remote button pressed.\n3) Find No Signal Power Off (or Auto Standby). In a meeting room, turn it off or set a longer time.\n4) If it turns on by itself: switch off On Timer, then switch off HDMI-CEC (the name varies by brand, e.g. Anynet+, SimpLink, Bravia Sync).\n5) Take the batteries out of the remote for a day to rule out a stuck button.\n6) If the display is very hot, smells burnt or makes a loud click when it goes off, switch it off at the wall, stop using it and have a technician check it."
+    },
+    "explain": {
+      "zh": "多数情况是设置问题，不是坏了：\n• 睡眠定时、无操作关机、无信号关机这三个节能功能最常见。\n• HDMI-CEC 会让电脑、机顶盒或会议系统替你开关显示屏。\n• 有中控系统的会议室，可能设了每天定时关机，这是正常的。\n• 恢复出厂设置或系统更新后，这些功能会重新打开。\n用户自己改菜单就能解决。如果开机几分钟就关、反复自己重启、机身过热或有异味，多半是电源板或散热问题，需要技术员，不要继续反复开机。",
+      "en": "In most cases this is a setting, not a breakdown:\n• Sleep Timer, Auto Power Off (no remote activity) and No Signal Power Off are the three usual energy-saving causes.\n• HDMI-CEC lets a laptop, set-top box or meeting system switch the display on and off for you.\n• In rooms with a control system, a daily shut-down schedule may be programmed; that is normal.\n• A factory reset or software update can switch these features back on.\nYou can fix it yourself in the menu. If it goes off within minutes of starting, keeps restarting, runs very hot or smells, it is usually a power board or cooling problem and needs a technician; do not keep switching it on."
+    }
+  },
+  {
+    "id": "disp-cec-auto-input-wake",
+    "title": {
+      "zh": "自己跳输入源或一插电脑就开机",
+      "en": "Display switches input or wakes by itself (HDMI-CEC)"
+    },
+    "match": [
+      "自己跳输入",
+      "自动切换输入",
+      "输入自己换",
+      "一插就开机",
+      "自己跳去别的",
+      "输入源乱跳",
+      "cec",
+      "auto source",
+      "input changes by itself",
+      "switches input itself",
+      "auto input switch",
+      "anynet",
+      "input keeps jumping"
+    ],
+    "reply": {
+      "zh": "显示屏自己跳输入源、一插电脑就开机，或该唤醒时不醒：\n1) 这通常是 HDMI-CEC 或「自动切换输入 Auto Source」在起作用，先确认是否每次都在插线或开某台设备时发生。\n2) 不想要自动动作：Menu →「设置 / 常规 / 外部设备」，关掉 HDMI-CEC（Anynet+、SimpLink、Bravia Sync 等）和「Auto Source / Auto Input Switch」。\n3) 想要插线自动开机却不醒：把上面两项打开，并在节能菜单里把待机模式改成「正常 / 快速启动」而不是「最省电 / Eco 待机」。\n4) 电脑休眠后显示屏不亮：动一下鼠标，再把线拔出等 10 秒重插。\n5) 一直跳到没人用的输入源：把那个接口上不用的设备关机，或拔掉它的 HDMI 线。",
+      "en": "Display switches input by itself, turns on when a laptop is plugged in, or does not wake when it should:\n1) This is usually HDMI-CEC or Auto Source at work. Check whether it happens each time a cable is plugged in or a certain device is switched on.\n2) To stop the automatic behaviour: Menu > Settings / General / External Devices, switch off HDMI-CEC (Anynet+, SimpLink, Bravia Sync and so on) and Auto Source / Auto Input Switch.\n3) If you want it to wake when a laptop is plugged in but it does not: switch those two items on, and in the energy menu set standby to Normal / Quick Start instead of Eco / Low Power.\n4) Display stays dark after the laptop sleeps: move the mouse, then unplug the cable, wait 10 seconds and plug it back.\n5) It keeps jumping to an unused input: switch off the unused device on that port or unplug its HDMI cable."
+    },
+    "explain": {
+      "zh": "这是显示屏和设备之间的「联动」功能，不是故障：\n• HDMI-CEC 让设备通过 HDMI 线互相开机、关机和切换输入源。\n• Auto Source 会自动跳到刚出现信号的接口，机顶盒、无线投屏盒自己醒来时就会把画面抢走。\n• 很多商用显示屏在深度节能待机下收不到唤醒信号，所以插线不会亮。\n• 有中控面板的会议室，开关和切换应由中控负责，CEC 最好关闭，避免两边打架。\n用户可以自己在菜单里开关。若会议室是技术员统一设置的，改之前先拍下原来的设置。",
+      "en": "This is a linking feature between the display and your devices, not a fault:\n• HDMI-CEC lets devices switch each other on and off and change the input over the HDMI cable.\n• Auto Source jumps to whichever port just received a signal, so a set-top box or wireless presentation box that wakes up can steal the picture.\n• Many commercial displays cannot receive a wake-up signal in deep energy-saving standby, so plugging in a cable does nothing.\n• In rooms with a control panel, the control system should do the switching; CEC is best left off so the two do not fight.\nYou can switch these on or off yourself in the menu. If a technician set the room up, take a photo of the original settings before changing them."
+    }
+  },
+  {
+    "id": "disp-image-retention-burn-in",
+    "title": {
+      "zh": "屏幕留下残影或烧屏",
+      "en": "Image retention or burn-in (ghost of a logo)"
+    },
+    "match": [
+      "烧屏",
+      "残影",
+      "烙印",
+      "logo印子",
+      "留下影子",
+      "鬼影",
+      "burn-in",
+      "burn in",
+      "image retention",
+      "ghost image",
+      "logo stuck",
+      "image sticking",
+      "shadow of logo"
+    ],
+    "reply": {
+      "zh": "屏幕留下 logo 或上一个画面的影子（残影 / 烧屏）：\n1) 先让显示屏关机休息几小时，LCD 的暂时残影多数会自己变淡。\n2) 或全屏播放会动的内容（视频、全白画面）30 至 60 分钟。\n3) OLED 或部分商用屏有「面板刷新 Pixel Refresh / Panel Refresh / Screen Wipe」，一般在「画面 / 常规 / 面板保护」里，执行一次并等它跑完，中途不要断电。\n4) 把「背光 Backlight / 亮度」和对比度调低一些。\n5) 打开「像素移动 Pixel Shift」「屏幕保护」「Logo 调暗」等防残影功能。\n6) 广告内容不要让同一个 logo 或边框 24 小时停在同一位置，晚上排程关机。\n7) 几天后影子仍清楚可见，可能已是永久烧屏，需要技术员评估。",
+      "en": "A logo or the previous picture leaves a shadow on the screen (image retention / burn-in):\n1) Switch the display off and let it rest for a few hours. Temporary retention on LCD usually fades by itself.\n2) Or play moving full-screen content (a video or a plain white page) for 30 to 60 minutes.\n3) OLED and some commercial displays have Pixel Refresh / Panel Refresh / Screen Wipe, usually under Picture / General / Panel Care. Run it once and let it finish; do not cut the power halfway.\n4) Lower Backlight / Brightness and Contrast a little.\n5) Switch on Pixel Shift, Screen Saver or Logo Dimming.\n6) For signage, do not leave the same logo or frame in one spot 24 hours a day, and schedule the screen off at night.\n7) If the shadow is still clear after a few days, it may be permanent and needs a technician to assess."
+    },
+    "explain": {
+      "zh": "同一个静止画面显示太久，面板就会留下痕迹：\n• LCD 多数是暂时的「影像残留」，休息或播放动态内容后会消退。\n• OLED 和长期高亮度运行的屏容易变成永久烧屏，设置无法修复。\n• 最常见的来源是固定的 logo、菜单栏、新闻跑马灯、视频会议的固定版面。\n• 家用电视拿来 24 小时播广告特别容易中招，商用屏耐用得多。\n暂时残影用户自己就能处理，重点是预防。永久烧屏只能更换面板，需要技术员判断。",
+      "en": "When the same still picture stays on too long, the panel keeps a mark:\n• On LCD it is mostly temporary image retention that fades after rest or moving content.\n• OLED panels and screens run at high brightness for long hours can get permanent burn-in that no setting can repair.\n• Usual sources are a fixed logo, menu bar, news ticker or a fixed video-meeting layout.\n• A home TV used for 24-hour advertising is especially at risk; commercial displays cope much better.\nYou can handle temporary retention yourself, and prevention matters most. Permanent burn-in means replacing the panel, which a technician has to judge."
+    }
+  },
+  {
+    "id": "disp-lines-on-panel",
+    "title": {
+      "zh": "屏幕出现竖线、横线或彩色带",
+      "en": "Vertical lines or a coloured band on the screen"
+    },
+    "match": [
+      "竖线",
+      "横线",
+      "有直线",
+      "彩色线",
+      "彩色条",
+      "屏幕有线",
+      "一条线",
+      "vertical line",
+      "vertical lines",
+      "horizontal line",
+      "horizontal lines",
+      "coloured line",
+      "colored line",
+      "lines across",
+      "电视有竖线",
+      "电视竖线",
+      "电视横线",
+      "屏幕竖线",
+      "屏幕横线",
+      "显示屏竖线",
+      "显示屏有线",
+      "lines on tv",
+      "lines on the tv",
+      "lines on display",
+      "lines on the display",
+      "tv has lines"
+    ],
+    "reply": {
+      "zh": "屏幕出现竖线、横线或一条彩色带：\n1) 按遥控器 Menu 叫出菜单：线也压在菜单上面，是面板本身的问题；菜单干净、线只在画面里，是信号或线材问题。\n2) 换一个输入源或换一台电脑试，看线还在不在。\n3) 把 HDMI 线两头拔出重插，可以的话换一条线。\n4) 关掉墙上电源 1 分钟再开。\n5) 看屏幕表面有没有撞击点或裂痕，不要用手按压或拍打屏幕。\n6) 在菜单打开的状态下拍一张全屏照片发给我们，方便判断。",
+      "en": "Vertical lines, horizontal lines or a coloured band on the screen:\n1) Press Menu on the remote. If the lines also run across the menu, the panel itself has a problem; if the menu is clean and the lines are only in the picture, it is the signal or cable.\n2) Switch to another input or try another laptop and see if the lines stay.\n3) Unplug and firmly re-plug both ends of the HDMI cable; swap the cable if you can.\n4) Switch off at the wall for 1 minute, then switch on again.\n5) Look for an impact mark or crack on the surface. Do not press or tap the screen.\n6) With the menu open, take a photo of the whole screen and send it to us so we can judge."
+    },
+    "explain": {
+      "zh": "关键是分清楚线来自信号还是面板：\n• 线只在某个输入源出现：线材松、线坏或电脑显卡输出问题，用户自己换线就能解决。\n• 线连菜单一起盖住、位置固定不动：面板或内部排线故障，常见于撞击、受潮或老化之后。\n• 一条细线有时会慢慢变多、变宽，早点报修比较好。\n• 整片彩色带或半边画面花掉，通常也是面板或驱动板问题。\n面板类故障用设置修不好，需要技术员；不影响安全，可以先继续用，但不要按压屏幕。",
+      "en": "The key is to tell whether the lines come from the signal or from the panel:\n• Lines on one input only: a loose or faulty cable, or the laptop's graphics output. Swapping the cable fixes it yourself.\n• Lines that cover the menu too and stay in a fixed place: a panel or internal ribbon fault, often after a knock, moisture or ageing.\n• A single thin line can slowly multiply or widen, so report it early.\n• A wide coloured band or half the picture scrambled is usually also the panel or its driver board.\nPanel faults cannot be fixed by settings and need a technician. It is not a safety risk, so you can keep using it meanwhile, but do not press on the screen."
+    }
+  },
+  {
+    "id": "disp-cracked-panel",
+    "title": {
+      "zh": "屏幕裂了或被撞坏",
+      "en": "Cracked or impact-damaged screen"
+    },
+    "match": [
+      "屏裂",
+      "裂了",
+      "裂痕",
+      "裂开",
+      "撞坏",
+      "打破了",
+      "黑色墨迹",
+      "cracked",
+      "cracked panel",
+      "panel broken",
+      "glass broken",
+      "got hit",
+      "ink blotch",
+      "crack line"
+    ],
+    "reply": {
+      "zh": "屏幕裂了或被撞坏：\n1) 立刻停止使用，关掉墙上电源开关。\n2) 不要触摸裂痕，不要按压，也不要用湿布擦。\n3) 有玻璃碎片的，让大家远离，不要徒手清理。\n4) 不要自己把显示屏从墙上或架子上拆下来。\n5) 在安全距离拍照：整台屏一张、裂痕近照一张，够得到的话再拍机身型号标签。\n6) 记下怎么发生的（被撞、被东西砸到、搬动时），连同照片一起发给我们。",
+      "en": "Screen is cracked or damaged by an impact:\n1) Stop using it at once and switch it off at the wall socket.\n2) Do not touch the crack, do not press on it and do not wipe it with a wet cloth.\n3) If there is broken glass, keep people away and do not clear it with bare hands.\n4) Do not try to take the display off the wall or stand yourself.\n5) Take photos from a safe distance: one of the whole display, one close-up of the crack, and the model label if you can reach it easily.\n6) Note how it happened (knocked, hit by an object, during moving) and send it to us with the photos."
+    },
+    "explain": {
+      "zh": "面板破裂属于硬件损坏，一定要技术员处理：\n• 液晶层裂开后会出现黑色墨迹状的斑块、彩色线条，而且会继续扩散。\n• 互动平板有时只是最外层的保护玻璃裂了，里面画面还正常，但玻璃可能掉落或割手，同样要停用。\n• 继续通电可能让损坏扩大，也有触电和玻璃伤人的风险。\n• 任何设置、重启或贴胶带都修不好裂痕。\n请不要自己搬动或拆卸，尤其是挂在墙上的大屏，保持断电，等技术员到场检查。",
+      "en": "A cracked panel is physical damage and must be handled by a technician:\n• Once the liquid crystal layer cracks you see black ink-like blotches and coloured lines, and they keep spreading.\n• On an interactive panel sometimes only the outer protective glass is cracked and the picture still looks fine, but the glass can fall or cut someone, so stop using it too.\n• Keeping it powered can make the damage worse and brings a risk of electric shock and injury from glass.\n• No setting, restart or tape will repair a crack.\nPlease do not move or dismount it yourself, especially a large wall-mounted display. Keep it switched off until a technician has inspected it on site."
+    }
+  },
+  {
+    "id": "disp-dark-patches-backlight",
+    "title": {
+      "zh": "画面有暗块或半边偏暗",
+      "en": "Dark patches, uneven backlight or half the screen darker"
+    },
+    "match": [
+      "暗块",
+      "半边暗",
+      "一半比较暗",
+      "亮度不均",
+      "背光",
+      "暗角",
+      "一边比较暗",
+      "dark patch",
+      "dark patches",
+      "uneven backlight",
+      "backlight",
+      "dark corner",
+      "one side darker",
+      "cloudy patches"
+    ],
+    "reply": {
+      "zh": "画面有暗块、亮度不均或半边偏暗：\n1) 显示一个全白画面（例如空白的 Word 文件），看暗的地方是固定在同一位置，还是跟着内容走。\n2) 按 Menu，把「节能 Eco / Energy Saving」「环境光感应 Light Sensor」「局部调光 Local Dimming」暂时关掉试试。\n3) 把「背光 Backlight」调高，或在「画面」里选「重置画面设置 Picture Reset」（拼接墙的屏不要重置）。\n4) 换一个输入源比较，排除是电脑或内容本身偏暗。\n5) 关掉墙上电源 1 分钟再开。\n6) 暗块位置固定不变的，拍一张全白画面的照片发给我们，这属于背光问题。",
+      "en": "Dark patches, uneven brightness or half the screen darker:\n1) Show a full white picture (for example a blank Word document) and see whether the dark area stays in the same place or moves with the content.\n2) Press Menu and temporarily switch off Eco / Energy Saving, Light Sensor and Local Dimming.\n3) Raise Backlight, or choose Picture Reset under Picture (do not reset a panel that is part of a video wall).\n4) Compare with another input to rule out a dark laptop or dark content.\n5) Switch off at the wall for 1 minute, then switch on again.\n6) If the dark area stays in a fixed place, take a photo of the white picture and send it to us; this is a backlight problem."
+    },
+    "explain": {
+      "zh": "LCD 屏幕靠后面一排排 LED 背光灯发亮，暗块多半和背光有关：\n• 节能或光感应功能会让整片画面变暗，这是设置，自己能调回来。\n• 固定位置的暗块、暗条或半边偏暗：部分背光灯条不亮了。\n• 出现一颗颗像手电筒照出来的亮点：背光的扩散透镜脱落。\n• 四角或边缘轻微偏暗是大尺寸面板的正常现象。\n背光故障用设置修不好，需要技术员。暂时可以继续用，把背光调低能减轻其余灯条的负担；如果整屏开始闪或亮一下就黑，就停止使用。",
+      "en": "An LCD screen is lit by rows of LED backlights behind it, so dark patches are usually backlight related:\n• Energy saving or the light sensor dims the whole picture; that is a setting you can change back.\n• A fixed dark patch, dark strip or one darker half: some of the backlight strips have stopped working.\n• Bright dots that look like small torch spots: the backlight diffuser lenses have come off.\n• Slightly darker corners or edges are normal on large panels.\nA backlight fault cannot be fixed by settings and needs a technician. You can keep using it for now, and lowering the backlight eases the load on the remaining strips. If the whole screen starts flashing or lights up then goes black, stop using it."
+    }
+  },
+  {
+    "id": "disp-setup-wizard-demo-mode",
+    "title": {
+      "zh": "出现设置向导、演示模式或语言错了",
+      "en": "Setup wizard, demo mode or wrong language on the display"
+    },
+    "match": [
+      "设置向导",
+      "演示模式",
+      "商店模式",
+      "展示模式",
+      "语言变了",
+      "看不懂语言",
+      "变成别的语言",
+      "demo mode",
+      "store mode",
+      "shop mode",
+      "setup wizard",
+      "wrong language",
+      "language changed",
+      "retail mode"
+    ],
+    "reply": {
+      "zh": "显示屏出现设置向导、演示模式，或语言变了：\n1) 语言错了：按 Menu 或齿轮键，进入「常规 / 系统 General / System」，找到 Language（常有地球图标），改回中文或 English。\n2) 出现设置向导：照步骤选语言和地区（Singapore / Malaysia）。\n3) 问使用环境时，一定选「家庭 / Home / Standard」，不要选「商店 / Store / Retail / Demo」。\n4) 只用来开会的，网络、账号登录和搜台都可以按「跳过 Skip」。\n5) 已经进了演示模式（画面自己播广告、横幅，或每隔几分钟把设置改回去）：在「常规 / 系统」里找「使用模式 Usage Mode / Store Mode / Demo Mode」，改成 Home 或关闭。\n6) 完成后按 Source 选回平时用的输入源。",
+      "en": "Display shows a setup wizard, demo mode or the wrong language:\n1) Wrong language: press Menu or the gear button, open General / System and find Language (often a globe icon); change it back to English or Chinese.\n2) Setup wizard: follow the steps, choosing your language and region (Singapore / Malaysia).\n3) When asked about the usage environment, always choose Home / Standard, not Store / Retail / Demo.\n4) If it is only used for meetings, you can press Skip for network, account sign-in and channel scan.\n5) Already in demo mode (it plays adverts or banners by itself, or resets your settings every few minutes): under General / System find Usage Mode / Store Mode / Demo Mode and set it to Home or Off.\n6) When done, press Source and choose the input you normally use."
+    },
+    "explain": {
+      "zh": "这通常表示显示屏被恢复出厂设置，或有人误按了重置：\n• 重置后第一次开机就会出现设置向导，语言回到默认。\n• 演示 / 商店模式是给卖场用的，会循环播放宣传画面、把亮度拉到最高，并定时还原你的设置。\n• 改模式时可能要 PIN，很多机型默认是 0000 或 1234，但因品牌而异。\n• 重置也会清掉原来的输入名称、CEC、画面模式和定时设置。\n普通会议室的屏，用户自己走完向导即可。拼接墙、广告机或接了中控系统的屏，重置后还需要技术员重新设定，不要自己乱试。",
+      "en": "This usually means the display was factory reset, or someone pressed reset by mistake:\n• After a reset the setup wizard appears at first start and the language returns to the default.\n• Demo / store mode is meant for shops: it loops promotional pictures, pushes brightness to maximum and restores your settings on a timer.\n• Changing the mode may ask for a PIN; on many models the default is 0000 or 1234, but it varies by brand.\n• A reset also wipes the input names, CEC, picture mode and timer settings.\nFor an ordinary meeting-room display you can finish the wizard yourself. A video wall, signage screen or a display linked to a control system needs a technician to set it up again after a reset; do not experiment."
+    }
+  },
+  {
+    "id": "disp-key-lock-hotel-mode",
+    "title": {
+      "zh": "显示屏被锁住或要输入 PIN",
+      "en": "Display locked: key lock, child lock, hotel mode or PIN"
+    },
+    "match": [
+      "童锁",
+      "按键锁",
+      "被锁住",
+      "锁住了",
+      "酒店模式",
+      "要输入pin",
+      "pin码",
+      "key lock",
+      "child lock",
+      "hotel mode",
+      "panel lock",
+      "asking for pin",
+      "locked out",
+      "remote lock"
+    ],
+    "reply": {
+      "zh": "显示屏被锁住：按键锁、童锁、酒店模式或要输入 PIN：\n1) 先看屏幕上出现的字：Key Lock / Child Lock / Panel Lock 表示机身按键被锁，改用遥控器操作。\n2) 用遥控器按 Menu →「系统 / 常规 / 安全」，把「童锁 Child Lock / 按键锁 Key Lock / Panel Button Lock」关掉。\n3) 反过来是遥控器被锁（IR Lock / Remote Lock）的，试试机身上的按键；这通常是安装时特意设的。\n4) 要求 PIN：先问公司 IT 或行政有没有记录；很多机型默认是 0000 或 1234。不要连续乱试很多次。\n5) 菜单变灰、音量调不上去、不能换输入源：多半是酒店模式 / 商用模式限制了功能。\n6) 把屏幕上的提示和机身型号标签拍照发给我们。",
+      "en": "Display is locked: key lock, child lock, hotel mode or it asks for a PIN:\n1) Read the message on screen first. Key Lock / Child Lock / Panel Lock means the buttons on the display are locked; use the remote instead.\n2) With the remote press Menu > System / General / Security and switch off Child Lock / Key Lock / Panel Button Lock.\n3) If it is the remote that is locked (IR Lock / Remote Lock), try the buttons on the display. This is usually set on purpose at installation.\n4) Asked for a PIN: check with your IT or admin team for a record first. Many models default to 0000 or 1234. Do not keep guessing many times.\n5) Menu greyed out, volume will not go higher, or the input cannot be changed: most likely hotel mode / commercial mode is limiting the functions.\n6) Take a photo of the on-screen message and the model label and send it to us."
+    },
+    "explain": {
+      "zh": "锁定功能是为了防止别人乱按，本身不是故障：\n• 公共区域和会议室的屏常会锁住机身按键或遥控器，避免设置被改。\n• 酒店模式 / 商用模式可以限制最大音量、固定开机输入源、隐藏菜单。\n• 有时是清洁时误触、小孩乱按，或恢复设置后锁被打开。\n• 解锁的按键组合和默认 PIN 每个品牌、每个型号都不同，网上的方法不一定适用。\n童锁和按键锁用户可以自己在菜单关掉。酒店模式或忘记 PIN 的情况需要技术员用专用方式解锁，不要反复猜密码。",
+      "en": "Lock features are there to stop people changing things; they are not a fault:\n• Displays in public areas and meeting rooms often have the buttons or the remote locked so settings stay put.\n• Hotel mode / commercial mode can limit maximum volume, fix the start-up input and hide menus.\n• Sometimes a lock is switched on by accident during cleaning, by a child, or after settings were restored.\n• The unlock key sequence and default PIN differ for every brand and model, so methods found online may not apply.\nYou can switch off child lock and key lock yourself in the menu. Hotel mode or a forgotten PIN needs a technician with the proper unlock method; do not keep guessing the PIN."
+    }
+  },
+  {
+    "id": "disp-wall-remote-set-id",
+    "title": {
+      "zh": "遥控器一按，整面拼接墙一起变",
+      "en": "One remote press changes every screen in the video wall"
+    },
+    "match": [
+      "全部一起变",
+      "一起关掉",
+      "控制全部屏",
+      "单独控制",
+      "只想调一台",
+      "屏幕id",
+      "set id",
+      "monitor id",
+      "display id",
+      "remote controls all",
+      "all screens change",
+      "all panels respond",
+      "control one panel"
+    ],
+    "reply": {
+      "zh": "遥控器一按，拼接墙的所有屏一起变：\n1) 这是正常的：每块屏都有遥控接收器，一个指令全部都会收到。先不要对着墙乱按 Source、Menu 或画面模式。\n2) 已经按乱了：同一个按键再按回去，让所有屏回到相同设置。\n3) 只想调其中一块：多数拼接屏的遥控器有「ID SET / Set ID / Monitor ID」键，按下后输入那块屏的编号，就只有它会反应。\n4) 屏的编号一般在 Menu →「设置 / 常规」的 Set ID / Monitor ID 里，或按 Info 键显示。\n5) 调完按「ID Clear / ID Off」或选 All，恢复全部一起控制。\n6) 某一块已经和别的不一样又调不回来：告诉我们是第几行第几列，并拍一张整面墙的照片。",
+      "en": "One remote press changes every screen in the video wall:\n1) This is normal: every panel has a remote sensor and they all receive the same command. Avoid pressing Source, Menu or Picture Mode in front of the wall.\n2) Already changed something: press the same button back so all panels return to the same setting.\n3) To adjust just one panel: on most video wall displays the remote has an ID SET / Set ID / Monitor ID button. Press it and enter that panel's number, and only that panel responds.\n4) The panel number is usually under Menu > Setup / General as Set ID / Monitor ID, or shown when you press Info.\n5) When finished, press ID Clear / ID Off or choose All to control every panel again.\n6) If one panel is now different and you cannot get it back, tell us its row and column and send a photo of the whole wall."
+    },
+    "explain": {
+      "zh": "拼接墙的屏型号相同、用同一种遥控码，所以会一起反应：\n• 安装时技术员给每块屏设了不同的 Set ID，用来单独控制。\n• 有些墙只装一个接收器，再串接到所有屏，这种就无法用遮挡的办法分开。\n• 日常开关和切换内容应该用中控面板、控制软件或墙上的按钮，而不是遥控器。\n• 误改了其中一块的画面模式或输入源，就会出现颜色不一致或某一块显示别的内容。\n用户能做的是把按键按回去，或用 ID 功能单独调。拼接和校色设置不要动，那部分需要技术员。",
+      "en": "Video wall panels are the same model and use the same remote codes, so they all react together:\n• At installation the technician gives each panel a different Set ID so it can be controlled alone.\n• Some walls have a single sensor looped to all panels, so they cannot be separated by blocking a sensor.\n• Daily on/off and content switching should be done from the control panel, control software or wall button, not the remote.\n• Changing the picture mode or input on one panel by mistake causes a colour mismatch or one panel showing something else.\nYou can press the button back or use the ID function to adjust one panel. Leave the tiling and colour calibration settings alone; those need a technician."
+    }
+  },
+  {
+    "id": "disp-wall-colour-mismatch",
+    "title": {
+      "zh": "拼接墙其中一块颜色或亮度不同",
+      "en": "One panel in the wall has a different colour or brightness"
+    },
+    "match": [
+      "颜色不一样",
+      "色差",
+      "亮度不一样",
+      "一块偏黄",
+      "一块偏蓝",
+      "颜色偏",
+      "一块比较暗",
+      "colour mismatch",
+      "color mismatch",
+      "different colour",
+      "different color",
+      "one panel darker",
+      "colour not uniform",
+      "one panel yellowish"
+    ],
+    "reply": {
+      "zh": "拼接墙或 LED 墙其中一块颜色、亮度不一样：\n1) 显示全白或全灰画面，正面拍一张整面墙的照片，确认是哪一块、偏什么颜色。\n2) 最近有人用过遥控器的：那一块的「画面模式 Picture Mode」「节能 Eco」「光感应」可能被改了，改成和其他屏一样。\n3) 不要对单独一块屏按「重置画面 Picture Reset」，那会清掉校色数据。\n4) LCD 拼接屏整块偏粉、偏绿：把这块屏的信号线两头插紧（够得到、不用爬高的情况下）。\n5) 把整面墙和处理器关机 1 分钟再开。\n6) 刚换过屏或 LED 模块之后出现的色差，需要技术员重新校色。",
+      "en": "One panel in the video wall or LED wall has a different colour or brightness:\n1) Show a full white or grey picture and take a photo of the whole wall from the front, to confirm which panel it is and what tint it has.\n2) If someone used the remote recently, that panel's Picture Mode, Eco or Light Sensor may have changed; set them the same as the other panels.\n3) Do not run Picture Reset on a single panel; it wipes the colour calibration.\n4) LCD video wall panel all pink or green: push in both ends of that panel's signal cable, only if you can reach it without climbing.\n5) Switch the whole wall and its processor off for 1 minute, then on again.\n6) A mismatch that appeared right after a panel or LED module was replaced needs a technician to recalibrate."
+    },
+    "explain": {
+      "zh": "几块屏拼在一起，眼睛对细微差别特别敏感：\n• 每块面板的背光和 LED 灯珠老化速度不同，用久了会慢慢出现差异。\n• 新换的屏或 LED 模块来自不同生产批次，不校正就会比旁边亮或偏色。\n• LED 墙每个模块都有自己的校正数据，换模块后要重新载入或校正。\n• 某一块的画面设置被遥控器改动，是最常见、也是唯一能自己修的原因。\n• 整块偏粉或偏绿常是信号线松动。\n除了把设置改回一致和插紧线材，其余都属于校色工作，需要技术员带仪器处理。不影响使用安全。",
+      "en": "When screens sit side by side, the eye picks up very small differences:\n• Backlights and LED lamps age at different speeds, so differences slowly appear over the years.\n• A replacement panel or LED module comes from a different production batch and looks brighter or tinted until it is corrected.\n• Every LED module has its own calibration data, which must be reloaded or redone after a module is changed.\n• Picture settings changed on one panel by the remote is the most common cause, and the only one you can fix yourself.\n• A whole panel turning pink or green is often a loose signal cable.\nApart from matching the settings and reseating cables, the rest is calibration work for a technician with a measuring instrument. It is not a safety issue."
+    }
+  },
+  {
+    "id": "disp-wall-tile-mode",
+    "title": {
+      "zh": "拼接墙没有拼成一个大画面",
+      "en": "Video wall not showing one big picture"
+    },
+    "match": [
+      "拼接模式",
+      "拼接错",
+      "每个屏一样",
+      "四个一样的画面",
+      "不是一个大画面",
+      "拼不起来",
+      "位置错乱",
+      "tile mode",
+      "video wall mode",
+      "each screen shows",
+      "not one big picture",
+      "split wrong",
+      "panels wrong order",
+      "matrix mode"
+    ],
+    "reply": {
+      "zh": "拼接墙没有拼成一个大画面（每块屏各显示完整画面，或位置错乱）：\n1) 有中控面板或控制软件的：重新选一次「全墙 / Full Wall / 大画面」的场景或预设。\n2) 把整面墙关机，机柜里的拼接处理器也关机，等 1 分钟，先开处理器再开屏。\n3) 没有处理器、靠屏幕自己拼接的：Menu →「设置 / 选项」→「拼接模式 Tile Mode / Video Wall」，确认是 On，行列数正确（例如 2x2）。\n4) 这个菜单会同时改到所有屏，不熟悉的话只看不改，拍照给我们。\n5) 画面块的位置错乱：拍一张整面墙的照片，标明哪一块显示错了。\n6) 不要自己去对调屏幕后面的线。",
+      "en": "Video wall is not showing one big picture (each screen shows the full picture, or the pieces are in the wrong place):\n1) If there is a control panel or control software, select the Full Wall / big picture scene or preset again.\n2) Switch off the whole wall and the video wall processor in the rack, wait 1 minute, then switch on the processor first and the screens after.\n3) No processor, the screens do the tiling themselves: Menu > Setup / Option > Tile Mode / Video Wall. Check it is On and the rows and columns are right (for example 2x2).\n4) That menu changes every screen at once. If you are not familiar with it, look but do not change, and send us a photo.\n5) Pieces in the wrong place: take a photo of the whole wall and mark which piece is wrong.\n6) Do not swap the cables behind the screens yourself."
+    },
+    "explain": {
+      "zh": "拼接墙要靠「拼接设置」把一个画面切成几块分给各屏：\n• 有的用独立的拼接处理器来切，有的用屏幕内置的 Tile Mode，每块屏要设定自己在第几行第几列。\n• 停电、恢复出厂设置或换了一块屏之后，这些设置会丢失，于是每块屏都显示完整画面。\n• 处理器的预设被切到「单屏 / 多窗口」模式也会这样。\n• 位置错乱通常是某块屏的位置编号错了，或信号线接到了别的输出口。\n重选预设和重启用户可以自己做。重新设定行列、位置和边框补偿需要技术员。",
+      "en": "A video wall relies on tiling settings to cut one picture into pieces for each screen:\n• Some walls use a separate video wall processor; others use the Tile Mode built into the screens, where each screen is told which row and column it sits in.\n• After a power cut, a factory reset or a replaced screen these settings can be lost, so every screen shows the full picture.\n• The same happens if the processor preset was switched to a single-screen or multi-window layout.\n• Pieces in the wrong place usually mean one screen has the wrong position number, or a signal cable is on the wrong output.\nYou can reselect the preset and restart the system yourself. Setting rows, positions and bezel compensation again needs a technician."
+    }
+  },
+  {
+    "id": "disp-signage-not-updating",
+    "title": {
+      "zh": "广告机内容不更新或显示离线",
+      "en": "Signage content not updating or player offline"
+    },
+    "match": [
+      "内容没更新",
+      "内容不更新",
+      "广告机离线",
+      "播放器离线",
+      "显示离线",
+      "还是旧内容",
+      "发布不了",
+      "player offline",
+      "content not updating",
+      "signage not updating",
+      "still old content",
+      "signage offline",
+      "cannot publish",
+      "cms"
+    ],
+    "reply": {
+      "zh": "广告机内容不更新或显示离线：\n1) 登录内容管理后台（CMS），看这台播放器的状态和「最后在线时间」。\n2) 到现场看播放器（屏后面的小盒子或屏幕内置）有没有通电，网线口的灯有没有闪，或 Wi-Fi 图标是否正常。\n3) 把播放器的电源关掉 30 秒再开（插头够得到、不用爬高的情况下），等 5 分钟。\n4) 同一个网络的其他设备也断线：重启路由器，或请 IT 查看；最近换过 Wi-Fi 密码或路由器的要重新连网。\n5) 后台再检查：内容有没有指派给正确的播放器 / 群组，排程日期有没有过期，是「已发布」而不只是「已保存」。\n6) 留意后台有没有授权到期或储存空间已满的提示。",
+      "en": "Digital signage content not updating or player shows offline:\n1) Log in to the content management system (CMS) and check this player's status and last seen time.\n2) On site, check the player (a small box behind the screen, or built into the screen) has power, and the network port lights are blinking or the Wi-Fi icon looks normal.\n3) Switch the player's power off for 30 seconds and on again (only if the plug is within reach without climbing), then wait 5 minutes.\n4) Other devices on the same network also offline: restart the router or ask IT. If the Wi-Fi password or router changed recently, the player must be reconnected.\n5) In the CMS check the content is assigned to the right player / group, the schedule dates have not expired, and it is Published, not just Saved.\n6) Look for a licence expiry or storage full notice in the CMS."
+    },
+    "explain": {
+      "zh": "广告机是靠网络向后台领取新内容的，断了线就一直播旧的：\n• 最常见是网络问题：Wi-Fi 密码改了、路由器换了、网线松了、公司防火墙挡住。\n• 播放器死机或被断电，后台就显示离线。\n• 内容其实没有真正发布，或指派到别的屏、排程日期不对。\n• 视频文件太大还在下载，或播放器储存空间满了下载不进去。\n• 软件授权或订阅到期，后台会停止推送。\n重启、检查网络和重新发布用户都能做。连续几天离线或重启后仍连不上，需要技术员检查播放器。",
+      "en": "A signage player collects new content from the CMS over the network; when the link is lost it keeps playing the old content:\n• Most often it is the network: Wi-Fi password changed, router replaced, loose network cable or the office firewall blocking it.\n• A player that has frozen or lost power shows as offline.\n• The content was never actually published, or was assigned to another screen, or the schedule dates are wrong.\n• A very large video is still downloading, or the player storage is full and cannot take it.\n• An expired software licence or subscription stops updates.\nRestarting, checking the network and republishing are things you can do. A player that stays offline for days or still cannot connect after a restart needs a technician."
+    }
+  },
+  {
+    "id": "disp-signage-after-power-cut",
+    "title": {
+      "zh": "停电后广告屏黑屏或停在主页",
+      "en": "Signage black or on home screen after a power cut"
+    },
+    "match": [
+      "不自动播放",
+      "没自动播放",
+      "不会自动播",
+      "停在主页",
+      "回到主画面",
+      "停电后广告",
+      "跳电后广告",
+      "not auto playing",
+      "does not auto play",
+      "auto play stopped",
+      "stuck on home screen",
+      "back to launcher",
+      "signage black",
+      "signage not playing"
+    ],
+    "reply": {
+      "zh": "停电或跳电之后，广告屏黑屏或停在主页：\n1) 屏幕在待机（只有小红灯）：用遥控器开机，然后在 Menu 里找「通电状态 Power On State / AC Power Recovery」，改成「开机 On」或「上次状态 Last」。\n2) 停在主页或桌面：手动打开广告播放 App，再到设置里把它设为「开机自动启动 Auto Start / Boot App」。\n3) 屏幕亮着但输入源不对：按 Source 选回播放器的接口，并把「开机输入源 Power On Source」固定在那里。\n4) 外接播放器盒子：看电源灯，没亮就按一下它的电源键。\n5) 等 5 分钟让它连网和下载内容，并核对屏上的时间有没有跑掉。\n6) 一开电总闸又跳的，保持关闭，需要技术员。",
+      "en": "After a power cut or trip, the signage screen is black or stuck on the home screen:\n1) Screen in standby (small red light only): switch it on with the remote, then in Menu find Power On State / AC Power Recovery and set it to On or Last State.\n2) Stuck on the home screen or desktop: open the signage app by hand, then in its settings turn on Auto Start / Boot App.\n3) Screen is on but on the wrong input: press Source, choose the player's port, and fix Power On Source / Start-up Input to that port.\n4) External player box: check its power light; if it is off, press its power button once.\n5) Wait 5 minutes for it to connect and download content, and check the clock on screen has not reset.\n6) If the breaker trips again when power is restored, leave it off; a technician is required."
+    },
+    "explain": {
+      "zh": "断电再来电之后，设备不一定会自己回到原来的状态：\n• 很多显示屏来电后默认停在待机，要改「通电状态」才会自动开机。\n• 播放 App 没有设成开机自动启动，就会停在 Android 主页。\n• 播放器盒子或小电脑要在内部设置「来电自动开机」，这项要技术员来设。\n• 断电会让没连网的设备时钟归零，排程因此不播。\n• 突然断电偶尔会损坏播放器的储存卡，表现为一直卡在开机画面。\n前几项用户可以自己设好，设定一次以后就不怕停电。卡在开机画面或跳闸的需要技术员。",
+      "en": "When power is lost and comes back, equipment does not always return to how it was:\n• Many displays stay in standby after power returns unless the Power On State setting is changed.\n• If the signage app is not set to start automatically, the screen stops at the Android home page.\n• A player box or mini PC needs an internal setting to start when power returns; a technician has to set that.\n• A power cut resets the clock on units with no network, so the schedule does not play.\n• A sudden cut can occasionally corrupt the player's storage card; it then hangs on the start-up logo.\nYou can set the first few items yourself, and once set a power cut is no longer a worry. A unit stuck on the start-up logo or a tripping breaker needs a technician."
+    }
+  },
+  {
+    "id": "disp-usb-media-not-playing",
+    "title": {
+      "zh": "U 盘的视频或图片播不出来",
+      "en": "USB video or pictures will not play on the display"
+    },
+    "match": [
+      "u盘",
+      "优盘",
+      "读不到usb",
+      "不支持的文件",
+      "格式不支持",
+      "视频播不了",
+      "插usb没反应",
+      "file not supported",
+      "unsupported file",
+      "usb not detected",
+      "usb video",
+      "thumb drive",
+      "pendrive",
+      "unsupported format"
+    ],
+    "reply": {
+      "zh": "U 盘里的视频或图片在显示屏上播不出来：\n1) U 盘格式用 FAT32 或 exFAT，多数显示屏读不到 NTFS；容量 32GB 以内的最稳。\n2) 视频用 MP4（H.264 视频 + AAC 声音）、1920x1080、30fps，兼容性最好；图片用 JPG 或 PNG。\n3) 从 PowerPoint、Canva 或剪辑软件重新导出成 MP4 1080p 再试。\n4) FAT32 单个文件不能超过 4GB，太大就缩短影片或改用 exFAT。\n5) 文件名用简单的英文和数字，放在 U 盘最外层，不要放进文件夹。\n6) 插在标有 USB / Media 的接口（不是 Service 口），按 Source 选 USB 或 Media Player。\n7) 要循环播放，在播放器菜单里打开「重复 Repeat」或「USB Auto Play」。",
+      "en": "Video or pictures on a USB drive will not play on the display:\n1) Format the drive as FAT32 or exFAT; most displays cannot read NTFS. Drives of 32GB or less are the most reliable.\n2) Use MP4 video (H.264 video + AAC audio), 1920x1080, 30fps for best compatibility; JPG or PNG for pictures.\n3) Export again as MP4 1080p from PowerPoint, Canva or your editing software and retry.\n4) On FAT32 one file cannot exceed 4GB; shorten the video or use exFAT.\n5) Use simple file names with English letters and numbers, placed at the top level of the drive, not inside folders.\n6) Plug into the port marked USB / Media (not Service), then press Source and choose USB or Media Player.\n7) For looping, switch on Repeat or USB Auto Play in the player menu."
+    },
+    "explain": {
+      "zh": "显示屏内置的播放器比电脑挑剔得多，电脑能播不代表屏能播：\n• 「不支持的文件」多半是编码问题，例如手机拍的 H.265 / HEVC、MOV，或 4K 60fps。\n• 有画面没声音、有声音没画面，也是编码不兼容。\n• 完全读不到 U 盘：格式是 NTFS、容量太大、U 盘耗电超过接口供电，或插错了接口。\n• 旧型号只支持到 1080p，放 4K 文件会卡顿或直接拒绝。\n• 直立屏播放时，文件本身也要做成直的。\n这类问题用户重新导出文件就能解决，不需要技术员；不同型号支持的格式可在说明书的「支持格式」表里查到。",
+      "en": "The player built into a display is far fussier than a computer; a file that plays on a laptop may not play on the screen:\n• File not supported is mostly a codec issue, such as H.265 / HEVC or MOV from a phone, or 4K at 60fps.\n• Picture with no sound, or sound with no picture, is also a codec mismatch.\n• Drive not detected at all: NTFS format, very large capacity, a drive that draws more power than the port gives, or the wrong port.\n• Older models only support up to 1080p and will stutter on or refuse a 4K file.\n• On a portrait screen the file itself must be made in portrait.\nRe-exporting the file fixes this yourself; no technician is needed. The supported formats for each model are listed in the Supported Formats table of its manual."
+    }
+  },
+  {
+    "id": "disp-signage-schedule-wrong-time",
+    "title": {
+      "zh": "广告排程在错误的时间播放",
+      "en": "Signage schedule plays at the wrong time"
+    },
+    "match": [
+      "排程不对",
+      "播错时间",
+      "时间表错",
+      "时钟不准",
+      "时区",
+      "提早播",
+      "定时不准",
+      "wrong schedule",
+      "schedule wrong",
+      "wrong time",
+      "clock wrong",
+      "timezone",
+      "time zone",
+      "plays too early"
+    ],
+    "reply": {
+      "zh": "广告排程在错误的时间播放，或定时开关机时间不对：\n1) 看播放器或显示屏自己的时钟：Menu →「设置 / 时间 Time / Date」。\n2) 时区选 Singapore / Kuala Lumpur（UTC+8），关掉「夏令时间 Daylight Saving」。\n3) 有连网的，打开「自动校时 Auto / Network Time」；没连网的要手动设，而且停电后要重设。\n4) 登录 CMS，检查账号和播放器的时区，以及排程是按播放器本地时间还是服务器时间。\n5) 核对排程本身：开始和结束日期、星期几、AM / PM 还是 24 小时制、有没有另一个优先级更高的播放列表盖住。\n6) 改完重新发布，并重启播放器一次。",
+      "en": "Signage schedule plays at the wrong time, or the on/off timer is off:\n1) Check the clock on the player or display itself: Menu > Settings > Time / Date.\n2) Set the time zone to Singapore / Kuala Lumpur (UTC+8) and switch off Daylight Saving.\n3) If it is online, switch on Auto / Network Time. If not, set the time by hand, and set it again after any power cut.\n4) Log in to the CMS and check the time zone of the account and the player, and whether schedules follow the player's local time or the server time.\n5) Check the schedule itself: start and end dates, days of the week, AM / PM or 24-hour format, and whether a higher-priority playlist is covering it.\n6) Publish again after the change and restart the player once."
+    },
+    "explain": {
+      "zh": "排程是照设备自己的时钟来执行的，时钟错了，播出时间就跟着错：\n• 差整整几个小时：时区设错，或开了夏令时间（新马没有夏令时间）。\n• 差几分钟到几十分钟：设备没连网，时钟自己慢慢走偏。\n• 停电后完全乱掉：时钟回到出厂日期，排程以为还没到时间。\n• 差 12 小时：AM 和 PM 设反了。\n• 内容对但屏自己提早关机：是显示屏的 On / Off Timer，不是排程的问题。\n这些都是设置，用户或 IT 可以自己改好。如果每次断电时钟都归零，可能是内部电池没电了，需要技术员。",
+      "en": "A schedule runs on the device's own clock, so a wrong clock means wrong playing times:\n• Out by whole hours: wrong time zone, or daylight saving is on (Singapore and Malaysia have none).\n• Out by minutes: the device is not online and its clock has drifted.\n• Completely wrong after a power cut: the clock went back to the factory date, so the schedule thinks it is not time yet.\n• Out by 12 hours: AM and PM are mixed up.\n• Content is right but the screen switches off early: that is the display's own On / Off Timer, not the schedule.\nThese are all settings that you or your IT team can correct. If the clock resets at every power cut, the internal battery may be flat and a technician is needed."
+    }
+  },
+  {
+    "id": "disp-portrait-content-sideways",
+    "title": {
+      "zh": "直立屏幕的内容是横躺的",
+      "en": "Portrait screen shows content sideways"
+    },
+    "match": [
+      "直屏",
+      "竖屏",
+      "内容横躺",
+      "画面横着",
+      "转90度",
+      "旋转画面",
+      "画面躺着",
+      "portrait mode",
+      "sideways",
+      "rotate 90",
+      "content sideways",
+      "portrait display",
+      "rotated wrong",
+      "rotate the content"
+    ],
+    "reply": {
+      "zh": "直立（竖屏）安装的屏幕，内容是横躺的：\n1) 先弄清楚内容从哪里来：屏幕内置播放器 / U 盘、外接广告播放器，还是电脑。\n2) 内置播放器：Menu →「设置 / 常规 / Signage」，找「旋转 Rotation / Portrait Mode」，选 90 或 270 度。注意「OSD Rotation」只转菜单，内容要另外设「Content Rotation」。\n3) 广告播放器 / CMS：把这台屏的方向设成 Portrait，并使用直式版面（1080x1920）。\n4) Windows 电脑：桌面按右键 →「显示设置」→「显示方向」选「纵向」或「纵向（翻转）」。\n5) U 盘内容：把文件本身做成直的 1080x1920。\n6) 上下颠倒的：把 90 改成 270（或反过来）。不要自己去转动屏幕。",
+      "en": "Portrait (upright) screen shows the content lying sideways:\n1) First find out where the content comes from: the screen's built-in player / USB, an external signage player, or a computer.\n2) Built-in player: Menu > Setup / General / Signage, find Rotation / Portrait Mode and choose 90 or 270 degrees. Note that OSD Rotation only turns the menu; the content needs Content Rotation separately.\n3) Signage player / CMS: set this screen's orientation to Portrait and use a portrait layout (1080x1920).\n4) Windows computer: right-click the desktop > Display settings > Display orientation > Portrait or Portrait (flipped).\n5) USB content: make the file itself in portrait, 1080x1920.\n6) Upside down: change 90 to 270 (or the other way). Do not turn the screen itself."
+    },
+    "explain": {
+      "zh": "屏幕被竖着装，但播放设备仍然以为它是横的：\n• 显示屏本身不知道自己被转了 90 度，要在屏、播放器或电脑其中一处设定旋转。\n• 很多屏的菜单旋转和内容旋转是两个分开的设置，只改一个就会一个正一个歪。\n• 外接输入（HDMI）的画面，多数屏不会帮你旋转，要在播放器或电脑那边转。\n• 恢复出厂设置、换播放器或 CMS 更新之后最容易跑掉。\n• 内容本身是横式的，转过来后会很小、留黑边，需要重做直式素材。\n这是设置问题，用户可以自己改。屏幕的安装方向不要自己动，需要改方向请找技术员。",
+      "en": "The screen is mounted upright, but the playback device still thinks it is in landscape:\n• A display does not know it has been turned 90 degrees; rotation must be set on the screen, the player or the computer.\n• On many screens menu rotation and content rotation are two separate settings, so changing only one leaves one upright and one sideways.\n• Most screens will not rotate an external HDMI input for you; rotate it on the player or computer.\n• It most often goes wrong after a factory reset, a replaced player or a CMS update.\n• Landscape content turned upright looks small with black bars; it needs to be remade in portrait.\nThis is a setting you can change yourself. Do not change the physical mounting; ask a technician if the orientation must change."
+    }
+  },
+  {
+    "id": "disp-ifp-slow-storage-full",
+    "title": {
+      "zh": "互动平板很慢、卡住或储存已满",
+      "en": "Interactive panel slow, frozen or storage full"
+    },
+    "match": [
+      "白板很卡",
+      "平板很慢",
+      "大屏很卡",
+      "储存已满",
+      "空间不足",
+      "内存不足",
+      "会议平板卡",
+      "panel very slow",
+      "panel hang",
+      "panel frozen",
+      "storage full",
+      "whiteboard lag",
+      "not enough storage",
+      "keeps hanging"
+    ],
+    "reply": {
+      "zh": "互动平板（会议大屏 / 电子白板）很慢、卡住或提示储存已满：\n1) 重启：长按电源键 3 至 5 秒，选「重启 Restart」，不是只按一下进待机。\n2) 完全卡死：把机身的电源总开关关掉 30 秒再开。\n3) 按多任务键（方块图标），把后台 App 全部清除。\n4) 进「设置 / 储存 Storage」看剩余空间；在「文件 Files」里删掉旧的白板存档、录屏、截图和下载（重要的先拷到 U 盘或云端）。\n5) 卸载不用的 App；很多机型有「一键清理 / Memory Clean」可以用。\n6) 开 Zoom / Teams 或大文件时，改用内置电脑（OPS）或自己的手提电脑，不要用 Android 那一边。",
+      "en": "Interactive flat panel (meeting board / e-whiteboard) is slow, frozen or says storage is full:\n1) Restart it: hold the power button for 3 to 5 seconds and choose Restart, not a short press into standby.\n2) Completely frozen: switch the main power switch on the panel off for 30 seconds, then on.\n3) Tap the recent apps button (square icon) and clear all background apps.\n4) Open Settings / Storage to see free space. In Files, delete old whiteboard saves, recordings, screenshots and downloads (copy important ones to USB or cloud first).\n5) Uninstall apps you do not use. Many models have a One-key Clean / Memory Clean tool.\n6) For Zoom / Teams or large files, use the built-in PC (OPS) or your own laptop instead of the Android side."
+    },
+    "explain": {
+      "zh": "互动平板的 Android 系统像一台大手机，内存和储存都不大：\n• 天天只进待机、从不重启，后台程序越积越多就会变慢。\n• 每次开会保存的白板、录屏和截图会慢慢把储存塞满，满了连系统都会卡。\n• 同时开白板、浏览器和视频会议，超出它的能力。\n• 系统版本太旧，有些 App 更新后跑不动。\n• 机身过热时也会自动降速，留意通风口有没有被挡住。\n清理和重启用户自己就能做，建议每周重启一次。清理后仍然很慢、常常自己重启或卡在开机画面的，需要技术员检查。",
+      "en": "The Android system in an interactive panel is like a big phone, with limited memory and storage:\n• If it only ever goes to standby and is never restarted, background apps pile up and it slows down.\n• Whiteboards, recordings and screenshots saved at every meeting slowly fill the storage; when full, even the system lags.\n• Running the whiteboard, a browser and a video call together is more than it can handle.\n• An old system version may struggle after apps are updated.\n• It also slows down when hot, so check the vents are not blocked.\nCleaning up and restarting are things you can do; a weekly restart is a good habit. If it is still slow after cleaning, restarts by itself or hangs on the start-up logo, it needs a technician."
+    }
+  },
+  {
+    "id": "disp-ifp-ops-pc-not-starting",
+    "title": {
+      "zh": "互动平板内置电脑 OPS 开不了",
+      "en": "Interactive panel built-in PC (OPS) will not start"
+    },
+    "match": [
+      "内置电脑",
+      "ops开不了",
+      "进不了系统",
+      "ops黑屏",
+      "电脑模块",
+      "pc模块",
+      "ops没反应",
+      "ops",
+      "ops pc",
+      "built-in pc",
+      "windows not starting",
+      "pc module",
+      "slot-in pc",
+      "no windows"
+    ],
+    "reply": {
+      "zh": "互动平板的内置电脑（OPS）开不了或进不了 Windows：\n1) 按 Source 选「PC / OPS / Windows」。显示无信号，表示内置电脑没有开机。\n2) OPS 模块有自己的电源键（在平板侧边或背面的模块上），按一下，等 1 分钟看指示灯。\n3) 把平板的电源总开关关掉 1 分钟再开；平板没开，OPS 是没有电的。\n4) 出现「正在更新 / 正在准备自动修复」：耐心等，最长可能 30 分钟，中途不要断电。\n5) 停在登录画面、BitLocker 恢复密钥或蓝屏：这是 Windows 的问题，请找公司 IT。\n6) 不要在通电时拔出模块，也不要自己松开它的螺丝。模块完全没有灯的，需要技术员。",
+      "en": "Built-in PC (OPS) of the interactive panel will not start or will not reach Windows:\n1) Press Source and choose PC / OPS / Windows. If it shows no signal, the built-in PC is not switched on.\n2) The OPS module has its own power button (on the module at the side or back of the panel). Press it once and wait 1 minute for its light.\n3) Switch the panel's main power switch off for 1 minute, then on. The OPS gets no power when the panel is off.\n4) Working on updates or Preparing Automatic Repair: be patient, it can take up to 30 minutes; do not cut the power.\n5) Stuck at the sign-in screen, a BitLocker recovery key or a blue screen: that is a Windows matter for your IT team.\n6) Never pull the module out while powered and do not loosen its screws. A module with no lights at all needs a technician."
+    },
+    "explain": {
+      "zh": "OPS 是插在平板背后插槽里的一台小电脑，和平板本身是两套系统：\n• 平板的 Android 正常、只有 PC 输入源没画面，问题就在 OPS 这边。\n• 最常见是 OPS 没开机，或被设成关机而不是睡眠。\n• Windows 更新、硬盘满了或系统损坏，会卡在转圈或修复画面。\n• 搬动或震动后模块没有插紧，会完全不通电。\n• 模块本身的风扇、电源或硬盘故障。\n开机、等更新这些用户可以自己处理；登录和 Windows 问题归公司 IT；模块松动、无灯或反复自动修复的，需要技术员，不要自己拆。",
+      "en": "The OPS is a small computer slotted into the back of the panel; it is a separate system from the panel itself:\n• If the panel's Android side works and only the PC input is blank, the problem is on the OPS side.\n• Most often the OPS is simply off, or set to shut down instead of sleep.\n• A Windows update, a full drive or a damaged system leaves it on a spinning circle or repair screen.\n• After moving or vibration the module may not be seated fully and gets no power at all.\n• The module's own fan, power or drive can fail.\nSwitching it on and waiting for updates are things you can do; sign-in and Windows problems go to your IT team; a loose module, no lights or repeated automatic repair needs a technician. Do not remove it yourself."
+    }
+  },
+  {
+    "id": "disp-ifp-pen-annotation",
+    "title": {
+      "zh": "互动平板的笔写不出或批注关不掉",
+      "en": "Interactive panel pen not writing or annotation stuck"
+    },
+    "match": [
+      "笔写不出",
+      "写不出来",
+      "笔不能写",
+      "擦不掉",
+      "批注关不掉",
+      "手掌误触",
+      "笔没反应",
+      "pen not writing",
+      "pen cannot write",
+      "eraser not working",
+      "palm rejection",
+      "annotation stuck",
+      "cannot erase",
+      "stylus not working"
+    ],
+    "reply": {
+      "zh": "互动平板的笔写不出、擦不掉，或批注工具关不掉：\n1) 先用手指试写：手指也没反应的，是触控问题；接外接电脑时，检查平板到电脑的那条 USB 触控线。\n2) 确认已进入白板或批注模式，选的是「笔」而不是「选择 / 移动」工具，笔的颜色不是和背景一样。\n3) 用干的软布把屏幕四边的边框内侧擦干净，拿走贴在屏幕边上的贴纸、纸张；袖子和手掌贴着屏幕会被当成橡皮擦。\n4) 需要充电或装电池的主动笔：充电或换电池；普通笔请用原厂配的笔。\n5) 批注层关不掉：点浮动工具栏上的「退出 / X」，或从侧边工具栏关掉 Annotation。\n6) 工具栏完全不动：长按电源键选重启。",
+      "en": "Pen will not write or erase on the interactive panel, or the annotation tool will not close:\n1) Try a finger first. If a finger does nothing either, it is a touch problem; with an external computer, check the USB touch cable from the panel to the computer.\n2) Make sure you are in whiteboard or annotation mode with the Pen tool chosen, not Select / Move, and the pen colour differs from the background.\n3) Wipe the inner edge of the frame around the screen with a dry soft cloth and remove stickers or paper at the edges. A sleeve or palm on the screen is read as an eraser.\n4) Active pens that charge or take batteries: charge or replace the battery. Otherwise use the pen supplied with the panel.\n5) Annotation layer will not close: tap Exit / X on the floating toolbar, or switch Annotation off from the side toolbar.\n6) Toolbar completely stuck: hold the power button and choose Restart."
+    },
+    "explain": {
+      "zh": "多数互动平板靠屏幕四边的红外线感应来判断笔和手：\n• 边框内侧有灰尘、贴纸或东西挡住，就会断笔、写不出或自己乱画。\n• 接触面积大的东西（手掌、拳头、袖子）会被认作橡皮擦，这是功能不是故障，有的机型可在设置里关掉「手掌擦除」。\n• 批注层是盖在画面上的一层透明图层，没退出的话，底下的电脑画面点不动。\n• 外接电脑时，画面走 HDMI，触控和书写走另一条 USB 线，少了它就只能看不能写。\n• 主动笔没电或笔尖磨损。\n以上用户都能自己处理。清洁后仍有固定一块区域写不出的，需要技术员检查感应边框。",
+      "en": "Most interactive panels detect pens and fingers with infrared sensors around the four edges:\n• Dust, stickers or objects on the inner edge of the frame cause broken strokes, no writing or stray marks.\n• A large contact (palm, fist, sleeve) is treated as an eraser. That is a feature, not a fault; some models let you switch off palm erase in settings.\n• Annotation is a transparent layer on top of the picture; until you exit, the computer screen underneath cannot be clicked.\n• With an external computer the picture travels on HDMI and touch and writing on a separate USB cable; without it you can only look.\n• An active pen may have a flat battery or worn tip.\nYou can handle all of these yourself. If one fixed area still will not write after cleaning, a technician needs to check the sensor frame."
+    }
+  },
+  {
+    "id": "disp-led-brightness",
+    "title": {
+      "zh": "LED 大屏太亮刺眼或太暗",
+      "en": "LED wall too bright or too dim"
+    },
+    "match": [
+      "led太亮",
+      "大屏太亮",
+      "刺眼",
+      "led太暗",
+      "led亮度",
+      "晚上太亮",
+      "亮度排程",
+      "led too bright",
+      "wall too bright",
+      "too glaring",
+      "led brightness",
+      "brightness schedule",
+      "led too dim",
+      "very glaring"
+    ],
+    "reply": {
+      "zh": "LED 大屏太亮刺眼或太暗：\n1) LED 墙没有电视那种遥控器菜单，亮度是在视频处理器或控制软件上调的。\n2) 机柜里的处理器：转动前面板的旋钮或按「亮度 Brightness / BRT」来调。室内一般 20% 到 40% 左右就已经够亮。\n3) 用控制电脑的：打开 LED 控制软件，只拖动「亮度」滑杆，其他设置不要改。\n4) 想要白天亮、晚上暗：软件里通常有「亮度排程 / 自动亮度（光感应）」可以设定。\n5) 突然变得很暗或全黑：看处理器上的「黑屏 Black / Blackout」或「冻结 Freeze」键是不是被按了，再按一次解除。\n6) 调之前先记下原来的数值，方便改回去。",
+      "en": "LED wall is too bright and glaring, or too dim:\n1) An LED wall has no TV-style remote menu; brightness is set on the video processor or in the control software.\n2) Processor in the rack: turn the front knob or press Brightness / BRT to adjust. Indoors, around 20% to 40% is usually bright enough.\n3) With a control computer: open the LED control software and move only the Brightness slider; leave other settings alone.\n4) For bright by day and dim at night: the software usually has a Brightness Schedule or Auto Brightness (light sensor) option.\n5) Suddenly very dim or black: check whether the Black / Blackout or Freeze button on the processor was pressed; press it again to release.\n6) Note the original value before changing so you can go back."
+    },
+    "explain": {
+      "zh": "LED 墙的最高亮度是为大空间和强光设计的，室内全开会很刺眼：\n• 开到 100% 不但伤眼，镜头拍出来过曝，也更耗电、更热、灯珠老化更快。\n• 亮度调得太低时，暗部颜色会变差、层次变少，所以不是越低越好。\n• 换了处理器、停电或恢复设置后，亮度可能回到默认的最高值。\n• 光感应探头被挡住或被太阳直射，自动亮度会乱跳。\n• 户外屏在大太阳下开到最高仍看不清，是硬件亮度不够，设置解决不了。\n调亮度用户可以自己做。亮度排程、光感应和颜色调整建议由技术员设定一次。",
+      "en": "An LED wall's top brightness is designed for big spaces and strong light; at full power indoors it is glaring:\n• 100% strains the eyes, overexposes on camera, uses more power, runs hotter and ages the lamps faster.\n• Set too low, dark colours get worse and shading is lost, so lower is not always better.\n• After a processor change, power cut or reset the brightness may return to the default maximum.\n• If the light sensor is covered or in direct sun, auto brightness jumps around.\n• An outdoor screen that is still hard to read in strong sun at maximum has reached its hardware limit; settings cannot solve that.\nYou can adjust brightness yourself. Brightness schedules, the light sensor and colour adjustment are best set up once by a technician."
+    }
+  },
+  {
+    "id": "disp-led-moire-on-camera",
+    "title": {
+      "zh": "LED 墙在镜头里有条纹或水波纹",
+      "en": "LED wall shows stripes or moire on camera or Zoom"
+    },
+    "match": [
+      "摩尔纹",
+      "水波纹",
+      "拍照有条纹",
+      "镜头里有条纹",
+      "扫描线",
+      "拍出来会闪",
+      "手机拍有纹",
+      "moire",
+      "moiré",
+      "stripes on camera",
+      "scan lines",
+      "flicker on camera",
+      "wavy lines",
+      "rolling bars"
+    ],
+    "reply": {
+      "zh": "LED 墙在手机、摄影机或 Zoom 画面里有条纹、水波纹或滚动黑条：\n1) 先用肉眼看：眼睛看是正常的，就不是 LED 墙坏了。\n2) 弯弯的水波纹（摩尔纹）：把镜头离墙远一点、换个角度、稍微变焦，或让焦点对在人身上而不是墙上。\n3) 滚动的黑条或扫描线：把相机快门设成 1/50 或 1/60，帧率用 25 或 30；手机用专业模式固定快门。\n4) 视频会议摄像头：在摄像头设置里把「防闪烁 Anti-flicker」在 50Hz 和 60Hz 之间切换试试。\n5) LED 亮度调得很低时条纹会更明显，把亮度稍微调高一点再试。\n6) 经常要拍摄或直播的场地，需要技术员调整处理器的刷新率设置。",
+      "en": "LED wall shows stripes, wavy patterns or rolling dark bars on a phone, camera or Zoom:\n1) Look with your own eyes first. If it looks normal to the eye, the LED wall is not faulty.\n2) Wavy pattern (moire): move the camera further from the wall, change the angle, zoom slightly, or focus on the person rather than the wall.\n3) Rolling dark bars or scan lines: set the camera shutter to 1/50 or 1/60 and the frame rate to 25 or 30; on a phone use Pro mode to fix the shutter.\n4) Video-meeting camera: in the camera settings switch Anti-flicker between 50Hz and 60Hz and see which is better.\n5) Stripes are more visible when LED brightness is very low; raise the brightness a little and retry.\n6) Venues that film or live-stream often need a technician to adjust the processor refresh settings."
+    },
+    "explain": {
+      "zh": "这是镜头和 LED 墙「对不上拍子」，不是屏坏了：\n• 摩尔纹：LED 灯珠是一格一格排列的，镜头感光元件也是一格一格的，两种格子叠在一起就出现波纹，距离和角度一变就会改变或消失。\n• 扫描线 / 滚动黑条：LED 是高速一闪一闪地发光，相机快门和它不同步就会拍到暗带。\n• 点距越粗、离得越近、亮度越低，情况越明显。\n• 刷新率较低的旧款或租赁屏更容易出现。\n拍摄角度、距离和快门用户自己能调。若是摄影棚、直播间或常做线上活动，需要技术员把墙调成适合拍摄的模式，有些墙要更换硬件才能做到。",
+      "en": "The camera and the LED wall are out of step with each other; the wall is not broken:\n• Moire: LED lamps sit in a grid and the camera sensor is also a grid; two grids on top of each other make wavy patterns, which change or vanish with distance and angle.\n• Scan lines / rolling bars: LEDs flash very fast, and when the camera shutter is not in step it captures dark bands.\n• A coarser pixel pitch, a closer camera and lower brightness all make it more visible.\n• Older or rental walls with a lower refresh rate show it more.\nYou can adjust angle, distance and shutter yourself. For a studio, streaming room or frequent online events, a technician should set the wall up for camera use; some walls need hardware changes for that."
+    }
+  },
+  {
+    "id": "disp-dual-displays-different",
+    "title": {
+      "zh": "两台屏幕内容不同或一台黑屏",
+      "en": "Two displays show different content or one is black"
+    },
+    "match": [
+      "两个屏幕不一样",
+      "两边不一样",
+      "只有一边有",
+      "另一台黑的",
+      "复制模式",
+      "扩展模式",
+      "双屏",
+      "only one side",
+      "one side blank",
+      "second display blank",
+      "duplicate display",
+      "extend mode",
+      "dual display",
+      "both screens different"
+    ],
+    "reply": {
+      "zh": "会议室两台屏幕内容不一样，或其中一台是黑的：\n1) 手提电脑：按 Windows + P 选「复制 Duplicate」；Mac 在「系统设置 → 显示器」里选「镜像 Mirror」。选了「扩展」时，第二台只会显示空桌面。\n2) 有中控面板或切换器按钮的：把同一个信号源同时送到两台屏（选 All Displays，或 Display 1 和 Display 2 都选同一个来源）。\n3) 确认黑的那一台已经开机，输入源和平时一样。\n4) 把电脑的线拔出等 10 秒再插回；有中控的，按「系统关闭」等 1 分钟再开。\n5) 把电脑分辨率设成 1920x1080 再试，两台屏型号不同时最稳。\n6) 换任何电脑、任何来源那一台都是黑的：拍下屏上的提示发给我们。",
+      "en": "Two displays in the room show different content, or one is black:\n1) Laptop: press Windows + P and choose Duplicate; on a Mac go to System Settings > Displays and choose Mirror. In Extend mode the second display only shows an empty desktop.\n2) With a control panel or switcher buttons: send the same source to both displays (choose All Displays, or pick the same source for Display 1 and Display 2).\n3) Make sure the black display is switched on and on its usual input.\n4) Unplug the laptop cable, wait 10 seconds and plug it back. With a control system, press System Off, wait 1 minute, then switch on.\n5) Set the laptop resolution to 1920x1080 and retry; this is safest when the two displays are different models.\n6) One display stays black with every laptop and every source: take a photo of any message on it and send it to us."
+    },
+    "explain": {
+      "zh": "两台屏的画面是由电脑设置加上会议室的分配设备共同决定的：\n• 最常见是电脑在「扩展」模式，把两台屏当成两张桌面。\n• 用矩阵切换器的会议室，每台屏可以各选来源，有人改过路由后就会一边一个样。\n• 两台屏型号或分辨率不同，电脑输出的格式只有其中一台支持，另一台就黑屏。\n• 其中一台走长距离延长器或分配器，线材或设备出问题时只坏一边。\n电脑设置和中控选择用户自己就能改。固定一台永远黑、而且屏本身能开机的，多半是分配器、延长器或线路问题，需要技术员。",
+      "en": "What the two displays show is decided by the laptop setting plus the room's distribution equipment:\n• Most often the laptop is in Extend mode and treats the two displays as two desktops.\n• In rooms with a matrix switcher each display can take its own source; after someone changes the routing, each side shows something different.\n• If the displays differ in model or resolution, the laptop may send a format only one supports, and the other goes black.\n• If one display is fed through a long-distance extender or splitter, a cable or device fault affects that side only.\nYou can change the laptop setting and the control panel selection yourself. One display that is always black while it does power on usually points to the splitter, extender or cabling and needs a technician."
+    }
+  },
+  {
+    "id": "disp-speakers-no-sound-output",
+    "title": {
+      "zh": "有画面但显示屏喇叭没声音",
+      "en": "Picture fine but no sound from the display speakers"
+    },
+    "match": [
+      "喇叭没声音",
+      "有画面没声音",
+      "电视没声音",
+      "内置喇叭",
+      "声音输出",
+      "电视喇叭",
+      "picture but no sound",
+      "no sound from tv",
+      "tv speaker",
+      "internal speaker",
+      "sound output",
+      "hdmi arc",
+      "tv no sound"
+    ],
+    "reply": {
+      "zh": "画面正常，但显示屏喇叭没有声音：\n1) 用显示屏自己的遥控器把音量调高，确认没有按到静音 Mute。\n2) 按 Menu →「声音 Sound」→「声音输出 Sound Output / Speaker」，选「电视喇叭 TV Speaker / Internal」。如果设在「外部 / Audio System / ARC / Optical / 蓝牙」，内置喇叭是不会响的。\n3) 会议室本来用 soundbar 或天花喇叭的：输出应保持外部，改去检查 soundbar 或功放有没有开机、音量是否太小。\n4) 电脑端：点右下角喇叭图标，把输出设备选成这台显示屏（HDMI），Zoom / Teams 里的扬声器也要选它。\n5) 外接音响只有某些影片没声：把「数字输出格式 Digital Output」改成 PCM。\n6) 关掉墙上电源 1 分钟再开。",
+      "en": "Picture is fine but there is no sound from the display speakers:\n1) Turn the volume up with the display's own remote and make sure Mute is off.\n2) Press Menu > Sound > Sound Output / Speaker and choose TV Speaker / Internal. If it is set to External / Audio System / ARC / Optical / Bluetooth, the built-in speakers stay silent.\n3) Rooms that use a soundbar or ceiling speakers: leave the output on external, and check that the soundbar or amplifier is on and its volume is not too low.\n4) On the laptop: click the speaker icon and choose this display (HDMI) as the output device; choose it as the speaker in Zoom / Teams too.\n5) External speakers silent with some videos only: change Digital Output format to PCM.\n6) Switch off at the wall for 1 minute, then switch on again."
+    },
+    "explain": {
+      "zh": "画面和声音虽然走同一条 HDMI 线，但声音从哪里出来是另外设定的：\n• 显示屏的声音输出被改到 ARC / 光纤 / 蓝牙，内置喇叭就被关掉，这是最常见的原因。\n• 电脑把声音送到自己的喇叭或耳机，而不是 HDMI。\n• 接了 soundbar 或功放的会议室，真正出声的是那台设备，它关机或换了输入就没声。\n• 部分影片用 Dolby 等格式，旧音响解不了，改成 PCM 就有声。\n• 蓝牙曾经配对过耳机或音箱，显示屏会自动连过去。\n这些都是设置，用户可以自己改。所有来源、所有设置都没声，才可能是喇叭或主板问题，需要技术员。",
+      "en": "Picture and sound share one HDMI cable, but where the sound comes out is set separately:\n• The display's sound output was changed to ARC / optical / Bluetooth, which switches the built-in speakers off. This is the most common cause.\n• The laptop is sending sound to its own speakers or a headset instead of HDMI.\n• In a room with a soundbar or amplifier, that device makes the sound; if it is off or on another input there is silence.\n• Some videos use formats such as Dolby that older sound systems cannot decode; PCM fixes it.\n• If Bluetooth was once paired with a headset or speaker, the display may connect to it automatically.\nThese are all settings you can change yourself. Only if every source and every setting gives no sound is it likely a speaker or main board fault that needs a technician."
+    }
+  },
+  {
+    "id": "disp-hdcp-streaming-black",
+    "title": {
+      "zh": "播放串流影片黑屏或 HDCP 错误",
+      "en": "Black screen or HDCP error with streaming video"
+    },
+    "match": [
+      "版权保护",
+      "影片黑屏",
+      "串流黑屏",
+      "受保护的内容",
+      "播电影黑屏",
+      "hdcp错误",
+      "hdcp",
+      "hdcp error",
+      "netflix",
+      "streaming black screen",
+      "protected content",
+      "content protection",
+      "movie black screen"
+    ],
+    "reply": {
+      "zh": "播放 Netflix 等串流影片时黑屏，或出现 HDCP 错误：\n1) 先放一般内容（PowerPoint、桌面）：正常的话，是版权保护在挡，不是设备坏了。\n2) 重新握手：显示屏和播放设备都关机，HDMI 线两头拔出 10 秒再插，先开显示屏，再开播放设备。\n3) 暂时绕过中间的设备：把播放设备直接接到显示屏，不经过分配器、切换器、延长器或录制盒。\n4) 换显示屏上另一个 HDMI 接口，线用有认证的 High Speed HDMI 线。\n5) 把播放设备的输出分辨率从 4K 降到 1080p 再试。\n6) 在 Zoom / Teams 共享屏幕或用无线投屏播串流影片时黑屏，是平台的版权限制，改用 HDMI 线直接连接。",
+      "en": "Black screen or HDCP error when playing Netflix or other streaming video:\n1) Play normal content first (PowerPoint, desktop). If that is fine, copy protection is blocking the video; the equipment is not broken.\n2) Redo the handshake: switch off the display and the playback device, unplug both ends of the HDMI cable for 10 seconds, plug back, switch on the display first and then the playback device.\n3) Bypass devices in between for a test: connect the playback device straight to the display, not through a splitter, switcher, extender or recorder.\n4) Try another HDMI port on the display and use a certified High Speed HDMI cable.\n5) Lower the playback device's output from 4K to 1080p and retry.\n6) Black when streaming through Zoom / Teams screen share or wireless presentation is a platform copyright restriction; connect directly by HDMI cable instead."
+    },
+    "explain": {
+      "zh": "HDCP 是 HDMI 上的防拷贝保护，受保护的影片要求整条线路上的每一台设备都通过验证：\n• 中间只要有一台不支持（旧的分配器、延长器、录制盒、部分会议系统的采集口），画面就会变黑或出现提示，声音有时还在。\n• 4K 串流需要 HDCP 2.2，旧显示屏或旧设备只支持到 1.4。\n• 开机顺序不对或线材接触不良，会握手失败，重插就好。\n• 录屏、屏幕共享和无线投屏被串流平台故意挡掉，这不是故障。\n重插、直连和降分辨率用户自己能做。如果会议室系统一定要经过切换器或延长器，需要技术员检查并更换不支持 HDCP 的那一台。",
+      "en": "HDCP is the copy protection on HDMI; protected video requires every device along the path to pass a check:\n• If one device in between does not support it (an old splitter, extender, recorder or the capture input of some meeting systems), the picture goes black or shows a message, sometimes with sound still playing.\n• 4K streaming needs HDCP 2.2; older displays and devices only support 1.4.\n• A wrong power-on order or a poor cable contact makes the handshake fail; re-plugging fixes it.\n• Recording, screen sharing and wireless presentation are blocked on purpose by streaming platforms; that is not a fault.\nRe-plugging, connecting directly and lowering the resolution are things you can do. If the room system must pass through a switcher or extender, a technician needs to check the chain and replace the device that does not support HDCP."
+    }
+  }
+]

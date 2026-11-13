@@ -23,9 +23,33 @@ function buildMessages(history, text) {
   return merged;
 }
 
-function systemPrompt(ai, language) {
+const fill = (text, variables) => String(text || "").replace(/\{(company|email|phone|address|name)\}/g, (_, key) => variables?.[key] ?? "");
+
+// The model answers from the business facts plus the knowledge-base entries the
+// engine found for this message, so it stays inside what the company has written.
+export function systemPrompt(ai, { language, context = [], mode = null, variables = {} }) {
   const languageName = { zh: "Chinese", en: "English", ms: "Malay" }[language] || language;
-  return [ai.system_prompt, `Reply in ${languageName}.`, ai.facts ? `Business facts:\n${ai.facts}` : ""].filter(Boolean).join("\n\n");
+  const lang = (texts) => texts?.[language] ?? texts?.en ?? Object.values(texts || {})[0] ?? "";
+  const knowledge = context
+    .map((entry) => `### ${lang(entry.title)}\nQuick steps:\n${lang(entry.reply)}\nBackground:\n${lang(entry.explain)}`)
+    .join("\n\n");
+  const style =
+    mode === "explain"
+      ? "The customer wants to understand the cause: explain what is likely going on, how serious it is and whether they can handle it themselves."
+      : mode === "fix"
+        ? "The customer is in a hurry: give only the fastest safe steps, numbered, most likely fix first."
+        : "";
+  return [
+    fill(ai.system_prompt, variables),
+    `Reply in ${languageName}.`,
+    style,
+    ai.facts ? `Business facts:\n${fill(ai.facts, variables)}` : "",
+    knowledge
+      ? `Knowledge base entries that may be relevant. Prefer these over your own knowledge and do not contradict them:\n\n${knowledge}`
+      : "No knowledge base entry matched. Ask for the brand, model, exact symptom and a photo instead of guessing.",
+  ]
+    .filter(Boolean)
+    .join("\n\n");
 }
 
 async function ollama(ai, system, messages, signal) {
@@ -93,13 +117,13 @@ async function anthropic(ai, system, messages, signal) {
 
 const PROVIDERS = { ollama, openai_compatible: openaiCompatible, anthropic };
 
-export async function aiReply(ai, { history, text, language }, { timeoutMs = 25_000 } = {}) {
+export async function aiReply(ai, { history, text, language, context = [], mode = null, variables = {} }, { timeoutMs = 25_000 } = {}) {
   const provider = PROVIDERS[ai.provider];
   if (!provider) throw new Error(`Unknown AI provider ${ai.provider}`);
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    return await provider(ai, systemPrompt(ai, language), buildMessages(history, text), controller.signal);
+    return await provider(ai, systemPrompt(ai, { language, context, mode, variables }), buildMessages(history, text), controller.signal);
   } finally {
     clearTimeout(timer);
   }
