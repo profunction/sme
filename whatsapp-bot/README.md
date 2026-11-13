@@ -34,18 +34,21 @@
 
 所有数据存在你电脑的 `data/` 文件夹，不会上传到任何地方。
 
-## 可以点的选项是怎么做的
+## 选项怎么发
 
-WhatsApp 真正的"按钮"只开放给官方 Business API。在这种非官方连接上，按钮消息发不出去或对方看不到。所以这里用 WhatsApp 的**投票消息**来做：客人看到一个问题和几个选项，点一下就选好了。
+默认是**数字列表**：客人看到一条普通消息，回复数字就选好了，任何手机都能用。
 
-- 客人也可以直接回复选项的数字，或者干脆打字描述问题，三种方式都有效。
-- 如果程序读不到客人点了哪个（WhatsApp 对投票加密，个别情况会解不开），它会自动把同样的选项用数字列表再发一次。
-- 想完全不用投票，把 `config.json` 里的 `menu_style` 改成 `"text"`，所有选项都变成"请回复数字"的列表。
+也可以把 `config.json` 里的 `menu_style` 改成 `"poll"`，用 WhatsApp 投票消息让客人点选。注意：
+
+- WhatsApp 真正的按钮只开放给官方 Business API，这种连接方式只能用投票代替，客人点完会显示成"投票结果"。
+- 投票是加密的，有些号码程序读不到客人点了哪个。读不到时机器人会道歉，请客人改回复数字，并且之后自动全部改用数字列表，不会一直重复。
+- 想要真正的按钮，需要以后迁到官方 API。
+
+其他设置：
+
 - 主菜单在 `main_menu`，设备类别和每类列出的问题在 `categories`，每类最多 10 个问题。类别里的 `keywords` 是客人提到这个设备时会用的词。
 - `guided_steps` 设为 `false` 就回到一次发完全部步骤的方式。知识库条目里写 `"guided": false` 的（例如安全提示、检查清单）总是整段发出。
-- `notify.numbers` 填你或同事的 WhatsApp 号码（不能是机器人自己的号码）。客人选"其他"并描述情况、要求上门、标记紧急或要求人工时，机器人会把内容发到这些号码。
-
-投票点选的读取在真实 WhatsApp 上还没有验证过，第一次使用请用另一部手机完整点一遍。
+- `notify.numbers` 填你或同事的 WhatsApp 号码（不能是机器人自己的号码）。客人选"其他"并描述情况、要求上门、标记紧急、要求人工或排查后仍未解决时，机器人会把内容发到这些号码。
 
 ## 必须先知道的风险
 
@@ -154,7 +157,7 @@ npm start -- second
 |---|---|
 | `business` | 公司名、email、电话、地址。文字里的 `{company}` `{email}` `{phone}` `{address}` 会自动替换 |
 | `texts.greeting` | 问候语 |
-| `menu_style` | `"poll"` 可点选的选项，`"text"` 数字列表 |
+| `menu_style` | `"text"` 数字列表（默认），`"poll"` 投票点选 |
 | `main_menu` / `categories` | 主菜单选项、设备类别和每类的常见问题 |
 | `guided_steps` | 一步一步带着做（`true`）还是一次发完全部步骤（`false`） |
 | `follow_up` | 整段发出的答案后面是否问"这样解决了吗？" |
@@ -258,7 +261,7 @@ npm run check
 Zero-cost WhatsApp auto-reply bot with a local back office. It links to your own number with an 8-digit pairing code (WhatsApp Web multi-device protocol via the open-source Baileys library) and runs on your own Windows or Mac machine.
 
 - Guided troubleshooting: the customer taps a device, then a problem, and is walked through one step at a time ("how did that go?") with "why does this happen?" and "have a technician contact me" always available. When every step has failed the bot hands over with the steps already tried. Vague messages bring up that device's common problems; unrelated ones are passed to a person instead of guessed at.
-- Choices are sent as WhatsApp polls (real buttons need the official API). Typing a number or describing the problem also works, and an unreadable tap falls back to a numbered list. "Other" takes a free-text report and alerts the staff numbers in `notify.numbers`. Reading poll taps has not been verified against live WhatsApp.
+- Choices are sent as a numbered list by default. `menu_style: "poll"` uses WhatsApp polls instead (real buttons need the official API); if a tap cannot be decrypted the bot apologises, asks for the number and switches to numbered lists from then on. Typing a number or describing the problem also works, and an unreadable tap falls back to a numbered list. "Other" takes a free-text report and alerts the staff numbers in `notify.numbers`. Reading poll taps has not been verified against live WhatsApp.
 - Menu: fix it myself now, explain what is going on, send a technician, other, or talk to a person. Each of the 170 AV troubleshooting entries under `knowledge/av/` has a quick-steps answer and an explanation, in Chinese and English.
 - Rarity-weighted phrase matching, A/B/C suggestions when nothing matches exactly, and a configurable "email us or post in the group" footer on every answer.
 - Back office in Chinese or English with four pages: Chats (phone view plus separate individual and group lists), Broadcast, Customers, Knowledge base.

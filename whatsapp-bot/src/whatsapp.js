@@ -244,8 +244,9 @@ export async function connect({ config, authDir, status, onMessage, onGroupMessa
   });
 
   sock.ev.on("messages.upsert", async ({ messages, type }) => {
-    if (type !== "notify") return;
     for (const msg of messages) {
+      // Poll votes can arrive outside "notify"; everything else must be a fresh message.
+      if (type !== "notify" && !msg.message?.pollUpdateMessage) continue;
       try {
         const jid = msg.key?.remoteJid;
         if (!msg.message || !jid) continue;
@@ -255,11 +256,18 @@ export async function connect({ config, authDir, status, onMessage, onGroupMessa
           const pollId = vote.pollCreationMessageKey?.id;
           const poll = !msg.key.fromMe && onPollVote && getPoll && pollId ? getPoll(pollId) : null;
           if (!poll || isJidGroup(jid)) continue;
-          const mine = [sock.user?.id, sock.user?.lid].filter(Boolean).map((value) => jidNormalizedUser(value));
-          const theirs = [jid, msg.key.senderPn, msg.key.senderLid, msg.key.participant].filter(Boolean).map((value) => jidNormalizedUser(value));
+          // Try every form WhatsApp might have used: phone id or LID, with and without device suffix.
+          const forms = (values) => [...new Set(values.filter(Boolean).flatMap((value) => [jidNormalizedUser(value), value]))];
+          const me = state.creds.me || {};
+          const mine = forms([sock.user?.id, sock.user?.lid, me.id, me.lid, vote.pollCreationMessageKey?.participant]);
+          const theirs = forms([jid, msg.key.senderPn, msg.key.senderLid, msg.key.participant, msg.key.participantPn, msg.key.participantLid]);
           const index = readPollVote({ vote: vote.vote, pollId, secret: poll.secret, labels: poll.labels, creators: mine, voters: theirs });
           if (index === -1) continue; // vote withdrawn
-          await onPollVote({ jid: jidNormalizedUser(jid), phone: phoneNumberOf(msg.key), name: msg.pushName, pollId, index });
+          if (index === null) {
+            log(`读不到投票选项 / could not read a poll vote (secret: ${poll.secret ? "yes" : "no"}, creator ids: ${mine.length}, voter ids: ${theirs.length})`);
+          }
+          // Answer in the chat the poll was sent to, even if WhatsApp switched between phone id and LID.
+          await onPollVote({ jid: poll.jid, phone: phoneNumberOf(msg.key), name: msg.pushName, pollId, index });
           continue;
         }
         const text = extractText(msg.message);

@@ -12,7 +12,7 @@ import { startDemo } from "../src/demo.js";
 
 const NOW = Date.UTC(2026, 10, 10, 2, 30);
 const av = prepare(buildConfig("av", { number: "6591234567", company: "ACME AV", email: "help@acme.test", notify: "+65 9000 1234, 6591234567" }));
-const fast = { ...av, min_seconds_between_replies_per_contact: 0 };
+const fast = { ...av, menu_style: "poll", min_seconds_between_replies_per_contact: 0 };
 
 test("typed numbers and letters map onto the last prompt; 0 never does", () => {
   assert.equal(optionIndex("2", 5), 1);
@@ -29,7 +29,7 @@ test("typed numbers and letters map onto the last prompt; 0 never does", () => {
 test("AV template: staff number parsed, bot's own number dropped, config valid", () => {
   assert.deepEqual(av.notify.numbers, ["6590001234"]);
   assert.deepEqual(validate(av), []);
-  assert.equal(av.menu_style, "poll");
+  assert.equal(av.menu_style, "text", "numbered lists by default: they work on every phone");
   assert.equal(av.categories.length, 7);
   assert.equal(av.guided_steps, true);
   for (const entry of av.faq.filter((e) => e.id && e.guided !== false)) {
@@ -46,7 +46,7 @@ test("guided path: device menu, problem list, then one step at a time", () => {
   const menu = decide(av, { text: "hi there", contact: {}, now: NOW });
   assert.equal(menu.reason, "menu");
   assert.equal(menu.lead, "Hello, this is ACME AV technical support.");
-  assert.equal(menu.prompt.question, "What can we help you with today? Tap an option, or just type what is happening.");
+  assert.equal(menu.prompt.question, "What can we help you with today? Reply with a number, or just type what is happening.");
   assert.deepEqual(menu.pending.slice(0, 3), ["pick:cat:projector", "pick:cat:display", "pick:cat:audio"]);
   assert.deepEqual(menu.pending.slice(-3), ["pick:visit", "pick:other", "0"]);
   assert.ok(menu.prompt.options.length <= 12, "fits in one WhatsApp poll");
@@ -65,7 +65,7 @@ test("guided path: device menu, problem list, then one step at a time", () => {
   const first = decide(av, { text: "2", contact: { ...contact, pending: problems.pending }, now: NOW });
   assert.deepEqual([first.reason, first.entry, first.step], ["option_chosen", "core-mic-feedback", 1]);
   assert.equal(first.lead, "OK, let's take this one step at a time, starting with the most common cause. There are 6 steps.\n\nStep 1 of 6\nLower the mic or master volume a little; feedback stops immediately.");
-  assert.equal(first.prompt.question, "How did that go?");
+  assert.equal(first.prompt.question, "How did that go? Reply with a number:");
   assert.deepEqual(first.prompt.options.map((o) => o.label), ["That fixed it", "Not yet, next step", "Why does this happen?", "Have a technician contact me"]);
   assert.deepEqual(first.pending, ["pick:solved:core-mic-feedback:1", "pick:step:core-mic-feedback:2", "pick:why:core-mic-feedback:1", "pick:tech:core-mic-feedback:1"]);
   assert.ok(!first.lead.includes("email us"), "no contact footer between steps");
@@ -73,12 +73,12 @@ test("guided path: device menu, problem list, then one step at a time", () => {
   const second = decide(av, { text: "2", contact: { ...contact, pending: first.pending }, now: NOW });
   assert.deepEqual([second.reason, second.step], ["step", 2]);
   assert.match(second.lead, /^Step 2 of 6\nKeep the mic pointing away/);
-  assert.equal(second.prompt.question, "Any change after that step?", "the question is worded differently each time");
+  assert.equal(second.prompt.question, "Any change after that step? Reply with a number:", "the question is worded differently each time");
 
   const why = decide(av, { text: "3", contact: { ...contact, pending: second.pending }, now: NOW });
   assert.equal(why.reason, "why");
   assert.match(why.lead, /^Feedback is the mic picking up the speakers/);
-  assert.equal(why.prompt.question, "Shall we carry on?");
+  assert.equal(why.prompt.question, "Shall we carry on? Reply with a number:");
   assert.deepEqual(why.pending, ["pick:solved:core-mic-feedback:2", "pick:step:core-mic-feedback:3", "pick:tech:core-mic-feedback:2"]);
 
   const solved = decide(av, { text: "1", contact: { ...contact, pending: second.pending }, now: NOW });
@@ -107,7 +107,7 @@ test("typing a problem starts the same guided steps; guides and safety notices a
   assert.equal(safety.entry, "proj-burning-smell-smoke");
   assert.equal(safety.step, undefined, "a safety notice is never drip-fed");
   assert.match(safety.lead, /欢迎 email 我们（help@acme\.test），或在群组里留言/);
-  assert.equal(safety.prompt.question, "这样解决了吗？");
+  assert.equal(safety.prompt.question, "这样解决了吗？回复数字：");
   assert.equal(safety.pending[1], "pick:tech:proj-burning-smell-smoke:0");
   const person = decide(av, { text: "2", contact: { ...contact, pending: safety.pending }, now: NOW });
   assert.deepEqual([person.reason, person.handoff], ["tech_requested", true]);
@@ -122,7 +122,7 @@ test("a number keeps the customer's language; a new conversation ignores stale o
   const pending = ["pick:cat:projector", "pick:cat:display"];
   const zh = decide(av, { text: "1", contact: { lastInboundAt: NOW - 1000, language: "zh", pending }, now: NOW });
   assert.equal(zh.language, "zh");
-  assert.equal(zh.prompt.question, "明白。是下面哪一种情况？");
+  assert.equal(zh.prompt.question, "明白。是下面哪一种情况？回复数字就可以。");
   const en = decide(av, { text: "1", contact: { lastInboundAt: NOW - 1000, language: "en", pending }, now: NOW });
   assert.equal(en.prompt.options[0].label, "Projector shows no image");
   const stale = decide(av, { text: "1", contact: { lastInboundAt: NOW - 30 * 3600_000, language: "en", pending: ["pick:solved:core-no-sound:2"] }, now: NOW });
@@ -182,7 +182,7 @@ test("handler sends prompts as polls, walks the steps by taps, and alerts staff"
   await handler.select({ jid: C, phone: "6591112222", pollId: "p3", index: 0 });
   assert.deepEqual(out.map((m) => m.type), ["text", "poll"]);
   assert.match(out[0].text, /one step at a time.*There are 6 steps\.\n\nStep 1 of 6\nAmplifier \/ mixer \/ speakers powered on\?/s);
-  assert.equal(out[1].question, "How did that go?");
+  assert.equal(out[1].question, "How did that go? Reply with a number:");
 
   out.length = 0;
   await handler.select({ jid: C, phone: "6591112222", pollId: "p5", index: 1 });
@@ -234,20 +234,23 @@ test("an unreadable tap falls back to numbers, and numbers then work", async () 
   out.length = 0;
   const fallback = await handler.select({ jid: C, pollId: "p2", index: null });
   assert.equal(fallback.decision.reason, "prompt_fallback");
-  assert.match(out[0].text, /^Please reply with the number:\n1\) Projector\n/);
+  assert.match(out[0].text, /^Sorry, I could not see which option you tapped\. Please reply with the number instead:\n1\) Projector\n/);
   assert.equal(store.contact(C).pending.length, 10);
   out.length = 0;
-  await handler({ jid: C, phone: "6591112222", text: "8", name: "Sarah", id: "m2", fromMe: false });
+  await handler({ jid: C, phone: "6591112222", text: "3", name: "Sarah", id: "m2", fromMe: false });
+  assert.deepEqual(out.map((m) => m.type), ["text"], "after one unreadable tap, choices come as numbers, not polls");
+  assert.match(out[0].text, /Which of these is closest\? Just reply with the number\.\n1\) No sound\n/);
+  out.length = 0;
+  await handler({ jid: C, phone: "6591112222", text: "visit", name: "Sarah", id: "m3", fromMe: false });
   assert.equal(store.contact(C).mode, "visit");
-  assert.match(out[0].text, /^Sure, let me arrange that/);
   store.close();
 });
 
 test("text style and missing poll support both send one numbered message", async () => {
-  const { store, out, handler } = harness({ ...fast, menu_style: "text" });
+  const { store, out, handler } = harness({ ...av, min_seconds_between_replies_per_contact: 0 });
   await handler({ jid: C, phone: "6591112222", text: "hello", name: "Sarah", id: "m1", fromMe: false });
   assert.deepEqual(out.map((m) => m.type), ["text"]);
-  assert.match(out[0].text, /technical support\.\n\nWhat can we help you with today\?.*\n1\) Projector\n/);
+  assert.match(out[0].text, /technical support\.\n\nWhat can we help you with today\? Reply with a number.*\n1\) Projector\n/);
   await handler({ jid: C, phone: "6591112222", text: "9", name: "Sarah", id: "m2", fromMe: false });
   assert.equal(store.contact(C).mode, "other");
   store.close();

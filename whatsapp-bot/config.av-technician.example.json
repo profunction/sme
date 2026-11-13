@@ -37,7 +37,7 @@
   "min_seconds_between_replies_per_contact": 2,
   "mark_read": false,
   "dashboard_port": 8787,
-  "menu_style": "poll",
+  "menu_style": "text",
   "guided_steps": true,
   "follow_up": true,
   "knowledge": [
@@ -73,12 +73,12 @@
       "en": "Received, thank you. A technician will contact you to confirm the visit. Send any extra details or photos here."
     },
     "suggest": {
-      "zh": "您说的是下面哪一种情况？",
-      "en": "Which of these is closest to what you are seeing?"
+      "zh": "您说的是下面哪一种情况？回复数字就可以。",
+      "en": "Which of these is closest to what you are seeing? Just reply with the number."
     },
     "choose_issue": {
-      "zh": "明白。是下面哪一种情况？",
-      "en": "Got it. Which of these is closest to what you are seeing?"
+      "zh": "明白。是下面哪一种情况？回复数字就可以。",
+      "en": "Got it. Which of these is closest? Just reply with the number."
     },
     "option_none": {
       "zh": "都不像，我来描述一下",
@@ -107,12 +107,34 @@
     "contact_also": {
       "zh": "您也可以随时 email 我们（{email}），或在群组里留言。",
       "en": "You can also email us at {email} or post in the group at any time."
+    },
+    "step_question": [
+      {
+        "zh": "试了之后怎么样？回复数字：",
+        "en": "How did that go? Reply with a number:"
+      },
+      {
+        "zh": "这一步之后有变化吗？回复数字：",
+        "en": "Any change after that step? Reply with a number:"
+      },
+      {
+        "zh": "现在好了吗？回复数字：",
+        "en": "Is it working now? Reply with a number:"
+      }
+    ],
+    "why_question": {
+      "zh": "要继续往下排查吗？回复数字：",
+      "en": "Shall we carry on? Reply with a number:"
+    },
+    "follow_up": {
+      "zh": "这样解决了吗？回复数字：",
+      "en": "Did that solve it? Reply with a number:"
     }
   },
   "main_menu": {
     "question": {
-      "zh": "请问今天是哪方面需要帮忙？点一个选项，或者直接打字告诉我也可以。",
-      "en": "What can we help you with today? Tap an option, or just type what is happening."
+      "zh": "请问今天是哪方面需要帮忙？回复数字，或者直接打字告诉我也可以。",
+      "en": "What can we help you with today? Reply with a number, or just type what is happening."
     },
     "options": [
       {

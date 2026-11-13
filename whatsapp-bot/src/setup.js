@@ -41,6 +41,7 @@ export function buildConfig(templateKey, answers) {
   config.notify = { numbers: staff };
   if (config.phone_number.startsWith("65")) config.timezone = "Asia/Singapore";
   else if (config.phone_number.startsWith("60")) config.timezone = "Asia/Kuala_Lumpur";
+  if (answers.style === "poll" || answers.style === "text") config.menu_style = answers.style;
   if (answers.port) config.dashboard_port = Number(answers.port);
   return config;
 }

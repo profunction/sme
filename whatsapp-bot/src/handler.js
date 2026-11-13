@@ -27,6 +27,8 @@ const ALERTS = {
  */
 export function createHandler({ config, store, send, sendPoll = null, log, instant = false, ai = aiReply }) {
   const staff = new Set((config.notify?.numbers || []).map(String));
+  // Once a tap could not be read, polls are not trusted again until restart: numbers always work.
+  let pollsUnreadable = false;
   const delay = () => (instant ? 0 : randomDelay(config.reply_delay_ms));
 
   // Tell the team on WhatsApp that a customer needs a person.
@@ -48,7 +50,7 @@ export function createHandler({ config, store, send, sendPoll = null, log, insta
   async function deliver(jid, decision, body, raw) {
     const prompt = decision.prompt;
     const markRead = config.mark_read ? raw?.key : null;
-    if (prompt && config.menu_style === "poll" && sendPoll) {
+    if (prompt && config.menu_style === "poll" && sendPoll && !pollsUnreadable) {
       try {
         if (decision.lead) {
           const leadId = await send(jid, decision.lead, { delayMs: delay(), markRead });
@@ -141,11 +143,21 @@ export function createHandler({ config, store, send, sendPoll = null, log, insta
   // then the same choices are offered again as a numbered list.
   onMessage.select = async function select({ jid, phone = null, name = null, pollId, index }) {
     const poll = store.poll(pollId);
-    if (!poll || poll.jid !== jid) return null;
+    if (!poll || (jid && poll.jid !== jid)) return null;
+    jid = poll.jid;
     if (index === null || index === undefined || !poll.sends[index]) {
+      pollsUnreadable = true;
       const contact = store.contact(jid);
       const language = contact.language || config.default_language;
-      const question = pick({ zh: "请回复数字选择：", en: "Please reply with the number:", ms: "Sila balas dengan nombor:" }, language, config.default_language);
+      const question = pick(
+        {
+          zh: "不好意思，我这边看不到您点了哪一个。麻烦直接回复选项前面的数字：",
+          en: "Sorry, I could not see which option you tapped. Please reply with the number instead:",
+          ms: "Maaf, saya tidak nampak pilihan yang anda tekan. Sila balas dengan nombor:",
+        },
+        language,
+        config.default_language
+      );
       const body = renderPrompt({ question, options: poll.labels.map((label) => ({ label })) });
       const sentId = await send(jid, body, { delayMs: delay(), markRead: null });
       if (sentId) store.rememberSent(sentId);
