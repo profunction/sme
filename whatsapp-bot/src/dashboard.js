@@ -504,7 +504,7 @@ export function buildState({ status, store, config }) {
     demo: status.connection === "demo",
     stats: store.stats(),
     tiers,
-    knowledgeCount: config.faq.length,
+    knowledgeCount: config.faq.filter((entry) => entry.id).length,
     conversations: listContacts({ store, config }),
   };
 }
