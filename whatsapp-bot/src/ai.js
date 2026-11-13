@@ -35,15 +35,16 @@ async function ollama(ai, system, messages, signal) {
     headers: { "content-type": "application/json" },
     signal,
     body: JSON.stringify({
-      model: ai.model || "llama3.2:3b",
+      model: ai.model || "qwen3:4b",
       stream: false,
+      think: false, // Qwen3/DeepSeek-R1 style models: answer directly, no slow reasoning pass
       messages: [{ role: "system", content: system }, ...messages],
       options: { num_predict: ai.max_output_tokens },
     }),
   });
   if (!response.ok) throw new Error(`Ollama HTTP ${response.status}`);
   const data = await response.json();
-  return data?.message?.content?.trim() || "";
+  return (data?.message?.content || "").replace(/<think>[\s\S]*?<\/think>/g, "").trim();
 }
 
 async function openaiCompatible(ai, system, messages, signal) {

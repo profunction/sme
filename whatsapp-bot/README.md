@@ -71,10 +71,10 @@ npm start
 **免费本地 Ollama**（需要一台有 8GB 以上内存的电脑）：
 
 ```json
-"ai": { "enabled": true, "provider": "ollama", "model": "qwen2.5:7b", "base_url": "http://127.0.0.1:11434", "facts": "你的店名、价格、地址、规则……" }
+"ai": { "enabled": true, "provider": "ollama", "model": "qwen3:4b", "base_url": "http://127.0.0.1:11434", "facts": "你的店名、价格、地址、规则……" }
 ```
 
-先安装 [Ollama](https://ollama.com) 并执行 `ollama pull qwen2.5:7b`。中文回复 Qwen 比 Llama 好得多。
+先安装 [Ollama](https://ollama.com) 并执行 `ollama pull qwen3:4b`。中文回复 Qwen 比 Llama 好得多；程序会关闭 Qwen3 的思考模式，让回复更快。
 
 **DeepSeek**（便宜，按量付费）：
 

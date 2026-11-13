@@ -77,7 +77,7 @@
   "ai": {
     "enabled": false,
     "provider": "ollama",
-    "model": "llama3.2:3b",
+    "model": "qwen3:4b",
     "base_url": "http://127.0.0.1:11434",
     "api_key_env": "",
     "facts": "ABC Tuition Centre, Puchong. Primary RM120/month, secondary RM180/month. Mon-Sat 9:00-18:00. Subjects: Maths, Science, English, Chinese, Malay. Free first trial class.",
