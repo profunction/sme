@@ -2,6 +2,7 @@
 // engine answers. Use it to tune config.json or to show a shop owner how the bot behaves.
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { DEFAULTS, merge } from "./config.js";
 import { Store } from "./store.js";
 import { startDashboard } from "./dashboard.js";
@@ -85,7 +86,7 @@ function readBody(req) {
 }
 
 export async function startDemo({ configFile, port, store = new Store(":memory:") } = {}) {
-  const file = configFile ?? (fs.existsSync("config.json") ? "config.json" : path.join(path.dirname(new URL(import.meta.url).pathname), "..", "config.example.json"));
+  const file = configFile ?? (fs.existsSync("config.json") ? "config.json" : path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "config.example.json"));
   // Demo replies are instant, so the per-contact spacing guard would hide quick follow-ups.
   const config = merge(merge(DEFAULTS, JSON.parse(fs.readFileSync(file, "utf8"))), { min_seconds_between_replies_per_contact: 1 });
   const status = { connection: "demo", phone: config.phone_number, pairingCode: null, lastError: null, aiEnabled: config.ai.enabled, aiProvider: config.ai.provider };
@@ -131,7 +132,7 @@ export async function startDemo({ configFile, port, store = new Store(":memory:"
   return { server, store, config, handler };
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === new URL(import.meta.url).pathname) {
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   startDemo({ port: Number(process.env.PORT) || undefined }).catch((error) => {
     console.error(error.message);
     process.exit(1);
