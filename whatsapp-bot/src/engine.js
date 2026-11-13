@@ -358,6 +358,8 @@ export function decide(config, input) {
   const entryById = (id) => config.faq.find((entry) => entry.id === id);
   const option = (label, send) => ({ label: local(label), send });
   const otherOption = () => option(texts.option_other, "pick:other");
+  // Every set of choices, from the very first one, lets the customer ask for a person.
+  const techOption = () => option(texts.option_step_tech, "0");
 
   const fill = (template, values) => String(template).replace(/\{(n|total|title)\}/g, (_, key) => values[key] ?? "");
   const stepsOf = (rule) => (rule.id && rule.guided !== false ? parseSteps(pick(rule.reply, language, config.default_language, vars)) : []);
@@ -423,12 +425,12 @@ export function decide(config, input) {
     if (!entries.length) return null;
     return {
       question: t("choose_issue"),
-      options: [...entries.map((entry) => option(entry.title, `pick:entry:${entry.id}`)), option(texts.option_none, "pick:describe")],
+      options: [...entries.map((entry) => option(entry.title, `pick:entry:${entry.id}`)), option(texts.option_none, "pick:describe"), techOption()],
     };
   };
   const categoryPrompt = () => ({
     question: t("choose_category"),
-    options: [...config.categories.map((category) => option(category.title, `pick:cat:${category.id}`)), otherOption()],
+    options: [...config.categories.map((category) => option(category.title, `pick:cat:${category.id}`)), otherOption(), techOption()],
   });
 
   // ---- choices made by tapping an option or answering its number ----
@@ -530,7 +532,7 @@ export function decide(config, input) {
     return reply("suggest", {
       prompt: {
         question: t("suggest"),
-        options: [...offered.map((entry) => option(entry.title, `pick:entry:${entry.id}`)), option(texts.option_none, "pick:describe")],
+        options: [...offered.map((entry) => option(entry.title, `pick:entry:${entry.id}`)), option(texts.option_none, "pick:describe"), techOption()],
       },
     });
   }

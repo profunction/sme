@@ -59,9 +59,9 @@ test("search ranks related entries and feeds A/B/C suggestions", () => {
   assert.deepEqual(search(kb, "ok thanks"), []);
   const offer = decide(base, { text: "apple tv copy protection problem", contact: seen(), now: OPEN_TIME });
   assert.equal(offer.reason, "suggest");
-  assert.match(offer.text, /Which of these is your problem\?\n1\) HDCP error with Apple TV\n2\) None of these, let me describe/);
-  assert.deepEqual(offer.pending, ["pick:entry:hdcp", "pick:describe"]);
-  assert.deepEqual(offer.prompt.options.map((o) => o.label), ["HDCP error with Apple TV", "None of these, let me describe"]);
+  assert.match(offer.text, /Which of these is your problem\?\n1\) HDCP error with Apple TV\n2\) None of these, let me describe\n3\) Have a technician contact me/);
+  assert.deepEqual(offer.pending, ["pick:entry:hdcp", "pick:describe", "0"]);
+  assert.deepEqual(offer.prompt.options.map((o) => o.label), ["HDCP error with Apple TV", "None of these, let me describe", "Have a technician contact me"]);
   const chosen = decide(base, { text: "A", contact: seen({ pending: offer.pending }), now: OPEN_TIME });
   assert.equal(chosen.reason, "option_chosen");
   assert.equal(decide(base, { text: "1)", contact: seen({ pending: offer.pending }), now: OPEN_TIME }).entry, "hdcp");
@@ -125,7 +125,7 @@ test("handler applies tiers, remembers suggestions and gives the AI its knowledg
   const jid = "6591112222@s.whatsapp.net";
   store.recordInbound(jid, "earlier", "Ali", Date.now() - 3600_000);
   await handler({ jid, text: "apple tv copy protection problem", id: "b", fromMe: false });
-  assert.deepEqual(store.contact(jid).pending, ["pick:entry:hdcp", "pick:describe"]);
+  assert.deepEqual(store.contact(jid).pending, ["pick:entry:hdcp", "pick:describe", "0"]);
   await handler({ jid, text: "a", id: "c", fromMe: false });
   assert.ok(sent.at(-1).startsWith("Use another port"));
   assert.equal(store.contact(jid).pending, null, "suggestions are cleared after use");

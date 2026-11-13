@@ -55,8 +55,12 @@ test("guided path: device menu, problem list, then one step at a time", () => {
   const problems = decide(av, { text: "3", contact: { ...contact, pending: menu.pending }, now: NOW });
   assert.deepEqual([problems.reason, problems.lead], ["category", ""]);
   assert.equal(problems.prompt.options[1].label, "Microphone feedback or echo");
-  assert.equal(problems.pending.at(-1), "pick:describe");
-  assert.ok(problems.prompt.options.length <= 12);
+  assert.deepEqual(problems.pending.slice(-2), ["pick:describe", "0"]);
+  assert.equal(problems.prompt.options.at(-1).label, "Have a technician contact me");
+  assert.equal(problems.prompt.options.length, 12, "ten problems, none of these, and a technician: exactly what one poll holds");
+  for (const prompt of [menu.prompt, problems.prompt]) assert.equal(prompt.options.at(-1).label, "Have a technician contact me", "a person is one tap away from the first screen on");
+  const person = decide(av, { text: "12", contact: { ...contact, pending: problems.pending }, now: NOW });
+  assert.equal(person.handoff, true);
 
   const first = decide(av, { text: "2", contact: { ...contact, pending: problems.pending }, now: NOW });
   assert.deepEqual([first.reason, first.entry, first.step], ["option_chosen", "core-mic-feedback", 1]);
