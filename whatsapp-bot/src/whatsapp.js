@@ -52,7 +52,10 @@ export function formatPairingCode(code) {
  * @param {(event: {jid: string, text: string, name?: string, id: string, fromMe: boolean}) => Promise<void>} options.onMessage
  * @param {(line: string) => void} options.log
  */
-export async function connect({ config, authDir, status, onMessage, log, backoffMs = 2000 }) {
+export async function connect({ config, authDir, status, onMessage, log, backoffMs = 2000, handle = null }) {
+  // One handle survives reconnects; index.js keeps sending through it after WhatsApp
+  // forces a restart (status 515 right after pairing, or any network drop).
+  handle = handle || { sock: null, sendText: null };
   const logger = pino({ level: process.env.BAILEYS_LOG_LEVEL || "silent" });
   const { state, saveCreds } = await useMultiFileAuthState(authDir);
   let version;
@@ -73,8 +76,14 @@ export async function connect({ config, authDir, status, onMessage, log, backoff
     generateHighQualityLinkPreview: false,
   });
 
+  handle.sock = sock;
   let pairingRequested = false;
   let reconnectDelay = backoffMs;
+  const reconnect = (delay, nextBackoff) =>
+    setTimeout(
+      () => connect({ config, authDir, status, onMessage, log, backoffMs: nextBackoff, handle }).catch((e) => log(e.message)),
+      delay
+    );
 
   sock.ev.on("creds.update", saveCreds);
 
@@ -111,12 +120,16 @@ export async function connect({ config, authDir, status, onMessage, log, backoff
           log("配对码已过期或未被输入，10 秒后生成新的配对码。 / Pairing code expired or was not entered; a new code comes in 10s.");
         }
         fs.rmSync(authDir, { recursive: true, force: true });
-        setTimeout(() => connect({ config, authDir, status, onMessage, log, backoffMs: 10_000 }).catch((e) => log(e.message)), 10_000);
+        reconnect(10_000, 10_000);
+        return;
+      }
+      if (code === DisconnectReason.restartRequired) {
+        log("WhatsApp 要求重启连接（配对后正常现象），马上重连 / WhatsApp asked for a restart (normal after pairing); reconnecting");
+        reconnect(500, 2000);
         return;
       }
       log(`连接断开，${Math.round(reconnectDelay / 1000)} 秒后重连 / Reconnecting in ${Math.round(reconnectDelay / 1000)}s (${code})`);
-      const next = Math.min(reconnectDelay * 2, 60_000);
-      setTimeout(() => connect({ config, authDir, status, onMessage, log, backoffMs: next }).catch((e) => log(e.message)), reconnectDelay);
+      reconnect(reconnectDelay, Math.min(reconnectDelay * 2, 60_000));
     }
   });
 
@@ -129,16 +142,24 @@ export async function connect({ config, authDir, status, onMessage, log, backoff
         if (msg.message.protocolMessage || msg.message.reactionMessage) continue;
         const text = extractText(msg.message);
         if (!text) continue;
-        await onMessage({ jid: jidNormalizedUser(jid), text, name: msg.pushName, id: msg.key.id, fromMe: !!msg.key.fromMe, raw: msg });
+        await onMessage({
+          jid: jidNormalizedUser(jid),
+          phone: phoneNumberOf(msg.key),
+          text,
+          name: msg.pushName,
+          id: msg.key.id,
+          fromMe: !!msg.key.fromMe,
+          raw: msg,
+        });
       } catch (error) {
         log(`message handling failed: ${error.message}`);
       }
     }
   });
 
-  return {
-    sock,
-    async sendText(jid, text, { delayMs = 0, markRead = null } = {}) {
+  handle.sendText = async function sendText(jid, text, { delayMs = 0, markRead = null } = {}) {
+      const sock = handle.sock;
+      if (status.connection !== "open") throw new Error("WhatsApp is not connected right now");
       if (markRead) {
         try {
           await sock.readMessages([markRead]);
@@ -160,6 +181,13 @@ export async function connect({ config, authDir, status, onMessage, log, backoff
       }
       const sent = await sock.sendMessage(jid, { text });
       return sent?.key?.id;
-    },
   };
+  return handle;
+}
+
+// WhatsApp now addresses many chats by an anonymous LID instead of the phone number.
+// The real number travels alongside in sender_pn when the server shares it.
+export function phoneNumberOf(key) {
+  const candidate = key?.senderPn || key?.participantPn || (key?.remoteJid?.endsWith("@s.whatsapp.net") ? key.remoteJid : null);
+  return candidate ? jidNormalizedUser(candidate).split("@")[0] : null;
 }

@@ -29,7 +29,7 @@ const PAGE = `<!doctype html>
 <script>
 const fmt=t=>t?new Date(t).toLocaleString():"—";
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const phone=j=>esc((j||"").split("@")[0]);
+const phone=c=>esc(c.phone||(c.jid||"").split("@")[0]+((c.jid||"").endsWith("@lid")?" (LID)":""));
 async function refresh(){
   const r=await fetch("/api/state");const s=await r.json();
   const st=document.getElementById("status");
@@ -37,8 +37,8 @@ async function refresh(){
   st.innerHTML='<span class="pill '+cls+'">'+esc(s.status.connection||"starting")+'</span> 号码 / number: <b>'+esc(s.status.phone)+'</b>'+(s.status.lastError?' <span class="bad">'+esc(s.status.lastError)+'</span>':'')+(s.status.aiEnabled?' · AI: '+esc(s.status.aiProvider):' · AI 关闭 / AI off');
   document.getElementById("pairing").innerHTML=s.status.pairingCode?'<p>在手机 WhatsApp 输入配对码 / Enter this pairing code on your phone:</p><div class="code">'+esc(s.status.pairingCode)+'</div><p class="muted">已连接的设备 → 连接设备 → 改用电话号码连接<br>Linked devices → Link a device → Link with phone number instead</p>':'';
   document.getElementById("stats").innerHTML=[["收到 / Inbound",s.stats.inbound24h],["机器人回复 / Bot replies",s.stats.botReplies24h],["人工回复 / Human replies",s.stats.humanReplies24h],["联系人 / Contacts",s.stats.contacts]].map(([k,v])=>'<div class="stat"><span class="muted">'+k+'</span><b>'+v+'</b></div>').join("");
-  document.getElementById("waiting").innerHTML=s.waiting.length?'<table><tr><th>号码 / Number</th><th>名字 / Name</th><th>最后消息 / Last message</th></tr>'+s.waiting.map(w=>'<tr><td>'+phone(w.jid)+'</td><td>'+esc(w.name)+'</td><td>'+fmt(w.last_inbound_at)+'</td></tr>').join("")+'</table>':'没有人在等 / Nobody waiting';
-  document.getElementById("recent").innerHTML=s.conversations.length?'<table><tr><th>号码 / Number</th><th>名字 / Name</th><th>最后一条 / Last text</th><th>时间 / Time</th></tr>'+s.conversations.map(c=>'<tr><td>'+phone(c.jid)+'</td><td>'+esc(c.name)+'</td><td class="text">'+esc(c.last_text)+'</td><td>'+fmt(c.last_inbound_at)+'</td></tr>').join("")+'</table>':'还没有对话 / No conversations yet';
+  document.getElementById("waiting").innerHTML=s.waiting.length?'<table><tr><th>号码 / Number</th><th>名字 / Name</th><th>最后消息 / Last message</th></tr>'+s.waiting.map(w=>'<tr><td>'+phone(w)+'</td><td>'+esc(w.name)+'</td><td>'+fmt(w.last_inbound_at)+'</td></tr>').join("")+'</table>':'没有人在等 / Nobody waiting';
+  document.getElementById("recent").innerHTML=s.conversations.length?'<table><tr><th>号码 / Number</th><th>名字 / Name</th><th>最后一条 / Last text</th><th>时间 / Time</th></tr>'+s.conversations.map(c=>'<tr><td>'+phone(c)+'</td><td>'+esc(c.name)+'</td><td class="text">'+esc(c.last_text)+'</td><td>'+fmt(c.last_inbound_at)+'</td></tr>').join("")+'</table>':'还没有对话 / No conversations yet';
 }
 refresh();setInterval(refresh,8000);
 </script></body></html>`;

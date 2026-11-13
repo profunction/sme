@@ -11,7 +11,7 @@ import { aiReply } from "./ai.js";
  * @param {boolean} [deps.instant] skip human-like delays (demo mode)
  */
 export function createHandler({ config, store, send, log, instant = false }) {
-  return async function onMessage({ jid, text, name, id, fromMe, raw }) {
+  return async function onMessage({ jid, phone = null, text, name, id, fromMe, raw }) {
     const now = Date.now();
     if (fromMe) {
       if (store.wasSentByBot(id)) return null;
@@ -21,8 +21,8 @@ export function createHandler({ config, store, send, log, instant = false }) {
     }
     const contact = store.contact(jid);
     const decision = decide(config, { text, contact, now, repliesThisMinute: store.repliesSince(now - 60_000) });
-    store.recordInbound(jid, text, name, now);
-    log(`← ${jid.split("@")[0]} (${decision.language}, ${decision.reason}): ${text.slice(0, 80)}`);
+    store.recordInbound(jid, text, name, now, phone);
+    log(`← ${phone || jid.split("@")[0]} (${decision.language}, ${decision.reason}): ${text.slice(0, 80)}`);
     if (decision.action === "silent") return { decision, reply: null };
 
     let reply = decision.text;
@@ -44,7 +44,7 @@ export function createHandler({ config, store, send, log, instant = false }) {
     if (sentId) store.rememberSent(sentId);
     store.recordBotReply(jid, reply, decision.reason, decision.language);
     if (decision.handoff) store.silence(jid, now + config.handoff_minutes * 60_000);
-    log(`→ ${jid.split("@")[0]}: ${reply.slice(0, 80).replace(/\n/g, " ")}`);
+    log(`→ ${phone || jid.split("@")[0]}: ${reply.slice(0, 80).replace(/\n/g, " ")}`);
     return { decision, reply };
   };
 }

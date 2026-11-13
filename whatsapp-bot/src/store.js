@@ -16,7 +16,8 @@ export class Store {
         last_bot_outbound_at INTEGER,
         last_human_outbound_at INTEGER,
         language TEXT,
-        muted_until INTEGER
+        muted_until INTEGER,
+        phone TEXT
       );
       CREATE TABLE IF NOT EXISTS messages (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,6 +33,7 @@ export class Store {
     // Older databases predate the muted_until column.
     const columns = this.db.prepare("PRAGMA table_info(contacts)").all().map((c) => c.name);
     if (!columns.includes("muted_until")) this.db.exec("ALTER TABLE contacts ADD COLUMN muted_until INTEGER");
+    if (!columns.includes("phone")) this.db.exec("ALTER TABLE contacts ADD COLUMN phone TEXT");
   }
 
   contact(jid) {
@@ -45,18 +47,20 @@ export class Store {
           lastHumanOutboundAt: row.last_human_outbound_at,
           language: row.language,
           mutedUntil: row.muted_until,
+          phone: row.phone,
         }
-      : { jid, name: null, lastInboundAt: null, lastBotOutboundAt: null, lastHumanOutboundAt: null, language: null, mutedUntil: null };
+      : { jid, name: null, lastInboundAt: null, lastBotOutboundAt: null, lastHumanOutboundAt: null, language: null, mutedUntil: null, phone: null };
   }
 
-  recordInbound(jid, text, name, now = Date.now()) {
+  recordInbound(jid, text, name, now = Date.now(), phone = null) {
     this.db
       .prepare(
-        `INSERT INTO contacts(jid, name, last_inbound_at) VALUES(?, ?, ?)
+        `INSERT INTO contacts(jid, name, last_inbound_at, phone) VALUES(?, ?, ?, ?)
          ON CONFLICT(jid) DO UPDATE SET last_inbound_at = excluded.last_inbound_at,
-         name = COALESCE(excluded.name, contacts.name)`
+         name = COALESCE(excluded.name, contacts.name),
+         phone = COALESCE(excluded.phone, contacts.phone)`
       )
-      .run(jid, name ?? null, now);
+      .run(jid, name ?? null, now, phone ?? null);
     this.db.prepare("INSERT INTO messages(jid, direction, text, created_at) VALUES(?, 'in', ?, ?)").run(jid, text, now);
   }
 
@@ -116,7 +120,7 @@ export class Store {
   recentConversations(limit = 50) {
     return this.db
       .prepare(
-        `SELECT c.jid, c.name, c.last_inbound_at, c.last_bot_outbound_at, c.last_human_outbound_at,
+        `SELECT c.jid, c.name, c.phone, c.last_inbound_at, c.last_bot_outbound_at, c.last_human_outbound_at,
                 (SELECT text FROM messages m WHERE m.jid = c.jid ORDER BY created_at DESC LIMIT 1) AS last_text
          FROM contacts c ORDER BY COALESCE(c.last_inbound_at, 0) DESC LIMIT ?`
       )
@@ -127,7 +131,7 @@ export class Store {
   waitingForHuman(limit = 50) {
     return this.db
       .prepare(
-        `SELECT jid, name, last_inbound_at FROM contacts
+        `SELECT jid, name, phone, last_inbound_at FROM contacts
          WHERE last_inbound_at IS NOT NULL
            AND (last_human_outbound_at IS NULL OR last_human_outbound_at < last_inbound_at)
          ORDER BY last_inbound_at DESC LIMIT ?`

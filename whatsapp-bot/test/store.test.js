@@ -3,13 +3,14 @@ import assert from "node:assert/strict";
 import { Store } from "../src/store.js";
 import { buildMessages } from "../src/ai.js";
 import { DEFAULTS, merge, validate } from "../src/config.js";
-import { extractText, formatPairingCode, isCustomerChat } from "../src/whatsapp.js";
+import { extractText, formatPairingCode, isCustomerChat, phoneNumberOf } from "../src/whatsapp.js";
 
 test("store tracks contacts, replies, handoff and waiting list", () => {
   const store = new Store(":memory:");
   const jid = "60111@s.whatsapp.net";
-  store.recordInbound(jid, "hello", "Ali", 1000);
+  store.recordInbound(jid, "hello", "Ali", 1000, "60111");
   assert.equal(store.contact(jid).lastInboundAt, 1000);
+  assert.equal(store.contact(jid).phone, "60111");
   assert.equal(store.contact(jid).name, "Ali");
   assert.deepEqual(store.waitingForHuman().map((w) => w.jid), [jid]);
 
@@ -84,4 +85,7 @@ test("whatsapp helpers", () => {
   assert.equal(isCustomerChat("status@broadcast"), false);
   assert.equal(isCustomerChat("abc@newsletter"), false);
   assert.equal(formatPairingCode("ABCD1234"), "ABCD-1234");
+  assert.equal(phoneNumberOf({ remoteJid: "84121917329565@lid", senderPn: "6591234567:3@s.whatsapp.net" }), "6591234567");
+  assert.equal(phoneNumberOf({ remoteJid: "60111@s.whatsapp.net" }), "60111");
+  assert.equal(phoneNumberOf({ remoteJid: "84121917329565@lid" }), null);
 });
