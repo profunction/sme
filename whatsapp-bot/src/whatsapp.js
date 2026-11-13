@@ -85,7 +85,7 @@ export async function connect({ config, authDir, status, onMessage, log, backoff
       try {
         const code = await sock.requestPairingCode(config.phone_number);
         status.pairingCode = formatPairingCode(code);
-        log(`配对码 / Pairing code: ${status.pairingCode}`);
+        log(`配对码 / Pairing code: ${status.pairingCode}   （请在 1 分钟内输入 / enter within about 1 minute）`);
         log("手机 WhatsApp → 已连接的设备 → 连接设备 → 改用电话号码连接，输入上面的配对码。");
         log("Phone WhatsApp → Linked devices → Link a device → Link with phone number instead → enter the code.");
       } catch (error) {
@@ -105,9 +105,14 @@ export async function connect({ config, authDir, status, onMessage, log, backoff
       const code = lastDisconnect?.error?.output?.statusCode;
       status.lastError = `disconnected (${code ?? "unknown"})`;
       if (code === DisconnectReason.loggedOut) {
-        log("此设备已在手机上被登出。删除 auth 文件夹后重新启动并重新配对。 / Logged out from the phone. Removing auth and exiting; restart to pair again.");
+        if (state.creds.registered) {
+          log("此设备已在手机上被登出，正在重新开始配对。 / Logged out from the phone; starting a fresh pairing.");
+        } else {
+          log("配对码已过期或未被输入，10 秒后生成新的配对码。 / Pairing code expired or was not entered; a new code comes in 10s.");
+        }
         fs.rmSync(authDir, { recursive: true, force: true });
-        process.exit(2);
+        setTimeout(() => connect({ config, authDir, status, onMessage, log, backoffMs: 10_000 }).catch((e) => log(e.message)), 10_000);
+        return;
       }
       log(`连接断开，${Math.round(reconnectDelay / 1000)} 秒后重连 / Reconnecting in ${Math.round(reconnectDelay / 1000)}s (${code})`);
       const next = Math.min(reconnectDelay * 2, 60_000);
