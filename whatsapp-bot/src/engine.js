@@ -76,6 +76,9 @@ export function decide(config, input) {
   if (contact.lastHumanOutboundAt && now - contact.lastHumanOutboundAt < config.handoff_minutes * minute) {
     return { action: "silent", language, reason: "human_active", parts: [] };
   }
+  if (contact.mutedUntil && contact.mutedUntil > now) {
+    return { action: "silent", language, reason: "handoff_mute", parts: [] };
+  }
   if (contact.lastBotOutboundAt && now - contact.lastBotOutboundAt < config.min_seconds_between_replies_per_contact * 1000) {
     return { action: "silent", language, reason: "contact_rate_limit", parts: [] };
   }

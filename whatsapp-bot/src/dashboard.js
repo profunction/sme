@@ -43,8 +43,17 @@ async function refresh(){
 refresh();setInterval(refresh,8000);
 </script></body></html>`;
 
-export function startDashboard({ port, status, store, log }) {
-  const server = http.createServer((req, res) => {
+export function startDashboard({ port, status, store, log, extraRoutes = null }) {
+  const server = http.createServer(async (req, res) => {
+    if (extraRoutes) {
+      try {
+        if (await extraRoutes(req, res)) return;
+      } catch (error) {
+        res.writeHead(500, { "content-type": "application/json" });
+        res.end(JSON.stringify({ error: error.message }));
+        return;
+      }
+    }
     if (req.url === "/api/state") {
       res.writeHead(200, { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" });
       res.end(

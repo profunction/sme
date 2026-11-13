@@ -15,7 +15,8 @@ export class Store {
         last_inbound_at INTEGER,
         last_bot_outbound_at INTEGER,
         last_human_outbound_at INTEGER,
-        language TEXT
+        language TEXT,
+        muted_until INTEGER
       );
       CREATE TABLE IF NOT EXISTS messages (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,6 +29,9 @@ export class Store {
       CREATE INDEX IF NOT EXISTS messages_jid ON messages(jid, created_at);
       CREATE TABLE IF NOT EXISTS sent_ids (id TEXT PRIMARY KEY, created_at INTEGER NOT NULL);
     `);
+    // Older databases predate the muted_until column.
+    const columns = this.db.prepare("PRAGMA table_info(contacts)").all().map((c) => c.name);
+    if (!columns.includes("muted_until")) this.db.exec("ALTER TABLE contacts ADD COLUMN muted_until INTEGER");
   }
 
   contact(jid) {
@@ -40,8 +44,9 @@ export class Store {
           lastBotOutboundAt: row.last_bot_outbound_at,
           lastHumanOutboundAt: row.last_human_outbound_at,
           language: row.language,
+          mutedUntil: row.muted_until,
         }
-      : { jid, name: null, lastInboundAt: null, lastBotOutboundAt: null, lastHumanOutboundAt: null, language: null };
+      : { jid, name: null, lastInboundAt: null, lastBotOutboundAt: null, lastHumanOutboundAt: null, language: null, mutedUntil: null };
   }
 
   recordInbound(jid, text, name, now = Date.now()) {
@@ -77,14 +82,15 @@ export class Store {
     this.db.prepare("INSERT INTO messages(jid, direction, text, created_at) VALUES(?, 'human', ?, ?)").run(jid, text, now);
   }
 
-  // Mute the bot on this chat for handoff_minutes without logging a fake human message.
-  silence(jid, now = Date.now()) {
+  // Mute the bot on this chat until the given time. The customer stays on the
+  // waiting list because no human has replied yet.
+  silence(jid, until) {
     this.db
       .prepare(
-        `INSERT INTO contacts(jid, last_human_outbound_at) VALUES(?, ?)
-         ON CONFLICT(jid) DO UPDATE SET last_human_outbound_at = excluded.last_human_outbound_at`
+        `INSERT INTO contacts(jid, muted_until) VALUES(?, ?)
+         ON CONFLICT(jid) DO UPDATE SET muted_until = excluded.muted_until`
       )
-      .run(jid, now);
+      .run(jid, until);
   }
 
   rememberSent(id, now = Date.now()) {

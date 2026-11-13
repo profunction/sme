@@ -25,15 +25,17 @@ test("store tracks contacts, replies, handoff and waiting list", () => {
   assert.equal(store.wasSentByBot("ABC"), true);
   assert.equal(store.wasSentByBot("XYZ"), false);
 
-  store.silence(jid, 5000);
-  assert.equal(store.contact(jid).lastHumanOutboundAt, 5000);
+  store.recordInbound(jid, "0", "Ali", 4500);
+  store.silence(jid, 9000);
+  assert.equal(store.contact(jid).mutedUntil, 9000);
+  assert.deepEqual(store.waitingForHuman().map((w) => w.jid), [jid], "handoff keeps the customer on the waiting list");
 
   assert.deepEqual(
     store.history(jid, 10).map((m) => m.direction),
-    ["in", "bot", "human"]
+    ["in", "bot", "human", "in"]
   );
   assert.equal(store.stats().contacts, 1);
-  assert.equal(store.recentConversations()[0].last_text, "I will call you");
+  assert.equal(store.recentConversations()[0].last_text, "0");
   store.close();
 });
 

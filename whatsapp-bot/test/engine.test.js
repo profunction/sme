@@ -83,6 +83,13 @@ test("stays silent while the owner is replying", () => {
   assert.equal(later.action, "reply");
 });
 
+test("stays silent while a handoff mute is active", () => {
+  const d = decide(base, { text: "hello?", contact: { lastInboundAt: OPEN_TIME - 1000, mutedUntil: OPEN_TIME + 60_000 }, now: OPEN_TIME });
+  assert.deepEqual([d.action, d.reason], ["silent", "handoff_mute"]);
+  const expired = decide(base, { text: "1", contact: { lastInboundAt: OPEN_TIME - 1000, mutedUntil: OPEN_TIME - 1 }, now: OPEN_TIME });
+  assert.equal(expired.action, "reply");
+});
+
 test("rate limits per contact and globally", () => {
   const burst = decide(base, {
     text: "hi",
