@@ -74,6 +74,21 @@ export function startDashboard({ port, status, store, log, extraRoutes = null })
     res.writeHead(404);
     res.end();
   });
-  server.listen(port, "127.0.0.1", () => log(`后台 / Dashboard: http://127.0.0.1:${port}`));
+  let attempts = 0;
+  server.on("error", (error) => {
+    if (error.code === "EADDRINUSE" && attempts < 10) {
+      attempts += 1;
+      log(`端口 ${port} 被占用（另一个窗口还在运行？），改用 ${port + 1} / Port ${port} busy (another window still running?), trying ${port + 1}`);
+      port += 1;
+      setTimeout(() => server.listen(port, "127.0.0.1"), 200);
+      return;
+    }
+    log(`后台启动失败 / Dashboard failed: ${error.message}`);
+  });
+  server.on("listening", () => {
+    status.dashboardPort = port;
+    log(`后台 / Dashboard: http://127.0.0.1:${port}`);
+  });
+  server.listen(port, "127.0.0.1");
   return server;
 }

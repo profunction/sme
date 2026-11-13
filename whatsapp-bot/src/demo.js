@@ -128,7 +128,7 @@ export async function startDemo({ configFile, port, store = new Store(":memory:"
       return false;
     },
   });
-  log(`演示页面 / Demo page: http://127.0.0.1:${port ?? config.dashboard_port}/demo  (config: ${path.basename(file)})`);
+  server.on("listening", () => log(`演示页面 / Demo page: http://127.0.0.1:${status.dashboardPort}/demo  (config: ${path.basename(file)})`));
   return { server, store, config, handler };
 }
 
