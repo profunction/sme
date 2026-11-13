@@ -50,8 +50,8 @@
       "turns off by itself"
     ],
     "reply": {
-      "zh": "投影机灯闪红色或橙色、自动关机：\n1) 不要反复按电源。断电后等 10 分钟让它冷却。\n2) 检查进风口和滤网有没有被灰尘堵住，有的话用软刷清一清（不要拆机）。\n3) 投影机周围留出 30 厘米散热空间，不要用布或箱子罩着。\n4) 冷却后再开机，如果几分钟内又闪灯或关机，停止使用。\n这种情况通常是灯泡寿命到或散热故障，需要技术员处理。",
-      "en": "Projector light blinking red or orange, or shutting itself off:\n1) Do not keep pressing power. Unplug and let it cool for 10 minutes.\n2) Check the air intake and filter for dust; brush gently if blocked (do not open the unit).\n3) Leave 30 cm of space around it, nothing covering it.\n4) Power on after cooling. If it blinks or shuts off again within minutes, stop using it.\nThis is usually a lamp at end of life or a cooling fault and needs a technician."
+      "zh": "投影机灯闪红色或橙色、自动关机：\n1) 不要反复按电源。断电后等 10 分钟让它冷却。\n2) 检查进风口和滤网有没有被灰尘堵住，有的话用软刷清一清（不要拆机）。\n3) 投影机周围留出 30 厘米散热空间，不要用布或箱子罩着。\n4) 冷却后再开机，如果几分钟内又闪灯或关机，停止使用。\n5) 这种情况通常是灯泡寿命到或散热故障，需要技术员处理。",
+      "en": "Projector light blinking red or orange, or shutting itself off:\n1) Do not keep pressing power. Unplug and let it cool for 10 minutes.\n2) Check the air intake and filter for dust; brush gently if blocked (do not open the unit).\n3) Leave 30 cm of space around it, nothing covering it.\n4) Power on after cooling. If it blinks or shuts off again within minutes, stop using it.\n5) This is usually a lamp at end of life or a cooling fault and needs a technician."
     },
     "explain": {
       "zh": "闪灯是投影机的自我保护：\n• 橙色 / 琥珀色常闪：灯泡接近寿命（一般 2000 到 5000 小时）或灯泡没装到位。\n• 红色闪：温度过高或风扇故障，机器为了保护灯泡和主板主动关机。\n• 画面偏暗、偏黄也是灯泡老化的信号。\n灯泡属于消耗品，更换需要对应型号的原厂或兼容灯泡；风扇和滤网堵塞如果长期不处理会烧主板，维修费比换灯高很多。建议安排技术员检查。",
@@ -105,7 +105,6 @@
       "没信号",
       "无信号",
       "no signal",
-      "hdmi",
       "没有输入",
       "no input",
       "not detected",
@@ -127,16 +126,10 @@
       "en": "TV or display will not turn on"
     },
     "match": [
-      "电视",
-      "显示器",
       "屏幕不亮",
       "屏幕黑",
-      "tv",
       "display no power",
       "screen off",
-      "monitor",
-      "待机",
-      "standby",
       "红灯常亮",
       "电视不亮",
       "电视开不了",
@@ -148,7 +141,10 @@
       "tv wont turn on",
       "tv no power",
       "display not turning on",
-      "tv cannot on"
+      "tv cannot on",
+      "显示屏待机",
+      "红灯待机",
+      "stuck in standby"
     ],
     "reply": {
       "zh": "电视或显示屏不亮：\n1) 电源插座有电吗？换个插座或用手机充电器测一下。\n2) 屏幕电源灯：红色常亮是待机，用遥控器或机身按键开机；没灯检查电源线和背后的总开关。\n3) 开机后蓝屏或「无信号」：按遥控 Input / Source 切到接电脑的那个 HDMI 口。\n4) 遥控没反应：换电池，或走到机身侧面 / 底部按实体键。\n5) 商用显示屏有定时开关机功能，检查菜单里的「定时」是否把它关了。",
@@ -167,7 +163,6 @@
     },
     "match": [
       "无线投屏",
-      "投屏",
       "clickshare",
       "airtame",
       "miracast",
@@ -175,7 +170,12 @@
       "screen mirror",
       "wireless presentation",
       "barco",
-      "连不上投屏"
+      "连不上投屏",
+      "投屏连不上",
+      "投不了屏",
+      "cannot cast",
+      "casting not working",
+      "screen mirroring not working"
     ],
     "reply": {
       "zh": "无线投屏连不上：\n1) 看屏幕上投屏主机的待机画面有没有显示，没有就先把投屏主机重启（断电 30 秒）。\n2) ClickShare 按钮：插电脑 USB 口等灯变白色常亮再按；第一次用要在电脑里运行 ClickShare 程序。\n3) Airtame / Miracast / AirPlay：电脑和投屏主机必须在同一个 Wi-Fi；访客网络通常被隔离，连公司内网试。\n4) 电脑的 VPN、防火墙先关掉再试。\n5) 投不了就用 HDMI 线先把会议开起来，之后再查。",
@@ -193,18 +193,18 @@
       "en": "Touch screen not responding or misaligned"
     },
     "match": [
-      "触控",
-      "触摸",
-      "白板",
-      "触屏",
       "touch not working",
       "touch screen",
-      "interactive",
-      "whiteboard",
       "smartboard",
       "点不准",
       "misaligned",
-      "calibrat"
+      "calibrat",
+      "触控没反应",
+      "触摸没反应",
+      "触屏没反应",
+      "触控不准",
+      "touch screen not working",
+      "touch not responding"
     ],
     "reply": {
       "zh": "触控屏或互动白板不响应、点不准：\n1) 触控靠一条 USB 线连到电脑（触控线），确认这条线插好了，不只是 HDMI。\n2) 屏幕边框的红外感应条有没有被纸、磁贴、灰尘挡住，用干布擦一圈。\n3) 电脑换一个 USB 口，等 10 秒让系统重新识别。\n4) 点不准：在电脑「控制面板 → 平板电脑设置 → 校准」重新校准。\n5) 屏幕自带安卓系统的，按设置里的触控校准，或重启屏幕。",
@@ -222,9 +222,7 @@
       "en": "LED wall garbled or partly dark"
     },
     "match": [
-      "led",
       "led屏",
-      "大屏",
       "花屏",
       "闪烁",
       "一块不亮",
@@ -262,14 +260,11 @@
       "picture drops",
       "pink screen",
       "green screen",
-      "sparkles",
-      "extender",
-      "matrix",
-      "切换器"
+      "sparkles"
     ],
     "reply": {
-      "zh": "画面偶尔黑一下、闪烁、雪花点或整片偏粉偏绿：\n1) 这类基本是线路问题。HDMI 线两头重插，换一条短线直连测试。\n2) 经过延长器（墙上 HDMI 面板、网线传输）的，检查两端延长器电源，各断电 30 秒重启。\n3) 经过矩阵或切换器的，换一个输入口或输出口试，排除某个口坏了。\n4) 降低电脑输出分辨率到 1080p 再试，4K 对线材要求高。\n5) 以上都试过还闪，记下是哪条线路、哪个口，回复 3 安排检查。",
-      "en": "Picture dropping out, flickering, sparkles or a pink or green cast:\n1) Almost always the signal path. Reseat the HDMI cable; test with one short cable direct.\n2) Through an extender (wall HDMI plate, over network cable): check power at both ends; power-cycle each for 30 seconds.\n3) Through a matrix or switcher: try another input or output port to rule out a bad port.\n4) Lower the laptop output to 1080p and retry; 4K is demanding on cabling.\n5) If it still flickers, note which path and port, then reply 3 to arrange a check."
+      "zh": "画面偶尔黑一下、闪烁、雪花点或整片偏粉偏绿：\n1) 这类基本是线路问题。HDMI 线两头重插，换一条短线直连测试。\n2) 经过延长器（墙上 HDMI 面板、网线传输）的，检查两端延长器电源，各断电 30 秒重启。\n3) 经过矩阵或切换器的，换一个输入口或输出口试，排除某个口坏了。\n4) 降低电脑输出分辨率到 1080p 再试，4K 对线材要求高。\n5) 以上都试过还闪：记下是哪条线路、哪个接口，这需要技术员检查线路。",
+      "en": "Picture dropping out, flickering, sparkles or a pink or green cast:\n1) Almost always the signal path. Reseat the HDMI cable; test with one short cable direct.\n2) Through an extender (wall HDMI plate, over network cable): check power at both ends; power-cycle each for 30 seconds.\n3) Through a matrix or switcher: try another input or output port to rule out a bad port.\n4) Lower the laptop output to 1080p and retry; 4K is demanding on cabling.\n5) If it still flickers, note which path and port; the cabling needs a technician to check."
     },
     "explain": {
       "zh": "• 闪烁、雪花、偏色是数字信号「勉强够用」的表现：线太长、线质量差、接头氧化、延长器供电不足。\n• 4K 和高刷新率需要更高带宽，旧线材跑 1080p 没事，跑 4K 就闪。\n• 延长器一端的电源适配器老化是常见隐患。\n• 矩阵某个口损坏会只影响一个房间或一个显示器。\n这类问题不会突然全坏，但会越来越频繁，建议安排一次线路检查并更换老化线材。",
@@ -323,7 +318,6 @@
       "can't hear",
       "cannot hear",
       "silent",
-      "音响",
       "没声",
       "喇叭不响",
       "音响不响",
@@ -412,8 +406,7 @@
       "mic not working",
       "microphone not working",
       "mic too soft",
-      "mic low",
-      "麦克风"
+      "mic low"
     ],
     "reply": {
       "zh": "麦克风没声音或声音很小：\n1) 麦克风上的开关是不是在 OFF 或 Mute；无线麦换电池。\n2) 混音台对应通道：推子推到 0 刻度、Gain 增益调到中间、Mute 没亮、通道没被切到别的输出。\n3) 电容麦（会议桌上的鹅颈麦、吊麦）需要 48V 幻象电源，混音台上的 +48V 按钮要按下。\n4) 麦克风线两头重插，换一个通道试，能分辨是麦还是通道坏。\n5) 视频会议：电脑或会议软件里的麦克风要选到会议室设备，不是电脑内置麦。\n6) 嘴离麦克风 10 到 15 厘米，鹅颈麦对着嘴。",
@@ -546,25 +539,29 @@
       "en": "Video conferencing not connecting or no camera"
     },
     "match": [
-      "zoom",
-      "teams",
-      "webex",
-      "google meet",
-      "视频会议",
-      "会议系统",
       "会议室连不上",
-      "codec",
       "摄像头没画面",
       "camera no image",
       "camera not working",
       "没有摄像头",
       "no camera",
       "入会",
-      "join meeting"
+      "join meeting",
+      "zoom 连不上",
+      "teams 连不上",
+      "zoom连不上",
+      "teams连不上",
+      "视频会议连不上",
+      "会议系统连不上",
+      "zoom room not connecting",
+      "teams room not connecting",
+      "cannot join meeting",
+      "zoom not working",
+      "teams not working"
     ],
     "reply": {
-      "zh": "视频会议系统连不上、没摄像头画面：\n1) 会议室触控屏 / 平板有没有显示正常主界面；黑屏或转圈就把会议主机断电 30 秒重启，等 3 分钟。\n2) 自带电脑入会（BYOD）：USB 线接到会议室的 USB 口后，在 Zoom / Teams 设置里把摄像头、麦克风、扬声器都选成会议室设备（名字通常是 Logitech / Poly / Yealink / Crestron）。\n3) 摄像头有隐私盖或镜头被转到墙壁的，打开 / 转回来；摄像头指示灯应该亮。\n4) 网线有没有插好，主机旁的网络指示灯是否闪烁；Wi-Fi 的改用网线。\n5) 触控屏提示「登录 / 账号 / 许可证」错误：这是账号问题，回复 0 联系技术员。\n6) 实在不行，用笔记本电脑直接入会先把会开起来。",
-      "en": "Video conferencing not connecting or no camera image:\n1) Does the room touch panel / tablet show its normal home screen? Black or spinning: unplug the codec 30 seconds, restart, wait 3 minutes.\n2) Joining from your own laptop (BYOD): after plugging the room USB cable, set camera, microphone and speaker to the room devices in Zoom / Teams settings (usually named Logitech / Poly / Yealink / Crestron).\n3) Camera privacy shutter closed or lens turned to the wall? Open it; the camera light should be on.\n4) Network cable seated, link light blinking by the codec? Move Wi-Fi codecs to a cable.\n5) Touch panel showing a sign-in / account / licence error: that is an account issue, reply 0 for a technician.\n6) Worst case, join from a laptop directly so the meeting can start."
+      "zh": "视频会议系统连不上、没摄像头画面：\n1) 会议室触控屏 / 平板有没有显示正常主界面；黑屏或转圈就把会议主机断电 30 秒重启，等 3 分钟。\n2) 自带电脑入会（BYOD）：USB 线接到会议室的 USB 口后，在 Zoom / Teams 设置里把摄像头、麦克风、扬声器都选成会议室设备（名字通常是 Logitech / Poly / Yealink / Crestron）。\n3) 摄像头有隐私盖或镜头被转到墙壁的，打开 / 转回来；摄像头指示灯应该亮。\n4) 网线有没有插好，主机旁的网络指示灯是否闪烁；Wi-Fi 的改用网线。\n5) 触控屏提示「登录 / 账号 / 许可证」错误：这是账号问题，需要技术员或 IT 处理。\n6) 实在不行，用笔记本电脑直接入会先把会开起来。",
+      "en": "Video conferencing not connecting or no camera image:\n1) Does the room touch panel / tablet show its normal home screen? Black or spinning: unplug the codec 30 seconds, restart, wait 3 minutes.\n2) Joining from your own laptop (BYOD): after plugging the room USB cable, set camera, microphone and speaker to the room devices in Zoom / Teams settings (usually named Logitech / Poly / Yealink / Crestron).\n3) Camera privacy shutter closed or lens turned to the wall? Open it; the camera light should be on.\n4) Network cable seated, link light blinking by the codec? Move Wi-Fi codecs to a cable.\n5) Touch panel showing a sign-in / account / licence error: that is an account issue for a technician or your IT team.\n6) Worst case, join from a laptop directly so the meeting can start."
     },
     "explain": {
       "zh": "会议室系统有三部分：会议主机（跑 Zoom Rooms / Teams Rooms 软件）、摄像头麦克风喇叭、网络和账号。\n• 主机死机、软件更新卡住：重启能解决，是最常见的。\n• 设备没被识别（USB 线松、集线器断电）：画面或声音缺一样。\n• 网络被 IT 改动（换路由、VLAN、防火墙）：显示离线或入会失败。\n• 账号过期、许可证到期、密码改了：显示登录错误，需要 IT 或我们处理账号。\n前两种自己能处理，后两种需要技术员或 IT。",
@@ -590,9 +587,7 @@
       "they can't hear",
       "cannot hear us",
       "we can't hear them",
-      "conference phone",
-      "polycom",
-      "jabra"
+      "conference phone"
     ],
     "reply": {
       "zh": "对方听不到我们，或我们听不到对方：\n1) 对方听不到我们：会议室麦克风是不是静音（设备上的红灯 / 会议软件里的麦克风图标）；软件里麦克风要选会议室设备。\n2) 我们听不到对方：软件里扬声器选会议室设备，音量调高；会议设备本身的音量键按几下。\n3) 电脑入会的，确认电脑没有同时用内置麦和内置喇叭，会导致一边听不到。\n4) 会议电话（八爪鱼）：拔掉重插 USB 或网线，重启一次。\n5) 让对方也检查他们的麦克风和扬声器，一半以上是对方的问题。",
@@ -636,20 +631,22 @@
       "en": "Remote or control panel not responding"
     },
     "match": [
-      "遥控",
-      "遥控器",
-      "中控",
-      "触控面板",
-      "面板",
-      "没反应",
-      "remote",
-      "touch panel",
-      "control panel",
-      "not responding",
-      "crestron",
-      "extron",
-      "amx",
-      "panel black"
+      "panel black",
+      "遥控器没反应",
+      "遥控没反应",
+      "遥控器坏了",
+      "中控没反应",
+      "面板没反应",
+      "触控面板没反应",
+      "控制面板没反应",
+      "面板黑屏",
+      "面板不动",
+      "remote not working",
+      "remote not responding",
+      "touch panel not responding",
+      "control panel not responding",
+      "panel not responding",
+      "panel frozen"
     ],
     "reply": {
       "zh": "遥控器或中控面板没反应：\n1) 遥控器：换电池，对着设备的接收窗按，中间不要有遮挡。\n2) 触控面板黑屏：面板靠网线（PoE）供电，检查网线有没有松；拔掉等 30 秒再插。\n3) 面板有画面但按了设备不动：中控主机死机，找到机柜里的中控主机断电 30 秒重启，等 2 到 3 分钟。\n4) 面板显示「连接中 / Connecting」一直不消失：中控主机或网络问题。\n5) 应急：直接用各设备自己的遥控器或机身按键操作。",
@@ -683,8 +680,8 @@
       "preset"
     ],
     "reply": {
-      "zh": "电动幕布 / 投影机升降不动、场景按了没反应：\n1) 幕布和升降架自己的墙面开关或遥控器试一下，能动说明中控线路问题，不能动是电机或电源。\n2) 听听有没有电机声：有声音不动可能卡住，马上停止操作，不要反复按。\n3) 检查幕布电源插头或空开有没有跳闸。\n4) 场景按钮没反应：中控主机断电 30 秒重启，等 3 分钟。\n5) 卡住、异响、停在半空，不要自己爬上去处理，回复 3 安排技术员。",
-      "en": "Motorized screen / projector lift not moving, or a scene button doing nothing:\n1) Try the screen's own wall switch or remote: if it moves, the control wiring is at fault; if not, the motor or its power.\n2) Listen for the motor: sound but no movement may mean a jam; stop pressing immediately.\n3) Check the screen's power plug or breaker has not tripped.\n4) Scene buttons dead: unplug the control processor 30 seconds, wait 3 minutes.\n5) Jammed, grinding or stopped halfway: do not climb up to fix it; reply 3 for a technician."
+      "zh": "电动幕布 / 投影机升降不动、场景按了没反应：\n1) 幕布和升降架自己的墙面开关或遥控器试一下，能动说明中控线路问题，不能动是电机或电源。\n2) 听听有没有电机声：有声音不动可能卡住，马上停止操作，不要反复按。\n3) 检查幕布电源插头或空开有没有跳闸。\n4) 场景按钮没反应：中控主机断电 30 秒重启，等 3 分钟。\n5) 卡住、异响、停在半空，不要自己爬上去处理，这需要技术员到场。",
+      "en": "Motorized screen / projector lift not moving, or a scene button doing nothing:\n1) Try the screen's own wall switch or remote: if it moves, the control wiring is at fault; if not, the motor or its power.\n2) Listen for the motor: sound but no movement may mean a jam; stop pressing immediately.\n3) Check the screen's power plug or breaker has not tripped.\n4) Scene buttons dead: unplug the control processor 30 seconds, wait 3 minutes.\n5) Jammed, grinding or stopped halfway: do not climb up to fix it; this needs a technician on site."
     },
     "explain": {
       "zh": "电动幕和升降架是电机加限位开关：\n• 完全不动、没声音：电源、保险、继电器或电机烧了。\n• 有声不动或走到一半停：机械卡住、限位错位、幕布卷偏。\n• 自己开关能动但中控不能：中控到继电器的线路或程序。\n这些设备在天花板上，涉及重物和电，必须由技术员处理，不要自己爬梯子。",
@@ -698,15 +695,18 @@
       "en": "Device offline or broken after a router change"
     },
     "match": [
-      "离线",
-      "offline",
       "换了路由",
       "连不上网",
       "no network",
       "换了wifi",
       "isp",
       "device not found",
-      "找不到设备"
+      "找不到设备",
+      "设备离线",
+      "显示离线",
+      "设备 offline",
+      "device offline",
+      "shows offline"
     ],
     "reply": {
       "zh": "设备显示离线、找不到设备、换了路由器后不能用：\n1) 设备的网线两头重插，看网口指示灯有没有亮或闪。\n2) 设备和机柜里的交换机都断电 30 秒重启。\n3) 最近 IT 有没有换路由器、改 Wi-Fi 密码或密码策略？有的话 AV 设备需要重新配置网络，这一步需要技术员配合 IT。\n4) Wi-Fi 的设备尽量改成网线。\n5) 临时应急：用 HDMI 线直连，不走网络功能。",
@@ -738,8 +738,8 @@
       "sequencer"
     ],
     "reply": {
-      "zh": "停电或跳闸之后整套系统不能用：\n1) 先看机柜的电源排插 / 时序电源有没有开，有总开关的先打开。\n2) 开机顺序：先开中控主机和交换机，等 3 分钟；再开处理器、矩阵；再开功放；最后开投影机 / 屏幕。功放一定最后开、最先关。\n3) 有的设备停电后不会自动开机，需要手动按一下电源。\n4) 检查配电箱的空开有没有跳，跳了合上；再次跳闸就不要再合，可能有短路，回复 3。\n5) 等 5 分钟再测试，很多设备需要时间启动和互相重新连接。",
-      "en": "After a power cut or trip the whole system is down:\n1) Check the rack power strip / power sequencer is on; turn on the master switch first.\n2) Power-up order: control processor and switch first, wait 3 minutes; then processors and matrix; then amplifiers; finally projectors / displays. Amplifiers always last on, first off.\n3) Some devices do not auto-start after a cut and need their power button pressed.\n4) Check breakers in the distribution board; reset a tripped one. If it trips again, leave it off, there may be a short; reply 3.\n5) Wait 5 minutes before testing; devices need time to boot and reconnect to each other."
+      "zh": "停电或跳闸之后整套系统不能用：\n1) 先看机柜的电源排插 / 时序电源有没有开，有总开关的先打开。\n2) 开机顺序：先开中控主机和交换机，等 3 分钟；再开处理器、矩阵；再开功放；最后开投影机 / 屏幕。功放一定最后开、最先关。\n3) 有的设备停电后不会自动开机，需要手动按一下电源。\n4) 检查配电箱的空开有没有跳，跳了合上；再次跳闸就不要再合，可能有短路，需要技术员检查。\n5) 等 5 分钟再测试，很多设备需要时间启动和互相重新连接。",
+      "en": "After a power cut or trip the whole system is down:\n1) Check the rack power strip / power sequencer is on; turn on the master switch first.\n2) Power-up order: control processor and switch first, wait 3 minutes; then processors and matrix; then amplifiers; finally projectors / displays. Amplifiers always last on, first off.\n3) Some devices do not auto-start after a cut and need their power button pressed.\n4) Check breakers in the distribution board; reset a tripped one. If it trips again, leave it off; there may be a short and a technician must check it.\n5) Wait 5 minutes before testing; devices need time to boot and reconnect to each other."
     },
     "explain": {
       "zh": "停电后「全不能用」多数是开机顺序和设备没自动开机造成的，不是坏了：中控没启动完就按场景，设备收不到指令；功放先于处理器开机会发出爆音并进保护。少数情况是电压冲击烧了电源，表现为某台设备完全不亮。反复跳闸是短路或漏电，必须停用待查。建议机柜加装时序电源和 UPS，停电后自动按顺序恢复。",

@@ -205,13 +205,20 @@ test("shipped knowledge base passes its checks and answers real questions", () =
   assert.equal(ask("投影机没画面").entry, "core-projector-no-image");
   assert.equal(ask("HDMI no signal").entry, "core-no-signal");
   assert.equal(ask("麦克风一直啸叫").entry, "core-mic-feedback");
-  assert.equal(ask("zoom room 连不上").entry, "core-vc-not-connecting");
-  const explained = ask("no sound in the meeting room", "explain");
+  assert.equal(ask("zoom 连不上").entry, "core-vc-not-connecting");
+  const vague = ask("zoom room 有问题");
+  assert.equal(vague.reason, "category", "naming only the device brings up that device's common problems");
+  assert.equal(vague.prompt.options[0].label, "视频会议连不上或没摄像头");
+  assert.equal(ask("我们办公室的咖啡机坏了你们能不能顺便看一下").reason, "fallback", "unrelated messages get no random suggestions");
+  assert.match(ask("你们星期天有开吗").text, /^我们的办公时间是/);
+  const explained = ask("speakers no sound", "explain");
   assert.equal(explained.entry, "core-no-sound");
   assert.match(explained.text, /^Sound travels/);
   assert.match(explained.text, /email us at help@acme\.test or post in the group/);
-  assert.match(ask("你好", null).text, /1\) 来不及了/);
-  assert.equal(ask("3").setMode, "visit");
+  assert.match(ask("你好", null).text, /哪方面需要帮忙？.*\n1\) 投影机\n/);
+  assert.equal(ask("我要预约上门").setMode ?? ask("上门").setMode, "visit");
+  const guided = ask("投影机没画面");
+  assert.match(guided.text, /一步一步来.*一共 6 步。\n\n第 1 步（共 6 步）\n看投影机电源灯/);
 });
 
 test("dashboard state, message API and tier writes", async () => {
@@ -260,14 +267,13 @@ test("demo mode answers through HTTP with the shipped AV config", async () => {
   try {
     const hello = await send("你好");
     assert.equal(hello.decision.reason, "menu");
-    assert.match(hello.reply, /1\) 来不及了/);
-    assert.equal((await send("1")).decision.reason, "menu_choice");
+    assert.match(hello.reply, /1\) 投影机/);
+    assert.equal((await send("1")).decision.reason, "category");
     const fix = await send("投影机没画面");
-    assert.match(fix.reply, /^投影机没画面，按顺序做/);
-    assert.match(fix.reply, /欢迎 email 我们/);
+    assert.match(fix.reply, /第 1 步（共 6 步）\n看投影机电源灯/);
     const state = await (await fetch(url + "/api/state")).json();
     assert.equal(state.demo, true);
-    assert.equal(state.conversations[0].mode, "fix");
+    assert.equal(state.conversations[0].waiting, true);
   } finally {
     demo.server.close();
     demo.store.close();

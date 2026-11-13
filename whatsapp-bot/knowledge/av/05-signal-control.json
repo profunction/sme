@@ -335,7 +335,8 @@
     "explain": {
       "zh": "桌面线每天被拔插、侧拉、被椅子压到，HDMI 和 USB-C 的接头又薄，是最容易坏的地方：\n• 弯掉的接头硬插进去，会连电脑自己的接口一起弄坏。\n• 墙插或桌面插座松动，表示后面的接口只靠焊点或线吊着，越推越容易断。\n• 画面时有时无、要扶着线才有，通常就是接头快坏了。\n换线、修墙插由技术员处理；不要自己拆墙插面板，后面有线路。\n只要还有别的接口可用就不算紧急，但坏的接头请立即停用。",
       "en": "Table cables are plugged, pulled sideways and rolled over by chairs every day, and HDMI and USB-C tips are thin, so this is where damage happens most:\n• Forcing in a bent connector can also damage the laptop's own port.\n• A loose wall plate or table socket means the connector behind is hanging only on its solder joints or cable; pushing harder makes it break.\n• A picture that comes and goes, or only works while you hold the cable, usually means the connector is about to fail.\nReplacing cables and repairing wall plates is technician work. Do not unscrew the wall plate yourself; there is wiring behind it.\nIt is not urgent while another port still works, but stop using the damaged connector straight away."
-    }
+    },
+    "guided": false
   },
   {
     "id": "sig-panel-wrong-room-page",
@@ -743,6 +744,7 @@
     "explain": {
       "zh": "固件是设备内部的软件。更新可以修正错误和安全漏洞，但在整合好的会议室里也有风险：\n• 新固件可能改变控制指令，更新后触控屏就控制不了那台设备。\n• 可能把设置恢复默认，例如电视的节能待机、HDMI 模式或网络地址。\n• 设备之间的版本不配合，会出现没画面、没声音。\n• 更新中途断电，设备可能无法开机，要送修。\n所以 AV 设备的更新要有计划：先备份，用确认过的版本，在非办公时间做。安全更新也不能永远不做，可以请技术员统一安排。",
       "en": "Firmware is the software inside a device. Updates fix bugs and security holes, but in an integrated meeting room they also carry risk:\n• New firmware can change the control commands, so the control screen can no longer operate that device.\n• It can reset settings to default, such as a TV's eco standby, HDMI mode or network address.\n• Versions that do not match between devices can cause no picture or no sound.\n• Power loss in the middle of an update can leave a device unable to start, needing repair.\nSo AV updates should be planned: back up first, use a confirmed version and do it outside office hours. Security updates should not be skipped forever either; a technician can schedule them together."
-    }
+    },
+    "guided": false
   }
 ]

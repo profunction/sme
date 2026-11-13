@@ -15,6 +15,8 @@ export const DEFAULTS = {
   main_menu: null,
   // Device categories offered after "fix" or "explain": [{ id, title: {zh,en}, entries: [knowledge ids] }]
   categories: [],
+  // Walk the customer through an answer one step at a time ("did that help?") instead of sending all steps at once.
+  guided_steps: false,
   // After each knowledge answer, ask "did that solve it?" with tappable choices.
   follow_up: false,
   // WhatsApp numbers of staff who get an alert for "other" reports, visit requests, emergencies and handoffs.
@@ -84,6 +86,41 @@ export const DEFAULTS = {
       zh: "好的，请直接打字描述：什么设备、出现什么情况。可以发照片。",
       en: "OK. Please type what equipment it is and what is happening. Photos are welcome.",
       ms: "Baik. Sila taip peralatan apa dan apa yang berlaku. Gambar dialu-alukan.",
+    },
+    step_intro: {
+      zh: "好的，我们一步一步来，从最常见的原因开始，一共 {total} 步。",
+      en: "OK, let's take this one step at a time, starting with the most common cause. There are {total} steps.",
+      ms: "Baik, kita buat satu langkah demi satu, bermula dengan punca paling biasa. Ada {total} langkah.",
+    },
+    step_label: { zh: "第 {n} 步（共 {total} 步）", en: "Step {n} of {total}", ms: "Langkah {n} daripada {total}" },
+    // Asked after each step; several wordings so it does not read like a machine.
+    step_question: [
+      { zh: "试了之后怎么样？", en: "How did that go?", ms: "Bagaimana hasilnya?" },
+      { zh: "这一步之后有变化吗？", en: "Any change after that step?", ms: "Ada perubahan selepas langkah itu?" },
+      { zh: "现在好了吗？", en: "Is it working now?", ms: "Sudah berfungsi sekarang?" },
+    ],
+    why_question: { zh: "要继续往下排查吗？", en: "Shall we carry on?", ms: "Mahu teruskan?" },
+    option_step_solved: { zh: "好了，解决了", en: "That fixed it", ms: "Sudah selesai" },
+    option_step_next: { zh: "还不行，下一步", en: "Not yet, next step", ms: "Belum, langkah seterusnya" },
+    option_step_still: { zh: "还是不行", en: "Still not working", ms: "Masih tidak berfungsi" },
+    option_step_why: { zh: "为什么会这样？", en: "Why does this happen?", ms: "Kenapa jadi begini?" },
+    option_step_tech: { zh: "请技术员联系我", en: "Have a technician contact me", ms: "Minta juruteknik hubungi saya" },
+    steps_exhausted: {
+      zh: "这几步都试过还是不行，那就不是操作上的问题了，需要技术员来处理。\n我已经把您试过的步骤记下来转给技术员，他会直接联系您，您不用再重复说明。方便的话，拍一张设备和接线的照片发过来，会更快。",
+      en: "You have tried every step and it is still not working, so this is not something you did wrong; it needs a technician.\nI have passed on the steps you already tried, so you will not have to explain again. A technician will contact you directly. If you can, send a photo of the equipment and cabling to speed things up.",
+      ms: "Semua langkah sudah dicuba dan masih tidak berfungsi, jadi ini bukan salah anda; ia memerlukan juruteknik.\nSaya telah maklumkan langkah yang anda cuba. Juruteknik akan menghubungi anda terus.",
+    },
+    tech_requested: {
+      zh: "好的，我请技术员直接联系您。您已经试过的步骤我会一起告诉他，不用再重复说明。",
+      en: "Sure, I will have a technician contact you directly. I will tell them what you have already tried, so you will not have to explain again.",
+      ms: "Baik, saya akan minta juruteknik menghubungi anda terus dan maklumkan langkah yang sudah dicuba.",
+    },
+    // Closing line after handing over to a technician.
+    contact_also: { zh: "", en: "", ms: "" },
+    visit_prompt: {
+      zh: "好的，我来帮您安排。请告诉我：\n1) 公司名称和地址\n2) 联系人和电话\n3) 是什么设备、什么情况\n4) 方便的日期和时间\n有照片的话也一起发来。",
+      en: "Sure, let me arrange that. Please tell me:\n1) Company name and address\n2) Contact person and phone number\n3) Which equipment and what is happening\n4) A date and time that suits you\nPhotos help too.",
+      ms: "Baik, saya aturkan. Sila beritahu:\n1) Nama syarikat dan alamat\n2) Orang untuk dihubungi dan telefon\n3) Peralatan dan masalahnya\n4) Tarikh dan masa yang sesuai",
     },
     follow_up: { zh: "这样解决了吗？", en: "Did that solve it?", ms: "Adakah masalah selesai?" },
     option_solved: { zh: "解决了，谢谢", en: "Solved, thank you", ms: "Selesai, terima kasih" },

@@ -34,82 +34,154 @@
     "max": 4000
   },
   "max_replies_per_minute": 20,
-  "min_seconds_between_replies_per_contact": 3,
+  "min_seconds_between_replies_per_contact": 2,
   "mark_read": false,
   "dashboard_port": 8787,
   "menu_style": "poll",
+  "guided_steps": true,
   "follow_up": true,
   "knowledge": [
     "knowledge/av"
   ],
   "texts": {
     "greeting": {
-      "zh": "您好，这里是 {company} AV 技术支持。",
-      "en": "Hello, this is {company} AV technical support."
+      "zh": "您好，这里是 {company} 技术支持。",
+      "en": "Hello, this is {company} technical support."
     },
     "menu": {
-      "zh": "请回复数字：\n1 来不及了，我要现在自己解决\n2 我想知道这是什么情况、什么原因\n3 我需要技术员上门处理\n4 其他（告诉我们发生什么事）\n0 直接联系技术员",
-      "en": "Reply with a number:\n1 No time, I need to fix it myself now\n2 I want to understand what is going on\n3 I need a technician on site\n4 Other (tell us what happened)\n0 Contact a technician directly"
+      "zh": "请问今天是哪方面需要帮忙？直接打字告诉我就可以，例如「投影机没画面」「麦克风有回音」。需要技术员的话回复 0。",
+      "en": "What can we help you with today? Just type what is happening, for example \"projector shows no image\" or \"microphone echo\". Reply 0 if you would like a technician."
     },
     "after_hours": {
-      "zh": "现在是非办公时间。如果活动正在进行、会议室完全不能用，请回复「紧急」，值班技术员会尽快联系您。",
-      "en": "We are outside office hours. If an event is in progress or the room is completely down, reply URGENT and the on-call technician will contact you."
+      "zh": "现在是下班时间，我可以先陪您做一些基本排查；需要技术员的话，我们上班后第一时间联系您。如果活动正在进行、情况紧急，请回复「紧急」。",
+      "en": "We are outside office hours. I can walk you through the basic checks now, and if you need a technician we will contact you first thing when we open. If an event is in progress and it is urgent, reply URGENT."
     },
     "fallback": {
-      "zh": "收到。为了帮您更快处理，请告诉我：\n1) 设备品牌和型号\n2) 具体现象（什么时候开始、什么操作后出现）\n3) 最近有没有改动接线或设置\n也欢迎 email 我们（{email}）或在群组里留言，我们会马上回复您。需要技术员上门请回复 3。",
-      "en": "Got it. To help faster, please tell me:\n1) Equipment brand and model\n2) Exactly what happens (since when, after what action)\n3) Whether cabling or settings changed recently\nYou are also welcome to email us at {email} or post in the group, and we will reply right away. Reply 3 if you need a technician on site."
+      "zh": "收到。这个情况我先转给同事看一下，他会回复您。\n方便的话，告诉我设备的品牌型号和现在的状况，或者拍张照片，处理会更快。也欢迎 email 我们（{email}）或在群组里留言。",
+      "en": "Got it. I am passing this to a colleague, who will reply to you.\nIf you can, tell me the brand and model and what it is doing now, or send a photo; it speeds things up. You are also welcome to email us at {email} or post in the group."
     },
     "handoff": {
-      "zh": "好的，已通知技术员，请稍候。方便的话先发一张设备和接线的照片，可以加快处理。",
-      "en": "Sure, a technician has been notified. If you can, send a photo of the equipment and cabling to speed things up."
+      "zh": "好的，我请技术员直接联系您，请稍等。方便的话，先发一张设备和接线的照片，他一看就能判断。",
+      "en": "Sure, I will have a technician contact you directly. One moment. If you can, send a photo of the equipment and cabling so they can assess it straight away."
     },
     "escalate": {
-      "zh": "如果还是不行，欢迎 email 我们（{email}），或在群组里留言，我们会马上回复您。需要技术员上门请回复 3。",
-      "en": "If this still does not work, you are welcome to email us at {email} or post in the group, and we will reply right away. Reply 3 if you need a technician on site."
+      "zh": "如果还是不行，欢迎 email 我们（{email}），或在群组里留言，我们会马上回复您。",
+      "en": "If it is still not working, you are welcome to email us at {email} or post in the group, and we will reply right away."
     },
     "visit_received": {
-      "zh": "已收到，技术员会尽快联系您确认上门时间。如还有补充资料或照片，直接发过来即可。",
-      "en": "Received. A technician will contact you shortly to confirm the visit. Send any extra details or photos here."
+      "zh": "收到，谢谢。技术员会联系您确认上门时间。还有要补充的资料或照片，直接发过来就行。",
+      "en": "Received, thank you. A technician will contact you to confirm the visit. Send any extra details or photos here."
+    },
+    "suggest": {
+      "zh": "您说的是下面哪一种情况？",
+      "en": "Which of these is closest to what you are seeing?"
+    },
+    "choose_issue": {
+      "zh": "明白。是下面哪一种情况？",
+      "en": "Got it. Which of these is closest to what you are seeing?"
+    },
+    "option_none": {
+      "zh": "都不像，我来描述一下",
+      "en": "None of these, I will describe it"
+    },
+    "option_other": {
+      "zh": "其他事情",
+      "en": "Something else"
+    },
+    "describe": {
+      "zh": "没问题，请直接告诉我：是什么设备、现在是什么情况。方便的话拍张照片。",
+      "en": "No problem. Tell me which equipment it is and what it is doing now. A photo helps if you can."
+    },
+    "other_prompt": {
+      "zh": "好的，请直接告诉我发生了什么事，文字、照片、语音都可以。我会转给我们的同事，由他亲自回复您。",
+      "en": "Of course. Tell me what happened, in text, photos or a voice note. I will pass it to a colleague, who will reply to you personally."
+    },
+    "other_received": {
+      "zh": "收到了，已经转给同事，他会尽快回复您。还有要补充的直接发过来就行。",
+      "en": "Received, and passed to a colleague who will get back to you shortly. Send anything else you want to add here."
+    },
+    "solved": {
+      "zh": "太好了，解决了就好。之后再有什么状况，随时在这里找我们。",
+      "en": "Great, glad that sorted it. If anything else comes up, message us here any time."
+    },
+    "contact_also": {
+      "zh": "您也可以随时 email 我们（{email}），或在群组里留言。",
+      "en": "You can also email us at {email} or post in the group at any time."
     }
   },
   "main_menu": {
     "question": {
-      "zh": "请选择您需要的帮助：",
-      "en": "How can we help? Please choose:"
+      "zh": "请问今天是哪方面需要帮忙？点一个选项，或者直接打字告诉我也可以。",
+      "en": "What can we help you with today? Tap an option, or just type what is happening."
     },
     "options": [
       {
         "label": {
-          "zh": "来不及了，我要现在自己解决",
-          "en": "No time, I need to fix it myself now"
+          "zh": "投影机",
+          "en": "Projector"
         },
-        "send": "1"
+        "send": "pick:cat:projector"
       },
       {
         "label": {
-          "zh": "我想知道这是什么情况、什么原因",
-          "en": "I want to understand what is going on"
+          "zh": "电视、显示屏或 LED 屏",
+          "en": "TV, display or LED wall"
         },
-        "send": "2"
+        "send": "pick:cat:display"
       },
       {
         "label": {
-          "zh": "我需要技术员上门处理",
-          "en": "I need a technician on site"
+          "zh": "声音、麦克风或喇叭",
+          "en": "Sound, microphones or speakers"
         },
-        "send": "3"
+        "send": "pick:cat:audio"
       },
       {
         "label": {
-          "zh": "其他（告诉我们发生什么事）",
-          "en": "Other (tell us what happened)"
+          "zh": "视频会议（Zoom / Teams）",
+          "en": "Video conferencing (Zoom / Teams)"
+        },
+        "send": "pick:cat:conferencing"
+      },
+      {
+        "label": {
+          "zh": "电脑接不上大屏幕",
+          "en": "Laptop will not show on the big screen"
+        },
+        "send": "pick:cat:connect"
+      },
+      {
+        "label": {
+          "zh": "控制面板或整套系统",
+          "en": "Control panel or the whole system"
+        },
+        "send": "pick:cat:control"
+      },
+      {
+        "label": {
+          "zh": "活动现场或演示",
+          "en": "Event or presentation"
+        },
+        "send": "pick:cat:events"
+      },
+      {
+        "label": {
+          "zh": "预约技术员上门",
+          "en": "Book a technician visit"
+        },
+        "send": "pick:visit"
+      },
+      {
+        "label": {
+          "zh": "其他事情",
+          "en": "Something else"
         },
         "send": "pick:other"
       },
       {
         "label": {
-          "zh": "直接联系技术员",
-          "en": "Talk to a technician directly"
+          "zh": "直接找技术员",
+          "en": "Talk to a technician"
         },
         "send": "0"
       }
@@ -118,52 +190,23 @@
   "menu": [
     {
       "keys": [
-        "1",
-        "fix",
-        "自己解决",
-        "快速",
-        "急"
-      ],
-      "mode": "fix",
-      "reply": {
-        "zh": "好，直接告诉我设备和现象，例如：\n• 投影机没画面\n• HDMI 没信号\n• 麦克风啸叫\n• 音响没声音\n• Zoom / Teams 连不上\n• 无线麦克风断断续续\n• LED 屏花屏\n我马上给您最快的处理步骤。",
-        "en": "OK. Tell me the equipment and symptom, for example:\n• Projector no image\n• HDMI no signal\n• Microphone feedback\n• Speakers no sound\n• Zoom / Teams not connecting\n• Wireless mic cutting out\n• LED wall garbled\nI will give you the fastest steps right away."
-      },
-      "prompt": "categories"
-    },
-    {
-      "keys": [
-        "2",
-        "explain",
-        "什么情况",
-        "原因",
-        "为什么"
-      ],
-      "mode": "explain",
-      "reply": {
-        "zh": "好，告诉我设备和现象（例如「投影机灯闪橙色」「会议室没声音」），我解释通常是什么原因、严不严重、能不能自己处理。",
-        "en": "OK. Tell me the equipment and symptom (e.g. projector light blinking orange, no sound in the meeting room) and I will explain the usual cause, how serious it is and whether you can handle it yourself."
-      },
-      "prompt": "categories"
-    },
-    {
-      "keys": [
-        "3",
         "visit",
+        "book visit",
         "上门",
         "技术员上门",
+        "预约上门",
         "派人",
+        "派人来",
         "下来"
       ],
       "mode": "visit",
       "reply": {
-        "zh": "好的，我们安排技术员上门。请发给我：\n1) 公司名称和地址\n2) 联系人和电话\n3) 设备和故障简述\n4) 方便的日期和时间段\n5) 现场照片（设备、接线、报错画面）\n收到后技术员会联系您确认时间。工作日上门服务费由技术员确认。",
-        "en": "Sure, we will arrange a technician. Please send:\n1) Company name and address\n2) Contact person and phone number\n3) Equipment and a short fault description\n4) Preferred date and time slot\n5) Photos (equipment, cabling, error screen)\nA technician will contact you to confirm. Weekday call-out fees are confirmed by the technician."
+        "zh": "好的，我来帮您安排。请告诉我：\n1) 公司名称和地址\n2) 联系人和电话\n3) 是什么设备、什么情况\n4) 方便的日期和时间\n有照片的话也一起发来。",
+        "en": "Sure, let me arrange that. Please tell me:\n1) Company name and address\n2) Contact person and phone number\n3) Which equipment and what is happening\n4) A date and time that suits you\nPhotos help too."
       }
     },
     {
       "keys": [
-        "4",
         "other",
         "others",
         "其他",
@@ -172,8 +215,8 @@
       ],
       "mode": "other",
       "reply": {
-        "zh": "好的，请告诉我们发生了什么情况：什么设备、在哪里、从什么时候开始。可以发照片或语音，我们的同事会亲自查看并回复您。",
-        "en": "Sure. Please tell us what happened: which equipment, where, and since when. Photos or voice notes are welcome; a member of our team will read it and reply to you."
+        "zh": "好的，请直接告诉我发生了什么事，文字、照片、语音都可以。我会转给我们的同事，由他亲自回复您。",
+        "en": "Of course. Tell me what happened, in text, photos or a voice note. I will pass it to a colleague, who will reply to you personally."
       }
     },
     {
@@ -186,8 +229,8 @@
       "urgent": true,
       "mode": "visit",
       "reply": {
-        "zh": "已标记为紧急。请立即发送：公司名、地址、联系电话、现场情况和照片。值班技术员会尽快致电。等待期间可回复 1，我先给您应急步骤。",
-        "en": "Marked as URGENT. Please send now: company name, address, contact number, what is happening and photos. The on-call technician will call you shortly. While waiting, reply 1 for emergency steps."
+        "zh": "明白，已标记为紧急并通知值班技术员。请马上发给我：公司名、地址、联系电话、现场情况，有照片更好。他会尽快打给您。",
+        "en": "Understood. I have marked this as urgent and alerted the on-call technician. Please send right away: company name, address, contact number and what is happening, with photos if you can. They will call you as soon as possible."
       }
     },
     {
@@ -251,13 +294,22 @@
         "proj-freeze-av-mute-blank",
         "core-screen-lift-scene",
         "proj-burning-smell-smoke"
+      ],
+      "keywords": [
+        "投影",
+        "projector",
+        "projectors",
+        "beamer"
+      ],
+      "prefixes": [
+        "proj-"
       ]
     },
     {
       "id": "display",
       "title": {
-        "zh": "电视 / 显示屏 / LED 屏",
-        "en": "TV / display / LED wall"
+        "zh": "电视、显示屏或 LED 屏",
+        "en": "TV, display or LED wall"
       },
       "entries": [
         "core-display-no-power",
@@ -270,13 +322,31 @@
         "disp-speakers-no-sound-output",
         "disp-signage-not-updating",
         "disp-lines-on-panel"
+      ],
+      "keywords": [
+        "电视",
+        "显示屏",
+        "显示器",
+        "屏幕",
+        "大屏",
+        "广告机",
+        "led",
+        "tv",
+        "television",
+        "display",
+        "monitor",
+        "screen",
+        "signage"
+      ],
+      "prefixes": [
+        "disp-"
       ]
     },
     {
       "id": "audio",
       "title": {
-        "zh": "声音 / 麦克风 / 喇叭",
-        "en": "Sound / microphones / speakers"
+        "zh": "声音、麦克风或喇叭",
+        "en": "Sound, microphones or speakers"
       },
       "entries": [
         "core-no-sound",
@@ -289,6 +359,27 @@
         "audio-amp-protect-light",
         "core-zone-paging",
         "core-bluetooth"
+      ],
+      "keywords": [
+        "声音",
+        "音响",
+        "喇叭",
+        "麦克风",
+        "话筒",
+        "咪",
+        "音量",
+        "扩音",
+        "sound",
+        "audio",
+        "speaker",
+        "speakers",
+        "mic",
+        "mics",
+        "microphone",
+        "volume"
+      ],
+      "prefixes": [
+        "audio-"
       ]
     },
     {
@@ -308,13 +399,30 @@
         "vc-ptz-camera-wrong-direction",
         "vc-laptops-same-room-howling",
         "vc-console-disconnected"
+      ],
+      "keywords": [
+        "zoom",
+        "teams",
+        "webex",
+        "google meet",
+        "视频会议",
+        "会议系统",
+        "摄像头",
+        "镜头",
+        "camera",
+        "video call",
+        "video conference",
+        "conferencing"
+      ],
+      "prefixes": [
+        "vc-"
       ]
     },
     {
       "id": "connect",
       "title": {
-        "zh": "接电脑 / 投屏 / 线材",
-        "en": "Connecting a laptop / casting / cables"
+        "zh": "电脑接不上大屏幕",
+        "en": "Laptop will not show on the big screen"
       },
       "entries": [
         "core-no-signal",
@@ -327,13 +435,32 @@
         "sig-connector-damaged",
         "audio-hdmi-plays-from-laptop",
         "use-phone-tablet-presenting"
+      ],
+      "keywords": [
+        "hdmi",
+        "usb-c",
+        "type-c",
+        "投屏",
+        "接电脑",
+        "笔记本",
+        "手提电脑",
+        "转接",
+        "airplay",
+        "clickshare",
+        "laptop",
+        "macbook",
+        "adapter",
+        "cable"
+      ],
+      "prefixes": [
+        "sig-"
       ]
     },
     {
       "id": "control",
       "title": {
-        "zh": "中控面板 / 网络 / 电源",
-        "en": "Control panel / network / power"
+        "zh": "控制面板或整套系统",
+        "en": "Control panel or the whole system"
       },
       "entries": [
         "core-control-not-responding",
@@ -346,13 +473,32 @@
         "sig-rack-hot",
         "core-screen-lift-scene",
         "sig-booking-panel"
+      ],
+      "keywords": [
+        "中控",
+        "控制面板",
+        "触控面板",
+        "控制屏",
+        "遥控",
+        "网络",
+        "停电",
+        "跳闸",
+        "control panel",
+        "touch panel",
+        "remote",
+        "network",
+        "power cut",
+        "power trip"
+      ],
+      "prefixes": [
+        "sig-"
       ]
     },
     {
       "id": "events",
       "title": {
-        "zh": "活动 / 演示 / 录播直播",
-        "en": "Events / presenting / recording"
+        "zh": "活动现场或演示",
+        "en": "Event or presentation"
       },
       "entries": [
         "use-event-day-precheck",
@@ -365,6 +511,25 @@
         "use-hybrid-remote-speaker-audio",
         "use-liquid-spill",
         "use-report-fault-info"
+      ],
+      "keywords": [
+        "活动",
+        "演示",
+        "演讲",
+        "直播",
+        "录播",
+        "录像",
+        "翻页笔",
+        "event",
+        "presentation",
+        "powerpoint",
+        "ppt",
+        "slides",
+        "live stream",
+        "recording"
+      ],
+      "prefixes": [
+        "use-"
       ]
     }
   ],
@@ -379,12 +544,12 @@
       "bot": "on",
       "texts": {
         "greeting": {
-          "zh": "{name} 您好，这里是 {company} AV 技术支持。您是我们的重点客户，技术员已同步收到您的信息。",
-          "en": "Hello {name}, this is {company} AV technical support. You are a priority customer and our technicians have been alerted to your message."
+          "zh": "{name} 您好，这里是 {company} 技术支持。您是我们的重点客户，技术员已同步收到您的信息。",
+          "en": "Hello {name}, this is {company} technical support. You are a priority customer and our technicians have been alerted to your message."
         },
         "escalate": {
-          "zh": "如果还是不行，请直接回复 0，值班技术员会优先联系您；也可以 email {email} 或在群组里留言。",
-          "en": "If this still does not work, reply 0 and the on-call technician will contact you first. You can also email {email} or post in the group."
+          "zh": "如果还是不行，直接回复 0，值班技术员会优先联系您；也可以 email {email} 或在群组里留言。",
+          "en": "If it is still not working, reply 0 and the on-call technician will contact you first. You can also email {email} or post in the group."
         }
       }
     },
@@ -411,12 +576,45 @@
         "pricing",
         "quotation",
         "quote",
-        "cost"
+        "cost",
+        "购买",
+        "想买",
+        "订购",
+        "有卖",
+        "do you sell",
+        "buy"
       ],
       "escalate": false,
       "reply": {
-        "zh": "价格需要技术员了解情况后确认，这里无法直接报价。请告诉我们：\n1) 设备品牌和型号，或需要的功能\n2) 场地类型和大小\n3) 希望的时间\n也可以 email 我们（{email}）或在群组里留言，我们会尽快回复报价。",
-        "en": "Prices are confirmed by a technician once we understand the job, so I cannot quote here. Please tell us:\n1) Equipment brand and model, or what you need\n2) Venue type and size\n3) Your preferred timing\nYou can also email us at {email} or post in the group and we will reply with a quotation."
+        "zh": "价格和供货要由同事了解您的需要后再报给您，我这里没办法直接报价。麻烦告诉我：\n1) 设备的品牌型号，或者想实现什么功能\n2) 场地类型和大小\n3) 希望什么时候要\n我会转给负责的同事，由他回复您。也可以 email 我们（{email}）。",
+        "en": "Pricing and availability come from a colleague once we understand what you need, so I cannot quote here. Could you tell me:\n1) The brand and model, or what you want to achieve\n2) The venue type and size\n3) When you need it\nI will pass it to the right colleague, who will reply to you. You can also email us at {email}."
+      }
+    },
+    {
+      "match": [
+        "几点",
+        "营业时间",
+        "办公时间",
+        "上班时间",
+        "开到几点",
+        "有开吗",
+        "有没有开",
+        "星期天",
+        "周日",
+        "公共假期",
+        "opening hours",
+        "office hours",
+        "business hours",
+        "what time",
+        "open today",
+        "open on",
+        "close today",
+        "are you open"
+      ],
+      "escalate": false,
+      "reply": {
+        "zh": "我们的办公时间是周一至周六 9:00–18:00。\n电话：{phone}\nEmail：{email}\n地址：{address}\n办公时间以外遇到紧急情况（例如活动正在进行），请回复「紧急」。",
+        "en": "Our office hours are Monday to Saturday, 9:00–18:00.\nPhone: {phone}\nEmail: {email}\nAddress: {address}\nFor an emergency outside these hours (for example an event in progress), reply URGENT."
       }
     },
     {

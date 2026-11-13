@@ -212,7 +212,8 @@
     "explain": {
       "zh": "烧焦味或冒烟属于紧急情况，不要自己排查：\n• 可能是电源板、灯泡、风扇马达烧坏，或灰尘、昆虫、异物在机内被烤焦。\n• 也可能是插座、排插或电源线过热，同样危险。\n• 继续通电有起火的风险，所以第一步永远是在墙上关电。\n• 新机器或刚换新灯泡的头几个小时，有一点轻微的塑料味是常见的，会自己散掉；但有烟、焦味很重或越来越浓，就不是正常现象。\n• 必须由技术员检查、确认安全之后才能再使用。",
       "en": "A burning smell or smoke is an emergency; do not try to find the cause yourself:\n• It may be a burnt power board, lamp or fan motor, or dust, insects or a foreign object scorching inside the unit.\n• It may also be an overheating wall socket, extension strip or power cable, which is just as dangerous.\n• Leaving the power on risks a fire, so the first step is always to switch off at the wall.\n• A slight plastic smell in the first few hours of a new unit or a new lamp is common and fades by itself. Smoke, or a strong or growing burnt smell, is not normal.\n• A technician must check it and confirm it is safe before it is used again."
-    }
+    },
+    "guided": false
   },
   {
     "id": "proj-dots-spots-dead-pixels",

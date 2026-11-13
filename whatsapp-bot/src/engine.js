@@ -169,7 +169,7 @@ function indexOf(entry) {
 // for little, so the rare words in the message decide. Returns at most `limit` entries.
 const frequencyCache = new WeakMap();
 
-export function search(entries, text, limit = 3, minScore = 2) {
+export function search(entries, text, limit = 3, minScore = 2, withScores = false) {
   const query = tokens(text);
   if (!query.length) return [];
   let frequency = frequencyCache.get(entries);
@@ -193,10 +193,24 @@ export function search(entries, text, limit = 3, minScore = 2) {
     });
     if (score >= minScore) scored.push({ entry, score });
   }
-  return scored
-    .sort((x, y) => y.score - x.score)
-    .slice(0, limit)
-    .map((item) => item.entry);
+  const ranked = scored.sort((x, y) => y.score - x.score).slice(0, limit);
+  return withScores ? ranked : ranked.map((item) => item.entry);
+}
+
+// The device category a vague message is about ("the mic has a problem"), by keywords.
+export function categoryFor(categories, text) {
+  const normalized = normalize(text);
+  let best = null;
+  let bestScore = 0;
+  for (const category of categories || []) {
+    let score = 0;
+    for (const keyword of category.keywords || []) score += keywordScore(normalized, keyword);
+    if (score > bestScore) {
+      best = category;
+      bestScore = score;
+    }
+  }
+  return best;
 }
 
 // ---- customers and tiers ----------------------------------------------------
@@ -223,6 +237,9 @@ export function tierOf(config, contact, phone) {
 export const OPT_OUT_WORDS = ["stop", "unsubscribe", "退订", "取消订阅"];
 export const OPT_IN_WORDS = ["start", "subscribe", "订阅", "恢复订阅"];
 export const HANDOFF_WORDS = ["0", "人工", "客服", "真人", "技术员", "human", "agent", "person", "staff", "operator", "technician", "manusia"];
+const CLEAR_SCORE = 8; // search score at which a single clear winner is answered directly
+const SUGGEST_SCORE = 3.8; // below this, related topics are too weak to offer
+const RELATED_SCORE = 2; // enough to lead a device's problem list once the device is known
 const LETTERS = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"];
 const QUIET_MINUTES = 10;
 
@@ -234,6 +251,19 @@ export function optionIndex(text, count) {
   if (/^\d{1,2}$/.test(cleaned)) index = Number(cleaned) - 1;
   else if (cleaned.length === 1) index = LETTERS.indexOf(cleaned);
   return index >= 0 && index < count ? index : -1;
+}
+
+// Split a knowledge answer ("heading:\n1) ...\n2) ...") into its numbered steps so the
+// bot can walk a customer through them one at a time. Unnumbered lines belong to the
+// step above them.
+export function parseSteps(text) {
+  const steps = [];
+  for (const line of String(text || "").split("\n")) {
+    const numbered = /^\s*\d{1,2}[).、]\s*(.*)$/.exec(line);
+    if (numbered) steps.push(numbered[1].trim());
+    else if (steps.length && line.trim()) steps[steps.length - 1] += `\n${line.trim()}`;
+  }
+  return steps;
 }
 
 // A prompt as plain text, for chats where tappable options are not available.
@@ -329,21 +359,55 @@ export function decide(config, input) {
   const option = (label, send) => ({ label: local(label), send });
   const otherOption = () => option(texts.option_other, "pick:other");
 
-  // The answer, then (when follow_up is on) a short "did that solve it?" prompt so the
-  // customer can confirm, ask for a person, or see the other version without typing.
-  const answer = (rule, reason, as = mode) => {
+  const fill = (template, values) => String(template).replace(/\{(n|total|title)\}/g, (_, key) => values[key] ?? "");
+  const stepsOf = (rule) => (rule.id && rule.guided !== false ? parseSteps(pick(rule.reply, language, config.default_language, vars)) : []);
+
+  // The whole answer in one message, then (when follow_up is on) "did that solve it?".
+  const wholeAnswer = (rule, reason, as = mode) => {
     const explaining = as === "explain" && !!rule.explain;
     parts.push(pick(explaining ? rule.explain : rule.reply, language, config.default_language, vars));
     if (footer && rule.escalate !== false) parts.push(footer);
     const extra = { entry: rule.id || null };
     if (config.follow_up && rule.id) {
-      const options = [option(texts.option_solved, "pick:solved"), option(texts.option_not_solved, "0")];
+      const options = [option(texts.option_solved, "pick:solved"), option(texts.option_not_solved, `pick:tech:${rule.id}:0`)];
       if (explaining) options.push(option(texts.option_show_fix, `pick:fix:${rule.id}`));
       else if (rule.explain) options.push(option(texts.option_show_explain, `pick:explain:${rule.id}`));
       options.push(option(texts.option_menu, "pick:menu"));
       extra.prompt = { question: t("follow_up"), options };
     }
     return reply(reason, extra);
+  };
+
+  // One step at a time, the way a technician on the phone would: do this, did it
+  // help? The customer answers by tapping; only when every step failed do we hand over.
+  const stepChoices = (rule, n, total, withWhy = true) => {
+    const options = [
+      option(texts.option_step_solved, `pick:solved:${rule.id}:${n}`),
+      option(n < total ? texts.option_step_next : texts.option_step_still, `pick:step:${rule.id}:${n + 1}`),
+    ];
+    if (withWhy && rule.explain) options.push(option(texts.option_step_why, `pick:why:${rule.id}:${n}`));
+    options.push(option(texts.option_step_tech, `pick:tech:${rule.id}:${n}`));
+    const questions = [].concat(texts.step_question || []);
+    return { question: local(questions[(n - 1) % questions.length]), options };
+  };
+  const handOver = (rule, tried, total, key, reason) => {
+    parts.push(t(key));
+    if (t("contact_also")) parts.push(t("contact_also"));
+    const title = pick(rule.title, config.default_language, config.default_language);
+    const progress = total ? `已试 ${tried} / ${total} 步 · tried ${tried} of ${total} steps` : "";
+    return reply(reason, { entry: rule.id, handoff: true, report: true, note: [title, progress].filter(Boolean).join("\n") });
+  };
+  const showStep = (rule, n, reason) => {
+    const steps = stepsOf(rule);
+    if (n > steps.length) return handOver(rule, steps.length, steps.length, "steps_exhausted", "steps_exhausted");
+    const values = { n, total: steps.length, title: local(rule.title) };
+    if (n === 1) parts.push(fill(t("step_intro"), values));
+    parts.push(`${fill(t("step_label"), values)}\n${steps[n - 1]}`);
+    return reply(reason, { entry: rule.id, step: n, prompt: stepChoices(rule, n, steps.length) });
+  };
+  const answer = (rule, reason, as = mode) => {
+    if (config.guided_steps && as !== "explain" && stepsOf(rule).length >= 2) return showStep(rule, 1, reason);
+    return wholeAnswer(rule, reason, as);
   };
   const mainMenu = () => {
     const menu = config.main_menu;
@@ -352,6 +416,15 @@ export function decide(config, input) {
       return reply("menu");
     }
     return reply("menu", { prompt: { question: local(menu.question), options: menu.options.map((item) => option(item.label, item.send)) } });
+  };
+  // The common problems of one device category, plus "none of these".
+  const issuePrompt = (category, first = []) => {
+    const entries = [...new Set([...first, ...(category?.entries || []).map(entryById)].filter(Boolean))].slice(0, 10);
+    if (!entries.length) return null;
+    return {
+      question: t("choose_issue"),
+      options: [...entries.map((entry) => option(entry.title, `pick:entry:${entry.id}`)), option(texts.option_none, "pick:describe")],
+    };
   };
   const categoryPrompt = () => ({
     question: t("choose_category"),
@@ -369,9 +442,27 @@ export function decide(config, input) {
       return reply("describe");
     }
     if (text === "pick:menu") return mainMenu();
-    if (text === "pick:solved") {
+    if (text === "pick:solved" || text.startsWith("pick:solved:")) {
       parts.push(t("solved"));
       return reply("solved");
+    }
+    if (text === "pick:visit") {
+      parts.push(t("visit_prompt"));
+      return reply("visit_prompt", { setMode: "visit" });
+    }
+    // pick:<step|why|tech>:<entry id>:<step number>
+    const stepToken = /^pick:(step|why|tech):(.+):(\d{1,2})$/.exec(text);
+    if (stepToken) {
+      const [, action, id, number] = stepToken;
+      const entry = entryById(id);
+      const n = Number(number);
+      if (entry) {
+        const total = stepsOf(entry).length;
+        if (action === "step") return showStep(entry, n, "step");
+        if (action === "tech") return handOver(entry, Math.min(n, total), total, "tech_requested", "tech_requested");
+        parts.push(pick(entry.explain || entry.reply, language, config.default_language, vars));
+        return reply("why", { entry: entry.id, step: n, prompt: { ...stepChoices(entry, n, total, false), question: t("why_question") } });
+      }
     }
     for (const as of ["explain", "fix"]) {
       if (!text.startsWith(`pick:${as}:`)) continue;
@@ -379,16 +470,8 @@ export function decide(config, input) {
       if (entry) return { ...answer(entry, "option_chosen", as), setMode: as };
     }
     if (text.startsWith("pick:cat:")) {
-      const category = (config.categories || []).find((item) => item.id === text.slice(9));
-      const entries = (category?.entries || []).map(entryById).filter(Boolean).slice(0, 10);
-      if (entries.length) {
-        return reply("category", {
-          prompt: {
-            question: t("choose_issue"),
-            options: [...entries.map((entry) => option(entry.title, `pick:entry:${entry.id}`)), option(texts.option_none, "pick:describe")],
-          },
-        });
-      }
+      const prompt = issuePrompt((config.categories || []).find((item) => item.id === text.slice(9)));
+      if (prompt) return reply("category", { prompt });
     }
     if (text.startsWith("pick:entry:")) {
       const entry = entryById(text.slice(11));
@@ -417,29 +500,46 @@ export function decide(config, input) {
     return reply(ack, { report: true });
   }
 
-  // A confident match answers straight away. When only a generic word matched
-  // and the wider search points somewhere else, let the customer choose instead.
+  // 1) A specific phrase matched: answer. 2) The wider search has one clear winner:
+  // answer that. 3) Only a device was named ("the mic has a problem"): show that
+  // device's common problems. 4) A few plausible topics: let the customer pick.
+  // Anything weaker is not worth guessing at, so unrelated messages never get
+  // random suggestions.
   const matched = matchDetailed(config.faq, text);
-  let related = search(config.faq, text);
-  if (matched.rule) {
-    const unsure = !matched.confident && matched.rule.id && related.length && related[0] !== matched.rule;
-    if (!unsure) return answer(matched.rule, "rule");
-    related = [...related.filter((entry) => entry !== matched.rule).slice(0, 2), matched.rule];
-  }
+  const ranked = search(config.faq, text, 3, 0, true);
+  const [top, second] = ranked;
+  // A generic phrase still counts when the wider search agrees it is the best fit ("会议室没声音").
+  if (matched.rule && (matched.confident || !matched.rule.id || top?.entry === matched.rule)) return answer(matched.rule, "rule");
+  const clearWinner = top && top.score >= CLEAR_SCORE && (!second || top.score >= 2 * second.score);
+  const plausible = top && top.score >= SUGGEST_SCORE ? ranked.filter((item) => item.score >= 0.6 * top.score).map((item) => item.entry) : [];
   if (config.ai.enabled) {
-    return { action: "ai", language, reason: "ai", parts, mode, footer, context: related, pending: null };
+    const context = [...new Set([matched.rule, ...plausible].filter(Boolean))].slice(0, 3);
+    return { action: "ai", language, reason: "ai", parts, mode, footer, context, pending: null };
   }
-  if (related.length) {
+  if (clearWinner) return answer(top.entry, "rule");
+  const category = categoryFor(config.categories, text);
+  if (category) {
+    // Lead the device's list with whatever the search thinks is closest to the message.
+    const belongs = (entry) => category.entries.includes(entry.id) || (category.prefixes || []).some((prefix) => entry.id.startsWith(prefix));
+    const closest = ranked.filter((item) => item.score >= RELATED_SCORE && belongs(item.entry)).map((item) => item.entry);
+    const prompt = issuePrompt(category, [...new Set([matched.rule, ...closest].filter(Boolean))]);
+    if (prompt) return reply("category", { prompt });
+  }
+  if (plausible.length) {
+    const offered = matched.rule && !plausible.includes(matched.rule) ? [...plausible.slice(0, 2), matched.rule] : plausible;
     return reply("suggest", {
       prompt: {
         question: t("suggest"),
-        options: [...related.map((entry) => option(entry.title, `pick:entry:${entry.id}`)), option(texts.option_none, "pick:describe")],
+        options: [...offered.map((entry) => option(entry.title, `pick:entry:${entry.id}`)), option(texts.option_none, "pick:describe")],
       },
     });
   }
+  if (matched.rule) return answer(matched.rule, "rule");
   if (firstContactInWhile || normalized.length <= 12) return mainMenu();
+  // Nothing matched a longer message: say so honestly and pass it to a person
+  // instead of looping the customer through the menu again.
   parts.push(t("fallback"));
-  return reply("fallback");
+  return reply("fallback", { report: true });
 }
 
 export function randomDelay(range, random = Math.random) {

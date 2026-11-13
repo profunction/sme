@@ -7,6 +7,9 @@ const ALERTS = {
   visit_details: "要求上门 / Visit request",
   urgent: "紧急 / URGENT",
   handoff_requested: "要求人工 / Wants a person",
+  tech_requested: "排查中途要求技术员 / Asked for a technician",
+  steps_exhausted: "步骤全部试过仍未解决 / All steps tried, not solved",
+  fallback: "机器人未能解答 / Bot could not answer",
 };
 
 /**
@@ -129,7 +132,7 @@ export function createHandler({ config, store, send, sendPoll = null, log, insta
     store.setPending(jid, decision.pending || null);
     log(`→ ${who}: ${reply.slice(0, 80).replace(/\n/g, " ")}`);
     if (decision.report || decision.urgent || decision.handoff) {
-      await alertStaff(decision.reason, { phone: knownPhone, jid, name: displayName, text: shown });
+      await alertStaff(decision.reason, { phone: knownPhone, jid, name: displayName, text: [decision.note, shown].filter(Boolean).join("\n") });
     }
     return { decision, reply };
   }

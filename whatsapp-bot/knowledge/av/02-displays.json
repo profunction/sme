@@ -161,7 +161,8 @@
     "explain": {
       "zh": "面板破裂属于硬件损坏，一定要技术员处理：\n• 液晶层裂开后会出现黑色墨迹状的斑块、彩色线条，而且会继续扩散。\n• 互动平板有时只是最外层的保护玻璃裂了，里面画面还正常，但玻璃可能掉落或割手，同样要停用。\n• 继续通电可能让损坏扩大，也有触电和玻璃伤人的风险。\n• 任何设置、重启或贴胶带都修不好裂痕。\n请不要自己搬动或拆卸，尤其是挂在墙上的大屏，保持断电，等技术员到场检查。",
       "en": "A cracked panel is physical damage and must be handled by a technician:\n• Once the liquid crystal layer cracks you see black ink-like blotches and coloured lines, and they keep spreading.\n• On an interactive panel sometimes only the outer protective glass is cracked and the picture still looks fine, but the glass can fall or cut someone, so stop using it too.\n• Keeping it powered can make the damage worse and brings a risk of electric shock and injury from glass.\n• No setting, restart or tape will repair a crack.\nPlease do not move or dismount it yourself, especially a large wall-mounted display. Keep it switched off until a technician has inspected it on site."
-    }
+    },
+    "guided": false
   },
   {
     "id": "disp-dark-patches-backlight",

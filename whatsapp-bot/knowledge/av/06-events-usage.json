@@ -152,7 +152,8 @@
     "explain": {
       "zh": "Mac 和会议室系统配合没问题，出问题的几乎都是转接头：\n• 多数 MacBook 只有 USB-C 口，必须用转接头。便宜、老旧或松动的转接头会造成闪烁、没画面或没声音。\n• 不是每条 USB-C 线都能传画面，手机充电线不能当显示线用。\n• 「镜像」两边画面一样，最简单；「扩展」可以看备注，但比较容易搞混。\n• 用 Zoom / Teams 共享屏幕，macOS 要先授权一次：系统设置 > 隐私与安全性 > 屏幕录制。活动前先允许并重开软件，不要等到现场才弄。\n• 串流软件的电影在大屏幕上可能是黑的，这是版权保护（HDCP）；幻灯片不受影响。\n• 预防：自备测试过的转接头，一直插着充电器，打开「勿扰模式」。",
       "en": "Macs work well with room systems; the weak point is nearly always the adapter:\n• Most MacBooks have only USB-C ports, so they need an adapter. Cheap, worn or loose adapters cause flicker, no picture or no sound.\n• Not every USB-C cable carries video. A phone charging cable will not work as a display cable.\n• Mirror shows the same on both screens and is simplest. Extended gives presenter notes but is easier to get confused with.\n• For Zoom / Teams screen sharing, macOS asks for permission once: System Settings > Privacy & Security > Screen Recording. Allow it and restart the app before the event, not during it.\n• Movies from streaming apps may show black on the room display because of copy protection (HDCP); slides are not affected.\n• To avoid problems: bring your own tested adapter, keep the charger connected and turn on Do Not Disturb."
-    }
+    },
+    "guided": false
   },
   {
     "id": "use-phone-tablet-presenting",
@@ -183,7 +184,8 @@
     "explain": {
       "zh": "手机和平板可以演示，但比手提电脑难预料：\n• 转接器：Apple Lightning 转接器上有充电口，长时间使用要插着充电器。非原厂转接器常在 iOS 更新后失效。\n• 无线：公司的访客 Wi-Fi 常常不让设备互相看见，所以列表里找不到会议室显示器。这要 IT 或技术员改设置，不是当天能解决的。\n• iPad 的画面两边有黑边，是因为屏幕比例和电视不同，属正常。\n• 没开「勿扰模式」的话，来电和信息会直接出现在大屏幕上。\n• 很多串流 app 被版权保护（HDCP）刻意挡住。\n• 预防：前一天用实际的设备试一次，转接器留在会议室，另外带一台手提电脑或 USB 里的 PDF 做后备。",
       "en": "Phones and tablets can present, but they are less predictable than a laptop:\n• Adapters: the Apple Lightning adapter has a charging port; plug in the charger for long sessions. Non-original adapters often stop working after an iOS update.\n• Wireless: office guest Wi-Fi often stops devices from seeing each other, so the room display never appears in the list. Changing that is a job for your IT team or a technician, not something to fix on the day.\n• An iPad picture has black bars at the sides because its screen shape differs from the TV. This is normal.\n• A phone call or message during the session will show on the big screen unless Do Not Disturb is on.\n• Copy protection (HDCP) blocks many streaming apps on purpose.\n• To avoid problems: test with the actual device the day before, keep the adapter in the room, and bring a laptop or a PDF on a USB drive as backup."
-    }
+    },
+    "guided": false
   },
   {
     "id": "use-laptop-sleep-notifications",
@@ -275,7 +277,8 @@
     "explain": {
       "zh": "换讲者是活动中最容易出状况的时刻，但准备好就不会有意外：\n• 每次接上或选到一台电脑，电脑和显示器都要「握手」，商量分辨率和版权保护，需要几秒钟；有些电脑和转接头的组合第一次会失败。\n• 电脑如果在休眠，或设成「扩展」，大屏幕可能只看到桌面背景。\n• 外来讲者的电脑最难预料：接口不同、没带转接头、设置被锁。\n• 想要没有黑屏的瞬间切换，需要「无缝切换器」，这是要技术员规划和安装的设备；有需要请在活动前告诉我们。\n• 预防：提前收齐幻灯片，用真正要用的电脑彩排一次切换，决定谁负责按键，并准备一张等候画面或 logo。",
       "en": "Changeovers are the riskiest moment of any event, but preparation makes them uneventful:\n• Each time a laptop is connected or selected, it and the display \"handshake\" to agree on resolution and copy protection. That takes a few seconds, and some laptop and adapter combinations fail on the first try.\n• A laptop that was asleep, or is set to Extend, may show only a desktop background on the big screen.\n• Guest speakers' laptops are the unknown: different ports, missing adapters, locked settings.\n• Instant, clean cuts with no black gap need a seamless switcher. That is equipment a technician plans and sets up, so tell us before the event if it matters.\n• To avoid trouble: collect slides in advance, rehearse the changeover once with the real laptops, decide who presses the button, and keep a holding slide or logo ready."
-    }
+    },
+    "guided": false
   },
   {
     "id": "use-walk-in-video-music-loop",
@@ -306,7 +309,8 @@
     "explain": {
       "zh": "暖场内容是没人看着、自己播的，所以小问题就会让它停下：\n• 在线串流是头号原因：广告、缓冲、帐号被登出、或跳出「你还在看吗？」。\n• 没人碰电脑，电脑休眠或跳出屏保。\n• 单个文件播完，观众就看到桌面或播放器的按钮。\n• 电脑音量太小，会议室音量开大时会有杂音；太大又会破音。80% 左右是稳妥的起点。\n• 在公开或公司活动播放音乐可能需要音乐版权许可，个人串流帐号一般不是给公开播放用的。请向场地或主办方确认。\n• 这些都可以自己处理；只要电脑声音平时在会议室正常，就不需要技术员。\n• 预防：布置时让它至少循环两遍，司仪开口前先把音乐慢慢收小。",
       "en": "Walk-in content runs unattended, so small things stop it:\n• Streaming is the top cause: adverts, buffering, an account logging out, or an \"Are you still watching?\" prompt.\n• The laptop goes to sleep or the screen saver starts because nobody touches it.\n• A single file ends and the audience sees the desktop or the player controls.\n• Laptop volume set too low makes the room noisy when turned up; too high distorts. About 80% is a safe starting point.\n• Playing music at a public or company event may need a music licence, and personal streaming accounts are generally not meant for public use. Check with your venue or organiser.\n• You can handle all of this yourself; no technician is needed if normal laptop sound already works in the room.\n• To avoid it: let the loop run through at least twice during setup, and fade the music down before the MC speaks."
-    }
+    },
+    "guided": false
   },
   {
     "id": "use-anthem-audio-cue",
@@ -337,7 +341,8 @@
     "explain": {
       "zh": "国歌迟播或播不出是活动上最尴尬的事，而几乎都是准备不足，不是设备问题：\n• 在线来源总在最糟的时候出错：先播广告、缓冲、或不是官方版本。\n• 文件没有在实际的电脑上通过会议室喇叭测试过，声音跑到电脑自己的喇叭。\n• 口令到的时候，电脑正在休眠或跳出弹窗。\n• 操作的人和司仪没约好口令，来宾就站着干等。\n• 国歌如果是带歌词的视频，画面和声音都要测，也要看播放前后大屏幕显示什么。\n• 一般活动可以自己操作。有贵宾或很多播放环节的活动，由技术员在现场操作比较稳妥，请在活动日之前和我们商量。\n• 预防：至少在现场和司仪彩排一次口令。",
       "en": "A late or failed anthem is the most embarrassing moment at an event, and it is almost always preparation, not equipment:\n• Online sources fail at the worst time: an advert plays first, the video buffers, or it is an unofficial version.\n• The file was never tested on the actual laptop through the room speakers, so the sound comes from the laptop's own speakers.\n• The laptop was asleep or showing a pop-up when the cue came.\n• The operator and the MC did not agree on the cue, so guests stand in silence.\n• If the anthem is a video with lyrics, test both picture and sound, and check what the screen shows before and after.\n• You can operate this yourself for normal events. For events with VIPs or many cues, a technician operating playback on site is safer; discuss it with us before the event day.\n• To avoid it: rehearse the cue with the MC at least once, in the room."
-    }
+    },
+    "guided": false
   },
   {
     "id": "use-event-day-precheck",
@@ -368,7 +373,8 @@
     "explain": {
       "zh": "活动当天的故障，大多数只要事前测试十分钟就能发现：\n• 常见的发现：话筒电池没电、电脑没有合适的转接头、视频没声音、线上听不到、翻页笔少了接收器。\n• 一定要用「真正要用」的电脑和文件来测。别的电脑没问题，说明不了什么。\n• 30 分钟是最低要求。大型或重要活动，前一天做一次完整彩排，万一真的有东西坏了，还来得及安排技术员。\n• 检查时发现故障，马上告诉我们，附上照片和已经试过的方法，不要等到活动开始了才说。\n• 不要为了「试试看」去移动或重插机柜里的线，这常常把一个故障变成两个。\n• 养成习惯：在会议室放一张打印好的清单，每次活动指定一个人负责。",
       "en": "Most event-day failures would have shown up in a ten-minute test:\n• Typical finds: flat mic batteries, a laptop without the right adapter, a video with no sound, the online side unable to hear, a clicker without its receiver.\n• Test with the REAL laptop and the REAL files. A different laptop working proves very little.\n• 30 minutes is the minimum. For a large or important event, do a full rehearsal the day before, so there is still time for a technician if something is truly broken.\n• If you find a fault during the pre-check, tell us straight away with a photo and what you have tried. Do not wait until the event has started.\n• Do not move or re-plug cables in the equipment rack to \"try something\"; that often turns one fault into two.\n• To make it routine: keep a printed checklist in the room and give the job to one named person at every event."
-    }
+    },
+    "guided": false
   },
   {
     "id": "use-hybrid-remote-speaker-audio",
@@ -615,7 +621,8 @@
     "explain": {
       "zh": "户外比室内难做声音得多，所以要把效果估得保守一点：\n• 户外没有墙壁反射声音，同一台音响听起来小声很多，距离一远或有风，人声很快就散掉。\n• 一台便携音响适合站得近的小群人。大草场或一长排帐篷，需要技术员架设正式的音响系统。\n• 音量开得大、电池旧了，使用时间都会变短。空电放了几个月的机器，可能完全充不进电。\n• 话筒和音响之间站了人，无线话筒的距离就变短，要保持中间没有阻挡。\n• 热带的太阳和雨是最大的杀手：过热会令功放自动关机，进水就报废。\n• 户外要用市电的话，只能用场地安排的正规户外电源。绝对不要把拖线板拉过潮湿的地面。\n• 预防：事前到实际位置试一次；就算不用，也每隔几个月充一次电。",
       "en": "Sound is much harder outdoors than in a room, so plan for less than you expect:\n• No walls reflect the sound, so the same speaker sounds far quieter and voices fade quickly with distance and wind.\n• One portable speaker suits a small crowd standing close. A large field or long row of tents needs a proper PA set up by a technician.\n• Battery time is shorter at high volume and as the battery ages. A unit stored empty for months may not charge at all.\n• Wireless mics lose range when people stand between mic and speaker; keep the path clear.\n• Tropical sun and rain are the main killers: heat shuts the amplifier down and water ruins it.\n• For mains power outdoors, use only a proper outdoor power point arranged by the venue. Never run extension cords across wet ground.\n• To avoid problems: test at the actual spot beforehand, and charge the unit every few months even if unused."
-    }
+    },
+    "guided": false
   },
   {
     "id": "use-cleaning-screens-lenses",
@@ -646,7 +653,8 @@
     "explain": {
       "zh": "影音设备的表面看起来很耐用，其实涂层很娇嫩，而真正危险的是液体：\n• 喷上去的液体会沿着屏幕流进下边框里面，造成永久的线条或暗斑，所以只能把布沾湿。\n• 家用清洁剂会腐蚀防眩涂层和镜头镀膜，纸类会刮花。\n• LED 大屏幕（拼接墙）绝对不要擦或按，细小的灯珠很容易脱落，交给技术员处理。\n• 要消毒公用的触控面板，请照该型号厂商的指引；不确定时，用清水稍微沾湿的布最安全。\n• 通风口和滤网里面的灰尘、以及任何装在高处的设备，是技术员的工作。不要爬梯子。\n• 参考频率：触控面板和桌面话筒每周一次；显示屏每月一次或有污迹时；镜头只在画面出现斑点或雾状时才清洁。\n• 每间会议室放一块超细纤维布，就不会有人随手拿纸巾和玻璃水来擦。",
       "en": "AV surfaces look tough but their coatings are delicate, and liquid is the real danger:\n• Sprayed liquid runs down behind the bottom edge of a screen and causes permanent lines or dark patches, so only the cloth is dampened.\n• Anti-glare and lens coatings are stripped by household cleaners and scratched by paper products.\n• Never wipe or press an LED video wall. The tiny LEDs break off easily; leave it to a technician.\n• To disinfect a shared touch panel, follow the maker's guide for that model. If unsure, a water-dampened cloth is the safe choice.\n• Dust inside vents and filters, and anything mounted overhead, is technician work. Do not use a ladder.\n• As a guide: touch panels and table mics weekly, display screens monthly or when marked, lenses only when the picture shows spots or haze.\n• Keep a microfibre cloth in each room so nobody reaches for tissue and window cleaner."
-    }
+    },
+    "guided": false
   },
   {
     "id": "use-liquid-spill",
@@ -677,7 +685,8 @@
     "explain": {
       "zh": "液体碰上通电的设备，是真正的安全问题，不只是维修问题：\n• 液体会让内部带电的部分连通，造成短路、有触电的危险，少数情况下会起火。\n• 损坏往往是延迟出现的。今天还能用，过几天残留物腐蚀了电路板才坏。所以检查之前一定要保持关机。\n• 地插和桌面接线盒里除了信号线，还有市电插座，风险最高；湿了绝对不要把手伸进去。\n• 清水的伤害比咖啡、茶或汽水小，后者的糖分和酸性干了以后还留在里面。\n• 这种情况一定要技术员处理。请不要拆开设备，也不要自己去弄干内部。\n• 预防：用有盖的杯子，饮料不要放在讲台上或桌面接线盒旁边，地插的盖子平时盖好，并请清洁人员不要在地插上面湿拖。",
       "en": "Liquid on powered equipment is a real safety matter, not only a repair matter:\n• Liquid can bridge live parts inside, causing a short circuit, a risk of electric shock or, rarely, fire.\n• Damage is often delayed. The unit may work today and fail days later as the residue corrodes the circuit board. That is why it must stay off until it has been checked.\n• Floor boxes and table connection boxes hold mains sockets as well as signal cables. They are the highest risk; never reach inside a wet one.\n• Plain water does less harm than coffee, tea or soft drinks, whose sugar and acid stay behind after drying.\n• This always needs a technician. Please do not open the unit or try to dry the inside yourself.\n• To avoid it: use cups with lids, keep drinks off the lectern and away from table boxes, keep floor box lids closed, and ask the cleaners not to wet-mop over floor boxes."
-    }
+    },
+    "guided": false
   },
   {
     "id": "use-maintenance-batteries-storage",
@@ -708,7 +717,8 @@
     "explain": {
       "zh": "影音设备的故障多半来自高温和灰尘，而这两样都是在没人注意的地方慢慢累积的：\n• 滤网堵塞会让投影机过热，开会开到一半自动关机，也老化得更快。\n• 灯泡式投影机是慢慢变暗的，大家不知不觉就习惯了。灯泡寿命通常是几千小时，激光光源长得多，确实数字要看型号。\n• 充电电池用几年后容量会下降。比其他电池明显不耐用的就该换；鼓胀的电池不可以再充电或使用。\n• 碱性电池留在话筒里几个月会漏液，腐蚀接触点。\n• 电池的日常管理、目视检查和记录灯泡小时数，都可以自己做。\n• 吊装设备的滤网、机柜内部、换灯泡和固件更新，是技术员的工作。不要打开盖子，也不要爬梯子。\n• 每间会议室放一张简单的记录表（日期、灯泡小时数、异常情况），就能赶在重要活动之前发现问题。",
       "en": "Heat and dust cause most AV breakdowns, and both build up slowly where nobody looks:\n• A clogged filter makes a projector run hot, shut down mid-meeting and age faster.\n• Lamp projectors dim gradually, so people get used to a weak picture. Lamp life is often a few thousand hours; laser light sources last much longer. It depends on the model.\n• Rechargeable batteries lose capacity over a few years. Replace one that runs far shorter than the others. Never charge or use a swollen battery.\n• Alkaline batteries left in a mic for months leak and corrode the contacts.\n• You can do the battery routine, visual checks and lamp hour notes.\n• Ceiling unit filters, rack interiors, lamp replacement and firmware are technician work. Do not open covers or use a ladder.\n• A simple log sheet in each room (date, lamp hours, anything odd) helps spot problems before an important event."
-    }
+    },
+    "guided": false
   },
   {
     "id": "use-report-fault-info",
@@ -739,6 +749,7 @@
     "explain": {
       "zh": "资料齐全，常常可以省掉一次上门，或一次上门就解决：\n• 有了品牌、型号和照片，很多故障可以远程判断，再一步一步教你处理。\n• 需要技术员的话，知道型号就能带对零件和线材。\n• 「之前改变过什么」是最有用的线索。大多数故障都是在某个改变之后开始的，哪怕看起来毫不相关。\n• 时好时坏的故障，请记下每次发生的时间和当时在用什么，有规律就容易找到原因。\n• 不要为了找型号去拆开、拧螺丝或把设备拿下来。标签够不着就直接告诉我们，说明设备装在哪里。\n• 安全第一：冒烟、有烧焦味、火花、泼到液体、或高处有东西松动，在安全够得着的情况下关掉墙壁电源，让人远离，并马上告诉我们，不要继续测试。\n• 建议每间会议室备一份简单的设备清单，并指定一位影音事务的联络人。",
       "en": "Good information often saves a visit, or makes one visit enough:\n• With the brand, model and a photo, many faults can be identified remotely and fixed by guiding you.\n• If a technician is needed, knowing the model means the right parts and cables come along.\n• \"What changed\" is the most useful clue. Most faults begin right after a change, even one that seems unrelated.\n• For faults that come and go, note the time and what was in use each time. A pattern points to the cause.\n• Do not open, unscrew or take down equipment to find a model number. If the label is out of reach, just tell us where the unit is.\n• Safety first: for smoke, a burning smell, sparks, spilled liquid or anything loose overhead, switch off at the wall if safe to reach, keep people away and tell us at once. Do not keep testing.\n• Keep a simple equipment list per room and one contact person for AV matters."
-    }
+    },
+    "guided": false
   }
 ]
