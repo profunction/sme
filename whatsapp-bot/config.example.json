@@ -1,0 +1,87 @@
+{
+  "phone_number": "60123456789",
+  "default_language": "zh",
+  "languages": ["zh", "en", "ms"],
+  "timezone": "Asia/Kuala_Lumpur",
+  "hours": { "open": "09:00", "close": "18:00", "days": [1, 2, 3, 4, 5, 6] },
+  "greeting_cooldown_hours": 12,
+  "handoff_minutes": 30,
+  "reply_delay_ms": { "min": 1500, "max": 4000 },
+  "max_replies_per_minute": 20,
+  "min_seconds_between_replies_per_contact": 4,
+  "mark_read": false,
+  "dashboard_port": 8787,
+  "texts": {
+    "greeting": {
+      "zh": "您好，这里是 ABC 补习中心，感谢联系我们！",
+      "en": "Hello, this is ABC Tuition Centre. Thanks for contacting us!",
+      "ms": "Hai, ini ABC Tuition Centre. Terima kasih kerana menghubungi kami!"
+    },
+    "menu": {
+      "zh": "请回复数字：\n1 收费\n2 试课预约\n3 地址与时间\n0 人工客服",
+      "en": "Reply with a number:\n1 Fees\n2 Book a trial class\n3 Address & hours\n0 Talk to a person",
+      "ms": "Balas dengan nombor:\n1 Yuran\n2 Tempah kelas percubaan\n3 Alamat & waktu\n0 Bercakap dengan staf"
+    },
+    "after_hours": {
+      "zh": "现在是非营业时间，老师会在营业时间尽快回复您。",
+      "en": "We are closed right now. A teacher will reply during opening hours.",
+      "ms": "Kami tutup sekarang. Guru akan membalas pada waktu operasi."
+    },
+    "fallback": {
+      "zh": "收到，老师会尽快回复您。",
+      "en": "Got it, a teacher will get back to you shortly.",
+      "ms": "Diterima, guru akan membalas sebentar lagi."
+    },
+    "handoff": {
+      "zh": "好的，已通知老师，请稍候。",
+      "en": "Sure, a teacher has been notified. One moment.",
+      "ms": "Baik, guru telah dimaklumkan. Sila tunggu."
+    }
+  },
+  "menu": [
+    {
+      "keys": ["1", "price", "fees", "fee", "收费", "价格", "学费", "harga", "yuran"],
+      "reply": {
+        "zh": "小学 RM120/月，中学 RM180/月，每周两堂。首次试课免费。",
+        "en": "Primary RM120/month, secondary RM180/month, two classes a week. First trial class is free.",
+        "ms": "Sekolah rendah RM120/bulan, menengah RM180/bulan, dua kelas seminggu. Kelas percubaan pertama percuma."
+      }
+    },
+    {
+      "keys": ["2", "trial", "book", "appointment", "试课", "预约", "temu janji", "tempah"],
+      "reply": {
+        "zh": "请告诉我们孩子的年级、科目和方便的时间，老师会安排试课。",
+        "en": "Please tell us the child's grade, subject and a convenient time. A teacher will arrange the trial.",
+        "ms": "Sila beritahu darjah anak, subjek dan masa yang sesuai. Guru akan mengatur kelas percubaan."
+      }
+    },
+    {
+      "keys": ["3", "address", "location", "hours", "地址", "时间", "营业时间", "alamat", "waktu"],
+      "reply": {
+        "zh": "地址：Jalan Example 12, Puchong。周一至周六 9:00–18:00。",
+        "en": "Address: 12 Jalan Example, Puchong. Mon–Sat 9:00–18:00.",
+        "ms": "Alamat: 12 Jalan Example, Puchong. Isnin–Sabtu 9:00–18:00."
+      }
+    }
+  ],
+  "faq": [
+    {
+      "match": ["online", "网课", "线上", "zoom"],
+      "reply": {
+        "zh": "我们有线上课程，用 Zoom 上课，收费与实体课相同。",
+        "en": "Yes, we offer online classes on Zoom at the same fee as in-person classes.",
+        "ms": "Ya, kami ada kelas online melalui Zoom dengan yuran yang sama."
+      }
+    }
+  ],
+  "ai": {
+    "enabled": false,
+    "provider": "ollama",
+    "model": "llama3.2:3b",
+    "base_url": "http://127.0.0.1:11434",
+    "api_key_env": "",
+    "facts": "ABC Tuition Centre, Puchong. Primary RM120/month, secondary RM180/month. Mon-Sat 9:00-18:00. Subjects: Maths, Science, English, Chinese, Malay. Free first trial class.",
+    "max_history": 10,
+    "max_output_tokens": 300
+  }
+}

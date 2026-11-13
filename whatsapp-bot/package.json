@@ -1,0 +1,20 @@
+{
+  "name": "nightbrew-whatsapp-bot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Zero-cost WhatsApp auto-reply bot that links to your own number with a pairing code",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/index.js",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.8.0",
+    "@whiskeysockets/baileys": "^6.7.24",
+    "pino": "^9.14.0"
+  }
+}
